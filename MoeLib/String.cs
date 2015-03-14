@@ -1449,7 +1449,11 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string Remove(string value, string target)
         {
-            return value?.Replace(target, "");
+            if (value == null)
+            {
+                return null;
+            }
+            return value.Replace(target, "");
         }
 
         /// <summary>

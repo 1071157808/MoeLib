@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : MoeLib
 // Author           : Siqi Lu
-// Created          : 2015-03-14  1:51 AM
+// Created          : 2015-03-14  11:05 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  11:05 PM
+// Last Modified On : 2015-03-15  12:43 AM
 // ***********************************************************************
-// <copyright file="EnumerableExtensions.cs" company="Shanghai Yuyi">
+// <copyright file="Enumerable.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
 // </copyright>
 // ***********************************************************************
@@ -82,8 +82,10 @@ namespace Moe.Lib
             finally
             {
                 IDisposable disposable = enumerator as IDisposable;
-
-                disposable?.Dispose();
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
             }
         }
 
@@ -203,8 +205,10 @@ namespace Moe.Lib
             finally
             {
                 IDisposable disposable = enumerator as IDisposable;
-
-                disposable?.Dispose();
+                if (disposable != null)
+                {
+                    disposable.Dispose();
+                }
             }
         }
     }
