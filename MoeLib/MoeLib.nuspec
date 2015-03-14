@@ -7,12 +7,12 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <projectUrl>https://github.com/SiqiLu/MoeLib.git</projectUrl>
     <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2015</copyright>
-    <tags>Tag1 Tag2</tags>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.</copyright>
+    <tags>Moe Lib</tags>
   </metadata>
 </package>
