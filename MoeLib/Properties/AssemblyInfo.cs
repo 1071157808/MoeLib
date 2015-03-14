@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  1:49 AM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  11:15 PM
+// Last Modified On : 2015-03-15  12:45 AM
 // ***********************************************************************
 // <copyright file="AssemblyInfo.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("MoeLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Base library for .net project of Moe team.")]
 [assembly: AssemblyConfiguration("MoeLib")]
 [assembly: AssemblyCompany("Shanghai Yuyi")]
 [assembly: AssemblyProduct("MoeLib")]
