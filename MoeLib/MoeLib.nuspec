@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<package >
+
+<package>
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
@@ -15,4 +16,7 @@
     <copyright>Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.</copyright>
     <tags>Moe Lib</tags>
   </metadata>
+  <file src=".\bin\Release\MoeLib.dll" target="lib\Net452" />
+  <file src=".\bin\Release\MoeLib.pdb" target="lib\Net452" />
+  <file src=".\bin\Release\MoeLib.xml" target="lib\Net452" />
 </package>

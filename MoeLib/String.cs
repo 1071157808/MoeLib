@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  10:17 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:24 PM
+// Last Modified On : 2015-03-16  12:01 AM
 // ***********************************************************************
 // <copyright file="String.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 namespace Moe.Lib
 {
     /// <summary>
-    ///     Extensions for <see cref="System.String" />
+    ///     Extensions for <see cref="System.String" />.
     /// </summary>
     public static class StringExtensions
     {
@@ -328,7 +328,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Concats the specified target.
+        ///     Concats the specified target.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="target">The target.</param>
