@@ -16,4 +16,7 @@
     <copyright>Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.</copyright>
     <tags>Moe Lib</tags>
   </metadata>
+  <files>
+    <file src=".\bin\Release\MoeLib.pdb" target="lib\Net452" />
+  </files>
 </package>

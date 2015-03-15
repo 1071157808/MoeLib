@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  11:05 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-15  12:43 AM
+// Last Modified On : 2015-03-16  12:54 AM
 // ***********************************************************************
 // <copyright file="Enumerable.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -52,6 +52,7 @@ namespace Moe.Lib
 
         /// <summary>
         ///     Gets the length of the enumerable sequence.
+        ///     When the value is a null reference, it is considered to have 0 elements.
         /// </summary>
         /// <param name="sequence">The sequence.</param>
         /// <returns>System.Int32.</returns>
@@ -59,6 +60,11 @@ namespace Moe.Lib
         {
             // When the given enumerable is an ICollection, we can do a simple interface call to determine
             // it's size.
+            if (sequence == null)
+            {
+                return 0;
+            }
+
             ICollection collection = sequence as ICollection;
 
             if (collection != null)
