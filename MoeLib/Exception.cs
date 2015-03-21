@@ -4,7 +4,7 @@
 // Created          : 2015-03-21  5:13 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-21  5:23 PM
+// Last Modified On : 2015-03-21  6:50 PM
 // ***********************************************************************
 // <copyright file="Exception.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -61,14 +61,14 @@ namespace Moe.Lib
                 sb.AppendFormat("{0}Inner ", indent);
             }
 
-            sb.AppendFormat("Exception Found:\n{0}Type: {1}", indent, e.GetType().FullName);
-            sb.AppendFormat("\n{0}Message: {1}", indent, e.Message);
-            sb.AppendFormat("\n{0}Source: {1}", indent, e.Source);
-            sb.AppendFormat("\n{0}Stacktrace: {1}", indent, e.StackTrace);
+            sb.AppendFormat("Exception Found:\r\n{0}Type: {1}", indent, e.GetType().FullName);
+            sb.AppendFormat("\r\n{0}Message: {1}", indent, e.Message);
+            sb.AppendFormat("\r\n{0}Source: {1}", indent, e.Source);
+            sb.AppendFormat("\r\n{0}Stacktrace: {1}", indent, e.StackTrace);
 
             if (e.InnerException != null)
             {
-                sb.Append("\n");
+                sb.Append("\r\n");
                 CreateExceptionString(sb, e.InnerException, indent + "  ");
             }
         }
