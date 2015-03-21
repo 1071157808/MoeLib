@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : MoeLib
 // Author           : Siqi Lu
-// Created          : 2015-03-14  1:51 AM
+// Created          : 2015-03-14  10:27 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:22 PM
+// Last Modified On : 2015-03-21  7:07 PM
 // ***********************************************************************
 // <copyright file="MD5.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -17,6 +17,9 @@ using System.Security.Cryptography;
 
 namespace Moe.Lib
 {
+    /// <summary>
+    ///     MD5Hash.
+    /// </summary>
     public static class MD5Hash
     {
         /// <summary>
