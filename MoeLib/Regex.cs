@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  10:17 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:17 PM
+// Last Modified On : 2015-03-21  6:58 PM
 // ***********************************************************************
 // <copyright file="Regex.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -15,6 +15,9 @@ using System.Text.RegularExpressions;
 
 namespace Moe.Lib
 {
+    /// <summary>
+    ///     RegexUtility.
+    /// </summary>
     public static class RegexUtility
     {
         /// <summary>
