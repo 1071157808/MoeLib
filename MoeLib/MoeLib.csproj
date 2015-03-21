@@ -40,6 +40,7 @@
     <Compile Include="Byte.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="Enumerable.cs" />
+    <Compile Include="Exception.cs" />
     <Compile Include="Int.cs" />
     <Compile Include="SHA256.cs" />
     <Compile Include="PBKDF2.cs" />
