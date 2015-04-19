@@ -1,17 +1,17 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:49 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:54 PM
+// Last Modified On : 2015-04-19  7:56 PM
 // ***********************************************************************
 // <copyright file="Crypto.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
-using Moe.Alib;
+using Moe.lib;
 
 namespace Moe.Lib
 {
