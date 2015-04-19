@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  6:18 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:26 PM
+// Last Modified On : 2015-04-19  7:49 PM
 // ***********************************************************************
 // <copyright file="Guid.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -74,7 +74,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string ToGuidString(this Guid guid)
         {
-            return guid.ToString().Remove("-");
+            return guid.ToString("N");
         }
     }
 }
