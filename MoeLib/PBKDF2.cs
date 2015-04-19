@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  10:41 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-04-19  7:49 PM
+// Last Modified On : 2015-04-19  8:59 PM
 // ***********************************************************************
 // <copyright file="PBKDF2.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -14,9 +14,8 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using Moe.Lib;
 
-namespace Moe.lib
+namespace Moe.Lib
 {
     // Come from FluentSharp
     // Code based on example from: Password Minder Internals http://msdn.microsoft.com/en-us/magazine/cc163913.aspx
