@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
+// Project          : MoeLib
 // Author           : Siqi Lu
-// Created          : 2015-03-14  1:51 AM
+// Created          : 2015-03-14  10:58 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:58 PM
+// Last Modified On : 2015-04-21  11:13 AM
 // ***********************************************************************
-// <copyright file="StringificationExtensions.cs" company="Shanghai Yuyi">
+// <copyright file="Stringification.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
 // </copyright>
 // ***********************************************************************
@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Moe.Lib
 {
@@ -43,6 +44,27 @@ namespace Moe.Lib
                 // Stack overflow prevented. We can not build a string representation of the supplied object.
                 // We return the default representation of the object.
                 Debug.Assert(value != null, "value should not be null when InvalidOperation is thrown.");
+                return value.ToString();
+            }
+        }
+
+        /// <summary>
+        ///     Transforms an object into a json string representation. When the value is a null reference, the string "null" will be returned.
+        /// </summary>
+        /// <param name="value">The value to be transformed.</param>
+        /// <returns>A string representation of the supplied <paramref name="value" />.</returns>
+        public static string ToJson(this object value)
+        {
+            if (value == null)
+            {
+                return "null";
+            }
+            try
+            {
+                return JsonConvert.SerializeObject(value);
+            }
+            catch
+            {
                 return value.ToString();
             }
         }
