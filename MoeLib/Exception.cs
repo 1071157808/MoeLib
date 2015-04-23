@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-21  5:13 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-21  6:50 PM
+// Last Modified On : 2015-04-24  7:26 AM
 // ***********************************************************************
 // <copyright file="Exception.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -12,6 +12,9 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Text;
 
 namespace Moe.Lib
@@ -24,34 +27,42 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the exception string.
         /// </summary>
-        /// <param name="e">The e.</param>
+        /// <param name="exception">The exception.</param>
         /// <returns>System.String.</returns>
-        public static string GetExceptionString(this Exception e)
+        public static string GetExceptionString(this Exception exception)
         {
-            return CreateExceptionString(e);
+            return CreateExceptionString(exception);
         }
 
         /// <summary>
         ///     Creates the exception string.
         /// </summary>
-        /// <param name="e">The exception.</param>
+        /// <param name="exception">The exception.</param>
         /// <returns>System.String.</returns>
-        private static string CreateExceptionString(Exception e)
+        private static string CreateExceptionString(Exception exception)
         {
             StringBuilder sb = new StringBuilder();
-            CreateExceptionString(sb, e, string.Empty);
+            CreateExceptionString(sb, exception, string.Empty);
 
             return sb.ToString();
         }
 
         /// <summary>
-        ///     Creates the exception string.
+        ///     Creates the exception string. If the exception is null.
+        ///     The exception string will be String.Empty.
         /// </summary>
         /// <param name="sb">The string builder.</param>
-        /// <param name="e">The exception.</param>
+        /// <param name="exception">The exception.</param>
         /// <param name="indent">The indent string.</param>
-        private static void CreateExceptionString(StringBuilder sb, Exception e, string indent)
+        [SuppressMessage("ReSharper", "CanBeReplacedWithTryCastAndCheckForNull")]
+        private static void CreateExceptionString(StringBuilder sb, Exception exception, string indent)
         {
+            if (exception == null)
+            {
+                sb.Append(string.Empty);
+                return;
+            }
+
             if (indent == null)
             {
                 indent = string.Empty;
@@ -61,15 +72,39 @@ namespace Moe.Lib
                 sb.AppendFormat("{0}Inner ", indent);
             }
 
-            sb.AppendFormat("Exception Found:\r\n{0}Type: {1}", indent, e.GetType().FullName);
-            sb.AppendFormat("\r\n{0}Message: {1}", indent, e.Message);
-            sb.AppendFormat("\r\n{0}Source: {1}", indent, e.Source);
-            sb.AppendFormat("\r\n{0}Stacktrace: {1}", indent, e.StackTrace);
+            sb.AppendFormat("Exception(s) Found:{0}{1}Type: {2}", Environment.NewLine, indent, exception.GetType().FullName);
+            sb.AppendFormat("{0}{1}Message: {2}", Environment.NewLine, indent, exception.Message);
+            sb.AppendFormat("{0}{1}Source: {2}", Environment.NewLine, indent, exception.Source);
+            sb.AppendFormat("{0}{1}Stacktrace: {2}", Environment.NewLine, indent, exception.StackTrace);
 
-            if (e.InnerException != null)
+            if (exception is ReflectionTypeLoadException)
             {
-                sb.Append("\r\n");
-                CreateExceptionString(sb, e.InnerException, indent + "  ");
+                Exception[] loaderExceptions = ((ReflectionTypeLoadException)exception).LoaderExceptions;
+                if (loaderExceptions == null || loaderExceptions.Length == 0)
+                {
+                    sb.AppendFormat("{0}No LoaderExceptions found", indent);
+                }
+                else
+                {
+                    foreach (Exception e in loaderExceptions)
+                        CreateExceptionString(sb, e, indent + "  ");
+                }
+            }
+            else if (exception is AggregateException)
+            {
+                ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception).InnerExceptions;
+                if (innerExceptions == null || innerExceptions.Count == 0)
+                    sb.AppendFormat("{0}No InnerExceptions found", indent);
+                else
+                {
+                    foreach (Exception e in innerExceptions)
+                        CreateExceptionString(sb, e, indent + "  ");
+                }
+            }
+            else if (exception.InnerException != null)
+            {
+                sb.Append(Environment.NewLine);
+                CreateExceptionString(sb, exception.InnerException, indent + "  ");
             }
         }
     }
