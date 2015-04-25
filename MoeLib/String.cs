@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:17 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-16  12:01 AM
+// Last Modified On : 2015-04-25  9:21 PM
 // ***********************************************************************
 // <copyright file="String.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Moe.Lib
@@ -378,6 +379,28 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        /// Gets the substring of the first chars.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="count">The count.</param>
+        /// <returns>System.String.</returns>
+        public static string GetFirst(this string value, int count = 1)
+        {
+            return StringUtility.GetFirst(value, count);
+        }
+
+        /// <summary>
+        /// Gets the substring of the last chars.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="count">The count.</param>
+        /// <returns>System.String.</returns>
+        public static string GetLast(this string value, int count = 1)
+        {
+            return StringUtility.GetLast(value, count);
+        }
+
+        /// <summary>
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
         /// <returns>
@@ -591,6 +614,17 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        /// Joins the specified string array with the delimeter.
+        /// </summary>
+        /// <param name="items">The items.</param>
+        /// <param name="delimeter">The delimeter.</param>
+        /// <returns>System.String.</returns>
+        public static string Join(this IEnumerable<string> items, string delimeter)
+        {
+            return String.Join(delimeter, items.ToArray());
+        }
+
+        /// <summary>
         ///     Limits the length of the <paramref name="source" /> to the specified <paramref name="maxLength" />.
         /// </summary>
         public static string Limit(this string source, int maxLength, string suffix = "")
@@ -662,6 +696,18 @@ namespace Moe.Lib
         public static bool ToBool(this string value)
         {
             return StringUtility.ToBool(value);
+        }
+
+        /// <summary>
+        ///     Converts a string to the CamelCase style.
+        /// </summary>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        /// <param name="value">The value to convert.</param>
+        public static string ToCamelCase(string value)
+        {
+            return StringUtility.ToCamelCase(value);
         }
 
         /// <summary>
@@ -773,6 +819,18 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        ///     Hide some chars of the string.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        public static string ToMosaicString(string value)
+        {
+            return StringUtility.ToMosaicString(value);
+        }
+
+        /// <summary>
         ///     Allows for using strings in null coalescing operations
         /// </summary>
         /// <param name="value">The string value to check</param>
@@ -793,6 +851,18 @@ namespace Moe.Lib
         {
             return StringUtility.ToSingle(value);
         }
+
+        /// <summary>
+        ///     Converts a string to the underscope style.
+        /// </summary>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        /// <param name="value">The value to convert.</param>
+        public static string ToUnderScope(this string value)
+        {
+            return StringUtility.ToUnderScope(value);
+        }
     }
 
     /// <summary>
@@ -800,6 +870,10 @@ namespace Moe.Lib
     /// </summary>
     public static class StringUtility
     {
+        private const int LowerCaseOffset = 'a' - 'A';
+        private static readonly Regex UnderScopeRegex = new Regex(@"((?<=.)[A-Z][a-zA-Z]*)|((?<=[a-zA-Z])\d+)", RegexOptions.Multiline);
+        private static readonly string UnderScopeReplace = @"_$1$2";
+
         /// <summary>
         ///     Converts a string to a strongly typed value of the specified data type.
         /// </summary>
@@ -862,7 +936,7 @@ namespace Moe.Lib
         public static bool AsBool(string value, bool defaultValue)
         {
             bool result;
-            return !bool.TryParse(value, out result) ? defaultValue : result;
+            return !Boolean.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -914,7 +988,7 @@ namespace Moe.Lib
         public static decimal AsDecimal(string value, decimal defaultValue)
         {
             decimal result;
-            return !decimal.TryParse(value, out result) ? defaultValue : result;
+            return !Decimal.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -940,7 +1014,7 @@ namespace Moe.Lib
         public static double AsDouble(string value, double defaultValue)
         {
             double result;
-            return !double.TryParse(value, out result) ? defaultValue : result;
+            return !Double.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -966,7 +1040,7 @@ namespace Moe.Lib
         public static float AsFloat(string value, float defaultValue)
         {
             float result;
-            return !float.TryParse(value, out result) ? defaultValue : result;
+            return !Single.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -992,7 +1066,7 @@ namespace Moe.Lib
         public static int AsInt(string value, int defaultValue)
         {
             int result;
-            return !int.TryParse(value, out result) ? defaultValue : result;
+            return !Int32.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -1096,7 +1170,7 @@ namespace Moe.Lib
         public static long AsLong(string value, long defaultValue)
         {
             long result;
-            return !long.TryParse(value, out result) ? defaultValue : result;
+            return !Int64.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -1122,7 +1196,7 @@ namespace Moe.Lib
         public static Single AsSingle(string value, Single defaultValue)
         {
             Single result;
-            return !float.TryParse(value, out result) ? defaultValue : result;
+            return !Single.TryParse(value, out result) ? defaultValue : result;
         }
 
         /// <summary>
@@ -1149,7 +1223,7 @@ namespace Moe.Lib
         /// <returns>A copy of format in which the format items have been replaced by the string representation of the corresponding objects in args.</returns>
         public static string FormatWith(string format, params object[] args)
         {
-            return string.Format(format, args);
+            return String.Format(format, args);
         }
 
         /// <summary>
@@ -1161,7 +1235,34 @@ namespace Moe.Lib
         /// <returns>A copy of format in which the format items have been replaced by the string representation of the corresponding objects in args.</returns>
         public static string FormatWith(string format, IFormatProvider provider, params object[] args)
         {
-            return string.Format(provider, format, args);
+            return String.Format(provider, format, args);
+        }
+
+        /// <summary>
+        ///     Gets the substring of the first number chars.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="count">The count.</param>
+        /// <returns>System.String.</returns>
+        public static string GetFirst(string source, int count = 1)
+        {
+            return SubString(source, 0, count);
+        }
+
+        /// <summary>
+        ///     Gets the substring of the last number chars.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="count">The count.</param>
+        /// <returns>System.String.</returns>
+        public static string GetLast(string source, int count = 1)
+        {
+            int start = source.Length - count;
+            if (start < 0)
+            {
+                start = 0;
+            }
+            return SubString(source, start, count);
         }
 
         /// <summary>
@@ -1202,7 +1303,7 @@ namespace Moe.Lib
         public static bool IsBool(string value)
         {
             bool result;
-            return bool.TryParse(value, out result);
+            return Boolean.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1238,7 +1339,7 @@ namespace Moe.Lib
         public static bool IsDecimal(string value)
         {
             decimal result;
-            return decimal.TryParse(value, out result);
+            return Decimal.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1251,7 +1352,7 @@ namespace Moe.Lib
         public static bool IsDouble(string value)
         {
             double result;
-            return double.TryParse(value, out result);
+            return Double.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1274,7 +1375,7 @@ namespace Moe.Lib
         public static bool IsFloat(string value)
         {
             float result;
-            return float.TryParse(value, out result);
+            return Single.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1287,7 +1388,7 @@ namespace Moe.Lib
         public static bool IsInt(string value)
         {
             int result;
-            return int.TryParse(value, out result);
+            return Int32.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1349,7 +1450,7 @@ namespace Moe.Lib
         public static bool IsLong(string value)
         {
             long result;
-            return long.TryParse(value, out result);
+            return Int64.TryParse(value, out result);
         }
 
         /// <summary>
@@ -1359,7 +1460,7 @@ namespace Moe.Lib
         /// <returns>true if the value parameter is not null or an empty string (""); otherwise, false.</returns>
         public static bool IsNotNullOrEmpty(string value)
         {
-            return !string.IsNullOrEmpty(value);
+            return !String.IsNullOrEmpty(value);
         }
 
         /// <summary>
@@ -1369,7 +1470,7 @@ namespace Moe.Lib
         /// <returns>true if the value parameter is not null or an empty string (""); otherwise, false.</returns>
         public static bool IsNotNullOrWhiteSpace(string value)
         {
-            return !string.IsNullOrWhiteSpace(value);
+            return !String.IsNullOrWhiteSpace(value);
         }
 
         /// <summary>
@@ -1379,7 +1480,7 @@ namespace Moe.Lib
         /// <returns>true if the value parameter is null or an empty string (""); otherwise, false.</returns>
         public static bool IsNullOrEmpty(string value)
         {
-            return string.IsNullOrEmpty(value);
+            return String.IsNullOrEmpty(value);
         }
 
         /// <summary>
@@ -1389,7 +1490,7 @@ namespace Moe.Lib
         /// <returns>true if the value parameter is null or an empty string (""); otherwise, false.</returns>
         public static bool IsNullOrWhiteSpace(string value)
         {
-            return string.IsNullOrWhiteSpace(value);
+            return String.IsNullOrWhiteSpace(value);
         }
 
         /// <summary>
@@ -1417,7 +1518,7 @@ namespace Moe.Lib
                 return source;
             }
 
-            return string.Concat(source.Substring(0, maxLength).Trim(), suffix ?? string.Empty);
+            return String.Concat(source.Substring(0, maxLength).Trim(), suffix ?? String.Empty);
         }
 
         /// <summary>
@@ -1466,7 +1567,7 @@ namespace Moe.Lib
         /// <returns>The original string separated on each uppercase character.</returns>
         public static string SeparatePascalCase(string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (String.IsNullOrEmpty(value))
             {
                 return "";
             }
@@ -1479,8 +1580,24 @@ namespace Moe.Lib
         /// </summary>
         public static IEnumerable<string> SplitAndTrim(string value, params char[] separators)
         {
-            value = value ?? string.Empty;
+            value = value ?? String.Empty;
             return value.Trim().Split(separators, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
+        }
+
+        /// <summary>
+        ///     SubString
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="count">The count.</param>
+        /// <returns>System.String.</returns>
+        public static string SubString(string source, int start, int count)
+        {
+            if (source.Length - count - start < 0)
+            {
+                return source.Substring(start);
+            }
+            return source.Substring(start, count);
         }
 
         /// <summary>
@@ -1492,7 +1609,40 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static bool ToBool(string value)
         {
-            return bool.Parse(value);
+            return Boolean.Parse(value);
+        }
+
+        /// <summary>
+        ///     Converts a string to the CamelCase style.
+        /// </summary>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        /// <param name="value">The value to convert.</param>
+        public static string ToCamelCase(string value)
+        {
+            if (String.IsNullOrEmpty(value)) return value;
+
+            int len = value.Length;
+            char[] newValue = new char[len];
+            bool firstPart = true;
+
+            for (int i = 0; i < len; ++i)
+            {
+                char c0 = value[i];
+                char c1 = i < len - 1 ? value[i + 1] : 'A';
+                bool c0isUpper = c0 >= 'A' && c0 <= 'Z';
+                bool c1isUpper = c1 >= 'A' && c1 <= 'Z';
+
+                if (firstPart && c0isUpper && (c1isUpper || i == 0))
+                    c0 = (char)(c0 + LowerCaseOffset);
+                else
+                    firstPart = false;
+
+                newValue[i] = c0;
+            }
+
+            return new string(newValue);
         }
 
         /// <summary>
@@ -1516,7 +1666,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static decimal ToDecimal(string value)
         {
-            return decimal.Parse(value);
+            return Decimal.Parse(value);
         }
 
         /// <summary>
@@ -1528,7 +1678,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static double ToDouble(string value)
         {
-            return double.Parse(value);
+            return Double.Parse(value);
         }
 
         /// <summary>
@@ -1540,7 +1690,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static float ToFloat(string value)
         {
-            return float.Parse(value);
+            return Single.Parse(value);
         }
 
         /// <summary>
@@ -1552,7 +1702,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static int ToInt(string value)
         {
-            return int.Parse(value);
+            return Int32.Parse(value);
         }
 
         /// <summary>
@@ -1600,7 +1750,38 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static long ToLong(string value)
         {
-            return long.Parse(value);
+            return Int64.Parse(value);
+        }
+
+        /// <summary>
+        ///     Hide some chars of the string.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        public static string ToMosaicString(string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return "";
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            if (value.Length >= 12)
+            {
+                sb.Append(GetFirst(value, 4));
+                (value.Length - 8).Times().Do(() => sb.Append("*"));
+                sb.Append(GetLast(value, 4));
+            }
+            else
+            {
+                (value.Length - 4).Times().Do(() => sb.Append("*"));
+                sb.Append(GetLast(value, 4));
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -1610,7 +1791,7 @@ namespace Moe.Lib
         /// <returns>Null if <paramref name="value" /> is empty or the original value of <paramref name="value" />.</returns>
         public static string ToNullIfEmpty(string value)
         {
-            return value == string.Empty ? null : value;
+            return value == String.Empty ? null : value;
         }
 
         /// <summary>
@@ -1623,6 +1804,18 @@ namespace Moe.Lib
         public static Single ToSingle(string value)
         {
             return Single.Parse(value);
+        }
+
+        /// <summary>
+        ///     Converts a string to the underscope style.
+        /// </summary>
+        /// <returns>
+        ///     The converted value.
+        /// </returns>
+        /// <param name="value">The value to convert.</param>
+        public static string ToUnderScope(string value)
+        {
+            return UnderScopeRegex.Replace(value, UnderScopeReplace).ToLowerInvariant();
         }
     }
 }
