@@ -52,6 +52,7 @@
     <Compile Include="Enumerable.cs" />
     <Compile Include="Exception.cs" />
     <Compile Include="Int.cs" />
+    <Compile Include="PaginatedList.cs" />
     <Compile Include="SHA256.cs" />
     <Compile Include="PBKDF2.cs" />
     <Compile Include="String.cs" />
