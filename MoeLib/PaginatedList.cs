@@ -4,7 +4,7 @@
 // Created          : 2015-05-02  11:21 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-02  11:29 PM
+// Last Modified On : 2015-05-02  11:47 PM
 // ***********************************************************************
 // <copyright file="PaginatedList.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Moe.Lib
@@ -51,7 +52,7 @@ namespace Moe.Lib
         #region IPaginatedList<TEntity> Members
 
         /// <summary>
-        ///     是否有下一页
+        ///     Gets a value indicating whether this instance has next page.
         /// </summary>
         /// <value><c>true</c> if this instance has next page; otherwise, <c>false</c>.</value>
         public bool HasNextPage
@@ -60,7 +61,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     产品数据
+        ///     Gets the items.
         /// </summary>
         /// <value>The items.</value>
         public IEnumerable<TEntity> Items
@@ -74,28 +75,32 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     当前页码
+        ///     Gets the index of the page.
         /// </summary>
         /// <value>The index of the page.</value>
-        public int PageIndex { get; }
+        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
+        public int PageIndex { get; private set; }
 
         /// <summary>
-        ///     页面大小
+        ///     Gets the size of the page.
         /// </summary>
         /// <value>The size of the page.</value>
-        public int PageSize { get; }
+        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
+        public int PageSize { get; private set; }
 
         /// <summary>
-        ///     总数据数量
+        ///     Gets the total count.
         /// </summary>
         /// <value>The total count.</value>
-        public int TotalCount { get; }
+        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
+        public int TotalCount { get; private set; }
 
         /// <summary>
-        ///     总页数
+        ///     Gets the total page count.
         /// </summary>
         /// <value>The total page count.</value>
-        public int TotalPageCount { get; }
+        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
+        public int TotalPageCount { get; private set; }
 
         #endregion IPaginatedList<TEntity> Members
 
