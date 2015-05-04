@@ -1,10 +1,10 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:17 PM
-//
+// 
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-04-25  9:21 PM
+// Last Modified On : 2015-05-04  4:56 PM
 // ***********************************************************************
 // <copyright file="String.cs" company="Shanghai Yuyi">
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
@@ -379,7 +379,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Gets the substring of the first chars.
+        ///     Gets the substring of the first chars.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="count">The count.</param>
@@ -390,7 +390,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Gets the substring of the last chars.
+        ///     Gets the substring of the last chars.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="count">The count.</param>
@@ -614,7 +614,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Joins the specified string array with the delimeter.
+        ///     Joins the specified string array with the delimeter.
         /// </summary>
         /// <param name="items">The items.</param>
         /// <param name="delimeter">The delimeter.</param>
@@ -871,8 +871,6 @@ namespace Moe.Lib
     public static class StringUtility
     {
         private const int LowerCaseOffset = 'a' - 'A';
-        private static readonly Regex UnderScopeRegex = new Regex(@"((?<=.)[A-Z][a-zA-Z]*)|((?<=[a-zA-Z])\d+)", RegexOptions.Multiline);
-        private static readonly string UnderScopeReplace = @"_$1$2";
 
         /// <summary>
         ///     Converts a string to a strongly typed value of the specified data type.
@@ -1815,7 +1813,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         public static string ToUnderScope(string value)
         {
-            return UnderScopeRegex.Replace(value, UnderScopeReplace).ToLowerInvariant();
+            return string.Concat(value.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()));
         }
     }
 }
