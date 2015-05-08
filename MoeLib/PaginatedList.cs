@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-05-02  11:21 PM
@@ -18,6 +18,49 @@ using System.Linq;
 
 namespace Moe.Lib
 {
+    /// <summary>
+    ///     Interface IPaginatedList
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IPaginatedList<out T>
+    {
+        /// <summary>
+        ///     Gets a value indicating whether this instance has next page.
+        /// </summary>
+        /// <value><c>true</c> if this instance has next page; otherwise, <c>false</c>.</value>
+        bool HasNextPage { get; }
+
+        /// <summary>
+        ///     Gets the items.
+        /// </summary>
+        /// <value>The items.</value>
+        IEnumerable<T> Items { get; }
+
+        /// <summary>
+        ///     Gets the index of the page.
+        /// </summary>
+        /// <value>The index of the page.</value>
+        int PageIndex { get; }
+
+        /// <summary>
+        ///     Gets the size of the page.
+        /// </summary>
+        /// <value>The size of the page.</value>
+        int PageSize { get; }
+
+        /// <summary>
+        ///     Gets the total count.
+        /// </summary>
+        /// <value>The total count.</value>
+        int TotalCount { get; }
+
+        /// <summary>
+        ///     Gets the total page count.
+        /// </summary>
+        /// <value>The total page count.</value>
+        int TotalPageCount { get; }
+    }
+
     /// <summary>
     ///     PaginatedList.
     /// </summary>
@@ -57,7 +100,7 @@ namespace Moe.Lib
         /// <value><c>true</c> if this instance has next page; otherwise, <c>false</c>.</value>
         public bool HasNextPage
         {
-            get { return this.PageIndex < this.TotalPageCount; }
+            get { return this.PageIndex < this.TotalPageCount - 1; }
         }
 
         /// <summary>
@@ -114,48 +157,5 @@ namespace Moe.Lib
         {
             return new PaginatedList<T>(this.PageIndex, this.PageSize, this.TotalCount, this.Items.Select(selector));
         }
-    }
-
-    /// <summary>
-    ///     Interface IPaginatedList
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IPaginatedList<out T>
-    {
-        /// <summary>
-        ///     Gets a value indicating whether this instance has next page.
-        /// </summary>
-        /// <value><c>true</c> if this instance has next page; otherwise, <c>false</c>.</value>
-        bool HasNextPage { get; }
-
-        /// <summary>
-        ///     Gets the items.
-        /// </summary>
-        /// <value>The items.</value>
-        IEnumerable<T> Items { get; }
-
-        /// <summary>
-        ///     Gets the index of the page.
-        /// </summary>
-        /// <value>The index of the page.</value>
-        int PageIndex { get; }
-
-        /// <summary>
-        ///     Gets the size of the page.
-        /// </summary>
-        /// <value>The size of the page.</value>
-        int PageSize { get; }
-
-        /// <summary>
-        ///     Gets the total count.
-        /// </summary>
-        /// <value>The total count.</value>
-        int TotalCount { get; }
-
-        /// <summary>
-        ///     Gets the total page count.
-        /// </summary>
-        /// <value>The total page count.</value>
-        int TotalPageCount { get; }
     }
 }
