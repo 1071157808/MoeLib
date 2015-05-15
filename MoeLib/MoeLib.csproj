@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="MoeLib.nuspec" />
     <None Include="packages.config" />
+    <Compile Include="Task.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
