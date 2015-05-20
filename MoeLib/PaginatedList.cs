@@ -4,7 +4,7 @@
 // Created          : 2015-05-02  11:21 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-20  1:20 PM
+// Last Modified On : 2015-05-20  4:07 PM
 // ***********************************************************************
 // <copyright file="PaginatedList.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -72,7 +72,7 @@ namespace Moe.Lib
     ///     PaginatedList.
     /// </summary>
     /// <typeparam name="TEntity">The type of the t entity.</typeparam>
-    public class PaginatedList<TEntity> : List<TEntity>, IPaginatedList<TEntity>
+    public class PaginatedList<TEntity> : IPaginatedList<TEntity>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PaginatedList{TEntity}" /> class.
@@ -91,7 +91,7 @@ namespace Moe.Lib
         /// <param name="source">The source.</param>
         public PaginatedList(int pageIndex, int pageSize, int totalCount, IEnumerable<TEntity> source)
         {
-            this.AddRange(source);
+            this.Items = source;
 
             this.PageIndex = pageIndex;
             this.PageSize = pageSize;
@@ -114,15 +114,7 @@ namespace Moe.Lib
         ///     Gets the items.
         /// </summary>
         /// <value>The items.</value>
-        public IEnumerable<TEntity> Items
-        {
-            get { return this; }
-            set
-            {
-                this.Clear();
-                this.AddRange(value);
-            }
-        }
+        public IEnumerable<TEntity> Items { get; set; }
 
         /// <summary>
         ///     Gets the index of the page.
