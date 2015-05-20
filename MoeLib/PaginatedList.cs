@@ -4,16 +4,15 @@
 // Created          : 2015-05-02  11:21 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-02  11:47 PM
+// Last Modified On : 2015-05-20  1:04 PM
 // ***********************************************************************
-// <copyright file="PaginatedList.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="PaginatedList.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Moe.Lib
@@ -22,7 +21,7 @@ namespace Moe.Lib
     ///     Interface IPaginatedList
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IPaginatedList<out T>
+    public interface IPaginatedList<T>
     {
         /// <summary>
         ///     Gets a value indicating whether this instance has next page.
@@ -34,31 +33,31 @@ namespace Moe.Lib
         ///     Gets the items.
         /// </summary>
         /// <value>The items.</value>
-        IEnumerable<T> Items { get; }
+        IEnumerable<T> Items { get; set; }
 
         /// <summary>
         ///     Gets the index of the page.
         /// </summary>
         /// <value>The index of the page.</value>
-        int PageIndex { get; }
+        int PageIndex { get; set; }
 
         /// <summary>
         ///     Gets the size of the page.
         /// </summary>
         /// <value>The size of the page.</value>
-        int PageSize { get; }
+        int PageSize { get; set; }
 
         /// <summary>
         ///     Gets the total count.
         /// </summary>
         /// <value>The total count.</value>
-        int TotalCount { get; }
+        int TotalCount { get; set; }
 
         /// <summary>
         ///     Gets the total page count.
         /// </summary>
         /// <value>The total page count.</value>
-        int TotalPageCount { get; }
+        int TotalPageCount { get; set; }
     }
 
     /// <summary>
@@ -121,29 +120,25 @@ namespace Moe.Lib
         ///     Gets the index of the page.
         /// </summary>
         /// <value>The index of the page.</value>
-        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
-        public int PageIndex { get; private set; }
+        public int PageIndex { get; set; }
 
         /// <summary>
         ///     Gets the size of the page.
         /// </summary>
         /// <value>The size of the page.</value>
-        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
-        public int PageSize { get; private set; }
+        public int PageSize { get; set; }
 
         /// <summary>
         ///     Gets the total count.
         /// </summary>
         /// <value>The total count.</value>
-        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
-        public int TotalCount { get; private set; }
+        public int TotalCount { get; set; }
 
         /// <summary>
         ///     Gets the total page count.
         /// </summary>
         /// <value>The total page count.</value>
-        [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Local")]
-        public int TotalPageCount { get; private set; }
+        public int TotalPageCount { get; set; }
 
         #endregion IPaginatedList<TEntity> Members
 
