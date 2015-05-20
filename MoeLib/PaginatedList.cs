@@ -4,7 +4,7 @@
 // Created          : 2015-05-02  11:21 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-20  1:04 PM
+// Last Modified On : 2015-05-20  1:20 PM
 // ***********************************************************************
 // <copyright file="PaginatedList.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -20,8 +20,8 @@ namespace Moe.Lib
     /// <summary>
     ///     Interface IPaginatedList
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IPaginatedList<T>
+    /// <typeparam name="TEntity">The type of the tt entity.</typeparam>
+    public interface IPaginatedList<TEntity>
     {
         /// <summary>
         ///     Gets a value indicating whether this instance has next page.
@@ -33,7 +33,7 @@ namespace Moe.Lib
         ///     Gets the items.
         /// </summary>
         /// <value>The items.</value>
-        IEnumerable<T> Items { get; set; }
+        IEnumerable<TEntity> Items { get; set; }
 
         /// <summary>
         ///     Gets the index of the page.
@@ -58,6 +58,14 @@ namespace Moe.Lib
         /// </summary>
         /// <value>The total page count.</value>
         int TotalPageCount { get; set; }
+
+        /// <summary>
+        ///     Convert to another paginated list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="selector">The selector.</param>
+        /// <returns>IPaginatedList&lt;T&gt;.</returns>
+        IPaginatedList<T> ToPaginated<T>(Func<TEntity, T> selector);
     }
 
     /// <summary>
@@ -140,8 +148,6 @@ namespace Moe.Lib
         /// <value>The total page count.</value>
         public int TotalPageCount { get; set; }
 
-        #endregion IPaginatedList<TEntity> Members
-
         /// <summary>
         ///     Convert to another paginated list.
         /// </summary>
@@ -152,5 +158,7 @@ namespace Moe.Lib
         {
             return new PaginatedList<T>(this.PageIndex, this.PageSize, this.TotalCount, this.Items.Select(selector));
         }
+
+        #endregion IPaginatedList<TEntity> Members
     }
 }
