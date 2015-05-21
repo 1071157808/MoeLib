@@ -1,13 +1,13 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:58 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-04-21  11:13 AM
+// Last Modified On : 2015-05-21  9:30 PM
 // ***********************************************************************
-// <copyright file="Stringification.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Stringification.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -57,7 +57,7 @@ namespace Moe.Lib
         {
             if (value == null)
             {
-                return "null";
+                return null;
             }
             try
             {
@@ -71,8 +71,6 @@ namespace Moe.Lib
 
         private static string StringifyCollection(IEnumerable collection, int maximumNumberOfRecursiveCalls)
         {
-            Debug.Assert(collection != null, "collection should not be null");
-
             return "{" + String.Join(",", (from object o in collection select StringifyInternal(o, maximumNumberOfRecursiveCalls - 1)).ToArray()) + "}";
         }
 
