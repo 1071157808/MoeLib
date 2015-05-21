@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  10:58 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-21  9:30 PM
+// Last Modified On : 2015-05-21  10:15 PM
 // ***********************************************************************
 // <copyright file="Stringification.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -43,21 +42,21 @@ namespace Moe.Lib
             {
                 // Stack overflow prevented. We can not build a string representation of the supplied object.
                 // We return the default representation of the object.
-                Debug.Assert(value != null, "value should not be null when InvalidOperation is thrown.");
                 return value.ToString();
             }
         }
 
         /// <summary>
-        ///     Transforms an object into a json string representation. When the value is a null reference, the string "null" will be returned.
+        ///     Transforms an object into a json string representation. When the value is a null reference, the nullValue will be returned.
         /// </summary>
         /// <param name="value">The value to be transformed.</param>
+        /// <param name="nullValue">The string to return when the value is a null reference.Default is null</param>
         /// <returns>A string representation of the supplied <paramref name="value" />.</returns>
-        public static string ToJson(this object value)
+        public static string ToJson(this object value, string nullValue = null)
         {
             if (value == null)
             {
-                return null;
+                return nullValue;
             }
             try
             {
