@@ -34,9 +34,8 @@ namespace Moe.Lib
             }
             catch (Exception e)
             {
-                if (exceptionHandler == null)
-                    throw;
-                exceptionHandler.Invoke(e);
+                if (exceptionHandler != null)
+                    exceptionHandler.Invoke(e);
             }
         }
     }
