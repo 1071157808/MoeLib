@@ -1,13 +1,13 @@
-﻿// ***********************************************************************
-// Assembly         : MoeLib
+// ***********************************************************************
+// Project          : MoeLib
 // Author           : Siqi Lu
-// Created          : 2015-03-14  1:51 AM
+// Created          : 2015-03-14  8:49 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  8:48 PM
+// Last Modified On : 2015-05-30  11:15 PM
 // ***********************************************************************
-// <copyright file="NullUtils.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Null.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -33,7 +33,7 @@ namespace Moe.Lib
         public static TResult IfNotNull<TObject, TResult>(this TObject obj, Func<TObject, TResult> action, TResult defaultValue = default(TResult)) where TObject : class
         {
             if (action == null)
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             return obj != null ? action(obj) : defaultValue;
         }
 
@@ -47,7 +47,7 @@ namespace Moe.Lib
         public static void IfNotNull<TObject>(this TObject obj, Action<TObject> action) where TObject : class
         {
             if (action == null)
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             if (obj == null)
                 return;
             action(obj);

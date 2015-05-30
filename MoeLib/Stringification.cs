@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  10:58 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-21  10:15 PM
+// Last Modified On : 2015-05-30  11:22 PM
 // ***********************************************************************
 // <copyright file="Stringification.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -23,7 +23,7 @@ namespace Moe.Lib
     /// </summary>
     public static class Stringification
     {
-        private const int MaximumNumberOfRecursiveCalls = 10;
+        private const int MAXIMUM_NUMBER_OF_RECURSIVE_CALLS = 10;
 
         /// <summary>
         ///     Transforms an object into a string representation that can be used to represent it's value in an
@@ -36,7 +36,7 @@ namespace Moe.Lib
         {
             try
             {
-                return StringifyInternal(value, MaximumNumberOfRecursiveCalls);
+                return StringifyInternal(value, MAXIMUM_NUMBER_OF_RECURSIVE_CALLS);
             }
             catch (InvalidOperationException)
             {
@@ -70,7 +70,7 @@ namespace Moe.Lib
 
         private static string StringifyCollection(IEnumerable collection, int maximumNumberOfRecursiveCalls)
         {
-            return "{" + String.Join(",", (from object o in collection select StringifyInternal(o, maximumNumberOfRecursiveCalls - 1)).ToArray()) + "}";
+            return "{" + string.Join(",", (from object o in collection select StringifyInternal(o, maximumNumberOfRecursiveCalls - 1)).ToArray()) + "}";
         }
 
         private static string StringifyInternal(object value, int maximumNumberOfRecursiveCalls)

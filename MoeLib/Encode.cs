@@ -1,13 +1,13 @@
-﻿// ***********************************************************************
-// Assembly         : MoeLib
+// ***********************************************************************
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  4:33 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:27 PM
+// Last Modified On : 2015-05-30  11:15 PM
 // ***********************************************************************
-// <copyright file="Encode.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Encode.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -28,7 +28,7 @@ namespace Moe.Lib
         /// <summary>
         ///     The base36 characters
         /// </summary>
-        private const string Base36Characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+        private const string BASE36_CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyz";
 
         /// <summary>
         ///     Decode the Base36 Encoded string into a number.
@@ -42,7 +42,7 @@ namespace Moe.Lib
             int pos = 0;
             foreach (char c in reversed)
             {
-                result += Base36Characters.IndexOf(c) * (long)Math.Pow(36, pos);
+                result += BASE36_CHARACTERS.IndexOf(c) * (long)Math.Pow(36, pos);
                 pos++;
             }
             return result;
@@ -60,14 +60,14 @@ namespace Moe.Lib
                 return string.Empty;
             }
 
-            char[] clistarr = Base36Characters.ToCharArray();
+            char[] clistarr = BASE36_CHARACTERS.ToCharArray();
             Stack<char> result = new Stack<char>();
             while (input != 0)
             {
                 result.Push(clistarr[input % 36]);
                 input /= 36;
             }
-            return new String(result.ToArray());
+            return new string(result.ToArray());
         }
 
         /// <summary>
@@ -111,12 +111,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string HtmlDecode(string value)
         {
-            if (value.IsNullOrEmpty())
-            {
-                return value;
-            }
-
-            return WebUtility.HtmlDecode(value);
+            return value.IsNullOrEmpty() ? value : WebUtility.HtmlDecode(value);
         }
 
         /// <summary>
@@ -126,22 +121,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string HtmlEncode(string value)
         {
-            if (value.IsNullOrEmpty())
-            {
-                return value;
-            }
-
-            return WebUtility.HtmlEncode(value);
-        }
-
-        /// <summary>
-        ///     Encode the given javascript string.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>System.String.</returns>
-        public static string JavaScriptStringEncode(string value)
-        {
-            return JavaScriptStringEncode(value, false);
+            return value.IsNullOrEmpty() ? value : WebUtility.HtmlEncode(value);
         }
 
         /// <summary>
@@ -150,7 +130,7 @@ namespace Moe.Lib
         /// <param name="value">The value.</param>
         /// <param name="addDoubleQuotes">if set to <c>true</c> [add double quotes].</param>
         /// <returns>System.String.</returns>
-        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes)
+        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes = false)
         {
             string encoded = HttpEncoder.JavaScriptStringEncode(value);
             return (addDoubleQuotes) ? "\"" + encoded + "\"" : encoded;
@@ -163,9 +143,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string UrlDecode(string str)
         {
-            if (str == null)
-                return null;
-            return HttpEncoder.UrlDecode(str, Encoding.UTF8);
+            return str == null ? null : HttpEncoder.UrlDecode(str, Encoding.UTF8);
         }
 
         /// <summary>
@@ -596,15 +574,15 @@ namespace Moe.Lib
                 return false;
             if (bytes == null)
             {
-                throw new ArgumentNullException("bytes");
+                throw new ArgumentNullException(nameof(bytes));
             }
             if (offset < 0 || offset > bytes.Length)
             {
-                throw new ArgumentOutOfRangeException("offset");
+                throw new ArgumentOutOfRangeException(nameof(offset));
             }
             if (count < 0 || offset + count > bytes.Length)
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
 
             return true;
@@ -673,7 +651,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="str">The string.</param>
         /// <returns>String.</returns>
-        internal static String UrlEncodeSpaces(string str)
+        internal static string UrlEncodeSpaces(string str)
         {
             if (str != null && str.IndexOf(' ') >= 0)
                 str = str.Replace(" ", "%20");
@@ -730,7 +708,7 @@ namespace Moe.Lib
             this.bufferSize = bufferSize;
             this.encoding = encoding;
 
-            charBuffer = new char[bufferSize];
+            this.charBuffer = new char[bufferSize];
             // byte buffer created on demand
         }
 
@@ -749,10 +727,10 @@ namespace Moe.Lib
                             else
             */
             {
-                if (byteBuffer == null)
-                    byteBuffer = new byte[bufferSize];
+                if (this.byteBuffer == null)
+                    this.byteBuffer = new byte[this.bufferSize];
 
-                byteBuffer[numBytes++] = byteValue;
+                this.byteBuffer[this.numBytes++] = byteValue;
             }
         }
 
@@ -762,24 +740,22 @@ namespace Moe.Lib
         /// <param name="charValue">The charValue.</param>
         internal void AddChar(char charValue)
         {
-            if (numBytes > 0)
-                FlushBytes();
+            if (this.numBytes > 0)
+                this.FlushBytes();
 
-            charBuffer[numChars++] = charValue;
+            this.charBuffer[this.numChars++] = charValue;
         }
 
         /// <summary>
         ///     Gets the string.
         /// </summary>
         /// <returns>String.</returns>
-        internal String GetString()
+        internal string GetString()
         {
-            if (numBytes > 0)
-                FlushBytes();
+            if (this.numBytes > 0)
+                this.FlushBytes();
 
-            if (numChars > 0)
-                return new String(charBuffer, 0, numChars);
-            return String.Empty;
+            return this.numChars > 0 ? new string(this.charBuffer, 0, this.numChars) : string.Empty;
         }
 
         /// <summary>
@@ -787,10 +763,10 @@ namespace Moe.Lib
         /// </summary>
         private void FlushBytes()
         {
-            if (numBytes > 0)
+            if (this.numBytes > 0)
             {
-                numChars += encoding.GetChars(byteBuffer, 0, numBytes, charBuffer, numChars);
-                numBytes = 0;
+                this.numChars += this.encoding.GetChars(this.byteBuffer, 0, this.numBytes, this.charBuffer, this.numChars);
+                this.numBytes = 0;
             }
         }
     }

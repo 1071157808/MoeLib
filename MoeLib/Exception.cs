@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-21  5:13 PM
@@ -57,54 +57,60 @@ namespace Moe.Lib
         [SuppressMessage("ReSharper", "CanBeReplacedWithTryCastAndCheckForNull")]
         private static void CreateExceptionString(StringBuilder sb, Exception exception, string indent)
         {
-            if (exception == null)
+            while (true)
             {
-                sb.Append(string.Empty);
-                return;
-            }
-
-            if (indent == null)
-            {
-                indent = string.Empty;
-            }
-            else if (indent.Length > 0)
-            {
-                sb.AppendFormat("{0}Inner ", indent);
-            }
-
-            sb.AppendFormat("Exception(s) Found:{0}{1}Type: {2}", Environment.NewLine, indent, exception.GetType().FullName);
-            sb.AppendFormat("{0}{1}Message: {2}", Environment.NewLine, indent, exception.Message);
-            sb.AppendFormat("{0}{1}Source: {2}", Environment.NewLine, indent, exception.Source);
-            sb.AppendFormat("{0}{1}Stacktrace: {2}", Environment.NewLine, indent, exception.StackTrace);
-
-            if (exception is ReflectionTypeLoadException)
-            {
-                Exception[] loaderExceptions = ((ReflectionTypeLoadException)exception).LoaderExceptions;
-                if (loaderExceptions == null || loaderExceptions.Length == 0)
+                if (exception == null)
                 {
-                    sb.AppendFormat("{0}No LoaderExceptions found", indent);
+                    sb.Append(string.Empty);
+                    return;
                 }
-                else
+
+                if (indent == null)
                 {
-                    foreach (Exception e in loaderExceptions)
-                        CreateExceptionString(sb, e, indent + "  ");
+                    indent = string.Empty;
                 }
-            }
-            else if (exception is AggregateException)
-            {
-                ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception).InnerExceptions;
-                if (innerExceptions == null || innerExceptions.Count == 0)
-                    sb.AppendFormat("{0}No InnerExceptions found", indent);
-                else
+                else if (indent.Length > 0)
                 {
-                    foreach (Exception e in innerExceptions)
-                        CreateExceptionString(sb, e, indent + "  ");
+                    sb.AppendFormat("{0}Inner ", indent);
                 }
-            }
-            else if (exception.InnerException != null)
-            {
-                sb.Append(Environment.NewLine);
-                CreateExceptionString(sb, exception.InnerException, indent + "  ");
+
+                sb.AppendFormat("Exception(s) Found:{0}{1}Type: {2}", Environment.NewLine, indent, exception.GetType().FullName);
+                sb.AppendFormat("{0}{1}Message: {2}", Environment.NewLine, indent, exception.Message);
+                sb.AppendFormat("{0}{1}Source: {2}", Environment.NewLine, indent, exception.Source);
+                sb.AppendFormat("{0}{1}Stacktrace: {2}", Environment.NewLine, indent, exception.StackTrace);
+
+                if (exception is ReflectionTypeLoadException)
+                {
+                    Exception[] loaderExceptions = ((ReflectionTypeLoadException)exception).LoaderExceptions;
+                    if (loaderExceptions == null || loaderExceptions.Length == 0)
+                    {
+                        sb.AppendFormat("{0}No LoaderExceptions found", indent);
+                    }
+                    else
+                    {
+                        foreach (Exception e in loaderExceptions)
+                            CreateExceptionString(sb, e, indent + "  ");
+                    }
+                }
+                else if (exception is AggregateException)
+                {
+                    ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception).InnerExceptions;
+                    if (innerExceptions == null || innerExceptions.Count == 0)
+                        sb.AppendFormat("{0}No InnerExceptions found", indent);
+                    else
+                    {
+                        foreach (Exception e in innerExceptions)
+                            CreateExceptionString(sb, e, indent + "  ");
+                    }
+                }
+                else if (exception.InnerException != null)
+                {
+                    sb.Append(Environment.NewLine);
+                    exception = exception.InnerException;
+                    indent = indent + "  ";
+                    continue;
+                }
+                break;
             }
         }
     }

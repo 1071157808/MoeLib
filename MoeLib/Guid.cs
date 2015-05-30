@@ -1,13 +1,13 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  6:18 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-04-19  7:49 PM
+// Last Modified On : 2015-05-30  11:22 PM
 // ***********************************************************************
-// <copyright file="Guid.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Guid.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -21,7 +21,7 @@ namespace Moe.Lib
     /// </summary>
     public static class GuidUtility
     {
-        private const long EpochMilliseconds = 62135596800000;
+        private const long EPOCH_MILLISECONDS = 62135596800000;
 
         /// <summary>
         ///     Generates a 16 character, Guid based string with very little chance of collision.
@@ -32,7 +32,7 @@ namespace Moe.Lib
         public static string GuidShortCode()
         {
             long i = Guid.NewGuid().ToByteArray().Aggregate<byte, long>(1, (current, b) => current * ((int)b + 1));
-            return string.Format("{0:x}", i - DateTime.Now.Ticks);
+            return $"{i - DateTime.Now.Ticks:x}";
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Moe.Lib
             byte[] guidBytes = Guid.NewGuid().ToByteArray();
 
             // get the milliseconds since Jan 1 1970
-            byte[] sequential = BitConverter.GetBytes((DateTime.Now.Ticks / 10000L) - EpochMilliseconds);
+            byte[] sequential = BitConverter.GetBytes((DateTime.Now.Ticks / 10000L) - EPOCH_MILLISECONDS);
 
             // discard the 2 most significant bytes, as we only care about the milliseconds
             // increasing, but the highest ones should be 0 for several thousand years to come (non-issue).

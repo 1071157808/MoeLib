@@ -1,17 +1,18 @@
-﻿// ***********************************************************************
-// Assembly         : MoeLib
+// ***********************************************************************
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  4:14 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  6:10 PM
+// Last Modified On : 2015-05-30  11:29 PM
 // ***********************************************************************
-// <copyright file="DateTime.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="DateTime.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -47,7 +48,7 @@ namespace Moe.Lib
         /// <returns>System.Int64.</returns>
         public static long UnixTimeStamp(this DateTime dateTime)
         {
-            return DateTimeUtility.GetUnixTimeStamp();
+            return DateTimeUtility.GetUnixTimeStamp(dateTime);
         }
 
         /// <summary>
@@ -69,12 +70,12 @@ namespace Moe.Lib
         /// <summary>
         ///     The ticks of 1970
         /// </summary>
-        private const long EpochTicks = 621355968000000000;
+        private const long EPOCH_TICKS = 621355968000000000;
 
         /// <summary>
         ///     The file time offset
         /// </summary>
-        private const long FileTimeOffset = 504911232000000000;
+        private const long FILE_TIME_OFFSET = 504911232000000000;
 
         /// <summary>
         ///     The datetime maximum value minus one day
@@ -98,12 +99,7 @@ namespace Moe.Lib
                 return DateTime.MinValue;
             }
 
-            if (utcTime > MaxValueMinusOneDay)
-            {
-                return DateTime.MaxValue;
-            }
-
-            return utcTime.ToLocalTime();
+            return utcTime > MaxValueMinusOneDay ? DateTime.MaxValue : utcTime.ToLocalTime();
         }
 
         /// <summary>
@@ -118,12 +114,7 @@ namespace Moe.Lib
                 return DateTime.MinValue;
             }
 
-            if (localTime > MaxValueMinusOneDay)
-            {
-                return DateTime.MaxValue;
-            }
-
-            return localTime.ToUniversalTime();
+            return localTime > MaxValueMinusOneDay ? DateTime.MaxValue : localTime.ToUniversalTime();
         }
 
         /// <summary>
@@ -131,9 +122,10 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="filetime">The filetime.</param>
         /// <returns>DateTime.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static DateTime FromFileTime(long filetime)
         {
-            long universalTicks = filetime + FileTimeOffset;
+            long universalTicks = filetime + FILE_TIME_OFFSET;
             // Dev10 733288: Caching: behavior change for CacheDependency when using UseMemoryCache=1
             // ObjectCacheHost converts DateTime to a DateTimeOffset, and the conversion requires
             // that DateTimeKind be set correctly
@@ -145,6 +137,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="dateMillisecondsAfter1970">The date milliseconds after1970.</param>
         /// <returns>UTC DateTime.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static DateTime FromJsDate(long dateMillisecondsAfter1970)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -186,6 +179,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="timeStamp">The time stamp.</param>
         /// <returns>DateTime.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static DateTime FromUnixTimeStamp(long timeStamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -200,7 +194,7 @@ namespace Moe.Lib
         public static long GetJsDate(DateTime time)
         {
             DateTime utc = time.ToUniversalTime();
-            return (utc.Ticks - EpochTicks) / 10000;
+            return (utc.Ticks - EPOCH_TICKS) / 10000;
         }
 
         /// <summary>
@@ -221,7 +215,7 @@ namespace Moe.Lib
         public static long GetUnixTimeStamp(DateTime time)
         {
             DateTime utc = time.ToUniversalTime();
-            return (utc.Ticks - EpochTicks) / 10000000;
+            return (utc.Ticks - EPOCH_TICKS) / 10000000;
         }
 
         /// <summary>
@@ -249,6 +243,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="ticks">The ticks.</param>
         /// <returns>DateTime.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static DateTime ToDateTime(this long ticks)
         {
             return new DateTime(ticks);

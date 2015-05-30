@@ -1,13 +1,13 @@
-﻿// ***********************************************************************
-// Assembly         : MoeLib
+// ***********************************************************************
+// Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  11:05 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-16  12:54 AM
+// Last Modified On : 2015-05-30  11:41 PM
 // ***********************************************************************
-// <copyright file="Enumerable.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Enumerable.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -36,12 +36,12 @@ namespace Moe.Lib
             IList<T> values = sequence as IList<T> ?? sequence.ToList();
             if (sequence == null)
             {
-                throw new ArgumentNullException("sequence");
+                throw new ArgumentNullException(nameof(sequence));
             }
 
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
 
             foreach (T value in values)
@@ -88,10 +88,7 @@ namespace Moe.Lib
             finally
             {
                 IDisposable disposable = enumerator as IDisposable;
-                if (disposable != null)
-                {
-                    disposable.Dispose();
-                }
+                disposable?.Dispose();
             }
         }
 
@@ -152,7 +149,7 @@ namespace Moe.Lib
 
             // We expect this to be the exceptional flow, because most collections implement
             // ICollection<T>.
-            return ((IEnumerable)sequence).IsNullOrEmpty();
+            return sequence.IsSequenceNullOrEmpty();
         }
 
         /// <summary>
@@ -162,21 +159,7 @@ namespace Moe.Lib
         /// <returns>System.Boolean.</returns>
         public static bool IsNullOrEmpty(this IEnumerable sequence)
         {
-            if (sequence == null)
-            {
-                return true;
-            }
-
-            ICollection collection = sequence as ICollection;
-
-            if (collection != null)
-            {
-                // We expect this to be the normal flow.
-                return collection.Count == 0;
-            }
-
-            // We expect this to be the exceptional flow, because most collections implement ICollection.
-            return IsEnumerableEmpty(sequence);
+            return sequence == null || sequence.IsSequenceNullOrEmpty();
         }
 
         /// <summary>
@@ -211,11 +194,32 @@ namespace Moe.Lib
             finally
             {
                 IDisposable disposable = enumerator as IDisposable;
-                if (disposable != null)
-                {
-                    disposable.Dispose();
-                }
+                disposable?.Dispose();
             }
+        }
+
+        /// <summary>
+        ///     Determines whether [is null or empty] [the specified sequence].
+        /// </summary>
+        /// <param name="sequence">The sequence.</param>
+        /// <returns>System.Boolean.</returns>
+        private static bool IsSequenceNullOrEmpty(this IEnumerable sequence)
+        {
+            if (sequence == null)
+            {
+                return true;
+            }
+
+            ICollection collection = sequence as ICollection;
+
+            if (collection != null)
+            {
+                // We expect this to be the normal flow.
+                return collection.Count == 0;
+            }
+
+            // We expect this to be the exceptional flow, because most collections implement ICollection.
+            return IsEnumerableEmpty(sequence);
         }
     }
 }

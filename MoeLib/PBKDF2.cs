@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Project          : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:41 PM
@@ -12,6 +12,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -34,32 +35,32 @@ namespace Moe.Lib
         /// <summary>
         ///     The block size in bytes
         /// </summary>
-        private const int BlockSizeInBytes = 64;
+        private const int BLOCK_SIZE_IN_BYTES = 64;
 
         /// <summary>
         ///     The default PBKD f2 bytes
         /// </summary>
-        private const int DefaultPBKDF2Bytes = 64;
+        private const int DEFAULT_PBKDF2_BYTES = 64;
 
         /// <summary>
         ///     The default PBKD f2 interactions
         /// </summary>
-        private const int DefaultPBKDF2Interactions = 100; // 20000;
+        private const int DEFAULT_PBKDF2_INTERACTIONS = 100; // 20000;
 
         /// <summary>
         ///     The hash size in bytes
         /// </summary>
-        private const int HashSizeInBytes = 32;
+        private const int HASH_SIZE_IN_BYTES = 32;
 
         /// <summary>
         ///     The ipad
         /// </summary>
-        private const byte Ipad = 0x36;
+        private const byte IPAD = 0x36;
 
         /// <summary>
         ///     The opad
         /// </summary>
-        private const byte Opad = 0x5C;
+        private const byte OPAD = 0x5C;
 
         /// <summary>
         ///     Gets the bytes.
@@ -84,17 +85,18 @@ namespace Moe.Lib
         /// <param name="iterations">The iterations.</param>
         /// <param name="howManyBytes">The how many bytes.</param>
         /// <returns>System.Byte[].</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static byte[] GetBytes(byte[] password, byte[] salt, int iterations, int howManyBytes)
         {
             // round up
 
-            uint cBlocks = (uint)((howManyBytes + HashSizeInBytes - 1) / HashSizeInBytes);
+            uint cBlocks = (uint)((howManyBytes + HASH_SIZE_IN_BYTES - 1) / HASH_SIZE_IN_BYTES);
 
             // seed for the pseudo-random fcn: salt + block index
             byte[] saltAndIndex = new byte[salt.Length + 4];
             Array.Copy(salt, 0, saltAndIndex, 0, salt.Length);
 
-            byte[] output = new byte[cBlocks * HashSizeInBytes];
+            byte[] output = new byte[cBlocks * HASH_SIZE_IN_BYTES];
             int outputOffset = 0;
 
             SHA256Managed innerHash = new SHA256Managed();
@@ -102,19 +104,19 @@ namespace Moe.Lib
 
             // HMAC says the key must be hashed or padded with zeros
             // so it fits into a single block of the hash in use
-            if (password.Length > BlockSizeInBytes)
+            if (password.Length > BLOCK_SIZE_IN_BYTES)
             {
                 password = innerHash.ComputeHash(password);
             }
-            byte[] key = new byte[BlockSizeInBytes];
+            byte[] key = new byte[BLOCK_SIZE_IN_BYTES];
             Array.Copy(password, 0, key, 0, password.Length);
 
-            byte[] innerKey = new byte[BlockSizeInBytes];
-            byte[] outerKey = new byte[BlockSizeInBytes];
-            for (int i = 0; i < BlockSizeInBytes; ++i)
+            byte[] innerKey = new byte[BLOCK_SIZE_IN_BYTES];
+            byte[] outerKey = new byte[BLOCK_SIZE_IN_BYTES];
+            for (int i = 0; i < BLOCK_SIZE_IN_BYTES; ++i)
             {
-                innerKey[i] = (byte)(key[i] ^ Ipad);
-                outerKey[i] = (byte)(key[i] ^ Opad);
+                innerKey[i] = (byte)(key[i] ^ IPAD);
+                outerKey[i] = (byte)(key[i] ^ OPAD);
             }
 
             // for each block of desired output
@@ -129,23 +131,23 @@ namespace Moe.Lib
                     // simple implementation of HMAC-SHA-256
                     innerHash.Initialize();
                     innerHash.TransformBlock(innerKey, 0,
-                        BlockSizeInBytes, innerKey, 0);
+                        BLOCK_SIZE_IN_BYTES, innerKey, 0);
                     innerHash.TransformFinalBlock(u, 0, u.Length);
 
                     byte[] temp = innerHash.Hash;
 
                     outerHash.Initialize();
                     outerHash.TransformBlock(outerKey, 0,
-                        BlockSizeInBytes, outerKey, 0);
+                        BLOCK_SIZE_IN_BYTES, outerKey, 0);
                     outerHash.TransformFinalBlock(temp, 0, temp.Length);
 
                     u = outerHash.Hash; // U = result of HMAC
 
                     // xor result into output buffer
-                    XorByteArray(u, 0, HashSizeInBytes,
+                    XorByteArray(u, 0, HASH_SIZE_IN_BYTES,
                         output, outputOffset);
                 }
-                outputOffset += HashSizeInBytes;
+                outputOffset += HASH_SIZE_IN_BYTES;
             }
             byte[] result = new byte[howManyBytes];
             Array.Copy(output, 0, result, 0, howManyBytes);
@@ -160,7 +162,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string Hash(string password, string salt)
         {
-            byte[] bytes = GetBytes(password.GetBytesOfUTF8(), salt.GetBytesOfUTF8(), DefaultPBKDF2Interactions, DefaultPBKDF2Bytes);
+            byte[] bytes = GetBytes(password.GetBytesOfUTF8(), salt.GetBytesOfUTF8(), DEFAULT_PBKDF2_INTERACTIONS, DEFAULT_PBKDF2_BYTES);
             return Convert.ToBase64String(bytes);
         }
 

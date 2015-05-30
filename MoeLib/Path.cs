@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : MoeLib
 // Author           : Siqi Lu
 // Created          : 2015-03-14  10:30 PM
@@ -10,6 +10,8 @@
 //     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
 // </copyright>
 // ***********************************************************************
+
+using System;
 
 namespace Moe.Lib
 {
@@ -29,7 +31,7 @@ namespace Moe.Lib
             if (path1.IsNullOrEmpty())
                 return path2;
 
-            if (path2.StartsWith("http://") || path2.StartsWith("https://"))
+            if (path2.StartsWith("http://", StringComparison.Ordinal) || path2.StartsWith("https://", StringComparison.Ordinal))
                 return path2;
 
             char ch = path1[path1.Length - 1];

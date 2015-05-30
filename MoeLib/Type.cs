@@ -1,19 +1,20 @@
-﻿// ***********************************************************************
-// Assembly         : MoeLib
+// ***********************************************************************
+// Project          : MoeLib
 // Author           : Siqi Lu
-// Created          : 2015-03-14  1:51 AM
+// Created          : 2015-03-14  10:38 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  10:38 PM
+// Last Modified On : 2015-05-30  11:22 PM
 // ***********************************************************************
-// <copyright file="TypeUtils.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Type.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Moe.Lib
@@ -38,11 +39,7 @@ namespace Moe.Lib
         /// </summary>
         public static bool Implements<T>(this Type type)
         {
-            if (type == null)
-            {
-                return false;
-            }
-            return typeof(T).IsAssignableFrom(type);
+            return type != null && typeof(T).IsAssignableFrom(type);
         }
 
         /// <summary>
@@ -62,6 +59,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if [is dictionary type] [the specified type]; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static bool IsDictionaryType(this Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>))
@@ -86,9 +84,7 @@ namespace Moe.Lib
         /// <returns><c>true</c> if [is list or dictionary type] [the specified type]; otherwise, <c>false</c>.</returns>
         public static bool IsListOrDictionaryType(this Type type)
         {
-            if (!IsListType(type))
-                return IsDictionaryType(type);
-            return true;
+            return IsListType(type) || IsDictionaryType(type);
         }
 
         /// <summary>
@@ -96,6 +92,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if [is list type] [the specified type]; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static bool IsListType(this Type type)
         {
             return type.GetInterfaces().Contains(typeof(IList));

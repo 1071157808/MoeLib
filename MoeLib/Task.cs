@@ -4,7 +4,7 @@
 // Created          : 2015-05-15  10:43 AM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-15  11:05 AM
+// Last Modified On : 2015-05-30  11:22 PM
 // ***********************************************************************
 // <copyright file="Task.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -34,8 +34,7 @@ namespace Moe.Lib
             }
             catch (Exception e)
             {
-                if (exceptionHandler != null)
-                    exceptionHandler.Invoke(e);
+                exceptionHandler?.Invoke(e);
             }
         }
     }

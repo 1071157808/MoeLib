@@ -49,10 +49,31 @@
     <Compile Include="Crypto.cs" />
     <Compile Include="Byte.cs" />
     <Compile Include="Dictionary.cs" />
+    <Compile Include="Ensures\Ensures.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Collection.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Boolean.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Byte.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.DateTime.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Decimal.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Double.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.IComparable.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Int16.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Int32.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Int64.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Compare.Single.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Null.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.String.cs" />
+    <Compile Include="Ensures\EnsuresExtensions.Type.cs" />
+    <Compile Include="Ensures\It.cs" />
     <Compile Include="Enumerable.cs" />
     <Compile Include="Exception.cs" />
     <Compile Include="Int.cs" />
     <Compile Include="PaginatedList.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SHA256.cs" />
     <Compile Include="PBKDF2.cs" />
     <Compile Include="String.cs" />
@@ -66,6 +87,8 @@
     <Compile Include="Null.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Regex.cs" />
+    <Compile Include="Throw\ExceptionMessagesManager.cs" />
+    <Compile Include="Throw\Throw.cs" />
     <Compile Include="Type.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +99,13 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
