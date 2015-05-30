@@ -21,9 +21,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MoeLib")]
 [assembly: AssemblyDescription("Base library for .net project of Moe team.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Shanghai Yuyi")]
+[assembly: AssemblyCompany("Shanghai Yuyi Mdt InfoTech Ltd.")]
 [assembly: AssemblyProduct("MoeLib")]
-[assembly: AssemblyCopyright("Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
