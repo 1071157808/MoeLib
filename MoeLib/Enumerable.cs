@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
+// File             : Enumerable.cs
 // Created          : 2015-03-14  11:05 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:41 PM
+// Last Modified On : 2015-08-11  9:38 AM
 // ***********************************************************************
 // <copyright file="Enumerable.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Moe.Lib
 {
@@ -48,6 +49,34 @@ namespace Moe.Lib
             {
                 action(value);
             }
+        }
+
+        /// <summary>
+        ///     Performs an action on each value of the sequence
+        /// </summary>
+        /// <typeparam name="T">Element type</typeparam>
+        /// <param name="sequence">Sequence on which to perform action</param>
+        /// <param name="action">Action to perform on every item</param>
+        /// <returns>IEnumerable&lt;V&gt;.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static Task ForEach<T>(this IEnumerable<T> sequence, Func<T, Task> action)
+        {
+            IList<T> values = sequence as IList<T> ?? sequence.ToList();
+
+            if (sequence == null)
+            {
+                throw new ArgumentNullException(nameof(sequence));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            IEnumerable<Task> tasks = values.Select(value => action(value));
+            return Task.WhenAll(tasks);
         }
 
         /// <summary>
