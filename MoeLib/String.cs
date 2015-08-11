@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
+// File             : String.cs
 // Created          : 2015-03-14  10:17 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:15 PM
+// Last Modified On : 2015-08-11  8:57 PM
 // ***********************************************************************
 // <copyright file="String.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -30,11 +30,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a strongly typed value of the specified data type.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
-        /// <param name="value">The value to convert.</param>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static TValue As<TValue>(this string value)
         {
             return StringUtility.As<TValue>(value);
@@ -43,12 +41,10 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the specified data type and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
-        /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static TValue As<TValue>(this string value, TValue defaultValue)
         {
             return StringUtility.As(value, defaultValue);
@@ -57,10 +53,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a Boolean (true/false) value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static bool AsBool(this string value)
         {
             return StringUtility.AsBool(value);
@@ -69,11 +63,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a Boolean (true/false) value and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
-        /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static bool AsBool(this string value, bool defaultValue)
         {
             return StringUtility.AsBool(value, defaultValue);
@@ -82,10 +74,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static DateTime AsDateTime(this string value)
         {
             return StringUtility.AsDateTime(value);
@@ -94,11 +84,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> value and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value. The default is the minimum time value on the system.</param>
+        /// <returns>The converted value.</returns>
         public static DateTime AsDateTime(this string value, DateTime defaultValue)
         {
             return StringUtility.AsDateTime(value, defaultValue);
@@ -107,10 +95,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Decimal" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static decimal AsDecimal(this string value)
         {
             return StringUtility.AsDecimal(value);
@@ -119,11 +105,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Decimal" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
+        /// <returns>The converted value.</returns>
         public static decimal AsDecimal(this string value, decimal defaultValue)
         {
             return StringUtility.AsDecimal(value, defaultValue);
@@ -132,10 +116,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Double" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static double AsDouble(this string value)
         {
             return StringUtility.AsDouble(value);
@@ -144,11 +126,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Double" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
+        /// <returns>The converted value.</returns>
         public static double AsDouble(this string value, double defaultValue)
         {
             return StringUtility.AsDouble(value, defaultValue);
@@ -157,10 +137,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.float" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float AsFloat(this string value)
         {
             return StringUtility.AsFloat(value);
@@ -169,23 +147,32 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.float" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static float AsFloat(this string value, float defaultValue)
         {
             return StringUtility.AsFloat(value, defaultValue);
         }
 
         /// <summary>
+        /// Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
+        /// <returns>The converted value.</returns>
+        public static Guid AsGuid(this string value, string format = "N", Guid? defaultValue = null)
+        {
+            Guid result;
+            return !Guid.TryParseExact(value, format, out result) ? defaultValue.GetValueOrDefault(Guid.Empty) : result;
+        }
+
+        /// <summary>
         ///     Converts a string to a <see cref="T:System.int" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt(this string value)
         {
             return StringUtility.AsInt(value);
@@ -194,11 +181,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt(this string value, int defaultValue)
         {
             return StringUtility.AsInt(value, defaultValue);
@@ -207,10 +192,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int16" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static short AsInt16(this string value)
         {
             return StringUtility.AsInt16(value);
@@ -219,11 +202,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static short AsInt16(this string value, short defaultValue)
         {
             return StringUtility.AsInt16(value, defaultValue);
@@ -232,10 +213,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int32" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt32(this string value)
         {
             return StringUtility.AsInt32(value);
@@ -244,11 +223,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt32(this string value, int defaultValue)
         {
             return StringUtility.AsInt32(value, defaultValue);
@@ -257,10 +234,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int64" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long AsInt64(this string value)
         {
             return StringUtility.AsInt64(value);
@@ -269,11 +244,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static long AsInt64(this string value, long defaultValue)
         {
             return StringUtility.AsInt64(value, defaultValue);
@@ -282,10 +255,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.long" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long AsLong(this string value)
         {
             return StringUtility.AsLong(value);
@@ -294,11 +265,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static long AsLong(this string value, long defaultValue)
         {
             return StringUtility.AsLong(value, defaultValue);
@@ -307,10 +276,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Single" /> number.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float AsSingle(this string value)
         {
             return StringUtility.AsSingle(value);
@@ -319,11 +286,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Single" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static float AsSingle(this string value, float defaultValue)
         {
             return StringUtility.AsSingle(value, defaultValue);
@@ -343,6 +308,10 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks if the <paramref name="source" /> contains the <paramref name="input" /> based on the provided <paramref name="comparison" /> rules.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="input">The input.</param>
+        /// <param name="comparison">The comparison.</param>
+        /// <returns><c>true</c> if [contains] [the specified input]; otherwise, <c>false</c>.</returns>
         public static bool Contains(this string source, string input, StringComparison comparison)
         {
             return StringUtility.Contains(source, input, comparison);
@@ -351,6 +320,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks if the <paramref name="source" /> contains the <paramref name="input" />.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="input">The input.</param>
+        /// <returns><c>true</c> if [contains] [the specified input]; otherwise, <c>false</c>.</returns>
         public static bool Contains(this string source, string input)
         {
             return StringUtility.Contains(source, input);
@@ -404,11 +376,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
-        /// <param name="value">The value to test.</param>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
+        /// <param name="value">The value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool Is<TValue>(this string value)
         {
             return StringUtility.Is<TValue>(value);
@@ -417,20 +387,18 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the Boolean (true/false) type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsBool(this string value)
         {
             return StringUtility.IsBool(value);
         }
 
         /// <summary>
-        ///     Validates whether the provided
-        ///     <param name="value">string</param>
-        ///     is a valid cellphone number(13712341234).
+        ///     Validates whether the provided <paramref name="value">string</paramref> is a valid cellphone number(13712341234).
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns><c>true</c> if the specified value is cellphone; otherwise, <c>false</c>.</returns>
         public static bool IsCellphone(this string value)
         {
             return StringUtility.IsCellphone(value);
@@ -439,10 +407,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.DateTime" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsDateTime(this string value)
         {
             return StringUtility.IsDateTime(value);
@@ -451,10 +417,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.Decimal" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsDecimal(this string value)
         {
             return StringUtility.IsDecimal(value);
@@ -463,20 +427,18 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the Boolean (true/false) type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsDouble(this string value)
         {
             return StringUtility.IsDouble(value);
         }
 
+        //// <param name="value">The string value to test.</param>
         /// <summary>
-        ///     Validates whether the provided
-        ///     <param name="value">string</param>
-        ///     is a valid Email Address.
+        ///     Validates whether the provided <paramref name="value">string</paramref> is a valid Email Address.
         /// </summary>
+        /// <returns><c>true</c> if the specified value is email; otherwise, <c>false</c>.</returns>
         public static bool IsEmail(this string value)
         {
             return StringUtility.IsEmail(value);
@@ -485,22 +447,30 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.Single" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsFloat(this string value)
         {
             return StringUtility.IsFloat(value);
         }
 
         /// <summary>
+        /// Checks whether a string can be converted to the Guid (true/false) type.
+        /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
+        public static bool IsGuid(this string value, string format = "N")
+        {
+            Guid result;
+            return Guid.TryParseExact(value, format, out result);
+        }
+
+        /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.int" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsInt(this string value)
         {
             return StringUtility.IsInt(value);
@@ -509,10 +479,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int16" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsInt16(this string value)
         {
             return StringUtility.IsInt16(value);
@@ -521,10 +489,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int32" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsInt32(this string value)
         {
             return StringUtility.IsInt32(value);
@@ -533,20 +499,18 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int64" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsInt64(this string value)
         {
             return StringUtility.IsInt64(value);
         }
 
         /// <summary>
-        ///     Validates whether the provided
-        ///     <param name="value">string</param>
-        ///     is a valid IP Address.
+        ///     Validates whether the provided <paramref name="value">string</paramref> is a valid IP Address.
         /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <returns><c>true</c> if [is ip address] [the specified value]; otherwise, <c>false</c>.</returns>
         public static bool IsIpAddress(this string value)
         {
             return StringUtility.IsIpAddress(value);
@@ -555,10 +519,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to a long.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
         /// <param name="value">The string value to test.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool IsLong(this string value)
         {
             return StringUtility.IsLong(value);
@@ -605,10 +567,10 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Validates whether the provided
-        ///     <param name="value">string</param>
-        ///     is a valid (absolute) URL.
+        ///     Validates whether the provided <paramref name="value">string</paramref> is a valid (absolute) URL.
         /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <returns><c>true</c> if the specified value is URL; otherwise, <c>false</c>.</returns>
         public static bool IsUrl(this string value) // absolute
         {
             return StringUtility.IsUrl(value);
@@ -628,6 +590,10 @@ namespace Moe.Lib
         /// <summary>
         ///     Limits the length of the <paramref name="source" /> to the specified <paramref name="maxLength" />.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="maxLength">The maximum length.</param>
+        /// <param name="suffix">The suffix.</param>
+        /// <returns>System.String.</returns>
         public static string Limit(this string source, int maxLength, string suffix = "")
         {
             return StringUtility.Limit(source, maxLength, suffix);
@@ -682,6 +648,9 @@ namespace Moe.Lib
         ///     Returns a string array containing the trimmed substrings in this <paramref name="value" />
         ///     that are delimited by the provided <paramref name="separators" />.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="separators">The separators.</param>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
         public static IEnumerable<string> SplitAndTrim(this string value, params char[] separators)
         {
             return StringUtility.SplitAndTrim(value, separators);
@@ -690,10 +659,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.bool" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static bool ToBool(this string value)
         {
             return StringUtility.ToBool(value);
@@ -702,10 +669,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the CamelCase style.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static string ToCamelCase(string value)
         {
             return StringUtility.ToCamelCase(value);
@@ -714,10 +679,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static DateTime ToDateTime(this string value)
         {
             return StringUtility.ToDateTime(value);
@@ -726,10 +689,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.decimal" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static decimal ToDecimal(this string value)
         {
             return StringUtility.ToDecimal(value);
@@ -738,10 +699,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.double" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static double ToDouble(this string value)
         {
             return StringUtility.ToDouble(value);
@@ -750,22 +709,29 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.float" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float ToFloat(this string value)
         {
             return StringUtility.ToFloat(value);
         }
 
         /// <summary>
+        /// Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <returns>The converted value.</returns>
+        public static Guid ToGuid(this string value, string format = "N")
+        {
+            return Guid.ParseExact(value, format);
+        }
+
+        /// <summary>
         ///     Converts a string to a <see cref="T:System.int" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int ToInt(this string value)
         {
             return StringUtility.ToInt(value);
@@ -774,10 +740,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int16" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static short ToInt16(this string value)
         {
             return StringUtility.ToInt16(value);
@@ -786,10 +750,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int32" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int ToInt32(this string value)
         {
             return StringUtility.ToInt32(value);
@@ -798,10 +760,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int64" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long ToInt64(this string value)
         {
             return StringUtility.ToInt64(value);
@@ -810,10 +770,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.long" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long ToLong(this string value)
         {
             return StringUtility.ToLong(value);
@@ -823,9 +781,7 @@ namespace Moe.Lib
         ///     Hide some chars of the string.
         /// </summary>
         /// <param name="value">The value to convert.</param>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
+        /// <returns>The converted value.</returns>
         public static string ToMosaicString(string value)
         {
             return StringUtility.ToMosaicString(value);
@@ -844,10 +800,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Single" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float ToSingle(this string value)
         {
             return StringUtility.ToSingle(value);
@@ -856,10 +810,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the underscope style.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static string ToUnderScope(this string value)
         {
             return StringUtility.ToUnderScope(value);
@@ -876,11 +828,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the specified data type and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
         public static TValue As<TValue>(string value, TValue defaultValue = default(TValue))
         {
@@ -903,11 +853,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a Boolean (true/false) value and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static bool AsBool(string value, bool defaultValue = false)
         {
             bool result;
@@ -917,10 +865,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static DateTime AsDateTime(string value)
         {
             return AsDateTime(value, DateTime.UtcNow);
@@ -929,10 +875,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> value and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value. The default is the minimum time value on the system.</param>
         public static DateTime AsDateTime(string value, DateTime defaultValue)
         {
@@ -943,10 +887,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Decimal" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
         public static decimal AsDecimal(string value, decimal defaultValue = 0m)
         {
@@ -957,10 +899,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Double" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
         public static double AsDouble(string value, double defaultValue = 0d)
         {
@@ -971,11 +911,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.float" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static float AsFloat(string value, float defaultValue = 0.0f)
         {
             float result;
@@ -983,13 +921,24 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        /// Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or invalid.</param>
+        /// <returns>The converted value.</returns>
+        public static Guid AsGuid(string value, string format = "N", Guid? defaultValue = null)
+        {
+            Guid result;
+            return !Guid.TryParseExact(value, format, out result) ? defaultValue.GetValueOrDefault(Guid.Empty) : result;
+        }
+
+        /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt(string value, int defaultValue = 0)
         {
             int result;
@@ -999,11 +948,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static short AsInt16(string value, short defaultValue = 0)
         {
             short result;
@@ -1013,11 +960,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static int AsInt32(string value, int defaultValue = 0)
         {
             int result;
@@ -1027,11 +972,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static long AsInt64(string value, long defaultValue = 0)
         {
             long result;
@@ -1041,11 +984,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to to a <see cref="T:System.int" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static long AsLong(string value, long defaultValue = 0L)
         {
             long result;
@@ -1055,11 +996,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Single" /> number and specifies a default value.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
-        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null.</param>
+        /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
+        /// <returns>The converted value.</returns>
         public static float AsSingle(string value, float defaultValue = 0.0f)
         {
             float result;
@@ -1069,6 +1008,10 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks if the <paramref name="source" /> contains the <paramref name="input" /> based on the provided <paramref name="comparison" /> rules.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="input">The input.</param>
+        /// <param name="comparison">The comparison.</param>
+        /// <returns><c>true</c> if [contains] [the specified source]; otherwise, <c>false</c>.</returns>
         public static bool Contains(string source, string input, StringComparison comparison)
         {
             return source.IndexOf(input, comparison) >= 0;
@@ -1077,6 +1020,9 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks if the <paramref name="source" /> contains the <paramref name="input" />.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="input">The input.</param>
+        /// <returns><c>true</c> if [contains] [the specified source]; otherwise, <c>false</c>.</returns>
         public static bool Contains(string source, string input)
         {
             return source.IndexOf(input, StringComparison.Ordinal) >= 0;
@@ -1135,9 +1081,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The value to test.</param>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
         public static bool Is<TValue>(string value)
@@ -1165,9 +1109,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the Boolean (true/false) type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsBool(string value)
         {
@@ -1180,6 +1122,8 @@ namespace Moe.Lib
         ///     <param name="value">string</param>
         ///     is a valid cellphone number(13712341234).
         /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <returns><c>true</c> if the specified value is cellphone; otherwise, <c>false</c>.</returns>
         public static bool IsCellphone(string value)
         {
             return Match(value, RegexUtility.CellphoneRegex);
@@ -1188,9 +1132,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.DateTime" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsDateTime(string value)
         {
@@ -1201,9 +1143,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.Decimal" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsDecimal(string value)
         {
@@ -1214,9 +1154,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the Boolean (true/false) type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsDouble(string value)
         {
@@ -1226,9 +1164,11 @@ namespace Moe.Lib
 
         /// <summary>
         ///     Validates whether the provided
-        ///     <param name="value">string</param>
+        ///     <paramref name="value">string</paramref>
         ///     is a valid Email Address.
         /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <returns><c>true</c> if the specified value is email; otherwise, <c>false</c>.</returns>
         public static bool IsEmail(string value)
         {
             return Match(value, RegexUtility.EmailRegex);
@@ -1237,9 +1177,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.Single" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsFloat(string value)
         {
@@ -1248,11 +1186,21 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        /// Checks whether a string can be converted to the Guid (true/false) type.
+        /// </summary>
+        /// <param name="value">The string value to test.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
+        public static bool IsGuid(string value, string format = "N")
+        {
+            Guid result;
+            return Guid.TryParseExact(value, format, out result);
+        }
+
+        /// <summary>
         ///     Checks whether a string can be converted to the <see cref="T:System.int" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsInt(string value)
         {
@@ -1263,9 +1211,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int16" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsInt16(string value)
         {
@@ -1276,9 +1222,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int32" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsInt32(string value)
         {
@@ -1289,9 +1233,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to to the <see cref="T:System.Int64" /> type.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsInt64(string value)
         {
@@ -1301,9 +1243,11 @@ namespace Moe.Lib
 
         /// <summary>
         ///     Validates whether the provided
-        ///     <param name="value">string</param>
+        ///     <paramref name="value">string</paramref>
         ///     is a valid IP Address.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns><c>true</c> if [is ip address] [the specified value]; otherwise, <c>false</c>.</returns>
         public static bool IsIpAddress(string value)
         {
             return Match(value, RegexUtility.IPAddressRegex);
@@ -1312,9 +1256,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether a string can be converted to a long.
         /// </summary>
-        /// <returns>
-        ///     true if <paramref name="value" /> can be converted to the specified type; otherwise, false.
-        /// </returns>
+        /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
         /// <param name="value">The string value to test.</param>
         public static bool IsLong(string value)
         {
@@ -1364,9 +1306,11 @@ namespace Moe.Lib
 
         /// <summary>
         ///     Validates whether the provided
-        ///     <param name="value">string</param>
+        ///     <paramref name="value">string</paramref>
         ///     is a valid (absolute) URL.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns><c>true</c> if the specified value is URL; otherwise, <c>false</c>.</returns>
         public static bool IsUrl(string value) // absolute
         {
             return Match(value, RegexUtility.UrlRegex);
@@ -1375,6 +1319,10 @@ namespace Moe.Lib
         /// <summary>
         ///     Limits the length of the <paramref name="source" /> to the specified <paramref name="maxLength" />.
         /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="maxLength">The maximum length.</param>
+        /// <param name="suffix">The suffix.</param>
+        /// <returns>System.String.</returns>
         public static string Limit(string source, int maxLength, string suffix = "")
         {
             if (suffix.IsNotNullOrEmpty())
@@ -1434,6 +1382,9 @@ namespace Moe.Lib
         ///     Returns a string array containing the trimmed substrings in this <paramref name="value" />
         ///     that are delimited by the provided <paramref name="separators" />.
         /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="separators">The separators.</param>
+        /// <returns>System.Collections.Generic.IEnumerable&lt;System.String&gt;.</returns>
         public static IEnumerable<string> SplitAndTrim(string value, params char[] separators)
         {
             value = value ?? string.Empty;
@@ -1456,10 +1407,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.bool" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static bool ToBool(string value)
         {
             return bool.Parse(value);
@@ -1468,10 +1417,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the CamelCase style.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static string ToCamelCase(string value)
         {
             if (string.IsNullOrEmpty(value)) return value;
@@ -1501,10 +1448,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.DateTime" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static DateTime ToDateTime(string value)
         {
             return DateTime.Parse(value);
@@ -1513,10 +1458,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.decimal" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static decimal ToDecimal(string value)
         {
             return decimal.Parse(value);
@@ -1525,10 +1468,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.double" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static double ToDouble(string value)
         {
             return double.Parse(value);
@@ -1537,22 +1478,29 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.float" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float ToFloat(string value)
         {
             return float.Parse(value);
         }
 
         /// <summary>
+        /// Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="format">The format of the value.</param>
+        /// <returns>The converted value.</returns>
+        public static Guid ToGuid(string value, string format = "N")
+        {
+            return Guid.ParseExact(value, format);
+        }
+
+        /// <summary>
         ///     Converts a string to a <see cref="T:System.int" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int ToInt(string value)
         {
             return int.Parse(value);
@@ -1561,10 +1509,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int16" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static short ToInt16(string value)
         {
             return short.Parse(value);
@@ -1573,10 +1519,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int32" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static int ToInt32(string value)
         {
             return int.Parse(value);
@@ -1585,10 +1529,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Int64" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long ToInt64(string value)
         {
             return long.Parse(value);
@@ -1597,10 +1539,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.long" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static long ToLong(string value)
         {
             return long.Parse(value);
@@ -1610,9 +1550,7 @@ namespace Moe.Lib
         ///     Hide some chars of the string.
         /// </summary>
         /// <param name="value">The value to convert.</param>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
+        /// <returns>The converted value.</returns>
         public static string ToMosaicString(string value)
         {
             if (value.IsNullOrEmpty())
@@ -1650,10 +1588,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to a <see cref="T:System.Single" /> or throw an exception if the string is in a bad format.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static float ToSingle(string value)
         {
             return float.Parse(value);
@@ -1662,10 +1598,8 @@ namespace Moe.Lib
         /// <summary>
         ///     Converts a string to the underscope style.
         /// </summary>
-        /// <returns>
-        ///     The converted value.
-        /// </returns>
         /// <param name="value">The value to convert.</param>
+        /// <returns>The converted value.</returns>
         public static string ToUnderScope(string value)
         {
             return string.Concat(value.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()));

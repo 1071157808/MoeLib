@@ -78,6 +78,11 @@ namespace Moe.Lib
         private const long FILE_TIME_OFFSET = 504911232000000000;
 
         /// <summary>
+        /// The china standard time zone
+        /// </summary>
+        private static readonly TimeZoneInfo ChinaStandardTimeZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
+
+        /// <summary>
         ///     The datetime maximum value minus one day
         /// </summary>
         private static readonly DateTime MaxValueMinusOneDay = DateTime.MaxValue.AddDays(-1);
@@ -226,6 +231,16 @@ namespace Moe.Lib
         {
             DateTime utc = DateTime.UtcNow;
             return GetUnixTimeStamp(utc);
+        }
+
+        /// <summary>
+        /// To the china standard time.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        /// <returns>DateTime.</returns>
+        public static DateTime ToChinaStandardTime(this DateTime time)
+        {
+            return TimeZoneInfo.ConvertTime(time.ToUniversalTime(), TimeZoneInfo.Utc, ChinaStandardTimeZone);
         }
 
         /// <summary>
