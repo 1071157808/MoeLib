@@ -4,7 +4,7 @@
 // Created          : 2015-03-14  11:05 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-08-11  9:38 AM
+// Last Modified On : 2015-08-11  2:39 PM
 // ***********************************************************************
 // <copyright file="Enumerable.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -28,7 +28,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Performs an action on each value of the sequence
         /// </summary>
-        /// <typeparam name="T">Element type</typeparam>
+        /// <typeparam name="T">Sequence element type.</typeparam>
         /// <param name="sequence">Sequence on which to perform action</param>
         /// <param name="action">Action to perform on every item</param>
         /// <exception cref="System.ArgumentNullException">Thrown when given null <paramref name="sequence" /> or <paramref name="action" /></exception>
@@ -54,8 +54,36 @@ namespace Moe.Lib
         /// <summary>
         ///     Performs an action on each value of the sequence
         /// </summary>
-        /// <typeparam name="T">Element type</typeparam>
+        /// <typeparam name="T">Sequence element type.</typeparam>
+        /// <typeparam name="TR">Result element type.</typeparam>
         /// <param name="sequence">Sequence on which to perform action</param>
+        /// <param name="action">Action to perform on every item</param>
+        /// <returns>IEnumerable&lt;TR&gt;.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static IEnumerable<TR> ForEach<T, TR>(this IEnumerable<T> sequence, Func<T, TR> action)
+        {
+            IList<T> values = sequence as IList<T> ?? sequence.ToList();
+
+            if (sequence == null)
+            {
+                throw new ArgumentNullException(nameof(sequence));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            return values.Select(value => action(value)).ToList();
+        }
+
+        /// <summary>
+        ///     Performs an action on each value of the sequence
+        /// </summary>
+        /// <typeparam name="T">Sequence element type.</typeparam>
+        /// <param name="sequence">Sequence on which to perform action.</param>
         /// <param name="action">Action to perform on every item</param>
         /// <returns>IEnumerable&lt;V&gt;.</returns>
         /// <exception cref="ArgumentNullException">
@@ -77,6 +105,39 @@ namespace Moe.Lib
 
             IEnumerable<Task> tasks = values.Select(value => action(value));
             return Task.WhenAll(tasks);
+        }
+
+        /// <summary>
+        ///     Performs an action on each value of the sequence
+        /// </summary>
+        /// <typeparam name="T">Sequence element type.</typeparam>
+        /// <typeparam name="TR">Result element type.</typeparam>
+        /// <param name="sequence">Sequence on which to perform action</param>
+        /// <param name="action">Action to perform on every item</param>
+        /// <returns>IEnumerable&lt;V&gt;.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static async Task<IEnumerable<TR>> ForEach<T, TR>(this IEnumerable<T> sequence, Func<T, Task<TR>> action)
+        {
+            IList<T> values = sequence as IList<T> ?? sequence.ToList();
+            IList<TR> results = new List<TR>();
+
+            if (sequence == null)
+            {
+                throw new ArgumentNullException(nameof(sequence));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            foreach (T value in values)
+            {
+                results.Add(await action(value));
+            }
+            return results;
         }
 
         /// <summary>

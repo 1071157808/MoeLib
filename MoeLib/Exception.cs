@@ -1,13 +1,13 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
+// File             : Exception.cs
 // Created          : 2015-03-21  5:13 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-04-24  7:26 AM
+// Last Modified On : 2015-08-11  2:14 PM
 // ***********************************************************************
-// <copyright file="Exception.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Exception.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -74,6 +74,7 @@ namespace Moe.Lib
                     sb.AppendFormat("{0}Inner ", indent);
                 }
 
+                sb.Append(Environment.NewLine);
                 sb.AppendFormat("Exception(s) Found:{0}{1}Type: {2}", Environment.NewLine, indent, exception.GetType().FullName);
                 sb.AppendFormat("{0}{1}Message: {2}", Environment.NewLine, indent, exception.Message);
                 sb.AppendFormat("{0}{1}Source: {2}", Environment.NewLine, indent, exception.Source);
