@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
+// File             : DateTime.cs
 // Created          : 2015-03-14  4:14 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:29 PM
+// Last Modified On : 2015-08-12  9:03 AM
 // ***********************************************************************
 // <copyright file="DateTime.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -78,7 +78,7 @@ namespace Moe.Lib
         private const long FILE_TIME_OFFSET = 504911232000000000;
 
         /// <summary>
-        /// The china standard time zone
+        ///     The china standard time zone
         /// </summary>
         private static readonly TimeZoneInfo ChinaStandardTimeZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
 
@@ -234,13 +234,14 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// To the china standard time.
+        ///     To the china standard time.
         /// </summary>
         /// <param name="time">The time.</param>
         /// <returns>DateTime.</returns>
         public static DateTime ToChinaStandardTime(this DateTime time)
         {
-            return TimeZoneInfo.ConvertTime(time.ToUniversalTime(), TimeZoneInfo.Utc, ChinaStandardTimeZone);
+            time = time.ToUniversalTime().AddHours(8);
+            return new DateTime(time.Year, time.Month, time.Day, time.Hour, time.Minute, time.Second, time.Millisecond, DateTimeKind.Local);
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
+// File             : Guid.cs
 // Created          : 2015-03-14  6:18 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:22 PM
+// Last Modified On : 2015-08-12  9:04 AM
 // ***********************************************************************
 // <copyright file="Guid.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -74,7 +74,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string ToGuidString(this Guid guid)
         {
-            return guid.ToString("N");
+            return guid.ToString("N").ToUpperInvariant();
         }
     }
 }
