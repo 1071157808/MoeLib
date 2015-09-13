@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
 // File             : String.cs
-// Created          : 2015-03-14  10:17 PM
+// Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-08-11  8:57 PM
+// Last Modified On : 2015-09-13  7:50 PM
 // ***********************************************************************
 // <copyright file="String.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -156,7 +156,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
+        ///     Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="format">The format of the value.</param>
@@ -455,7 +455,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Checks whether a string can be converted to the Guid (true/false) type.
+        ///     Checks whether a string can be converted to the Guid (true/false) type.
         /// </summary>
         /// <param name="value">The string value to test.</param>
         /// <param name="format">The format of the value.</param>
@@ -717,7 +717,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
+        ///     Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="format">The format of the value.</param>
@@ -921,7 +921,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
+        ///     Converts a string to a <see cref="T:System.Guid" /> number and specifies a default value.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="format">The format of the value.</param>
@@ -1119,7 +1119,7 @@ namespace Moe.Lib
 
         /// <summary>
         ///     Validates whether the provided
-        ///     <param name="value">string</param>
+        ///     <paramref name="value">string</paramref>
         ///     is a valid cellphone number(13712341234).
         /// </summary>
         /// <param name="value">The string value to test.</param>
@@ -1186,7 +1186,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Checks whether a string can be converted to the Guid (true/false) type.
+        ///     Checks whether a string can be converted to the Guid (true/false) type.
         /// </summary>
         /// <param name="value">The string value to test.</param>
         /// <param name="format">The format of the value.</param>
@@ -1486,7 +1486,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        /// Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
+        ///     Converts a string to a <see cref="T:System.Guid" /> or throw an exception if the string is in a bad format.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="format">The format of the value.</param>
