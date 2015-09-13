@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
-// Created          : 2015-05-15  10:43 AM
+// File             : Task.cs
+// Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:22 PM
+// Last Modified On : 2015-09-13  7:05 PM
 // ***********************************************************************
 // <copyright file="Task.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -26,7 +26,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="task">The task.</param>
         /// <param name="exceptionHandler">The exception handler.</param>
-        public static async void Forget(this Task task, Action<Exception> exceptionHandler = null)
+        public static async Task Forget(this Task task, Action<Exception> exceptionHandler = null)
         {
             try
             {

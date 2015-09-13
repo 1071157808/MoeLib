@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
-// Author           : Siqi Lu
-// Created          : 2015-03-14  10:27 PM
+// Project          : MoeLib
+// File             : MD5.cs
+// Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-21  7:07 PM
+// Last Modified On : 2015-09-13  7:05 PM
 // ***********************************************************************
-// <copyright file="MD5.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="MD5.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -29,9 +29,9 @@ namespace Moe.Lib
         /// <returns>Hash bytes</returns>
         public static byte[] ComputeHash(string filePath)
         {
-            using (var md5 = MD5.Create())
+            using (MD5 md5 = MD5.Create())
             {
-                using (var stream = File.OpenRead(filePath))
+                using (FileStream stream = File.OpenRead(filePath))
                 {
                     return md5.ComputeHash(stream);
                 }
@@ -45,9 +45,9 @@ namespace Moe.Lib
         /// <returns>Hash string</returns>
         public static string ComputeHashString(string filePath)
         {
-            using (var md5 = MD5.Create())
+            using (MD5 md5 = MD5.Create())
             {
-                using (var stream = File.OpenRead(filePath))
+                using (FileStream stream = File.OpenRead(filePath))
                 {
                     byte[] bytes = md5.ComputeHash(stream);
                     return BitConverter.ToString(bytes).Remove("-").ToLowerInvariant();

@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
-// Author           : Siqi Lu
-// Created          : 2015-03-14  4:33 PM
+// File             : Encode.cs
+// Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-05-30  11:15 PM
+// Last Modified On : 2015-09-13  7:05 PM
 // ***********************************************************************
 // <copyright file="Encode.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -156,7 +156,7 @@ namespace Moe.Lib
             if (str == null)
                 return null;
             byte[] bytes = str.GetBytesOfUTF8();
-            var encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
+            byte[] encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
             return encodedBytes.Ascii();
         }
     }

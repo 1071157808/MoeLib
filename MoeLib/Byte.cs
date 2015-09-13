@@ -1,13 +1,13 @@
 ﻿// ***********************************************************************
-// Assembly         : MoeLib
-// Author           : Siqi Lu
-// Created          : 2015-03-14  4:36 PM
+// Project          : MoeLib
+// File             : Byte.cs
+// Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-14  6:39 PM
+// Last Modified On : 2015-09-13  7:05 PM
 // ***********************************************************************
-// <copyright file="Byte.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
+// <copyright file="Byte.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
 
@@ -244,8 +244,8 @@ namespace Moe.Lib
         {
             if (originalBytes.Length > removeFrom)
             {
-                var newSize = originalBytes.Length - removeFrom - 1;
-                var bytes = new byte[newSize];
+                long newSize = originalBytes.Length - removeFrom - 1;
+                byte[] bytes = new byte[newSize];
                 Array.Copy(originalBytes, removeFrom + 1, bytes, 0, newSize);
                 return bytes;
             }
