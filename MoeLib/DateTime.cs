@@ -78,11 +78,6 @@ namespace Moe.Lib
         private const long FILE_TIME_OFFSET = 504911232000000000;
 
         /// <summary>
-        ///     The china standard time zone
-        /// </summary>
-        private static readonly TimeZoneInfo ChinaStandardTimeZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
-
-        /// <summary>
         ///     The datetime maximum value minus one day
         /// </summary>
         private static readonly DateTime MaxValueMinusOneDay = DateTime.MaxValue.AddDays(-1);
@@ -91,6 +86,12 @@ namespace Moe.Lib
         ///     The datetime minimum value plus one day
         /// </summary>
         private static readonly DateTime MinValuePlusOneDay = DateTime.MinValue.AddDays(1);
+
+        /// <summary>
+        /// Gets the china standard time zone.
+        /// </summary>
+        /// <value>The china standard time zone.</value>
+        public static TimeZoneInfo ChinaStandardTimeZone { get; } = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
 
         /// <summary>
         ///     Converts to local time.
@@ -127,7 +128,6 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="filetime">The filetime.</param>
         /// <returns>DateTime.</returns>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static DateTime FromFileTime(long filetime)
         {
             long universalTicks = filetime + FILE_TIME_OFFSET;
@@ -231,6 +231,17 @@ namespace Moe.Lib
         {
             DateTime utc = DateTime.UtcNow;
             return GetUnixTimeStamp(utc);
+        }
+
+        /// <summary>
+        /// Determines whether [is in the day] [the specified date].
+        /// </summary>
+        /// <param name="time">The time.</param>
+        /// <param name="date">The date.</param>
+        /// <returns><c>true</c> if [is in the day] [the specified date]; otherwise, <c>false</c>.</returns>
+        public static bool IsInTheDay(this DateTime time, DateTime date)
+        {
+            return time >= date.Date && time < date.Date.AddDays(1);
         }
 
         /// <summary>

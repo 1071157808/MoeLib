@@ -22,14 +22,14 @@ namespace Moe.Lib
     public static class SHA256Utility
     {
         /// <summary>
-        ///     Hashes the specified password.
+        ///     Hashes the specified payload.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
-        public static string Hash(string password, string salt)
+        public static string Hash(string payload, string salt)
         {
-            string stringToHash = password + salt;
+            string stringToHash = payload + salt;
             SHA256 sha256 = SHA256.Create();
             byte[] hashBytes = sha256.ComputeHash(stringToHash.GetBytesOfUTF8());
             StringBuilder hashString = new StringBuilder();

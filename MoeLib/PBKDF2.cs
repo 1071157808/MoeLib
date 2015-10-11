@@ -65,28 +65,28 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the bytes.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <param name="iterations">The iterations.</param>
         /// <param name="howManyBytes">The how many bytes.</param>
         /// <returns>System.Byte[].</returns>
-        public static byte[] GetBytes(string password, byte[] salt, int iterations, int howManyBytes)
+        public static byte[] GetBytes(string payload, byte[] salt, int iterations, int howManyBytes)
         {
             return GetBytes(
-                Encoding.UTF8.GetBytes(password),
+                Encoding.UTF8.GetBytes(payload),
                 salt, iterations, howManyBytes);
         }
 
         /// <summary>
         ///     Gets the bytes.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <param name="iterations">The iterations.</param>
         /// <param name="howManyBytes">The how many bytes.</param>
         /// <returns>System.Byte[].</returns>
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static byte[] GetBytes(byte[] password, byte[] salt, int iterations, int howManyBytes)
+        public static byte[] GetBytes(byte[] payload, byte[] salt, int iterations, int howManyBytes)
         {
             // round up
 
@@ -104,12 +104,12 @@ namespace Moe.Lib
 
             // HMAC says the key must be hashed or padded with zeros
             // so it fits into a single block of the hash in use
-            if (password.Length > BLOCK_SIZE_IN_BYTES)
+            if (payload.Length > BLOCK_SIZE_IN_BYTES)
             {
-                password = innerHash.ComputeHash(password);
+                payload = innerHash.ComputeHash(payload);
             }
             byte[] key = new byte[BLOCK_SIZE_IN_BYTES];
-            Array.Copy(password, 0, key, 0, password.Length);
+            Array.Copy(payload, 0, key, 0, payload.Length);
 
             byte[] innerKey = new byte[BLOCK_SIZE_IN_BYTES];
             byte[] outerKey = new byte[BLOCK_SIZE_IN_BYTES];
@@ -155,14 +155,14 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Hashes the specified password.
+        ///     Hashes the specified payload.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
-        public static string Hash(string password, string salt)
+        public static string Hash(string payload, string salt)
         {
-            byte[] bytes = GetBytes(password.GetBytesOfUTF8(), salt.GetBytesOfUTF8(), DEFAULT_PBKDF2_INTERACTIONS, DEFAULT_PBKDF2_BYTES);
+            byte[] bytes = GetBytes(payload.GetBytesOfUTF8(), salt.GetBytesOfUTF8(), DEFAULT_PBKDF2_INTERACTIONS, DEFAULT_PBKDF2_BYTES);
             return Convert.ToBase64String(bytes);
         }
 

@@ -12,7 +12,6 @@
 // ***********************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -36,14 +35,12 @@ namespace Moe.Lib
         ///     Gets a value indicating whether this <see cref="Ensures{T}" /> is result.
         /// </summary>
         /// <value><c>true</c> if result; otherwise, <c>false</c>.</value>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public bool Result { get; private set; }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <value>The value.</value>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public T Value { get; }
 
         /// <summary>

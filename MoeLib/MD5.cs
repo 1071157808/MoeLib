@@ -27,7 +27,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <returns>Hash bytes</returns>
-        public static byte[] ComputeHash(string filePath)
+        public static byte[] ComputeHashForTheFile(string filePath)
         {
             using (MD5 md5 = MD5.Create())
             {
@@ -43,7 +43,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <returns>Hash string</returns>
-        public static string ComputeHashString(string filePath)
+        public static string ComputeHashStringForTheFile(string filePath)
         {
             using (MD5 md5 = MD5.Create())
             {

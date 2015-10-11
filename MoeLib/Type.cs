@@ -14,7 +14,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Moe.Lib
@@ -59,7 +58,6 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if [is dictionary type] [the specified type]; otherwise, <c>false</c>.</returns>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static bool IsDictionaryType(this Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>))
@@ -92,7 +90,6 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c> if [is list type] [the specified type]; otherwise, <c>false</c>.</returns>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static bool IsListType(this Type type)
         {
             return type.GetInterfaces().Contains(typeof(IList));

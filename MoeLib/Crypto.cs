@@ -21,23 +21,23 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the encrypted string.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
-        public static string PBKDF2(string password, string salt)
+        public static string PBKDF2(string payload, string salt)
         {
-            return PBKDF2Utility.Hash(password, salt);
+            return PBKDF2Utility.Hash(payload, salt);
         }
 
         /// <summary>
         ///     Gets the encrypted string.
         /// </summary>
-        /// <param name="password">The password.</param>
+        /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
-        public static string SHA256(string password, string salt)
+        public static string SHA256(string payload, string salt)
         {
-            return SHA256Utility.Hash(password, salt);
+            return SHA256Utility.Hash(payload, salt);
         }
     }
 }

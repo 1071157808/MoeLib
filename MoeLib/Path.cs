@@ -18,12 +18,12 @@ namespace Moe.Lib
     /// <summary>
     ///     Utilities methods for working with resource paths
     /// </summary>
-    public static class PathUtility
+    public static class UrlPathUtility
     {
         /// <summary>
         ///     Combines two URL paths
         /// </summary>
-        public static string CombinePaths(string path1, string path2)
+        public static string CombineUrlPaths(string path1, string path2)
         {
             if (path2.IsNullOrEmpty())
                 return path1;
