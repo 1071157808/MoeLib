@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Filters;
-using Newtonsoft.Json.Serialization;
+using System.Web.Http.Tracing;
 
 namespace Moe.Lib.Web
 {
