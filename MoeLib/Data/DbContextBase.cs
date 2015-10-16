@@ -41,8 +41,6 @@ namespace Moe.Lib.Data
 
             if (entry.State == EntityState.Detached)
                 this.Set<T>().Add(entity);
-
-            this.ExecuteSaveChangesAsync();
         }
 
         /// <summary>
@@ -56,8 +54,31 @@ namespace Moe.Lib.Data
             {
                 this.Set<T>().Add(entity);
             }
+        }
 
-            this.ExecuteSaveChangesAsync();
+        /// <summary>
+        /// Deletes the specified entity.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">The entity.</param>
+        public void Delete<T>(T entity) where T : class
+        {
+            this.Entry(entity).State = EntityState.Deleted;
+
+            this.ExecuteSaveChanges();
+        }
+
+        /// <summary>
+        /// Deletes the asynchronous.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns>Task&lt;System.Int32&gt;.</returns>
+        public Task<int> DeleteAsync<T>(T entity) where T : class
+        {
+            this.Entry(entity).State = EntityState.Deleted;
+
+            return this.ExecuteSaveChangesAsync();
         }
 
         /// <summary>
@@ -116,21 +137,6 @@ namespace Moe.Lib.Data
         public void Remove<T>(T entity) where T : class
         {
             this.Entry(entity).State = EntityState.Deleted;
-
-            this.retryPolicy.ExecuteAction(() => this.SaveChanges());
-        }
-
-        /// <summary>
-        ///     Removes the asynchronous.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity">The entity.</param>
-        /// <returns>Task&lt;System.Int32&gt;.</returns>
-        public Task<int> RemoveAsync<T>(T entity) where T : class
-        {
-            this.Entry(entity).State = EntityState.Deleted;
-
-            return this.retryPolicy.ExecuteAsync(this.SaveChangesAsync);
         }
 
         /// <summary>
