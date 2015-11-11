@@ -1,30 +1,17 @@
-// ***********************************************************************
-// Assembly         : MoeEnsure
-// Author           : Siqi Lu
-// Created          : 2015-03-15  2:52 PM
-//
-// Last Modified By : Siqi Lu
-// Last Modified On : 2015-03-22  11:27 PM
-// ***********************************************************************
-// <copyright file="Ensures.cs" company="Shanghai Yuyi">
-//     Copyright ©  2012-2015 Shanghai Yuyi. All rights reserved.
-// </copyright>
-// ***********************************************************************
-
 using System;
 
 namespace Moe.Lib
 {
     /// <summary>
-    ///     Ensures
+    ///     A <see cref="Ensures{T}" /> is used to ensure the predicate is true.
     /// </summary>
-    /// <typeparam name="T">The type of ensure object</typeparam>
+    /// <typeparam name="T">The type of the object to test for.</typeparam>
     public class Ensures<T>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Ensures{T}" /> class.
         /// </summary>
-        /// <param name="value">The value.</param>
+        /// <param name="value">The value to test/ensure of this <see cref="Ensures{T}" />.</param>
         public Ensures(T value)
         {
             this.Value = value;
@@ -32,50 +19,49 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets a value indicating whether this <see cref="Ensures{T}" /> is result.
+        ///     Gets a value indicating whether the result of this <see cref="Ensures{T}" /> is true.
         /// </summary>
-        /// <value><c>true</c> if result; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the result of this <see cref="Ensures{T}" /> is true; otherwise, <c>false</c>.</value>
         public bool Result { get; private set; }
 
         /// <summary>
-        ///     Gets the value.
+        ///     Gets The value to test/ensure of this <see cref="Ensures{T}" />..
         /// </summary>
-        /// <value>The value.</value>
         public T Value { get; }
 
         /// <summary>
-        ///     Ensures given condition is false
+        ///     Ensures that the given predicate is false.
         /// </summary>
-        /// <param name="condition">Condition to test</param>
-        /// <returns>Ensures&lt;T&gt;.</returns>
+        /// <param name="predicate">Predicate to test/ensure.</param>
+        /// <returns>This <see cref="Ensures{T}" /> instance.</returns>
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
-        public Ensures<T> Not(Func<T, bool> condition)
+        public Ensures<T> Not(Func<T, bool> predicate)
         {
-            this.Result = !condition.Invoke(this.Value);
+            this.Result = !predicate.Invoke(this.Value);
             return this;
         }
 
         /// <summary>
-        ///     Ensures that the given expression is true
+        ///     Ensures that the given predicate is true.
         /// </summary>
-        /// <param name="condition">Condition to test/ensure</param>
-        /// <returns>Ensures instance.</returns>
+        /// <param name="predicate">Predicate to test/ensure.</param>
+        /// <returns>This <see cref="Ensures{T}" /> instance.</returns>
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
-        public Ensures<T> That(Func<T, bool> condition)
+        public Ensures<T> That(Func<T, bool> predicate)
         {
-            this.Result = condition.Invoke(this.Value);
+            this.Result = predicate.Invoke(this.Value);
             return this;
         }
 
         /// <summary>
-        ///     Ensures that the given expression is true
+        ///     Ensures that the given predicate is true.
         /// </summary>
-        /// <param name="condition">Condition to test/ensure</param>
-        /// <returns>Ensures instance.</returns>
+        /// <param name="predicate">Predicate to test/ensure.</param>
+        /// <returns>This <see cref="Ensures{T}" /> instance.</returns>
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
-        public Ensures<T> That(Func<bool> condition)
+        public Ensures<T> That(Func<bool> predicate)
         {
-            this.Result = condition.Invoke();
+            this.Result = predicate.Invoke();
             return this;
         }
 
@@ -86,12 +72,12 @@ namespace Moe.Lib
         /// <returns><c>true</c> if the Result is true, <c>throw a TException</c> otherwise.</returns>
         public bool WithException<TException>() where TException : Exception
         {
-            if (this.Result != true)
+            if (this.Result)
             {
-                throw (TException)Activator.CreateInstance(typeof(TException));
+                return this.Result;
             }
 
-            return this.Result;
+            throw (TException)Activator.CreateInstance(typeof(TException));
         }
 
         /// <summary>
@@ -102,12 +88,12 @@ namespace Moe.Lib
         /// <returns><c>true</c> if the Result is true, <c>throw a TException</c> otherwise.</returns>
         public bool WithException<TException>(TException exception) where TException : Exception
         {
-            if (this.Result != true)
+            if (this.Result)
             {
-                throw exception;
+                return this.Result;
             }
 
-            return this.Result;
+            throw exception;
         }
 
         /// <summary>
@@ -115,16 +101,16 @@ namespace Moe.Lib
         /// </summary>
         /// <typeparam name="TException">The type of the exception.</typeparam>
         /// <param name="message">The exception message.</param>
-        /// <param name="formates">The formates.</param>
+        /// <param name="formates">The formates for the exception message.</param>
         /// <returns><c>true</c> if the Result is true, <c>throw a TException</c> otherwise.</returns>
         public bool WithException<TException>(string message, params object[] formates) where TException : Exception
         {
-            if (this.Result != true)
+            if (this.Result)
             {
-                throw (TException)Activator.CreateInstance(typeof(TException), message.FormatWith(formates));
+                return this.Result;
             }
 
-            return this.Result;
+            throw (TException)Activator.CreateInstance(typeof(TException), message.FormatWith(formates));
         }
     }
 }

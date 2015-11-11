@@ -26,7 +26,7 @@ namespace Moe.Lib
         ///     <paramref name="type" />. Please use the <b>IsNotNull</b> method to check for null references.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="type">The <see cref="Type" /> that will be used to perform the check.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotOfType<T>(this Ensures<T> ensures, Type type) where T : class
@@ -40,7 +40,7 @@ namespace Moe.Lib
         ///     <paramref name="type" />. Please use the <b>IsNotNull</b> method to check for null references.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="type">The <see cref="Type" /> that will be used to perform the check.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsOfType<T>(this Ensures<T> ensures, Type type) where T : class

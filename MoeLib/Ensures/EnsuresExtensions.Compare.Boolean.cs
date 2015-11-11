@@ -21,7 +21,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is <b>false</b>.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<bool> IsFalse(this Ensures<bool> ensures)
         {
@@ -31,7 +31,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is <b>false</b>.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<bool?> IsFalse(this Ensures<bool?> ensures)
         {
@@ -41,7 +41,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is <b>true</b>.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<bool> IsTrue(this Ensures<bool> ensures)
         {
@@ -51,7 +51,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is <b>true</b>.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<bool?> IsTrue(this Ensures<bool?> ensures)
         {

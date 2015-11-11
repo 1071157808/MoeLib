@@ -14,25 +14,25 @@
 namespace Moe.Lib
 {
     /// <summary>
-    ///     Use It class to construct Ensures instance.
+    ///     Use <see cref="It" /> class to construct <see cref="Ensures{T}" /> instance.
     /// </summary>
     public static class It
     {
         /// <summary>
-        ///     Ensures the specified value.
+        ///     Construct a <see cref="Ensures{T}" /> instance for the value.
         /// </summary>
-        /// <typeparam name="T">Type of the value.</typeparam>
-        /// <param name="value">The value.</param>
-        /// <returns>Ensures instance.</returns>
+        /// <typeparam name="T">Type of the value to test/ensure.</typeparam>
+        /// <param name="value">The value to test/ensure of the <see cref="Ensures{T}" /> instance.</param>
+        /// <returns>The specified <see cref="Ensures{T}" /> instance.</returns>
         public static Ensures<T> Ensures<T>(T value)
         {
             return new Ensures<T>(value);
         }
 
         /// <summary>
-        ///     Ensures.
+        ///     Construct a <see cref="Ensures{T}" /> instance for an object.
         /// </summary>
-        /// <returns>Ensures instance.</returns>
+        /// <returns>The specified <see cref="Ensures{T}" /> instance for an object.</returns>
         public static Ensures<object> Ensures()
         {
             return new Ensures<object>(new object());

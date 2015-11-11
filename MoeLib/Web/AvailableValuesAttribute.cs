@@ -6,7 +6,7 @@ using System.Linq;
 namespace Moe.Lib.Web
 {
     /// <summary>
-    ///     Class AvailableValuesAttribute.
+    ///     Determines whether the specified value of the object is valid.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class AvailableValuesAttribute : ValidationAttribute

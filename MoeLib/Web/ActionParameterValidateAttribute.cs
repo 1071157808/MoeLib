@@ -6,7 +6,7 @@ using System.Web.Http.Controllers;
 namespace Moe.Lib.Web
 {
     /// <summary>
-    ///     ActionParameterValidateAttribute.
+    ///     An action filter for validating action parameter, if validate failed, create a 400 response.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class ActionParameterValidateAttribute : OrderedActionFilterAttribute

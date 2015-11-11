@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 
@@ -51,10 +50,6 @@ namespace Moe.Lib
         ///     Creates the exception string. If the exception is null.
         ///     The exception string will be String.Empty.
         /// </summary>
-        /// <param name="sb">The string builder.</param>
-        /// <param name="exception">The exception.</param>
-        /// <param name="indent">The indent string.</param>
-        [SuppressMessage("ReSharper", "CanBeReplacedWithTryCastAndCheckForNull")]
         private static void CreateExceptionString(StringBuilder sb, Exception exception, string indent)
         {
             while (true)

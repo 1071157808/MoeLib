@@ -22,7 +22,7 @@ namespace Moe.Lib
     public static class ExceptionMessagesManager
     {
         /// <summary>
-        ///     The collection contains currently1 element
+        ///     The collection contains currently 1 element
         /// </summary>
         public const string CollectionContainsCurrently1Element = "CollectionContainsCurrently1Element";
 
@@ -42,7 +42,7 @@ namespace Moe.Lib
         public const string CollectionShouldBeEmpty = "CollectionShouldBeEmpty";
 
         /// <summary>
-        ///     The collection should contain1 element
+        ///     The collection should contain 1 element
         /// </summary>
         public const string CollectionShouldContain1Element = "CollectionShouldContain1Element";
 
@@ -57,7 +57,7 @@ namespace Moe.Lib
         public const string CollectionShouldContainAtLeastOneOfX = "CollectionShouldContainAtLeastOneOfX";
 
         /// <summary>
-        ///     The collection should contain less than1 element
+        ///     The collection should contain less than 1 element
         /// </summary>
         public const string CollectionShouldContainLessThan1Element = "CollectionShouldContainLessThan1Element";
 
@@ -67,7 +67,7 @@ namespace Moe.Lib
         public const string CollectionShouldContainLessThanXElements = "CollectionShouldContainLessThanXElements";
 
         /// <summary>
-        ///     The collection should contain more than1 element
+        ///     The collection should contain more than 1 element
         /// </summary>
         public const string CollectionShouldContainMoreThan1Element = "CollectionShouldContainMoreThan1Element";
 
@@ -102,7 +102,7 @@ namespace Moe.Lib
         public const string CollectionShouldNotBeEmpty = "CollectionShouldNotBeEmpty";
 
         /// <summary>
-        ///     The collection should not contain1 element
+        ///     The collection should not contain 1 element
         /// </summary>
         public const string CollectionShouldNotContain1Element = "CollectionShouldNotContain1Element";
 
@@ -117,7 +117,7 @@ namespace Moe.Lib
         public const string CollectionShouldNotContainAnyOfX = "CollectionShouldNotContainAnyOfX";
 
         /// <summary>
-        ///     The collection should not contain less than1 element
+        ///     The collection should not contain less than 1 element
         /// </summary>
         public const string CollectionShouldNotContainLessThan1Element = "CollectionShouldNotContainLessThan1Element";
 
@@ -127,7 +127,7 @@ namespace Moe.Lib
         public const string CollectionShouldNotContainLessThanXElements = "CollectionShouldNotContainLessThanXElements";
 
         /// <summary>
-        ///     The collection should not contain more than1 element
+        ///     The collection should not contain more than 1 element
         /// </summary>
         public const string CollectionShouldNotContainMoreThan1Element = "CollectionShouldNotContainMoreThan1Element";
 
@@ -187,7 +187,7 @@ namespace Moe.Lib
         public const string StringShouldBeEmpty = "StringShouldBeEmpty";
 
         /// <summary>
-        ///     The string should be longer or equal to1 character
+        ///     The string should be longer or equal to 1 character
         /// </summary>
         public const string StringShouldBeLongerOrEqualTo1Character = "StringShouldBeLongerOrEqualTo1Character";
 
@@ -197,7 +197,7 @@ namespace Moe.Lib
         public const string StringShouldBeLongerOrEqualToXCharacters = "StringShouldBeLongerOrEqualToXCharacters";
 
         /// <summary>
-        ///     The string should be longer than1 character
+        ///     The string should be longer than 1 character
         /// </summary>
         public const string StringShouldBeLongerThan1Character = "StringShouldBeLongerThan1Character";
 
@@ -217,7 +217,7 @@ namespace Moe.Lib
         public const string StringShouldBeNullOrWhiteSpace = "StringShouldBeNullOrWhiteSpace";
 
         /// <summary>
-        ///     The string should be shorter or equal to1 character
+        ///     The string should be shorter or equal to 1 character
         /// </summary>
         public const string StringShouldBeShorterOrEqualTo1Character = "StringShouldBeShorterOrEqualTo1Character";
 
@@ -227,7 +227,7 @@ namespace Moe.Lib
         public const string StringShouldBeShorterOrEqualToXCharacters = "StringShouldBeShorterOrEqualToXCharacters";
 
         /// <summary>
-        ///     The string should be shorter than1 character
+        ///     The string should be shorter than 1 character
         /// </summary>
         public const string StringShouldBeShorterThan1Character = "StringShouldBeShorterThan1Character";
 
@@ -452,12 +452,11 @@ namespace Moe.Lib
         private static readonly ResourceManager Resource =
             new ResourceManager(typeof(ExceptionMessagesManager).Namespace + ".Properties.Resources", typeof(ExceptionMessagesManager).Assembly);
 
-        // Returns a string from the resource.
         /// <summary>
-        ///     Gets the string.
+        ///     Returns a string from the resource.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="name">The resource name.</param>
+        /// <returns>The resource string.</returns>
         public static string GetString(string name)
         {
             return GetStringInternal(name, null);
@@ -465,22 +464,16 @@ namespace Moe.Lib
 
         // Returns a string from the resource and formats it with the given args in a culture-specific way.
         /// <summary>
-        ///     Gets the string.
+        ///     Returns a string from the resource and formats it with the given args in a culture-specific way.
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="name">The resource name.</param>
+        /// <param name="args">The fomating arguments.</param>
+        /// <returns>The formated resource string.</returns>
         public static string GetString(string name, params object[] args)
         {
             return GetStringInternal(name, args);
         }
 
-        /// <summary>
-        ///     Gets the string internal.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>System.String.</returns>
         private static string GetStringInternal(string name, params object[] args)
         {
             // GetString will throw an ArgumentNullException when name is null.

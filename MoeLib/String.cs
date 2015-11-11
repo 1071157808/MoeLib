@@ -377,7 +377,7 @@ namespace Moe.Lib
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
-        /// <param name="value">The value to test.</param>
+        /// <param name="value">The value to test/ensure.</param>
         /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
         public static bool Is<TValue>(this string value)
         {
@@ -1082,7 +1082,7 @@ namespace Moe.Lib
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
         /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
-        /// <param name="value">The value to test.</param>
+        /// <param name="value">The value to test/ensure.</param>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
         public static bool Is<TValue>(string value)
         {

@@ -21,7 +21,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is equal to the specified <paramref name="value" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The valid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsEqualTo(this Ensures<float> ensures, float value)
@@ -33,7 +33,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is greater or equal to the specified <paramref name="minValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsGreaterOrEqual(this Ensures<float> ensures, float minValue)
@@ -44,7 +44,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is greater than the specified <paramref name="minValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsGreaterThan(this Ensures<float> ensures, float minValue)
@@ -55,7 +55,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsInfinity(this Ensures<float> ensures)
         {
@@ -66,7 +66,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is between <paramref name="minValue" /> and
         ///     <paramref name="maxValue" /> (including those values).
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
@@ -78,7 +78,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsLessOrEqual(this Ensures<float> ensures, float maxValue)
@@ -89,7 +89,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is less than the specified <paramref name="maxValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsLessThan(this Ensures<float> ensures, float maxValue)
@@ -100,7 +100,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is a valid number.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNaN(this Ensures<float> ensures)
         {
@@ -110,7 +110,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is negative infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNegativeInfinity(this Ensures<float> ensures)
         {
@@ -120,7 +120,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is unequal to the specified <paramref name="value" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The invalid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotEqualTo(this Ensures<float> ensures, float value)
@@ -132,7 +132,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not greater or equal to the specified <paramref name="maxValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotGreaterOrEqual(this Ensures<float> ensures, float maxValue)
@@ -143,7 +143,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not greater than the specified <paramref name="maxValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotGreaterThan(this Ensures<float> ensures, float maxValue)
@@ -154,7 +154,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotInfinity(this Ensures<float> ensures)
         {
@@ -165,7 +165,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is not between <paramref name="minValue" /> and
         ///     <paramref name="maxValue" /> (including those values).
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest invalid value.</param>
         /// <param name="maxValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
@@ -177,7 +177,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotLessOrEqual(this Ensures<float> ensures, float minValue)
@@ -188,7 +188,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not less than the specified <paramref name="minValue" />.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotLessThan(this Ensures<float> ensures, float minValue)
@@ -199,7 +199,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is a not valid number.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotNaN(this Ensures<float> ensures)
         {
@@ -209,7 +209,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not negative infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotNegativeInfinity(this Ensures<float> ensures)
         {
@@ -219,7 +219,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is not positive infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotPositiveInfinity(this Ensures<float> ensures)
         {
@@ -229,7 +229,7 @@ namespace Moe.Lib
         /// <summary>
         ///     Checks whether the given value is positive infinity.
         /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsPositiveInfinity(this Ensures<float> ensures)
         {

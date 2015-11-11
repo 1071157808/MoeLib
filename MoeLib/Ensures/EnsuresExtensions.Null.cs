@@ -22,7 +22,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is not null.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotNull<T>(this Ensures<T> ensures) where T : class
         {
@@ -33,7 +33,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is not null.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotNull<T>(this Ensures<T?> ensures) where T : struct
         {
@@ -44,7 +44,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is null.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNull<T>(this Ensures<T> ensures) where T : class
         {
@@ -55,7 +55,7 @@ namespace Moe.Lib
         ///     Checks whether the given value is null. An exception is thrown otherwise.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be checked.</param>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNull<T>(this Ensures<T?> ensures)
             where T : struct

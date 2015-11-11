@@ -55,12 +55,16 @@
       <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.1.4.1\lib\dotnet\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.2.0\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ReflectionMagic, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
@@ -88,7 +92,7 @@
   <ItemGroup>
     <Compile Include="Crypto.cs" />
     <Compile Include="Byte.cs" />
-    <Compile Include="Data\DbContextBase.cs" />
+    <Compile Include="Data\MoeDbContext.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="Ensures\Ensures.cs" />
     <Compile Include="Ensures\EnsuresExtensions.Collection.cs" />
@@ -128,8 +132,6 @@
     <Compile Include="Null.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Regex.cs" />
-    <Compile Include="Throw\ExceptionMessagesManager.cs" />
-    <Compile Include="Throw\Throw.cs" />
     <Compile Include="TransientFaultHandling\HttpRequestTransientErrorDetectionStrategy.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Web\ActionParameterRequiredAttribute.cs" />

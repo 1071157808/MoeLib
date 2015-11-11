@@ -6,7 +6,7 @@ using System.Web.Http.Controllers;
 namespace Moe.Lib.Web
 {
     /// <summary>
-    ///     Action filter for check whether the action parameter is null.
+    ///     An action filter for checking whether the action parameter is null.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class ActionParameterRequiredAttribute : OrderedActionFilterAttribute
@@ -14,7 +14,7 @@ namespace Moe.Lib.Web
         /// <summary>
         ///     Initializes a new instance of the <see cref="ActionParameterRequiredAttribute" /> class.
         /// </summary>
-        /// <param name="actionParameterName">Name of the parameter.</param>
+        /// <param name="actionParameterName">Name of the action parameter.</param>
         /// <exception cref="System.ArgumentNullException">actionParameterName</exception>
         public ActionParameterRequiredAttribute(string actionParameterName = "request")
         {
@@ -22,9 +22,9 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        ///     Gets the name of the parameter.
+        ///     Gets the name of the action parameter.
         /// </summary>
-        /// <value>The name of the parameter.</value>
+        /// <value>The name of the action parameter.</value>
         public string ActionParameterName { get; }
 
         /// <summary>

@@ -6,7 +6,7 @@ using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 namespace Moe.Lib.TransientFaultHandling
 {
     /// <summary>
-    ///     HttpTransientErrorDetectionStrategy.
+    ///     Transient error detection strategy for http communication between clients and servers.
     /// </summary>
     public class HttpRequestTransientErrorDetectionStrategy : ITransientErrorDetectionStrategy
     {
@@ -25,7 +25,7 @@ namespace Moe.Lib.TransientFaultHandling
         /// </summary>
         /// <param name="ex">The exception object to be verified.</param>
         /// <returns>
-        ///     true if the specified exception is considered as transient; otherwise, false.
+        ///     <c>true</c> if the specified exception is considered as transient; otherwise, <c>false</c>.
         /// </returns>
         public bool IsTransient(Exception ex)
         {
