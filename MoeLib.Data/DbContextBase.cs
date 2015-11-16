@@ -11,31 +11,31 @@ using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 namespace Moe.Lib.Data
 {
     /// <summary>
-    ///     A <see cref="MoeDbContext" /> adds Auto-Retry function for DbContext of EntityFramework.
+    ///     A <see cref="DbContextBase" /> adds Auto-Retry function for DbContext of EntityFramework.
     /// </summary>
     /// <remarks>
     ///     建议使用MoeDbContext作为业务中使用的DbContext的基类，MoeDbContext为DbContext的常用操作添加了自动重试机制。
     /// </remarks>
-    public abstract class MoeDbContext : DbContext
+    public abstract class DbContextBase : DbContext
     {
         private readonly RetryPolicy retryPolicy;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MoeDbContext" /> class.
+        ///     Initializes a new instance of the <see cref="DbContextBase" /> class.
         /// </summary>
         /// <param name="nameOrConnectionString">The name of the connection string setting or connection string.</param>
-        protected MoeDbContext(string nameOrConnectionString)
+        protected DbContextBase(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             this.retryPolicy = new RetryPolicy(new SqlDatabaseTransientErrorDetectionStrategy(), RetryStrategy.DefaultExponential);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MoeDbContext" /> class.
+        ///     Initializes a new instance of the <see cref="DbContextBase" /> class.
         /// </summary>
         /// <param name="nameOrConnectionString">The name of the connection string setting or connection string.</param>
-        /// <param name="retryPolicy">The retry policy used by the <see cref="MoeDbContext" /> instance.</param>
-        protected MoeDbContext(string nameOrConnectionString, RetryPolicy retryPolicy)
+        /// <param name="retryPolicy">The retry policy used by the <see cref="DbContextBase" /> instance.</param>
+        protected DbContextBase(string nameOrConnectionString, RetryPolicy retryPolicy)
             : base(nameOrConnectionString)
         {
             this.retryPolicy = retryPolicy;

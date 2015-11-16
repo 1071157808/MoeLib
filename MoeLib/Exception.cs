@@ -69,18 +69,19 @@ namespace Moe.Lib
                     sb.AppendFormat("{0}Inner ", indent);
                 }
 
-                sb.Append(Environment.NewLine);
-                sb.AppendFormat("Exception(s) Found:{0}{1}Type: {2}", Environment.NewLine, indent, exception.GetType().FullName);
-                sb.AppendFormat("{0}{1}Message: {2}", Environment.NewLine, indent, exception.Message);
-                sb.AppendFormat("{0}{1}Source: {2}", Environment.NewLine, indent, exception.Source);
-                sb.AppendFormat("{0}{1}Stacktrace: {2}", Environment.NewLine, indent, exception.StackTrace);
+                sb.AppendLine();
+                sb.AppendLine("Exception(s) Found:");
+                sb.AppendLine($"{indent}Type: {exception.GetType().FullName}");
+                sb.AppendLine($"{indent}Message: {exception.Message}");
+                sb.AppendLine($"{indent}Source: {exception.Source}");
+                sb.AppendLine($"{indent}Stacktrace: {exception.StackTrace}");
 
                 if (exception is ReflectionTypeLoadException)
                 {
                     Exception[] loaderExceptions = ((ReflectionTypeLoadException)exception).LoaderExceptions;
                     if (loaderExceptions == null || loaderExceptions.Length == 0)
                     {
-                        sb.AppendFormat("{0}No LoaderExceptions found", indent);
+                        sb.AppendLine($"{indent}No LoaderExceptions found.");
                     }
                     else
                     {
@@ -92,7 +93,7 @@ namespace Moe.Lib
                 {
                     ReadOnlyCollection<Exception> innerExceptions = ((AggregateException)exception).InnerExceptions;
                     if (innerExceptions == null || innerExceptions.Count == 0)
-                        sb.AppendFormat("{0}No InnerExceptions found", indent);
+                        sb.AppendLine($"{indent}No InnerExceptions found.");
                     else
                     {
                         foreach (Exception e in innerExceptions)
