@@ -192,3 +192,4 @@ ModelManifest.xml
 # Dev
 ConsoleApplication/
 *.GhostDoc.xml
+.vs/config/applicationhost.config
