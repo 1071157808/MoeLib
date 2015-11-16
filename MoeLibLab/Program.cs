@@ -15,7 +15,6 @@ namespace MoeLibLab
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }
