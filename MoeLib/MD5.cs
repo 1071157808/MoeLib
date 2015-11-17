@@ -66,7 +66,7 @@ namespace Moe.Lib
                 return "";
 
             MD5 md5 = MD5.Create();
-            byte[] data = md5.ComputeHash(stringToHash.GetBytesOfUTF8());
+            byte[] data = md5.ComputeHash(stringToHash.GetBytesOfUtf8());
             return data.Hex().ToLowerInvariant();
         }
     }

@@ -4,9 +4,9 @@ namespace MoeLib.Jinyinmao
 {
     public interface IAppConfigProvider
     {
-        Guid GetDeploymentIdConfig();
+        string GetAppKeysConfig();
 
-        string GetPrivateKeyConfig();
+        Guid GetDeploymentIdConfig();
 
         string GetRoleConfig();
 

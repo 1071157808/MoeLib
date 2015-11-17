@@ -11,6 +11,8 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
+
 namespace Moe.Lib
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsEqualTo(this Ensures<decimal> ensures, decimal value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v == value);
         }
 
@@ -37,6 +44,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsGreaterOrEqual(this Ensures<decimal> ensures, decimal minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
 
@@ -48,6 +60,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsGreaterThan(this Ensures<decimal> ensures, decimal minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -61,6 +78,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsInRange(this Ensures<decimal> ensures, decimal minValue, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue && v <= maxValue);
         }
 
@@ -72,6 +94,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsLessOrEqual(this Ensures<decimal> ensures, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -83,6 +110,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsLessThan(this Ensures<decimal> ensures, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -94,6 +126,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotEqualTo(this Ensures<decimal> ensures, decimal value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => v == value);
         }
 
@@ -105,6 +142,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotGreaterOrEqual(this Ensures<decimal> ensures, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -116,6 +158,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotGreaterThan(this Ensures<decimal> ensures, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -129,6 +176,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotInRange(this Ensures<decimal> ensures, decimal minValue, decimal maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > maxValue || v < minValue);
         }
 
@@ -140,6 +192,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotLessOrEqual(this Ensures<decimal> ensures, decimal minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -151,6 +208,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<decimal> IsNotLessThan(this Ensures<decimal> ensures, decimal minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
     }

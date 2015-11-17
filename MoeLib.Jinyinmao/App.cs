@@ -1,5 +1,4 @@
 ﻿using System;
-using MoeLib.Diagnostics;
 using MoeLib.Jinyinmao;
 
 namespace Moe.Lib.Jinyinmao
@@ -53,7 +52,7 @@ namespace Moe.Lib.Jinyinmao
         public App Config(IAppConfigProvider appConfigProvider)
         {
             Host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
-            Host.PrivateKey = appConfigProvider.GetPrivateKeyConfig();
+            Host.AppKeys = appConfigProvider.GetAppKeysConfig();
             Host.Role = appConfigProvider.GetRoleConfig();
             Host.RoleInstance = appConfigProvider.GetRoleInstanceConfig();
 
@@ -63,11 +62,6 @@ namespace Moe.Lib.Jinyinmao
         public App Config()
         {
             return this.Config(new AppConfigProvider());
-        }
-
-        public ILogger GetLogger()
-        {
-            return LogManager.CreateLogger();
         }
 
         private static void ThrowInvalidOperationException()

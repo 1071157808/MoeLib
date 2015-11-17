@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Moe.Lib;
 
 namespace MoeLibLab
 {
@@ -15,6 +16,8 @@ namespace MoeLibLab
     {
         private static void Main(string[] args)
         {
+            Console.WriteLine(Environment.Version.ToJson());
+            Console.WriteLine(Environment.OSVersion.ToJson());
         }
     }
 }

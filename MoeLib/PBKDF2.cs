@@ -162,7 +162,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string Hash(string payload, string salt)
         {
-            byte[] bytes = GetBytes(payload.GetBytesOfUTF8(), salt.GetBytesOfUTF8(), DEFAULT_PBKDF2_INTERACTIONS, DEFAULT_PBKDF2_BYTES);
+            byte[] bytes = GetBytes(payload.GetBytesOfUtf8(), salt.GetBytesOfUtf8(), DEFAULT_PBKDF2_INTERACTIONS, DEFAULT_PBKDF2_BYTES);
             return Convert.ToBase64String(bytes);
         }
 

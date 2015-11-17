@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Moe.Lib
 {
@@ -371,6 +372,30 @@ namespace Moe.Lib
         public static string GetLast(this string value, int count = 1)
         {
             return StringUtility.GetLast(value, count);
+        }
+
+        /// <summary>
+        ///     Converts a string that has been HTML-encoded for HTTP transmission into a decoded string.
+        /// </summary>
+        /// <param name="value">The string to decode. </param>
+        /// <returns>
+        ///     A decoded string.
+        /// </returns>
+        public static string HtmlDecode(this string value)
+        {
+            return StringUtility.HtmlDecode(value);
+        }
+
+        /// <summary>
+        ///     Converts a string to an HTML-encoded string.
+        /// </summary>
+        /// <param name="value">The string to encode. </param>
+        /// <returns>
+        ///     An encoded string.
+        /// </returns>
+        public static string HtmlEncode(this string value)
+        {
+            return StringUtility.HtmlEncode(value);
         }
 
         /// <summary>
@@ -1079,6 +1104,32 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        ///     Converts a string that has been HTML-encoded for HTTP transmission into a decoded string.
+        /// </summary>
+        /// <param name="value">The string to decode. </param>
+        /// <returns>
+        ///     A decoded string.
+        /// </returns>
+        public static string HtmlDecode(string value)
+        {
+            value = value ?? string.Empty;
+            return HttpUtility.HtmlDecode(value);
+        }
+
+        /// <summary>
+        ///     Converts a string to an HTML-encoded string.
+        /// </summary>
+        /// <param name="value">The string to encode. </param>
+        /// <returns>
+        ///     An encoded string.
+        /// </returns>
+        public static string HtmlEncode(string value)
+        {
+            value = value ?? string.Empty;
+            return HttpUtility.HtmlEncode(value);
+        }
+
+        /// <summary>
         ///     Checks whether a string can be converted to the specified data type.
         /// </summary>
         /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false./// </returns>
@@ -1582,7 +1633,7 @@ namespace Moe.Lib
         /// <returns>Null if <paramref name="value" /> is empty or the original value of <paramref name="value" />.</returns>
         public static string ToNullIfEmpty(string value)
         {
-            return value == string.Empty ? null : value;
+            return value.IsNullOrEmpty() ? null : value;
         }
 
         /// <summary>

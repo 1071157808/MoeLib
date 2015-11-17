@@ -1,34 +1,24 @@
 ﻿using System;
-using Microsoft.Azure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Moe.Lib;
 
 namespace MoeLib.Jinyinmao.Azure
 {
-    public class AzureAppConfigProvider : IAppConfigProvider
+    public class AzureAppConfigProvider : AppConfigProvider
     {
-        #region IAppConfigProvider Members
-
-        public Guid GetDeploymentIdConfig()
+        public override Guid GetDeploymentIdConfig()
         {
-            return RoleEnvironment.IsAvailable ? RoleEnvironment.DeploymentId.AsGuid() : CloudConfigurationManager.GetSetting("DeploymentId").AsGuid();
+            return RoleEnvironment.IsAvailable ? RoleEnvironment.DeploymentId.AsGuid() : base.GetDeploymentIdConfig();
         }
 
-        public string GetPrivateKeyConfig()
+        public override string GetRoleConfig()
         {
-            return CloudConfigurationManager.GetSetting("PrivateKey");
+            return RoleEnvironment.IsAvailable ? RoleEnvironment.CurrentRoleInstance.Role.Name : base.GetRoleConfig();
         }
 
-        public string GetRoleConfig()
+        public override string GetRoleInstanceConfig()
         {
-            return RoleEnvironment.IsAvailable ? RoleEnvironment.CurrentRoleInstance.Role.Name : CloudConfigurationManager.GetSetting("Role");
+            return RoleEnvironment.IsAvailable ? RoleEnvironment.CurrentRoleInstance.Id : base.GetRoleInstanceConfig();
         }
-
-        public string GetRoleInstanceConfig()
-        {
-            return RoleEnvironment.IsAvailable ? RoleEnvironment.CurrentRoleInstance.Id : CloudConfigurationManager.GetSetting("RoleInstance");
-        }
-
-        #endregion IAppConfigProvider Members
     }
 }

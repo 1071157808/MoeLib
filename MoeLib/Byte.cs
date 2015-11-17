@@ -42,7 +42,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of ASCII string.
+        ///     Gets the value of ASCII string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
@@ -52,7 +52,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of unicode string.
+        ///     Gets the value of unicode string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
@@ -62,13 +62,13 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of utf8 string.
+        ///     Gets the value of Utf8 string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        public static byte[] GetBytesOfUTF8(this string value)
+        public static byte[] GetBytesOfUtf8(this string value)
         {
-            return ByteUtility.GetBytesOfUTF8(value);
+            return ByteUtility.GetBytesOfUtf8(value);
         }
 
         /// <summary>
@@ -84,31 +84,31 @@ namespace Moe.Lib
         /// <summary>
         ///     Hexadecimals the specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string Hex(this byte[] bytes)
+        public static string Hex(this byte[] value)
         {
-            return ByteUtility.Hex(bytes);
+            return ByteUtility.Hex(value);
         }
 
         /// <summary>
         ///     Gets Unicode string of specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string Unicode(this byte[] bytes)
+        public static string Unicode(this byte[] value)
         {
-            return ByteUtility.Unicode(bytes);
+            return ByteUtility.Unicode(value);
         }
 
         /// <summary>
-        ///     Gets UTF8 string of specified byte array.
+        ///     Gets Utf8 string of specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string UTF8(this byte[] bytes)
+        public static string Utf8(this byte[] value)
         {
-            return ByteUtility.UTF8(bytes);
+            return ByteUtility.Utf8(value);
         }
     }
 
@@ -141,7 +141,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of ASCII string.
+        ///     Gets the value of ASCII string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
@@ -151,7 +151,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of unicode string.
+        ///     Gets the value of unicode string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
@@ -161,11 +161,11 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the bytes of utf8 string.
+        ///     Gets the value of Utf8 string.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        public static byte[] GetBytesOfUTF8(string value)
+        public static byte[] GetBytesOfUtf8(string value)
         {
             return Encoding.UTF8.GetBytes(value);
         }
@@ -183,17 +183,17 @@ namespace Moe.Lib
         /// <summary>
         ///     Hexadecimals the specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string Hex(byte[] bytes)
+        public static string Hex(byte[] value)
         {
-            if (bytes == null)
+            if (value == null)
                 return "";
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            for (int i = 0; i < bytes.Length; i++)
-                stringBuilder.Append(bytes[i].Hex());
+            for (int i = 0; i < value.Length; i++)
+                stringBuilder.Append(value[i].Hex());
 
             return stringBuilder.ToString();
         }
@@ -201,53 +201,53 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets Unicode string of specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string Unicode(byte[] bytes)
+        public static string Unicode(byte[] value)
         {
-            return bytes == null ? null : Encoding.Unicode.GetString(bytes);
+            return value == null ? null : Encoding.Unicode.GetString(value);
         }
 
         /// <summary>
-        ///     Gets UTF8 string of specified byte array.
+        ///     Gets Utf8 string of specified byte array.
         /// </summary>
-        /// <param name="bytes">The bytes.</param>
+        /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string UTF8(byte[] bytes)
+        public static string Utf8(byte[] value)
         {
-            return Encoding.UTF8.GetString(bytes);
+            return Encoding.UTF8.GetString(value);
         }
 
         /// <summary>
         ///     Fixes the bom.
         /// </summary>
-        /// <param name="bytesToFix">The bytes to fix.</param>
+        /// <param name="valueToFix">The value to fix.</param>
         /// <returns>System.Byte[].</returns>
-        private static byte[] FixBom(this byte[] bytesToFix)
+        private static byte[] FixBom(this byte[] valueToFix)
         {
             //see BOM - Byte Order Mark : http://en.wikipedia.org/wiki/Byte_order_mark
             //    http://www.verious.com/qa/-239-187-191-characters-appended-to-the-beginning-of-each-file/
             //    http://social.msdn.microsoft.com/Forums/en-US/8956758d-9814-4bd4-9812-e82903640b2f/recieving-239187191-character-symbols-when-loading-text-files-not-containing-them
-            if (bytesToFix != null && bytesToFix.Length > 3 && (bytesToFix[0] == '\xEF' && bytesToFix[1] == '\xBB' && bytesToFix[2] == '\xBF'))
-                return bytesToFix.RemoveBytes(2);
+            if (valueToFix != null && valueToFix.Length > 3 && (valueToFix[0] == '\xEF' && valueToFix[1] == '\xBB' && valueToFix[2] == '\xBF'))
+                return valueToFix.Removevalue(2);
 
-            return bytesToFix;
+            return valueToFix;
         }
 
         /// <summary>
-        ///     Removes the bytes.
+        ///     Removes the value.
         /// </summary>
-        /// <param name="originalBytes">The original bytes.</param>
+        /// <param name="originalvalue">The original value.</param>
         /// <param name="removeFrom">The remove from.</param>
         /// <returns>System.Byte[].</returns>
-        private static byte[] RemoveBytes(this byte[] originalBytes, uint removeFrom)
+        private static byte[] Removevalue(this byte[] originalvalue, uint removeFrom)
         {
-            if (originalBytes.Length > removeFrom)
+            if (originalvalue.Length > removeFrom)
             {
-                long newSize = originalBytes.Length - removeFrom - 1;
-                byte[] bytes = new byte[newSize];
-                Array.Copy(originalBytes, removeFrom + 1, bytes, 0, newSize);
-                return bytes;
+                long newSize = originalvalue.Length - removeFrom - 1;
+                byte[] value = new byte[newSize];
+                Array.Copy(originalvalue, removeFrom + 1, value, 0, newSize);
+                return value;
             }
 
             return new byte[0];

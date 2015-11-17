@@ -28,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsEqualTo(this Ensures<DateTime> ensures, DateTime value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v == value);
         }
 
@@ -39,6 +44,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsGreaterOrEqual(this Ensures<DateTime> ensures, DateTime minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
 
@@ -50,6 +60,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsGreaterThan(this Ensures<DateTime> ensures, DateTime minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -63,6 +78,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsInRange(this Ensures<DateTime> ensures, DateTime minValue, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue && v <= maxValue);
         }
 
@@ -74,6 +94,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsLessOrEqual(this Ensures<DateTime> ensures, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -85,6 +110,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsLessThan(this Ensures<DateTime> ensures, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -96,6 +126,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotEqualTo(this Ensures<DateTime> ensures, DateTime value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => v == value);
         }
 
@@ -107,6 +142,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotGreaterOrEqual(this Ensures<DateTime> ensures, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -118,6 +158,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotGreaterThan(this Ensures<DateTime> ensures, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -131,6 +176,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotInRange(this Ensures<DateTime> ensures, DateTime minValue, DateTime maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > maxValue || v < minValue);
         }
 
@@ -142,6 +192,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotLessOrEqual(this Ensures<DateTime> ensures, DateTime minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -153,6 +208,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<DateTime> IsNotLessThan(this Ensures<DateTime> ensures, DateTime minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
     }

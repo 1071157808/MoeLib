@@ -71,7 +71,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Decode the Base64 encoded string into a string using utf8.
+        ///     Decode the Base64 encoded string into a string using Utf8.
         /// </summary>
         /// <param name="stringToDecode">The string to decode.</param>
         /// <returns>System.String.</returns>
@@ -79,7 +79,7 @@ namespace Moe.Lib
         {
             try
             {
-                return Convert.FromBase64String(stringToDecode).UTF8();
+                return Convert.FromBase64String(stringToDecode).Utf8();
             }
             catch
             {
@@ -88,15 +88,15 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Encode the given string into a Base64 string using utf8.
+        ///     Encode the given string into a Base64 string using Utf8.
         /// </summary>
-        /// <param name="stringToEncode">The string to encode.</param>
+        /// <param name="value">The string to encode.</param>
         /// <returns>System.String.</returns>
-        public static string Base64Encode(string stringToEncode)
+        public static string Base64Encode(string value)
         {
             try
             {
-                return Convert.ToBase64String(stringToEncode.GetBytesOfUTF8());
+                return Convert.ToBase64String(value.GetBytesOfUtf8());
             }
             catch
             {
@@ -155,7 +155,7 @@ namespace Moe.Lib
         {
             if (str == null)
                 return null;
-            byte[] bytes = str.GetBytesOfUTF8();
+            byte[] bytes = str.GetBytesOfUtf8();
             byte[] encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
             return encodedBytes.Ascii();
         }

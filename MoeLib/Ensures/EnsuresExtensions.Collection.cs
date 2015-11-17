@@ -33,6 +33,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> All<TCollection, TElement>(this Ensures<TCollection> ensures, Func<TElement, bool> predicate) where TCollection : IEnumerable<TElement>
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.All(predicate));
         }
 
@@ -46,6 +51,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> Any<TCollection, TElement>(this Ensures<TCollection> ensures, Func<TElement, bool> predicate) where TCollection : IEnumerable<TElement>
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Any(predicate));
         }
 
@@ -60,6 +70,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> Contains<TCollection, TElement>(this Ensures<TCollection> ensures, TElement element) where TCollection : IEnumerable<TElement>
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Contains(element));
         }
 
@@ -74,6 +89,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> DoesNotContain<TCollection, TElement>(this Ensures<TCollection> ensures, TElement element) where TCollection : IEnumerable<TElement>
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v == null || !v.Contains(element));
         }
 
@@ -87,6 +107,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> DoesNotHaveLength<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => v.GetLength() == length);
         }
 
@@ -100,6 +125,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> HasLength<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() == length);
         }
 
@@ -111,6 +141,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsEmpty<TCollection>(this Ensures<TCollection> ensures) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.IsNullOrEmpty());
         }
 
@@ -124,6 +159,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsLongerOrEqual<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() >= length);
         }
 
@@ -137,6 +177,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsLongerThan<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() > length);
         }
 
@@ -149,6 +194,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsNotEmpty<TCollection>(this Ensures<TCollection> ensures) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => v.IsNullOrEmpty());
         }
 
@@ -162,6 +212,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsNotLongerOrEqual<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() < length);
         }
 
@@ -175,6 +230,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsNotLongerThan<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() <= length);
         }
 
@@ -188,6 +248,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsNotShorterOrEqual<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() > length);
         }
 
@@ -201,6 +266,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsNotShorterThan<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() >= length);
         }
 
@@ -214,6 +284,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsShorterOrEqual<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() <= length);
         }
 
@@ -227,6 +302,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<TCollection> IsShorterThan<TCollection>(this Ensures<TCollection> ensures, int length) where TCollection : IEnumerable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.GetLength() < length);
         }
     }

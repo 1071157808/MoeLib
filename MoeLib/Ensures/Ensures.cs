@@ -37,6 +37,11 @@ namespace Moe.Lib
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
         public Ensures<T> Not(Func<T, bool> predicate)
         {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
             this.Result = !predicate.Invoke(this.Value);
             return this;
         }
@@ -49,6 +54,11 @@ namespace Moe.Lib
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
         public Ensures<T> That(Func<T, bool> predicate)
         {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
             this.Result = predicate.Invoke(this.Value);
             return this;
         }
@@ -61,6 +71,11 @@ namespace Moe.Lib
         /// <remarks>The ensure result would be set into the Result property of the instance.</remarks>
         public Ensures<T> That(Func<bool> predicate)
         {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
             this.Result = predicate.Invoke();
             return this;
         }

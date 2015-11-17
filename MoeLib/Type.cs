@@ -92,7 +92,7 @@ namespace Moe.Lib
         /// <returns><c>true</c> if [is list type] [the specified type]; otherwise, <c>false</c>.</returns>
         public static bool IsListType(this Type type)
         {
-            return type.GetInterfaces().Contains(typeof(IList));
+            return type != null && type.GetInterfaces().Contains(typeof(IList));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Moe.Lib
         /// <returns><c>true</c> if [is nullable type] [the specified type]; otherwise, <c>false</c>.</returns>
         public static bool IsNullableType(this Type type)
         {
-            if (type.IsGenericType)
+            if (type != null && type.IsGenericType)
                 return type.GetGenericTypeDefinition() == typeof(Nullable<>);
             return false;
         }

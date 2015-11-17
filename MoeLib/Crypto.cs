@@ -11,12 +11,14 @@
 // </copyright>
 // ***********************************************************************
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Moe.Lib
 {
     /// <summary>
     ///     Class Crypto.
     /// </summary>
-    public class Crypto
+    public static class Crypto
     {
         /// <summary>
         ///     Gets the encrypted string.
@@ -24,6 +26,7 @@ namespace Moe.Lib
         /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "PBKDF")]
         public static string PBKDF2(string payload, string salt)
         {
             return PBKDF2Utility.Hash(payload, salt);
@@ -35,7 +38,7 @@ namespace Moe.Lib
         /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
-        public static string SHA256(string payload, string salt)
+        public static string Sha256(string payload, string salt)
         {
             return SHA256Utility.Hash(payload, salt);
         }

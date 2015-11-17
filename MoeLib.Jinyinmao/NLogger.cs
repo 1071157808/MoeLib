@@ -223,7 +223,7 @@ namespace MoeLib.Jinyinmao
                 EventId = level.ToString(),
                 Function = string.Empty,
                 Level = level,
-                PreciseTimeStamp = DateTime.UtcNow,
+                PreciseTimestamp = DateTime.UtcNow,
                 Role = App.Host.Role,
                 RoleInstance = App.Host.RoleInstance,
                 Message = new MessageContent

@@ -16,8 +16,7 @@ namespace Moe.Lib.Web
         /// <returns>HttpConfiguration.</returns>
         public static HttpConfiguration UseJinyinmaoExceptionLogger(this HttpConfiguration config)
         {
-            JinyinmaoExceptionLogger logger = new JinyinmaoExceptionLogger();
-            config.Services.Add(typeof(IExceptionLogger), logger);
+            config.Services.Add(typeof(IExceptionLogger), new JinyinmaoExceptionLogger());
             return config;
         }
 

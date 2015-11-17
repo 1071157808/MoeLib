@@ -36,9 +36,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns>System.Int64.</returns>
-        public static long JsDate(this DateTime dateTime)
+        public static long JSDate(this DateTime dateTime)
         {
-            return DateTimeUtility.GetJsDate(dateTime);
+            return DateTimeUtility.GetJSDate(dateTime);
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="dateTime">The date time.</param>
         /// <returns>System.Int64.</returns>
-        public static long UnixTimeStamp(this DateTime dateTime)
+        public static long UnixTimestamp(this DateTime dateTime)
         {
-            return DateTimeUtility.GetUnixTimeStamp(dateTime);
+            return DateTimeUtility.GetUnixTimestamp(dateTime);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Moe.Lib
         private static readonly DateTime MinValuePlusOneDay = DateTime.MinValue.AddDays(1);
 
         /// <summary>
-        /// Gets the china standard time zone.
+        ///     Gets the china standard time zone.
         /// </summary>
         /// <value>The china standard time zone.</value>
         public static TimeZoneInfo ChinaStandardTimeZone { get; } = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
@@ -126,11 +126,11 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the UTC from the file time.
         /// </summary>
-        /// <param name="filetime">The filetime.</param>
+        /// <param name="fileTime">The file time.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime FromFileTime(long filetime)
+        public static DateTime FromFileTime(long fileTime)
         {
-            long universalTicks = filetime + FILE_TIME_OFFSET;
+            long universalTicks = fileTime + FILE_TIME_OFFSET;
             // Dev10 733288: Caching: behavior change for CacheDependency when using UseMemoryCache=1
             // ObjectCacheHost converts DateTime to a DateTimeOffset, and the conversion requires
             // that DateTimeKind be set correctly
@@ -143,7 +143,7 @@ namespace Moe.Lib
         /// <param name="dateMillisecondsAfter1970">The date milliseconds after1970.</param>
         /// <returns>UTC DateTime.</returns>
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static DateTime FromJsDate(long dateMillisecondsAfter1970)
+        public static DateTime FromJSDate(long dateMillisecondsAfter1970)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return dateTime.AddMilliseconds(dateMillisecondsAfter1970);
@@ -152,11 +152,11 @@ namespace Moe.Lib
         /// <summary>
         ///     Froms the string.
         /// </summary>
-        /// <param name="dateString">The date string.</param>
+        /// <param name="value">The date string.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime FromString(string dateString)
+        public static DateTime FromString(string value)
         {
-            return DateTime.Parse(dateString);
+            return DateTime.Parse(value);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Moe.Lib
         /// <param name="timeStamp">The time stamp.</param>
         /// <returns>DateTime.</returns>
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static DateTime FromUnixTimeStamp(long timeStamp)
+        public static DateTime FromUnixTimestamp(long timeStamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             return dateTime.AddSeconds(timeStamp);
@@ -196,7 +196,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="time">The time.</param>
         /// <returns>System.Int64.</returns>
-        public static long GetJsDate(DateTime time)
+        public static long GetJSDate(DateTime time)
         {
             DateTime utc = time.ToUniversalTime();
             return (utc.Ticks - EPOCH_TICKS) / 10000;
@@ -206,10 +206,10 @@ namespace Moe.Lib
         ///     Gets the js date of now.
         /// </summary>
         /// <returns>System.Int64.</returns>
-        public static long GetJsDate()
+        public static long GetJSDate()
         {
             DateTime utc = DateTime.UtcNow;
-            return GetJsDate(utc);
+            return GetJSDate(utc);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="time">The time.</param>
         /// <returns>System.Int64.</returns>
-        public static long GetUnixTimeStamp(DateTime time)
+        public static long GetUnixTimestamp(DateTime time)
         {
             DateTime utc = time.ToUniversalTime();
             return (utc.Ticks - EPOCH_TICKS) / 10000000;
@@ -227,14 +227,14 @@ namespace Moe.Lib
         ///     Gets the unix time stamp of now.
         /// </summary>
         /// <returns>System.Int64.</returns>
-        public static long GetUnixTimeStamp()
+        public static long GetUnixTimestamp()
         {
             DateTime utc = DateTime.UtcNow;
-            return GetUnixTimeStamp(utc);
+            return GetUnixTimestamp(utc);
         }
 
         /// <summary>
-        /// Determines whether [is in the day] [the specified date].
+        ///     Determines whether [is in the day] [the specified date].
         /// </summary>
         /// <param name="time">The time.</param>
         /// <param name="date">The date.</param>
@@ -279,11 +279,11 @@ namespace Moe.Lib
         /// <summary>
         ///     To the UTC from file time.
         /// </summary>
-        /// <param name="filetime">The filetime.</param>
+        /// <param name="fileTime">The file time.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime ToDateTimeFromFileTime(this long filetime)
+        public static DateTime ToDateTimeFromFileTime(this long fileTime)
         {
-            return FromFileTime(filetime);
+            return FromFileTime(fileTime);
         }
 
         /// <summary>
@@ -291,9 +291,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="dateMillisecondsAfter1970">The date milliseconds after1970.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime ToDateTimeFromJsDate(this long dateMillisecondsAfter1970)
+        public static DateTime ToDateTimeFromJSDate(this long dateMillisecondsAfter1970)
         {
-            return FromJsDate(dateMillisecondsAfter1970);
+            return FromJSDate(dateMillisecondsAfter1970);
         }
 
         /// <summary>
@@ -301,9 +301,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="timeStamp">The timestamp.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime ToDateTimeFromUnixTimeStamp(this long timeStamp)
+        public static DateTime ToDateTimeFromUnixTimestamp(this long timeStamp)
         {
-            return FromUnixTimeStamp(timeStamp);
+            return FromUnixTimestamp(timeStamp);
         }
     }
 }

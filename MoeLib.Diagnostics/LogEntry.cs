@@ -11,7 +11,7 @@ namespace MoeLib.Diagnostics
         public string Function { get; set; }
         public int Level { get; set; }
         public MessageContent Message { get; set; }
-        public DateTime PreciseTimeStamp { get; set; }
+        public DateTime PreciseTimestamp { get; set; }
         public string Role { get; set; }
         public string RoleInstance { get; set; }
     }

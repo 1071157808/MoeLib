@@ -8,24 +8,24 @@ namespace MoeLib.Jinyinmao
     {
         #region IAppConfigProvider Members
 
-        public Guid GetDeploymentIdConfig()
+        public virtual string GetAppKeysConfig()
         {
-            return ConfigurationManager.AppSettings.Get("DeploymentId").AsGuid();
+            return ConfigurationManager.AppSettings.Get("AppKeys").HtmlDecode();
         }
 
-        public string GetPrivateKeyConfig()
+        public virtual Guid GetDeploymentIdConfig()
         {
-            return ConfigurationManager.AppSettings.Get("PrivateKey");
+            return Guid.NewGuid();
         }
 
-        public string GetRoleConfig()
+        public virtual string GetRoleConfig()
         {
             return ConfigurationManager.AppSettings.Get("Role");
         }
 
-        public string GetRoleInstanceConfig()
+        public virtual string GetRoleInstanceConfig()
         {
-            return ConfigurationManager.AppSettings.Get("RoleInstance");
+            return ConfigurationManager.AppSettings.Get("Role") + "_" + HostServer.IP;
         }
 
         #endregion IAppConfigProvider Members
