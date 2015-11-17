@@ -46,15 +46,18 @@ namespace Moe.Lib.Jinyinmao
         {
             app.host = new Host();
             app.logManager = new LogManager();
+            app.Initialized = true;
             return app;
         }
 
         public App Config(IAppConfigProvider appConfigProvider)
         {
-            Host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
-            Host.AppKeys = appConfigProvider.GetAppKeysConfig();
-            Host.Role = appConfigProvider.GetRoleConfig();
-            Host.RoleInstance = appConfigProvider.GetRoleInstanceConfig();
+            this.host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
+            this.host.AppKeys = appConfigProvider.GetAppKeysConfig();
+            this.host.Role = appConfigProvider.GetRoleConfig();
+            this.host.RoleInstance = appConfigProvider.GetRoleInstanceConfig();
+
+            this.Configurated = true;
 
             return this;
         }

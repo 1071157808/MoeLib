@@ -12,6 +12,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Moe.Lib
@@ -26,6 +27,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static string Ascii(this byte value)
         {
             return ByteUtility.Ascii(value);
@@ -36,6 +38,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static string Ascii(this byte[] value)
         {
             return ByteUtility.Ascii(value);
@@ -46,6 +49,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static byte[] GetBytesOfAscii(this string value)
         {
             return ByteUtility.GetBytesOfAscii(value);
@@ -122,6 +126,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static string Ascii(byte value)
         {
             return Encoding.ASCII.GetString(new[] { value });
@@ -132,6 +137,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static string Ascii(byte[] value)
         {
             if (value == null)
@@ -145,6 +151,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
         public static byte[] GetBytesOfAscii(string value)
         {
             return Encoding.ASCII.GetBytes(value);

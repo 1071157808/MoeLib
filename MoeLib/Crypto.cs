@@ -38,6 +38,7 @@ namespace Moe.Lib
         /// <param name="payload">The payload.</param>
         /// <param name="salt">The salt.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sha")]
         public static string Sha256(string payload, string salt)
         {
             return SHA256Utility.Hash(payload, salt);

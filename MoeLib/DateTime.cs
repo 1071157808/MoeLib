@@ -182,13 +182,13 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the UTC from the js date string.
         /// </summary>
-        /// <param name="timeStamp">The time stamp.</param>
+        /// <param name="timestamp">The time stamp.</param>
         /// <returns>DateTime.</returns>
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static DateTime FromUnixTimestamp(long timeStamp)
+        public static DateTime FromUnixTimestamp(long timestamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return dateTime.AddSeconds(timeStamp);
+            return dateTime.AddSeconds(timestamp);
         }
 
         /// <summary>
@@ -299,11 +299,11 @@ namespace Moe.Lib
         /// <summary>
         ///     To the UTC from unix timestamp.
         /// </summary>
-        /// <param name="timeStamp">The timestamp.</param>
+        /// <param name="timestamp">The timestamp.</param>
         /// <returns>DateTime.</returns>
-        public static DateTime ToDateTimeFromUnixTimestamp(this long timeStamp)
+        public static DateTime ToDateTimeFromUnixTimestamp(this long timestamp)
         {
-            return FromUnixTimestamp(timeStamp);
+            return FromUnixTimestamp(timestamp);
         }
     }
 }

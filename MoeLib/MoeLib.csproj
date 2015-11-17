@@ -79,6 +79,7 @@
     <Compile Include="Ensures\It.cs" />
     <Compile Include="Enumerable.cs" />
     <Compile Include="Exception.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="Int.cs" />
     <Compile Include="PaginatedList.cs" />

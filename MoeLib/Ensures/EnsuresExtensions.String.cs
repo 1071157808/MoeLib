@@ -12,7 +12,6 @@
 // ***********************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -29,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> Contains(this Ensures<string> ensures, string value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => (value == null && v == null) ||
                                      (value != null && v != null && v.Contains(value)));
         }
@@ -41,6 +45,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> DoesNotContain(this Ensures<string> ensures, string value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => (value == null && v == null) ||
                                     (value != null && v != null && v.Contains(value)));
         }
@@ -58,6 +67,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> DoesNotEndWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => (value == null && v == null) ||
                                     (value != null && v != null && v.EndsWith(value, comparisonType)));
         }
@@ -71,6 +85,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> DoesNotHaveLength(this Ensures<string> ensures, int length, string additionalMessage = "")
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             if (additionalMessage == null) throw new ArgumentNullException(nameof(additionalMessage));
             return ensures.Not(v => v != null && v.Length == length);
         }
@@ -88,6 +107,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> DoesNotStartWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => (value == null && v == null) ||
                                     (value != null && v != null && v.StartsWith(value, comparisonType)));
         }
@@ -105,6 +129,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> EndsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => (value == null && v == null) ||
                                      (value != null && v != null && v.EndsWith(value, comparisonType)));
         }
@@ -115,9 +144,13 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="length">The valid length.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static Ensures<string> HasLength(this Ensures<string> ensures, int length)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length == length);
         }
 
@@ -129,6 +162,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsEmpty(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.HasLength(0);
         }
 
@@ -140,6 +178,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsLongerOrEqual(this Ensures<string> ensures, int minLength)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length >= minLength);
         }
 
@@ -151,6 +194,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsLongerThan(this Ensures<string> ensures, int minLength)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length > minLength);
         }
 
@@ -162,6 +210,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsNotEmpty(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length == 0);
         }
 
@@ -172,6 +225,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsNotNullOrEmpty(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.IsNotNullOrEmpty());
         }
 
@@ -183,6 +241,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsNotNullOrWhiteSpace(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures;
         }
 
@@ -193,6 +256,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsNullOrEmpty(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.IsNotNullOrEmpty());
         }
 
@@ -204,6 +272,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsNullOrWhiteSpace(this Ensures<string> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.IsNullOrWhiteSpace());
         }
 
@@ -215,6 +288,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsShorterOrEqual(this Ensures<string> ensures, int maxLength)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length <= maxLength);
         }
 
@@ -226,6 +304,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> IsShorterThan(this Ensures<string> ensures, int maxLength)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null && v.Length < maxLength);
         }
 
@@ -242,6 +325,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<string> StartsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => (value == null && v == null) ||
                                      (value != null && v != null && v.StartsWith(value, comparisonType)));
         }

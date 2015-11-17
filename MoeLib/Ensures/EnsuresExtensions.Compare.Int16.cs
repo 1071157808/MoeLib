@@ -11,6 +11,8 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
+
 namespace Moe.Lib
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsEqualTo(this Ensures<short> ensures, short value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v == value);
         }
 
@@ -37,6 +44,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsGreaterOrEqual(this Ensures<short> ensures, short minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
 
@@ -48,6 +60,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsGreaterThan(this Ensures<short> ensures, short minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -61,18 +78,12 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsInRange(this Ensures<short> ensures, short minValue, short maxValue)
         {
-            return ensures.That(v => v >= minValue && v <= maxValue);
-        }
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
 
-        /// <summary>
-        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
-        /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="maxValue">The highest valid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<short> IsLessOrEqual(this Ensures<short> ensures, short maxValue)
-        {
-            return ensures.That(v => v <= maxValue);
+            return ensures.That(v => v >= minValue && v <= maxValue);
         }
 
         /// <summary>
@@ -83,7 +94,28 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsLessThan(this Ensures<short> ensures, short maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
+        /// </summary>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="maxValue">The highest valid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<short> IsLessThanOrEqual(this Ensures<short> ensures, short maxValue)
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => v <= maxValue);
         }
 
         /// <summary>
@@ -94,6 +126,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsNotEqualTo(this Ensures<short> ensures, short value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => v == value);
         }
 
@@ -105,6 +142,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsNotGreaterOrEqual(this Ensures<short> ensures, short maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -116,6 +158,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsNotGreaterThan(this Ensures<short> ensures, short maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -129,18 +176,12 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsNotInRange(this Ensures<short> ensures, short minValue, short maxValue)
         {
-            return ensures.That(v => v > maxValue || v < minValue);
-        }
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
 
-        /// <summary>
-        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
-        /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="minValue">The highest invalid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<short> IsNotLessOrEqual(this Ensures<short> ensures, short minValue)
-        {
-            return ensures.That(v => v > minValue);
+            return ensures.That(v => v > maxValue || v < minValue);
         }
 
         /// <summary>
@@ -151,7 +192,28 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<short> IsNotLessThan(this Ensures<short> ensures, short minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
+        /// </summary>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="minValue">The highest invalid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<short> IsNotLessThanOrEqual(this Ensures<short> ensures, short minValue)
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => v > minValue);
         }
     }
 }

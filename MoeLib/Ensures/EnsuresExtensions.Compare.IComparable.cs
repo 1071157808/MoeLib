@@ -30,6 +30,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsEqualTo<T>(this Ensures<T> ensures, T value) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T>.Default.Compare(v, value) == 0);
         }
 
@@ -42,6 +47,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsEqualTo<T>(this Ensures<T?> ensures, T? value) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, value) == 0);
         }
 
@@ -54,6 +64,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsEqualTo<T>(this Ensures<T?> ensures, T value) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, value) == 0);
         }
 
@@ -66,6 +81,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsGreaterOrEqual<T>(this Ensures<T> ensures, T minValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T>.Default.Compare(v, minValue) >= 0);
         }
 
@@ -78,6 +98,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsGreaterOrEqual<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, minValue) >= 0);
         }
 
@@ -90,6 +115,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsGreaterOrEqual<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, minValue) >= 0);
         }
 
@@ -102,6 +132,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsGreaterThan<T>(this Ensures<T> ensures, T minValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T>.Default.Compare(v, minValue) > 0);
         }
 
@@ -114,6 +149,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsGreaterThan<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, minValue) > 0);
         }
 
@@ -126,6 +166,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsGreaterThan<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, minValue) > 0);
         }
 
@@ -140,6 +185,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsInRange<T>(this Ensures<T> ensures, T minValue, T maxValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T> defaultComparer = Comparer<T>.Default;
             return ensures.That(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                      defaultComparer.Compare(v, maxValue) <= 0);
@@ -156,6 +206,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsInRange<T>(this Ensures<T?> ensures, T? minValue, T? maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T?> defaultComparer = Comparer<T?>.Default;
             return ensures.That(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                      defaultComparer.Compare(v, maxValue) <= 0);
@@ -172,45 +227,14 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsInRange<T>(this Ensures<T?> ensures, T minValue, T maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T?> defaultComparer = Comparer<T?>.Default;
             return ensures.That(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                      defaultComparer.Compare(v, maxValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="maxValue">The highest valid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T> IsLessOrEqual<T>(this Ensures<T> ensures, T maxValue) where T : IComparable
-        {
-            return ensures.That(v => Comparer<T>.Default.Compare(v, maxValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="maxValue">The highest valid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T?> IsLessOrEqual<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
-        {
-            return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="maxValue">The highest valid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T?> IsLessOrEqual<T>(this Ensures<T?> ensures, T maxValue) where T : struct
-        {
-            return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) <= 0);
         }
 
         /// <summary>
@@ -222,6 +246,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsLessThan<T>(this Ensures<T> ensures, T maxValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T>.Default.Compare(v, maxValue) < 0);
         }
 
@@ -234,6 +263,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsLessThan<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) < 0);
         }
 
@@ -246,7 +280,63 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsLessThan<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) < 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="maxValue">The highest valid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T> IsLessThanOrEqual<T>(this Ensures<T> ensures, T maxValue) where T : IComparable
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => Comparer<T>.Default.Compare(v, maxValue) <= 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="maxValue">The highest valid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T?> IsLessThanOrEqual<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) <= 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="maxValue">The highest valid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T?> IsLessThanOrEqual<T>(this Ensures<T?> ensures, T maxValue) where T : struct
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => Comparer<T?>.Default.Compare(v, maxValue) <= 0);
         }
 
         /// <summary>
@@ -258,6 +348,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotEqualTo<T>(this Ensures<T> ensures, T value) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T>.Default.Compare(v, value) == 0);
         }
 
@@ -270,6 +365,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotEqualTo<T>(this Ensures<T?> ensures, T? value) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, value) == 0);
         }
 
@@ -282,6 +382,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotEqualTo<T>(this Ensures<T?> ensures, T value) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, value) == 0);
         }
 
@@ -294,6 +399,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotGreaterOrEqual<T>(this Ensures<T> ensures, T maxValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T>.Default.Compare(v, maxValue) >= 0);
         }
 
@@ -306,6 +416,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotGreaterOrEqual<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, maxValue) >= 0);
         }
 
@@ -318,6 +433,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotGreaterOrEqual<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, maxValue) >= 0);
         }
 
@@ -330,6 +450,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotGreaterThan<T>(this Ensures<T> ensures, T maxValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T>.Default.Compare(v, maxValue) > 0);
         }
 
@@ -342,6 +467,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotGreaterThan<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, maxValue) > 0);
         }
 
@@ -354,6 +484,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotGreaterThan<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, maxValue) > 0);
         }
 
@@ -368,6 +503,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotInRange<T>(this Ensures<T> ensures, T minValue, T maxValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T> defaultComparer = Comparer<T>.Default;
             return ensures.Not(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                     defaultComparer.Compare(v, maxValue) <= 0);
@@ -384,6 +524,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotInRange<T>(this Ensures<T?> ensures, T? minValue, T? maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T?> defaultComparer = Comparer<T?>.Default;
             return ensures.Not(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                     defaultComparer.Compare(v, maxValue) <= 0);
@@ -400,45 +545,14 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotInRange<T>(this Ensures<T?> ensures, T minValue, T maxValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             Comparer<T?> defaultComparer = Comparer<T?>.Default;
             return ensures.Not(v => defaultComparer.Compare(v, minValue) >= 0 &&
                                     defaultComparer.Compare(v, maxValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="minValue">The highest invalid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T> IsNotLessOrEqual<T>(this Ensures<T> ensures, T minValue) where T : IComparable
-        {
-            return ensures.Not(v => Comparer<T>.Default.Compare(v, minValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="minValue">The highest invalid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T?> IsNotLessOrEqual<T>(this Ensures<T?> ensures, T? minValue) where T : struct
-        {
-            return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) <= 0);
-        }
-
-        /// <summary>
-        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="minValue">The highest invalid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<T?> IsNotLessOrEqual<T>(this Ensures<T?> ensures, T minValue) where T : struct
-        {
-            return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) <= 0);
         }
 
         /// <summary>
@@ -450,6 +564,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotLessThan<T>(this Ensures<T> ensures, T minValue) where T : IComparable
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T>.Default.Compare(v, minValue) < 0);
         }
 
@@ -462,6 +581,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotLessThan<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) < 0);
         }
 
@@ -474,7 +598,63 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotLessThan<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) < 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="minValue">The highest invalid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T> IsNotLessThanOrEqual<T>(this Ensures<T> ensures, T minValue) where T : IComparable
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.Not(v => Comparer<T>.Default.Compare(v, minValue) <= 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="minValue">The highest invalid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T?> IsNotLessThanOrEqual<T>(this Ensures<T?> ensures, T? minValue) where T : struct
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) <= 0);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="minValue">The highest invalid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<T?> IsNotLessThanOrEqual<T>(this Ensures<T?> ensures, T minValue) where T : struct
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.Not(v => Comparer<T?>.Default.Compare(v, minValue) <= 0);
         }
     }
 }

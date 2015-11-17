@@ -77,14 +77,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string Base64Decode(string stringToDecode)
         {
-            try
-            {
-                return Convert.FromBase64String(stringToDecode).Utf8();
-            }
-            catch
-            {
-                return "";
-            }
+            return Convert.FromBase64String(stringToDecode).Utf8();
         }
 
         /// <summary>
@@ -94,14 +87,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string Base64Encode(string value)
         {
-            try
-            {
-                return Convert.ToBase64String(value.GetBytesOfUtf8());
-            }
-            catch
-            {
-                return "";
-            }
+            return Convert.ToBase64String(value.GetBytesOfUtf8());
         }
 
         /// <summary>
@@ -128,34 +114,54 @@ namespace Moe.Lib
         ///     Encode the given javascript string.
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string JavaScriptStringEncode(string value)
+        {
+            return JavaScriptStringEncode(value, false);
+        }
+
+        /// <summary>
+        ///     Encode the given javascript string.
+        /// </summary>
+        /// <param name="value">The value.</param>
         /// <param name="addDoubleQuotes">if set to <c>true</c> [add double quotes].</param>
         /// <returns>System.String.</returns>
-        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes = false)
+        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes)
         {
             string encoded = HttpEncoder.JavaScriptStringEncode(value);
             return (addDoubleQuotes) ? "\"" + encoded + "\"" : encoded;
         }
 
         /// <summary>
-        ///     Decode the given string.
+        ///     Return the URL decoded from the string value.
         /// </summary>
-        /// <param name="str">The string.</param>
-        /// <returns>System.String.</returns>
-        public static string UrlDecode(string str)
+        /// <param name="value">The string value.</param>
+        /// <returns>Uri.</returns>
+        /// <exception cref="System.ArgumentException">String to decode can not be null or empty.</exception>
+        public static Uri UrlDecode(string value)
         {
-            return str == null ? null : HttpEncoder.UrlDecode(str, Encoding.UTF8);
+            if (value.IsNullOrEmpty())
+            {
+                throw new ArgumentException(@"String to decode can not be null or empty.", nameof(value));
+            }
+
+            return new Uri(HttpEncoder.UrlDecode(value, Encoding.UTF8));
         }
 
         /// <summary>
-        ///     Encode the given string.
+        ///     Encode the given uri.
         /// </summary>
-        /// <param name="str">The string.</param>
+        /// <param name="value">The string value.</param>
         /// <returns>System.String.</returns>
-        public static string UrlEncode(string str)
+        /// <exception cref="System.ArgumentException">@String to encode can not be null or empty.</exception>
+        public static string UrlEncode(string value)
         {
-            if (str == null)
-                return null;
-            byte[] bytes = str.GetBytesOfUtf8();
+            if (value.IsNullOrEmpty())
+            {
+                throw new ArgumentException(@"String to encode can not be null or empty.", nameof(value));
+            }
+
+            byte[] bytes = value.GetBytesOfUtf8();
             byte[] encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
             return encodedBytes.Ascii();
         }

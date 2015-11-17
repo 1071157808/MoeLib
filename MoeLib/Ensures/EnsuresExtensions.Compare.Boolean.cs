@@ -40,6 +40,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<bool?> IsFalse(this Ensures<bool?> ensures)
         {
             if (ensures == null)
@@ -70,6 +71,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<bool?> IsTrue(this Ensures<bool?> ensures)
         {
             if (ensures == null)

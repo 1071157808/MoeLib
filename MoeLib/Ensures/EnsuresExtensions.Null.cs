@@ -11,6 +11,8 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
+
 namespace Moe.Lib
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotNull<T>(this Ensures<T> ensures) where T : class
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v != null);
         }
 
@@ -37,6 +44,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T?> IsNotNull<T>(this Ensures<T?> ensures) where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v.HasValue);
         }
 
@@ -48,6 +60,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNull<T>(this Ensures<T> ensures) where T : class
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v == null);
         }
 
@@ -60,6 +77,11 @@ namespace Moe.Lib
         public static Ensures<T?> IsNull<T>(this Ensures<T?> ensures)
             where T : struct
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => !v.HasValue);
         }
     }

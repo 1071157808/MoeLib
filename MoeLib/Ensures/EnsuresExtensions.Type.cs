@@ -31,6 +31,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsNotOfType<T>(this Ensures<T> ensures, Type type) where T : class
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => type.IsInstanceOfType(v));
         }
 
@@ -45,6 +50,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<T> IsOfType<T>(this Ensures<T> ensures, Type type) where T : class
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => type.IsInstanceOfType(v));
         }
     }

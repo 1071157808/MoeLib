@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Moe.Lib.Attributes
+namespace Moe.Lib
 {
     [AttributeUsage(AttributeTargets.All)]
     public sealed class ReferenceAttribute : Attribute, IEquatable<ReferenceAttribute>

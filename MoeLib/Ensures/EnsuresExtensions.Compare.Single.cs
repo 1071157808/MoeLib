@@ -11,6 +11,8 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
+
 namespace Moe.Lib
 {
     /// <summary>
@@ -26,6 +28,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsEqualTo(this Ensures<float> ensures, float value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             return ensures.That(v => v == value);
         }
@@ -38,6 +45,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsGreaterOrEqual(this Ensures<float> ensures, float minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
         }
 
@@ -49,6 +61,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsGreaterThan(this Ensures<float> ensures, float minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v > minValue);
         }
 
@@ -59,6 +76,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => float.IsInfinity(v));
         }
 
@@ -72,18 +94,12 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsInRange(this Ensures<float> ensures, float minValue, float maxValue)
         {
-            return ensures.That(v => v >= minValue && v <= maxValue);
-        }
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
 
-        /// <summary>
-        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
-        /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="maxValue">The highest valid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<float> IsLessOrEqual(this Ensures<float> ensures, float maxValue)
-        {
-            return ensures.That(v => v <= maxValue);
+            return ensures.That(v => v >= minValue && v <= maxValue);
         }
 
         /// <summary>
@@ -94,7 +110,28 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsLessThan(this Ensures<float> ensures, float maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is smaller or equal to the specified <paramref name="maxValue" />.
+        /// </summary>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="maxValue">The highest valid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<float> IsLessThanOrEqual(this Ensures<float> ensures, float maxValue)
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => v <= maxValue);
         }
 
         /// <summary>
@@ -104,6 +141,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNaN(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => float.IsNaN(v));
         }
 
@@ -114,6 +156,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNegativeInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => float.IsNegativeInfinity(v));
         }
 
@@ -125,6 +172,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotEqualTo(this Ensures<float> ensures, float value)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             return ensures.Not(v => v == value);
         }
@@ -137,6 +189,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotGreaterOrEqual(this Ensures<float> ensures, float maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v < maxValue);
         }
 
@@ -148,6 +205,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotGreaterThan(this Ensures<float> ensures, float maxValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v <= maxValue);
         }
 
@@ -158,6 +220,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => float.IsInfinity(v));
         }
 
@@ -171,18 +238,12 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotInRange(this Ensures<float> ensures, float minValue, float maxValue)
         {
-            return ensures.That(v => v > maxValue || v < minValue);
-        }
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
 
-        /// <summary>
-        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
-        /// </summary>
-        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
-        /// <param name="minValue">The highest invalid value.</param>
-        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<float> IsNotLessOrEqual(this Ensures<float> ensures, float minValue)
-        {
-            return ensures.That(v => v > minValue);
+            return ensures.That(v => v > maxValue || v < minValue);
         }
 
         /// <summary>
@@ -193,7 +254,28 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotLessThan(this Ensures<float> ensures, float minValue)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => v >= minValue);
+        }
+
+        /// <summary>
+        ///     Checks whether the given value is not smaller or equal to the specified <paramref name="minValue" />.
+        /// </summary>
+        /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
+        /// <param name="minValue">The highest invalid value.</param>
+        /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        public static Ensures<float> IsNotLessThanOrEqual(this Ensures<float> ensures, float minValue)
+        {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
+            return ensures.That(v => v > minValue);
         }
 
         /// <summary>
@@ -203,6 +285,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotNaN(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => float.IsNaN(v));
         }
 
@@ -213,6 +300,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotNegativeInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => float.IsNegativeInfinity(v));
         }
 
@@ -223,6 +315,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsNotPositiveInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.Not(v => float.IsPositiveInfinity(v));
         }
 
@@ -233,6 +330,11 @@ namespace Moe.Lib
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
         public static Ensures<float> IsPositiveInfinity(this Ensures<float> ensures)
         {
+            if (ensures == null)
+            {
+                throw new ArgumentNullException(nameof(ensures));
+            }
+
             return ensures.That(v => float.IsPositiveInfinity(v));
         }
     }
