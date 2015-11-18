@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -45,6 +46,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The valid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsEqualTo<T>(this Ensures<T?> ensures, T? value) where T : struct
         {
             if (ensures == null)
@@ -62,6 +64,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The valid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsEqualTo<T>(this Ensures<T?> ensures, T value) where T : struct
         {
             if (ensures == null)
@@ -96,6 +99,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsGreaterOrEqual<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
             if (ensures == null)
@@ -113,6 +117,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsGreaterOrEqual<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
             if (ensures == null)
@@ -147,6 +152,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsGreaterThan<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
             if (ensures == null)
@@ -164,6 +170,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsGreaterThan<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
             if (ensures == null)
@@ -204,6 +211,7 @@ namespace Moe.Lib
         /// <param name="minValue">The lowest valid value.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsInRange<T>(this Ensures<T?> ensures, T? minValue, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -225,6 +233,7 @@ namespace Moe.Lib
         /// <param name="minValue">The lowest valid value.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsInRange<T>(this Ensures<T?> ensures, T minValue, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -261,6 +270,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsLessThan<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -278,6 +288,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsLessThan<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -312,6 +323,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsLessThanOrEqual<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -329,6 +341,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The highest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsLessThanOrEqual<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -363,6 +376,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The invalid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotEqualTo<T>(this Ensures<T?> ensures, T? value) where T : struct
         {
             if (ensures == null)
@@ -380,6 +394,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="value">The invalid value to compare with.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotEqualTo<T>(this Ensures<T?> ensures, T value) where T : struct
         {
             if (ensures == null)
@@ -414,6 +429,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotGreaterOrEqual<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -431,6 +447,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotGreaterOrEqual<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -465,6 +482,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotGreaterThan<T>(this Ensures<T?> ensures, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -482,6 +500,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="maxValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotGreaterThan<T>(this Ensures<T?> ensures, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -522,6 +541,7 @@ namespace Moe.Lib
         /// <param name="minValue">The lowest invalid value.</param>
         /// <param name="maxValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotInRange<T>(this Ensures<T?> ensures, T? minValue, T? maxValue) where T : struct
         {
             if (ensures == null)
@@ -543,6 +563,7 @@ namespace Moe.Lib
         /// <param name="minValue">The lowest invalid value.</param>
         /// <param name="maxValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotInRange<T>(this Ensures<T?> ensures, T minValue, T maxValue) where T : struct
         {
             if (ensures == null)
@@ -579,6 +600,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotLessThan<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
             if (ensures == null)
@@ -596,6 +618,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The lowest valid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotLessThan<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
             if (ensures == null)
@@ -630,6 +653,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotLessThanOrEqual<T>(this Ensures<T?> ensures, T? minValue) where T : struct
         {
             if (ensures == null)
@@ -647,6 +671,7 @@ namespace Moe.Lib
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <param name="minValue">The highest invalid value.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotLessThanOrEqual<T>(this Ensures<T?> ensures, T minValue) where T : struct
         {
             if (ensures == null)

@@ -11,15 +11,17 @@
 // </copyright>
 // ***********************************************************************
 
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Moe.Lib
 {
     /// <summary>
-    ///     Class SHA256Utility.
+    ///     Class Sha256Utility.
     /// </summary>
-    public static class SHA256Utility
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sha")]
+    public static class Sha256Utility
     {
         /// <summary>
         ///     Hashes the specified payload.

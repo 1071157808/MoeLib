@@ -70,11 +70,11 @@ namespace Moe.Lib
         /// <summary>
         ///     To the unique identifier string.
         /// </summary>
-        /// <param name="guid">The unique identifier.</param>
+        /// <param name="value">The unique identifier.</param>
         /// <returns>System.String.</returns>
-        public static string ToGuidString(this Guid guid)
+        public static string ToGuidString(this Guid value)
         {
-            return guid.ToString("N").ToUpperInvariant();
+            return value.ToString("N").ToUpperInvariant();
         }
     }
 }

@@ -25,11 +25,11 @@ namespace Moe.Lib.Web
         /// <param name="context">The exception logger context.</param>
         public override void Log(ExceptionLoggerContext context)
         {
-            IEnumerable<string> clientId = new List<string>();
-            IEnumerable<string> deviceId = new List<string>();
-            IEnumerable<string> requestId = new List<string>();
-            IEnumerable<string> sessionId = new List<string>();
-            IEnumerable<string> userId = new List<string>();
+            IEnumerable<string> clientId = null;
+            IEnumerable<string> deviceId = null;
+            IEnumerable<string> requestId = null;
+            IEnumerable<string> sessionId = null;
+            IEnumerable<string> userId = null;
 
             if (context.Request?.Headers != null)
             {
@@ -40,8 +40,8 @@ namespace Moe.Lib.Web
                 context.Request.Headers.TryGetValues("X-JYM-UID", out userId);
             }
 
-            this.Logger.Log(2, context.Exception.Message, context.Request, clientId.Join(","), deviceId.Join(","),
-                requestId.Join(","), sessionId.Join(","), userId.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, context.Exception);
+            this.Logger.Log(2, context.Exception.Message, context.Request, clientId?.Join(","), deviceId?.Join(","),
+                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, context.Exception);
         }
 
         private static IWebLogger InitApplicationLogger()

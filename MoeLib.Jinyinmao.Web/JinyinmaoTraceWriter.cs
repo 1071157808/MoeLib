@@ -83,11 +83,11 @@ namespace Moe.Lib.Web
         /// <param name="traceRecord">The trace record.</param>
         private void LogTraceRecord(TraceRecord traceRecord)
         {
-            IEnumerable<string> clientId = new List<string>();
-            IEnumerable<string> deviceId = new List<string>();
-            IEnumerable<string> requestId = new List<string>();
-            IEnumerable<string> sessionId = new List<string>();
-            IEnumerable<string> userId = new List<string>();
+            IEnumerable<string> clientId = null;
+            IEnumerable<string> deviceId = null;
+            IEnumerable<string> requestId = null;
+            IEnumerable<string> sessionId = null;
+            IEnumerable<string> userId = null;
 
             if (traceRecord.Request?.Headers != null)
             {
@@ -98,8 +98,8 @@ namespace Moe.Lib.Web
                 traceRecord.Request.Headers.TryGetValues("X-JYM-UID", out userId);
             }
 
-            this.Logger.Log(GetLogLevel(traceRecord.Level), traceRecord.Message, traceRecord.Request, clientId.Join(","), deviceId.Join(","),
-                requestId.Join(","), sessionId.Join(","), userId.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, traceRecord.Exception);
+            this.Logger.Log(GetLogLevel(traceRecord.Level), traceRecord.Message, traceRecord.Request, clientId?.Join(","), deviceId?.Join(","),
+                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, traceRecord.Exception);
         }
     }
 }

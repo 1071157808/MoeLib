@@ -29,7 +29,8 @@ namespace Moe.Lib
     /// <summary>
     ///     Class PBKDF2Utility.
     /// </summary>
-    public class PBKDF2Utility
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "PBKDF")]
+    public static class PBKDF2Utility
     {
         // SHA-256 has a 512-bit block size and gives a 256-bit output
         /// <summary>
@@ -85,6 +86,8 @@ namespace Moe.Lib
         /// <param name="iterations">The iterations.</param>
         /// <param name="howManyBytes">The how many bytes.</param>
         /// <returns>System.Byte[].</returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1")]
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static byte[] GetBytes(byte[] payload, byte[] salt, int iterations, int howManyBytes)
         {

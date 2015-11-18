@@ -29,7 +29,8 @@ namespace Moe.Lib
         /// <param name="action">The action.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>TResult.</returns>
-        /// <exception cref="System.ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static TResult IfNotNull<TObject, TResult>(this TObject obj, Func<TObject, TResult> action, TResult defaultValue = default(TResult)) where TObject : class
         {
             if (action == null)

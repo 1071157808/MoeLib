@@ -56,9 +56,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
-        public static bool AsBool(this string value)
+        public static bool AsBoolean(this string value)
         {
-            return StringUtility.AsBool(value);
+            return StringUtility.AsBoolean(value);
         }
 
         /// <summary>
@@ -67,9 +67,9 @@ namespace Moe.Lib
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
-        public static bool AsBool(this string value, bool defaultValue)
+        public static bool AsBoolean(this string value, bool defaultValue)
         {
-            return StringUtility.AsBool(value, defaultValue);
+            return StringUtility.AsBoolean(value, defaultValue);
         }
 
         /// <summary>
@@ -140,6 +140,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
         public static float AsFloat(this string value)
         {
             return StringUtility.AsFloat(value);
@@ -151,6 +152,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
         public static float AsFloat(this string value, float defaultValue)
         {
             return StringUtility.AsFloat(value, defaultValue);
@@ -174,6 +176,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int")]
         public static int AsInt(this string value)
         {
             return StringUtility.AsInt(value);
@@ -185,6 +188,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int")]
         public static int AsInt(this string value, int defaultValue)
         {
             return StringUtility.AsInt(value, defaultValue);
@@ -258,6 +262,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "long")]
         public static long AsLong(this string value)
         {
             return StringUtility.AsLong(value);
@@ -269,6 +274,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "long")]
         public static long AsLong(this string value, long defaultValue)
         {
             return StringUtility.AsLong(value, defaultValue);
@@ -404,6 +410,7 @@ namespace Moe.Lib
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
         /// <param name="value">The value to test/ensure.</param>
         /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static bool Is<TValue>(this string value)
         {
             return StringUtility.Is<TValue>(value);
@@ -414,6 +421,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The string value to test.</param>
         /// <returns>true if <paramref name="value" /> can be converted to the specified type; otherwise, false.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bool")]
         public static bool IsBool(this string value)
         {
             return StringUtility.IsBool(value);
@@ -536,9 +544,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The string value to test.</param>
         /// <returns><c>true</c> if [is ip address] [the specified value]; otherwise, <c>false</c>.</returns>
-        public static bool IsIpAddress(this string value)
+        public static bool IsIPAddress(this string value)
         {
-            return StringUtility.IsIpAddress(value);
+            return StringUtility.IsIPAddress(value);
         }
 
         /// <summary>
@@ -602,14 +610,14 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Joins the specified string array with the delimeter.
+        ///     Joins the specified string array with the separator.
         /// </summary>
         /// <param name="items">The items.</param>
-        /// <param name="delimeter">The delimeter.</param>
+        /// <param name="separator">The separator.</param>
         /// <returns>System.String.</returns>
-        public static string Join(this IEnumerable<string> items, string delimeter)
+        public static string Join(this IEnumerable<string> items, string separator)
         {
-            return string.Join(delimeter, items.ToArray());
+            return string.Join(separator, items.ToArray());
         }
 
         /// <summary>
@@ -638,11 +646,11 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the string md5 hash.
         /// </summary>
-        /// <param name="stringToHash">The string to hash.</param>
+        /// <param name="value">The string to hash.</param>
         /// <returns>System.String.</returns>
-        public static string MD5Hash(this string stringToHash)
+        public static string MD5Hash(this string value)
         {
-            return StringUtility.MD5Hash(stringToHash);
+            return StringUtility.MD5Hash(value);
         }
 
         /// <summary>
@@ -686,6 +694,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bool")]
         public static bool ToBool(this string value)
         {
             return StringUtility.ToBool(value);
@@ -736,6 +745,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
         public static float ToFloat(this string value)
         {
             return StringUtility.ToFloat(value);
@@ -757,6 +767,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int")]
         public static int ToInt(this string value)
         {
             return StringUtility.ToInt(value);
@@ -797,6 +808,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "long")]
         public static long ToLong(this string value)
         {
             return StringUtility.ToLong(value);
@@ -857,6 +869,7 @@ namespace Moe.Lib
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
         /// <typeparam name="TValue">The data type to convert to.</typeparam>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public static TValue As<TValue>(string value, TValue defaultValue = default(TValue))
         {
             try
@@ -881,7 +894,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
-        public static bool AsBool(string value, bool defaultValue = false)
+        public static bool AsBoolean(string value, bool defaultValue = false)
         {
             bool result;
             return !bool.TryParse(value, out result) ? defaultValue : result;
@@ -939,6 +952,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "float")]
         public static float AsFloat(string value, float defaultValue = 0.0f)
         {
             float result;
@@ -964,6 +978,7 @@ namespace Moe.Lib
         /// <param name="value">The value to convert.</param>
         /// <param name="defaultValue">The value to return if <paramref name="value" /> is null or is an invalid value.</param>
         /// <returns>The converted value.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "int")]
         public static int AsInt(string value, int defaultValue = 0)
         {
             int result;
@@ -1299,7 +1314,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns><c>true</c> if [is ip address] [the specified value]; otherwise, <c>false</c>.</returns>
-        public static bool IsIpAddress(string value)
+        public static bool IsIPAddress(string value)
         {
             return Match(value, RegexUtility.IPAddressRegex);
         }

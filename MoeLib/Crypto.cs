@@ -41,7 +41,7 @@ namespace Moe.Lib
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sha")]
         public static string Sha256(string payload, string salt)
         {
-            return SHA256Utility.Hash(payload, salt);
+            return Sha256Utility.Hash(payload, salt);
         }
     }
 }

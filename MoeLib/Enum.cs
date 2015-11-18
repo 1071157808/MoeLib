@@ -41,13 +41,18 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the description.
         /// </summary>
-        /// <param name="enumObject">The enum object.</param>
+        /// <param name="value">The enum object.</param>
         /// <returns>System.String.</returns>
-        public static string GetDescription(object enumObject)
+        public static string GetDescription(object value)
         {
-            FieldInfo field = enumObject.GetType().GetField(enumObject.ToString());
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            FieldInfo field = value.GetType().GetField(value.ToString());
             DescriptionAttribute[] attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : enumObject.ToString();
+            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
         /// <summary>

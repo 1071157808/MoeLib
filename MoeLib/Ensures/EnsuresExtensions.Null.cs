@@ -12,6 +12,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -42,6 +43,7 @@ namespace Moe.Lib
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNotNull<T>(this Ensures<T?> ensures) where T : struct
         {
             if (ensures == null)
@@ -74,6 +76,7 @@ namespace Moe.Lib
         /// <typeparam name="T">The type of the <see cref="Ensures{T}">Value</see> of the specified <paramref name="ensures" />.</typeparam>
         /// <param name="ensures">The <see cref="Ensures{T}" /> that holds the value that has to be test/ensure.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Ensures<T?> IsNull<T>(this Ensures<T?> ensures)
             where T : struct
         {

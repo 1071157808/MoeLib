@@ -58,15 +58,15 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the string md5 hash.
         /// </summary>
-        /// <param name="stringToHash">The string to hash.</param>
+        /// <param name="value">The string to hash.</param>
         /// <returns>System.String.</returns>
-        public static string ComputeMD5Hash(string stringToHash)
+        public static string ComputeMD5Hash(string value)
         {
-            if (stringToHash == null)
+            if (value == null)
                 return "";
 
             MD5 md5 = MD5.Create();
-            byte[] data = md5.ComputeHash(stringToHash.GetBytesOfUtf8());
+            byte[] data = md5.ComputeHash(value.GetBytesOfUtf8());
             return data.Hex().ToLowerInvariant();
         }
     }

@@ -11,6 +11,7 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 
 namespace Moe.Lib
@@ -30,6 +31,11 @@ namespace Moe.Lib
         /// <param name="value">The value.</param>
         public static void AddIfNotExist<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
             if (dictionary.ContainsKey(key)) return;
 
             dictionary.Add(key, value);
@@ -38,12 +44,20 @@ namespace Moe.Lib
         /// <summary>
         ///     Gets the value associated with the specified key or the <paramref name="defaultValue" /> if it does not exist.
         /// </summary>
+        /// <typeparam name="TKey">The type of the t key.</typeparam>
+        /// <typeparam name="TValue">The type of the t value.</typeparam>
         /// <param name="dictionary">The dictionary object.</param>
         /// <param name="key">The key whose value to get.</param>
         /// <param name="defaultValue">The default value to return if an item with the specified <paramref name="key" /> does not exist.</param>
         /// <returns>The value associated with the specified key or the <paramref name="defaultValue" /> if it does not exist.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue))
         {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : defaultValue;
         }

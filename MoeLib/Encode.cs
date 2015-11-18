@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -33,11 +34,16 @@ namespace Moe.Lib
         /// <summary>
         ///     Decode the Base36 Encoded string into a number.
         /// </summary>
-        /// <param name="input">The number to decode.</param>
+        /// <param name="value">The number to decode.</param>
         /// <returns>System.Int64.</returns>
-        public static long Base36Decode(string input)
+        public static long Base36Decode(string value)
         {
-            IEnumerable<char> reversed = input.ToLower().Reverse();
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            IEnumerable<char> reversed = value.ToLower().Reverse();
             long result = 0;
             int pos = 0;
             foreach (char c in reversed)
@@ -73,11 +79,16 @@ namespace Moe.Lib
         /// <summary>
         ///     Decode the Base64 encoded string into a string using Utf8.
         /// </summary>
-        /// <param name="stringToDecode">The string to decode.</param>
+        /// <param name="value">The string to decode.</param>
         /// <returns>System.String.</returns>
-        public static string Base64Decode(string stringToDecode)
+        public static string Base64Decode(string value)
         {
-            return Convert.FromBase64String(stringToDecode).Utf8();
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            return Convert.FromBase64String(value).Utf8();
         }
 
         /// <summary>
@@ -114,19 +125,9 @@ namespace Moe.Lib
         ///     Encode the given javascript string.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>System.String.</returns>
-        public static string JavaScriptStringEncode(string value)
-        {
-            return JavaScriptStringEncode(value, false);
-        }
-
-        /// <summary>
-        ///     Encode the given javascript string.
-        /// </summary>
-        /// <param name="value">The value.</param>
         /// <param name="addDoubleQuotes">if set to <c>true</c> [add double quotes].</param>
         /// <returns>System.String.</returns>
-        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes)
+        public static string JavaScriptStringEncode(string value, bool addDoubleQuotes = false)
         {
             string encoded = HttpEncoder.JavaScriptStringEncode(value);
             return (addDoubleQuotes) ? "\"" + encoded + "\"" : encoded;
@@ -152,9 +153,9 @@ namespace Moe.Lib
         ///     Encode the given uri.
         /// </summary>
         /// <param name="value">The string value.</param>
-        /// <returns>System.String.</returns>
+        /// <returns>Uri.</returns>
         /// <exception cref="System.ArgumentException">@String to encode can not be null or empty.</exception>
-        public static string UrlEncode(string value)
+        public static Uri UrlEncode(string value)
         {
             if (value.IsNullOrEmpty())
             {
@@ -163,7 +164,7 @@ namespace Moe.Lib
 
             byte[] bytes = value.GetBytesOfUtf8();
             byte[] encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
-            return encodedBytes.Ascii();
+            return new Uri(encodedBytes.Utf8());
         }
     }
 
@@ -177,6 +178,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         internal static string JavaScriptStringEncode(string value)
         {
             if (value.IsNotNullOrEmpty())
@@ -281,6 +283,7 @@ namespace Moe.Lib
         /// <param name="offset">The offset.</param>
         /// <param name="count">The count.</param>
         /// <returns>System.Byte[].</returns>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static byte[] UrlDecode(byte[] bytes, int offset, int count)
         {
             if (!ValidateUrlEncodingParameters(bytes, offset, count))
@@ -334,6 +337,7 @@ namespace Moe.Lib
         /// <param name="count">The count.</param>
         /// <param name="encoding">The encoding.</param>
         /// <returns>System.String.</returns>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static string UrlDecode(byte[] bytes, int offset, int count, Encoding encoding)
         {
             if (!ValidateUrlEncodingParameters(bytes, offset, count))
@@ -657,6 +661,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="str">The string.</param>
         /// <returns>String.</returns>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static string UrlEncodeSpaces(string str)
         {
             if (str != null && str.IndexOf(' ') >= 0)

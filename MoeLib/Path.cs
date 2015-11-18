@@ -23,23 +23,20 @@ namespace Moe.Lib
         /// <summary>
         ///     Combines two URL paths
         /// </summary>
-        public static string CombineUrlPaths(string path1, string path2)
+        public static Uri CombineUrlPaths(string path1, string path2)
         {
-            if (path2.IsNullOrEmpty())
-                return path1;
+            if (string.IsNullOrEmpty(path2))
+                return new Uri(path1);
 
-            if (path1.IsNullOrEmpty())
-                return path2;
+            if (string.IsNullOrEmpty(path1))
+                return new Uri(path2);
 
             if (path2.StartsWith("http://", StringComparison.Ordinal) || path2.StartsWith("https://", StringComparison.Ordinal))
-                return path2;
+                return new Uri(path2);
 
             char ch = path1[path1.Length - 1];
 
-            if (ch != '/')
-                return (path1.TrimEnd('/') + '/' + path2.TrimStart('/'));
-
-            return (path1 + path2);
+            return ch != '/' ? new Uri(path1.TrimEnd('/') + '/' + path2.TrimStart('/')) : new Uri(path1 + path2);
         }
     }
 }

@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,14 +56,14 @@ namespace Moe.Lib
         ///     Performs an action on each value of the sequence
         /// </summary>
         /// <typeparam name="T">Sequence element type.</typeparam>
-        /// <typeparam name="TR">Result element type.</typeparam>
+        /// <typeparam name="TResult">Result element type.</typeparam>
         /// <param name="sequence">Sequence on which to perform action</param>
         /// <param name="action">Action to perform on every item</param>
         /// <returns>IEnumerable&lt;TR&gt;.</returns>
         /// <exception cref="ArgumentNullException">
         /// </exception>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static IEnumerable<TR> ForEach<T, TR>(this IEnumerable<T> sequence, Func<T, TR> action)
+        public static IEnumerable<TResult> ForEach<T, TResult>(this IEnumerable<T> sequence, Func<T, TResult> action)
         {
             IList<T> values = sequence as IList<T> ?? sequence.ToList();
 
@@ -111,17 +112,18 @@ namespace Moe.Lib
         ///     Performs an action on each value of the sequence
         /// </summary>
         /// <typeparam name="T">Sequence element type.</typeparam>
-        /// <typeparam name="TR">Result element type.</typeparam>
+        /// <typeparam name="TResult">Result element type.</typeparam>
         /// <param name="sequence">Sequence on which to perform action</param>
         /// <param name="action">Action to perform on every item</param>
         /// <returns>IEnumerable&lt;V&gt;.</returns>
         /// <exception cref="ArgumentNullException">
         /// </exception>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static async Task<IEnumerable<TR>> ForEach<T, TR>(this IEnumerable<T> sequence, Func<T, Task<TR>> action)
+        /// <exception cref="ArgumentNullException"></exception>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static async Task<IEnumerable<TResult>> ForEach<T, TResult>(this IEnumerable<T> sequence, Func<T, Task<TResult>> action)
         {
             IList<T> values = sequence as IList<T> ?? sequence.ToList();
-            IList<TR> results = new List<TR>();
+            IList<TResult> results = new List<TResult>();
 
             if (sequence == null)
             {
@@ -256,10 +258,10 @@ namespace Moe.Lib
         ///     Concatenates the members of a collection, using the specified separator between each member.
         /// </summary>
         /// <returns>A string that consists of the members of <paramref name="values" /> delimited by the <paramref name="separator" /> string. If values has no members, the method returns null.</returns>
-        public static string Join<T>(this IEnumerable<T> values, string separator = "")
+        public static string Join<T>(this IEnumerable<T> values, string separator = ",")
         {
-            separator = separator ?? "";
-            return values == null ? default(string) : string.Join(separator, values);
+            separator = separator ?? ",";
+            return values == null ? null : string.Join(separator, values);
         }
 
         /// <summary>

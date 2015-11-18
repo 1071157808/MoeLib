@@ -65,7 +65,7 @@ namespace Moe.Lib
         ///     this string and value are compared
         /// </param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<string> DoesNotEndWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
+        public static Ensures<string> DoesNotEndWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (ensures == null)
             {
@@ -83,7 +83,7 @@ namespace Moe.Lib
         /// <param name="length">The invalid length.</param>
         /// <param name="additionalMessage">The additional message that should combine into the exception message.</param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<string> DoesNotHaveLength(this Ensures<string> ensures, int length, string additionalMessage = "")
+        public static Ensures<string> DoesNotHaveLength(this Ensures<string> ensures, int length, string additionalMessage = null)
         {
             if (ensures == null)
             {
@@ -105,7 +105,7 @@ namespace Moe.Lib
         ///     this string and value are compared
         /// </param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<string> DoesNotStartWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
+        public static Ensures<string> DoesNotStartWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (ensures == null)
             {
@@ -127,7 +127,7 @@ namespace Moe.Lib
         ///     this string and value are compared
         /// </param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<string> EndsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
+        public static Ensures<string> EndsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (ensures == null)
             {
@@ -323,7 +323,7 @@ namespace Moe.Lib
         ///     this string and value are compared
         /// </param>
         /// <returns>The specified <paramref name="ensures" /> instance.</returns>
-        public static Ensures<string> StartsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.CurrentCulture)
+        public static Ensures<string> StartsWith(this Ensures<string> ensures, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (ensures == null)
             {

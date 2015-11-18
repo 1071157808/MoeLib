@@ -12,6 +12,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -24,12 +25,14 @@ namespace Moe.Lib
         ///     Does the specified action.
         /// </summary>
         /// <param name="action">The action.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Do")]
         void Do(Action action);
 
         /// <summary>
         ///     Does the specified action.
         /// </summary>
         /// <param name="action">The action.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Do")]
         void Do(Action<int> action);
     }
 
@@ -80,7 +83,7 @@ namespace Moe.Lib
         ///     Initializes a new instance of the <see cref="LoopIterator" /> class.
         /// </summary>
         /// <param name="count">The count.</param>
-        public LoopIterator(int count)
+        internal LoopIterator(int count)
         {
             if (count < 0)
             {
@@ -96,7 +99,8 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="start">The start.</param>
         /// <param name="end">The end.</param>
-        public LoopIterator(int start, int end)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal LoopIterator(int start, int end)
         {
             if (start > end)
             {
@@ -114,6 +118,11 @@ namespace Moe.Lib
         /// <param name="action">The action.</param>
         public void Do(Action action)
         {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             for (int i = this.start; i <= this.end; i++)
             {
                 action();
@@ -126,6 +135,11 @@ namespace Moe.Lib
         /// <param name="action">The action.</param>
         public void Do(Action<int> action)
         {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             for (int i = this.start; i <= this.end; i++)
             {
                 action(i);

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib
 {
@@ -85,6 +86,7 @@ namespace Moe.Lib
         /// </summary>
         /// <typeparam name="TException">The type of the exception.</typeparam>
         /// <returns><c>true</c> if the Result is true, <c>throw a TException</c> otherwise.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public bool WithException<TException>() where TException : Exception
         {
             if (this.Result)
@@ -116,16 +118,17 @@ namespace Moe.Lib
         /// </summary>
         /// <typeparam name="TException">The type of the exception.</typeparam>
         /// <param name="message">The exception message.</param>
-        /// <param name="formates">The formates for the exception message.</param>
+        /// <param name="args">The args for formating the exception message.</param>
         /// <returns><c>true</c> if the Result is true, <c>throw a TException</c> otherwise.</returns>
-        public bool WithException<TException>(string message, params object[] formates) where TException : Exception
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public bool WithException<TException>(string message, params object[] args) where TException : Exception
         {
             if (this.Result)
             {
                 return this.Result;
             }
 
-            throw (TException)Activator.CreateInstance(typeof(TException), message.FormatWith(formates));
+            throw (TException)Activator.CreateInstance(typeof(TException), message.FormatWith(args));
         }
     }
 }
