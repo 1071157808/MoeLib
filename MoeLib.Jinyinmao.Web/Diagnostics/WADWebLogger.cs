@@ -188,9 +188,9 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
 
                 if (request.Headers != null)
                 {
-                    payload.AddIfNotExist("Authorization", request.Headers.Authorization.ToString());
-                    payload.AddIfNotExist("Referrer", request.Headers.Referrer.ToString());
-                    payload.AddIfNotExist("UserAgent", request.Headers.UserAgent.ToString());
+                    payload.AddIfNotExist("Authorization", request.Headers.Authorization?.ToString());
+                    payload.AddIfNotExist("Referrer", request.Headers.Referrer?.ToString());
+                    payload.AddIfNotExist("UserAgent", request.Headers.UserAgent?.ToString());
 
                     request.Headers.Where(h => h.Key.StartsWith("X-JYM-", StringComparison.OrdinalIgnoreCase)).ToList()
                         .ForEach(h => payload.Add(h.Key, h.Value.Join(",")));
