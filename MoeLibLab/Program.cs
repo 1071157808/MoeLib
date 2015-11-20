@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace MoeLibLab
 {
@@ -16,12 +15,7 @@ namespace MoeLibLab
     {
         private static void Main(string[] args)
         {
-            string a = JsonConvert.SerializeObject(new Dictionary<string, object>
-            {
-                { "A", new List<Apple> { new Apple() } },
-                { "B", 10 }
-            });
-            Console.WriteLine(a);
+            Console.WriteLine(@"Hello world.");
         }
     }
 }
