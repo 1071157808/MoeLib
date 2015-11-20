@@ -8,7 +8,7 @@ namespace MoeLibWebLab
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            config.UseJinyinmaoLogger();
+            config.UseJinyinmaoConfig();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

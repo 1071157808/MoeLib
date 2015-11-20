@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.ExceptionHandling;
+using Moe.Lib;
 using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Web;
-using MoeLib.Jinyinmao.Web.Diagnostics;
 
-namespace Moe.Lib.Web
+namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
     /// <summary>
     ///     JinyinmaoExceptionLogger.
@@ -41,7 +40,7 @@ namespace Moe.Lib.Web
             }
 
             this.Logger.Log(2, context.Exception.Message, context.Request, clientId?.Join(","), deviceId?.Join(","),
-                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, context.Exception);
+                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Error", 0UL, string.Empty, context.Exception);
         }
 
         private static IWebLogger InitApplicationLogger()

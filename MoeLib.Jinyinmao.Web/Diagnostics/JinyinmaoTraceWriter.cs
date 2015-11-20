@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Tracing;
+using Moe.Lib;
 using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Web;
-using MoeLib.Jinyinmao.Web.Diagnostics;
 
-namespace Moe.Lib.Web
+namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
     /// <summary>
     ///     Asp.Net TraceWriter for Jinyinmao.
@@ -38,7 +37,7 @@ namespace Moe.Lib.Web
         /// <param name="traceAction">The action to invoke if tracing is enabled.  The caller is expected to fill in the fields of the given <see cref="T:System.Web.Http.Tracing.TraceRecord" /> in this action.</param>
         public void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)
         {
-            if (level == TraceLevel.Off) return;
+            if (level == TraceLevel.Off || category != "Application") return;
 
             TraceRecord record = new TraceRecord(request, category, level);
 
@@ -99,7 +98,7 @@ namespace Moe.Lib.Web
             }
 
             this.Logger.Log(GetLogLevel(traceRecord.Level), traceRecord.Message, traceRecord.Request, clientId?.Join(","), deviceId?.Join(","),
-                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace Log", 0UL, string.Empty, traceRecord.Exception);
+                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace", 0UL, string.Empty, traceRecord.Exception);
         }
     }
 }

@@ -74,7 +74,8 @@ namespace Moe.Lib
                 sb.AppendLine($"{indent}Type: {exception.GetType().FullName}");
                 sb.AppendLine($"{indent}Message: {exception.Message}");
                 sb.AppendLine($"{indent}Source: {exception.Source}");
-                sb.AppendLine($"{indent}Stacktrace: {exception.StackTrace}");
+                sb.AppendLine($"{indent}Stacktrace:");
+                sb.AppendLine($"{exception.StackTrace}");
 
                 if (exception is ReflectionTypeLoadException)
                 {

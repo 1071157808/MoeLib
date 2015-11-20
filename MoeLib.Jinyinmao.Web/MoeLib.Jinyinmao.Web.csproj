@@ -45,6 +45,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -58,12 +59,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppWebExtension.cs" />
+    <Compile Include="Diagnostics\TraceWriterExtensions.cs" />
     <Compile Include="Diagnostics\IWebLogger.cs" />
     <Compile Include="Diagnostics\NWebLogger.cs" />
     <Compile Include="Diagnostics\WADWebLogger.cs" />
+    <Compile Include="Filters\IPAuthorizeAttribute.cs" />
+    <Compile Include="Handlers\JinyinmaoExceptionHandler.cs" />
+    <Compile Include="Diagnostics\JinyinmaoLogHandler.cs" />
+    <Compile Include="Handlers\JinyinmaoRequestIdHandler.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
-    <Compile Include="JinyinmaoExceptionLogger.cs" />
-    <Compile Include="JinyinmaoTraceWriter.cs" />
+    <Compile Include="Diagnostics\JinyinmaoExceptionLogger.cs" />
+    <Compile Include="Diagnostics\JinyinmaoTraceWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +81,10 @@
       <Project>{67cdcf1a-50df-469a-a37f-ccb059151ec3}</Project>
       <Name>MoeLib.Jinyinmao</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Web\MoeLib.Web.csproj">
+      <Project>{32A3CD73-5CE1-4F10-BF56-8C472B3C882D}</Project>
+      <Name>MoeLib.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoeLib\MoeLib.csproj">
       <Project>{03528BB2-032E-486F-BCD0-EA8B69C477DC}</Project>
       <Name>MoeLib</Name>
@@ -84,6 +94,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
