@@ -69,7 +69,6 @@ namespace Moe.Lib
                     sb.AppendFormat("{0}Inner ", indent);
                 }
 
-                sb.AppendLine();
                 sb.AppendLine("Exception(s) Found:");
                 sb.AppendLine($"{indent}Type: {exception.GetType().FullName}");
                 sb.AppendLine($"{indent}Message: {exception.Message}");
