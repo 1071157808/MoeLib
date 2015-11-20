@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("MoeLib.Data")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MoeLib.Data")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MoeLib.Data")]

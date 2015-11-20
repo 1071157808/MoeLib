@@ -13,6 +13,10 @@ namespace MoeLib.Jinyinmao.Web.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class IPAuthorizeAttribute : OrderedAuthorizationFilterAttribute
     {
+        /// <summary>
+        ///     Gets or sets the valiad ip regex.
+        /// </summary>
+        /// <value>The valiad ip regex.</value>
         public Regex ValiadIPRegex { get; set; }
 
         /// <summary>
@@ -34,6 +38,7 @@ namespace MoeLib.Jinyinmao.Web.Filters
         ///     Unauthorized status code. Override this method to provide your own handling for unauthorized requests.
         /// </summary>
         /// <param name="actionContext">The context.</param>
+        /// <exception cref="System.ArgumentNullException">@actionContext can not be null</exception>
         private void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
             if (actionContext == null)
@@ -44,6 +49,11 @@ namespace MoeLib.Jinyinmao.Web.Filters
             actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Forbidden, "");
         }
 
+        /// <summary>
+        ///     Ips the is authorized.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         private bool IpIsAuthorized(HttpActionContext context)
         {
             HttpRequestMessage request = context.Request;

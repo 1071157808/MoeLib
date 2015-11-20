@@ -8,6 +8,9 @@ using System.Web.Http.ExceptionHandling;
 
 namespace MoeLib.Jinyinmao.Web.Handlers
 {
+    /// <summary>
+    ///     JinyinmaoExceptionHandler.
+    /// </summary>
     public class JinyinmaoExceptionHandler : ExceptionHandler
     {
         /// <summary>
@@ -26,10 +29,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         /// <summary>
         ///     Determines whether the exception should be handled.
         /// </summary>
-        /// <returns>
-        ///     true if the exception should be handled; otherwise, false.
-        /// </returns>
         /// <param name="context">The exception handler context.</param>
+        /// <returns>true if the exception should be handled; otherwise, false.</returns>
         public override bool ShouldHandle(ExceptionHandlerContext context)
         {
             return true;
@@ -37,13 +38,30 @@ namespace MoeLib.Jinyinmao.Web.Handlers
 
         #region Nested type: ErrorResult
 
+        /// <summary>
+        ///     ErrorResult. This class cannot be inherited.
+        /// </summary>
         private sealed class ErrorResult : IHttpActionResult
         {
+            /// <summary>
+            ///     Gets or sets the exception.
+            /// </summary>
+            /// <value>The exception.</value>
             internal Exception Exception { private get; set; }
+
+            /// <summary>
+            ///     Gets or sets the request.
+            /// </summary>
+            /// <value>The request.</value>
             internal HttpRequestMessage Request { private get; set; }
 
             #region IHttpActionResult Members
 
+            /// <summary>
+            ///     Executes the asynchronous.
+            /// </summary>
+            /// <param name="cancellationToken">The cancellation token.</param>
+            /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
             public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
             {
                 HttpResponseMessage response;

@@ -42,13 +42,17 @@ namespace Moe.Lib.Web
         /// <summary>
         ///     Authenticates the request.
         /// </summary>
-        /// <returns>
-        ///     A Task that will perform authentication.
-        /// </returns>
         /// <param name="context">The authentication context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+        /// <returns>A Task that will perform authentication.</returns>
         public abstract Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken);
 
+        /// <summary>
+        ///     Challenges the asynchronous.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>Task.</returns>
         public abstract Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken);
 
         #endregion IAuthenticationFilter Members

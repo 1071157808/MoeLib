@@ -5,6 +5,9 @@ using Moe.Lib;
 
 namespace MoeLib.Jinyinmao.Web.Handlers
 {
+    /// <summary>
+    ///     JinyinmaoRequestIdHandler.
+    /// </summary>
     public class JinyinmaoRequestIdHandler : DelegatingHandler
     {
         /// <summary>

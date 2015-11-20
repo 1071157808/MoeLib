@@ -12,10 +12,19 @@ using ILogger = MoeLib.Diagnostics.ILogger;
 
 namespace MoeLib.Jinyinmao
 {
+    /// <summary>
+    ///     NLogger.
+    /// </summary>
     public class NLogger : ILogger
     {
+        /// <summary>
+        ///     The application logger
+        /// </summary>
         private static readonly Lazy<NLog.ILogger> ApplicationLogger = new Lazy<NLog.ILogger>(() => InitApplicationLogger());
 
+        /// <summary>
+        ///     Initializes static members of the <see cref="NLogger" /> class.
+        /// </summary>
         static NLogger()
         {
             LoggingConfiguration config = new LoggingConfiguration();
@@ -36,6 +45,10 @@ namespace MoeLib.Jinyinmao
             NLog.LogManager.Configuration = config;
         }
 
+        /// <summary>
+        ///     Gets the logger.
+        /// </summary>
+        /// <value>The logger.</value>
         protected NLog.ILogger Logger
         {
             get { return ApplicationLogger.Value; }
@@ -43,12 +56,36 @@ namespace MoeLib.Jinyinmao
 
         #region ILogger Members
 
+        /// <summary>
+        ///     Criticals the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Critical(string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             LogEntry logEntry = BuildLogEntry(1, message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             this.Logger.Fatal(logEntry.ToJson());
         }
 
+        /// <summary>
+        ///     Criticals the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Critical(string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             TraceEntry traceEntry = new TraceEntry
@@ -63,12 +100,36 @@ namespace MoeLib.Jinyinmao
             this.Critical(message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
+        /// <summary>
+        ///     Errors the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Error(string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             LogEntry logEntry = BuildLogEntry(2, message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             this.Logger.Error(logEntry.ToJson());
         }
 
+        /// <summary>
+        ///     Errors the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Error(string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             TraceEntry traceEntry = new TraceEntry
@@ -83,12 +144,36 @@ namespace MoeLib.Jinyinmao
             this.Error(message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
+        /// <summary>
+        ///     Informations the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Info(string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             LogEntry logEntry = BuildLogEntry(4, message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             this.Logger.Info(logEntry.ToJson());
         }
 
+        /// <summary>
+        ///     Informations the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Info(string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             TraceEntry traceEntry = new TraceEntry
@@ -103,6 +188,17 @@ namespace MoeLib.Jinyinmao
             this.Info(message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
+        /// <summary>
+        ///     Logs the specified level.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Log(int level, string message, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             switch (level)
@@ -133,6 +229,21 @@ namespace MoeLib.Jinyinmao
             }
         }
 
+        /// <summary>
+        ///     Logs the specified level.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Log(int level, string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             switch (level)
@@ -163,12 +274,36 @@ namespace MoeLib.Jinyinmao
             }
         }
 
+        /// <summary>
+        ///     Verboses the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Verbose(string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             LogEntry logEntry = BuildLogEntry(5, message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             this.Logger.Debug(logEntry.ToJson());
         }
 
+        /// <summary>
+        ///     Verboses the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Verbose(string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             TraceEntry traceEntry = new TraceEntry
@@ -183,12 +318,36 @@ namespace MoeLib.Jinyinmao
             this.Verbose(message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
+        /// <summary>
+        ///     Warnings the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Warning(string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             LogEntry logEntry = BuildLogEntry(3, message, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             this.Logger.Warn(logEntry.ToJson());
         }
 
+        /// <summary>
+        ///     Warnings the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="clientId">The client identifier.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="requestId">The request identifier.</param>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
         public void Warning(string message, string clientId, string deviceId, string requestId, string sessionId, string userId, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", Exception exception = null, Dictionary<string, object> payload = null)
         {
             TraceEntry traceEntry = new TraceEntry
@@ -205,6 +364,18 @@ namespace MoeLib.Jinyinmao
 
         #endregion ILogger Members
 
+        /// <summary>
+        ///     Builds the log entry.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="tag">The tag.</param>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="errorCodeMessage">The error code message.</param>
+        /// <param name="traceEntry">The trace entry.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="payload">The payload.</param>
+        /// <returns>LogEntry.</returns>
         protected static LogEntry BuildLogEntry(int level, string message, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             StringBuilder messageBuilder = new StringBuilder();
@@ -243,6 +414,10 @@ namespace MoeLib.Jinyinmao
             return logEntry;
         }
 
+        /// <summary>
+        ///     Initializes the application logger.
+        /// </summary>
+        /// <returns>NLog.ILogger.</returns>
         private static NLog.ILogger InitApplicationLogger()
         {
             return NLog.LogManager.GetLogger("ApplicationLogger");

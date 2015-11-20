@@ -8,10 +8,20 @@ using Moe.Lib.Jinyinmao;
 
 namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
+    /// <summary>
+    ///     JinyinmaoLogHandler.
+    /// </summary>
     public class JinyinmaoLogHandler : DelegatingHandler
     {
+        /// <summary>
+        ///     The logger
+        /// </summary>
         private static readonly Lazy<IWebLogger> logger = new Lazy<IWebLogger>(() => InitApplicationLogger());
 
+        /// <summary>
+        ///     Gets the logger.
+        /// </summary>
+        /// <value>The logger.</value>
         private IWebLogger Logger
         {
             get { return logger.Value; }
