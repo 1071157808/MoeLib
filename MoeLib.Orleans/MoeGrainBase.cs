@@ -5,6 +5,9 @@ using Orleans.Runtime;
 
 namespace MoeLib.Orleans
 {
+    /// <summary>
+    ///     MoeGrainBaseExtensions.
+    /// </summary>
     public static class MoeGrainBaseExtensions
     {
         /// <summary>
@@ -36,8 +39,15 @@ namespace MoeLib.Orleans
         }
     }
 
+    /// <summary>
+    ///     MoeGrainBase.
+    /// </summary>
     public abstract class MoeGrainBase : Grain
     {
+        /// <summary>
+        ///     Gets the grain factory.
+        /// </summary>
+        /// <value>The grain factory.</value>
         public new IGrainFactory GrainFactory
         {
             get { return base.GrainFactory; }
@@ -53,9 +63,7 @@ namespace MoeLib.Orleans
         /// <param name="reminderName">Name of this reminder</param>
         /// <param name="dueTime">Due time for this reminder</param>
         /// <param name="period">Frequence period for this reminder</param>
-        /// <returns>
-        ///     Promise for Reminder handle.
-        /// </returns>
+        /// <returns>Promise for Reminder handle.</returns>
         public async Task<IGrainReminder> GetOrRegisterReminder(string reminderName, TimeSpan dueTime, TimeSpan period)
         {
             return await this.GetReminder(reminderName) ?? await this.RegisterOrUpdateReminder(reminderName, dueTime, period);
@@ -65,9 +73,7 @@ namespace MoeLib.Orleans
         ///     Unregisters a previously registered reminder or do nothing if the reminder has not been registered.
         /// </summary>
         /// <param name="reminderName">Name of the reminder to unregister.</param>
-        /// <returns>
-        ///     Completion promise for this operation.
-        /// </returns>
+        /// <returns>Completion promise for this operation.</returns>
         public async Task UnregisterReminder(string reminderName)
         {
             IGrainReminder reminder = await this.GetReminder(reminderName);

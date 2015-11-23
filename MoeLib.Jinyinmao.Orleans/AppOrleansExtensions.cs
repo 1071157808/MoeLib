@@ -3,6 +3,9 @@ using MoeLib.Jinyinmao.Orleans.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Orleans
 {
+    /// <summary>
+    ///     AppOrleansExtensions.
+    /// </summary>
     public static class AppOrleansExtensions
     {
         /// <summary>

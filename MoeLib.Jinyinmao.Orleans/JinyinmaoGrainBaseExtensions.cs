@@ -5,13 +5,16 @@ using Orleans.Runtime;
 
 namespace MoeLib.Jinyinmao.Orleans
 {
+    /// <summary>
+    ///     JinyinmaoGrainBaseExtensions.
+    /// </summary>
     public static class JinyinmaoGrainBaseExtensions
     {
         /// <summary>
         ///     Logs the message at the <c>Critical</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
@@ -31,8 +34,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Critical</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
         public static void Critical(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
         {
@@ -42,8 +45,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Error</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
@@ -63,8 +66,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Error</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
         public static void Error(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
         {
@@ -74,8 +77,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Info</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
@@ -95,8 +98,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Info</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
         public static void Info(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
         {
@@ -106,8 +109,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Verbose</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
@@ -127,8 +130,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Verbose</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
         public static void Verbose(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
         {
@@ -138,8 +141,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Warning</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
@@ -159,8 +162,8 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <summary>
         ///     Logs the message at the <c>Warning</c> level.
         /// </summary>
-        /// <param name="message">The message.</param>
         /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
         public static void Warning(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
         {
