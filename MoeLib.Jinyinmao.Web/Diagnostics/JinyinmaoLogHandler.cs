@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moe.Lib;
 using Moe.Lib.Jinyinmao;
+using MoeLib.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
@@ -38,31 +39,11 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            IEnumerable<string> clientId = null;
-            IEnumerable<string> deviceId = null;
-            IEnumerable<string> requestId = null;
-            IEnumerable<string> sessionId = null;
-            IEnumerable<string> userId = null;
+            TraceEntry traceEntry = request?.GetTraceEntry();
 
-            if (request?.Headers != null)
-            {
-                request.Headers.TryGetValues("X-JYM-CID", out clientId);
-                request.Headers.TryGetValues("X-JYM-DID", out deviceId);
-                request.Headers.TryGetValues("X-JYM-RID", out requestId);
-                request.Headers.TryGetValues("X-JYM-SID", out sessionId);
-                request.Headers.TryGetValues("X-JYM-UID", out userId);
-            }
+            string requestIdString = traceEntry?.RequestId ?? Guid.NewGuid().ToGuidString();
 
-            string clientIdString = clientId?.Join(",");
-            string deviceIdString = deviceId?.Join(",");
-            string requestIdString = requestId?.Join(",");
-            string sessionIdString = sessionId?.Join(",");
-            string userIdString = userId?.Join(",");
-
-            requestIdString = requestIdString ?? Guid.NewGuid().ToGuidString();
-
-            this.Logger.Info($"Request Begin: {requestIdString}", request, clientIdString, deviceIdString,
-                requestIdString, sessionIdString, userIdString, "ASP.NET HTTP Request", 0UL, string.Empty);
+            this.Logger.Info($"Request Begin: {requestIdString}", request, "ASP.NET HTTP Request", 0UL, string.Empty, traceEntry);
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
@@ -76,8 +57,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 payload.Add("ResponseContent", (await response.Content.ReadAsStringAsync()).GetFirst(30000));
             }
 
-            this.Logger.Info($"Request End: {requestIdString}", request, clientIdString, deviceIdString,
-                requestIdString, sessionIdString, userIdString, "ASP.NET HTTP Response", 0UL, string.Empty, null, payload);
+            this.Logger.Info($"Request End: {requestIdString}", request, "ASP.NET HTTP Response", 0UL, string.Empty, traceEntry, null, payload);
 
             return response;
         }

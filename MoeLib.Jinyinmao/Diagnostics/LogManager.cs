@@ -1,7 +1,7 @@
 ﻿using Microsoft.WindowsAzure.ServiceRuntime;
 using MoeLib.Diagnostics;
 
-namespace MoeLib.Jinyinmao
+namespace MoeLib.Jinyinmao.Diagnostics
 {
     /// <summary>
     ///     LogManager.

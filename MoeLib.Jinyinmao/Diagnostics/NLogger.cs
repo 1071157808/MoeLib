@@ -10,7 +10,7 @@ using NLog.Layouts;
 using NLog.Targets;
 using ILogger = MoeLib.Diagnostics.ILogger;
 
-namespace MoeLib.Jinyinmao
+namespace MoeLib.Jinyinmao.Diagnostics
 {
     /// <summary>
     ///     NLogger.

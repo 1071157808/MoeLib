@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -157,6 +158,10 @@
     <ProjectReference Include="..\MoeLib.Jinyinmao\MoeLib.Jinyinmao.csproj">
       <Project>{67cdcf1a-50df-469a-a37f-ccb059151ec3}</Project>
       <Name>MoeLib.Jinyinmao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Web\MoeLib.Web.csproj">
+      <Project>{32A3CD73-5CE1-4F10-BF56-8C472B3C882D}</Project>
+      <Name>MoeLib.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

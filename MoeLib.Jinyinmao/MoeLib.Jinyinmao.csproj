@@ -57,10 +57,10 @@
     <Compile Include="AppConfigProvider.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IAppConfigProvider.cs" />
-    <Compile Include="NLogger.cs" />
-    <Compile Include="LogManager.cs" />
+    <Compile Include="Diagnostics\NLogger.cs" />
+    <Compile Include="Diagnostics\LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WADLogger.cs" />
+    <Compile Include="Diagnostics\WADLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

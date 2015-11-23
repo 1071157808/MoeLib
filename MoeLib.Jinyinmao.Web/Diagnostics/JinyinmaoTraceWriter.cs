@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Tracing;
-using Moe.Lib;
 using Moe.Lib.Jinyinmao;
+using MoeLib.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
@@ -82,23 +81,9 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         /// <param name="traceRecord">The trace record.</param>
         private void LogTraceRecord(TraceRecord traceRecord)
         {
-            IEnumerable<string> clientId = null;
-            IEnumerable<string> deviceId = null;
-            IEnumerable<string> requestId = null;
-            IEnumerable<string> sessionId = null;
-            IEnumerable<string> userId = null;
+            TraceEntry traceEntry = traceRecord.Request?.GetTraceEntry();
 
-            if (traceRecord.Request?.Headers != null)
-            {
-                traceRecord.Request.Headers.TryGetValues("X-JYM-CID", out clientId);
-                traceRecord.Request.Headers.TryGetValues("X-JYM-DID", out deviceId);
-                traceRecord.Request.Headers.TryGetValues("X-JYM-RID", out requestId);
-                traceRecord.Request.Headers.TryGetValues("X-JYM-SID", out sessionId);
-                traceRecord.Request.Headers.TryGetValues("X-JYM-UID", out userId);
-            }
-
-            this.Logger.Log(GetLogLevel(traceRecord.Level), traceRecord.Message, traceRecord.Request, clientId?.Join(","), deviceId?.Join(","),
-                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Trace", 0UL, string.Empty, traceRecord.Exception);
+            this.Logger.Log(GetLogLevel(traceRecord.Level), traceRecord.Message, traceRecord.Request, "ASP.NET Trace", 0UL, string.Empty, traceEntry, traceRecord.Exception);
         }
     }
 }

@@ -79,10 +79,12 @@
     <Compile Include="EnumAvailableValuesAttribute.cs" />
     <Compile Include="ExceptionLogger.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
+    <Compile Include="HttpRequestMessageExtensions.cs" />
     <Compile Include="HttpUtils.cs" />
     <Compile Include="IOrderedFilter.cs" />
     <Compile Include="JsonRequestMessage.cs" />
     <Compile Include="JsonResponseMessage.cs" />
+    <Compile Include="MoeApiControllerBase.cs" />
     <Compile Include="OrderedFilterProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransientFaultHandling\HttpRequestTransientErrorDetectionStrategy.cs" />

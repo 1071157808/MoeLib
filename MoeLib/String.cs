@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Moe.Lib
 {
@@ -356,6 +357,17 @@ namespace Moe.Lib
         public static string FormatWith(this string format, IFormatProvider provider, params object[] args)
         {
             return StringUtility.FormatWith(format, provider, args);
+        }
+
+        /// <summary>
+        ///     Deserialize a json string to the instance of <typeparamref name="T" />. If the <paramref name="value" /> is null or empty, <c>null</c> will be returned.
+        /// </summary>
+        /// <typeparam name="T">The type of the instance to deserialize from the json string.</typeparam>
+        /// <param name="value">The json string .</param>
+        /// <returns>The deserialized instance of <typeparamref name="T" />. If the <paramref name="value" /> is null or empty, <c>null</c> will be returned.</returns>
+        public static T FromJson<T>(this string value)
+        {
+            return StringUtility.FromJson<T>(value);
         }
 
         /// <summary>
@@ -1089,6 +1101,17 @@ namespace Moe.Lib
         public static string FormatWith(string format, IFormatProvider provider, params object[] args)
         {
             return string.Format(provider, format, args);
+        }
+
+        /// <summary>
+        ///     Deserialize a json string to the instance of <typeparamref name="T" />. If the <paramref name="value" /> is null or empty, <c>null</c> will be returned.
+        /// </summary>
+        /// <typeparam name="T">The type of the instance to deserialize from the json string.</typeparam>
+        /// <param name="value">The json string .</param>
+        /// <returns>The deserialized instance of <typeparamref name="T" />. If the <paramref name="value" /> is null or empty, <c>null</c> will be returned.</returns>
+        public static T FromJson<T>(string value)
+        {
+            return value.IsNullOrEmpty() ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
 
         /// <summary>

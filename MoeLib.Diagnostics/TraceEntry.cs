@@ -30,6 +30,18 @@
         public string SessionId { get; set; }
 
         /// <summary>
+        ///     Gets or sets the source ip.
+        /// </summary>
+        /// <value>The source ip.</value>
+        public string SourceIP { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the source user agent.
+        /// </summary>
+        /// <value>The source user agent.</value>
+        public string SourceUserAgent { get; set; }
+
+        /// <summary>
         ///     Gets or sets the user identifier.
         /// </summary>
         /// <value>The user identifier.</value>

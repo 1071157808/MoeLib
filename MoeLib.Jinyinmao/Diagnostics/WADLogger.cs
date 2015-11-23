@@ -5,7 +5,7 @@ using System.Text;
 using Moe.Lib;
 using MoeLib.Diagnostics;
 
-namespace MoeLib.Jinyinmao
+namespace MoeLib.Jinyinmao.Diagnostics
 {
     /// <summary>
     ///     WADLogger.

@@ -60,7 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppWebExtension.cs" />
+    <Compile Include="AppWebExtensions.cs" />
+    <Compile Include="Diagnostics\HttpRequestMessageExtensions.cs" />
     <Compile Include="Diagnostics\TraceWriterExtensions.cs" />
     <Compile Include="Diagnostics\IWebLogger.cs" />
     <Compile Include="Diagnostics\NWebLogger.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="HttpConfigurationExtensions.cs" />
     <Compile Include="Diagnostics\JinyinmaoExceptionLogger.cs" />
     <Compile Include="Diagnostics\JinyinmaoTraceWriter.cs" />
+    <Compile Include="JinyinmaoApiControllerBase.cs" />
+    <Compile Include="JinyinmaoApiControllerBaseExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using MoeLib.Jinyinmao;
+using MoeLib.Jinyinmao.Diagnostics;
 
 namespace Moe.Lib.Jinyinmao
 {

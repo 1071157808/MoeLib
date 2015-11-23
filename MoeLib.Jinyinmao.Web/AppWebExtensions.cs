@@ -1,11 +1,12 @@
-﻿using MoeLib.Jinyinmao.Web.Diagnostics;
+﻿using MoeLib.Jinyinmao.Diagnostics;
+using MoeLib.Jinyinmao.Web.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Web
 {
     /// <summary>
-    ///     AppWebExtension.
+    ///     AppWebExtensions.
     /// </summary>
-    public static class AppWebExtension
+    public static class AppWebExtensions
     {
         /// <summary>
         ///     Creates the web logger.

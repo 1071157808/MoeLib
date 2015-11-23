@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http.ExceptionHandling;
-using Moe.Lib;
 using Moe.Lib.Jinyinmao;
+using MoeLib.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Web.Diagnostics
 {
@@ -24,23 +23,9 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         /// <param name="context">The exception logger context.</param>
         public override void Log(ExceptionLoggerContext context)
         {
-            IEnumerable<string> clientId = null;
-            IEnumerable<string> deviceId = null;
-            IEnumerable<string> requestId = null;
-            IEnumerable<string> sessionId = null;
-            IEnumerable<string> userId = null;
+            TraceEntry traceEntry = context.Request?.GetTraceEntry();
 
-            if (context.Request?.Headers != null)
-            {
-                context.Request.Headers.TryGetValues("X-JYM-CID", out clientId);
-                context.Request.Headers.TryGetValues("X-JYM-DID", out deviceId);
-                context.Request.Headers.TryGetValues("X-JYM-RID", out requestId);
-                context.Request.Headers.TryGetValues("X-JYM-SID", out sessionId);
-                context.Request.Headers.TryGetValues("X-JYM-UID", out userId);
-            }
-
-            this.Logger.Log(2, context.Exception.Message, context.Request, clientId?.Join(","), deviceId?.Join(","),
-                requestId?.Join(","), sessionId?.Join(","), userId?.Join(","), "ASP.NET Error", 0UL, string.Empty, context.Exception);
+            this.Logger.Log(2, context.Exception.Message, context.Request, "ASP.NET Error", 0UL, string.Empty, traceEntry, context.Exception);
         }
 
         private static IWebLogger InitApplicationLogger()
