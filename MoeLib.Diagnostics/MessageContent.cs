@@ -1,23 +1,49 @@
-﻿using System.Collections.Generic;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : MessageContent.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  2:50 PM
+// ***********************************************************************
+// <copyright file="MessageContent.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System.Collections.Generic;
 
 namespace MoeLib.Diagnostics
 {
     /// <summary>
     ///     MessageContent.
     /// </summary>
-    public class MessageContent
+    public class MessageContent : TraceEntry
     {
         /// <summary>
-        ///     Gets or sets the client identifier.
+        ///     Initializes a new instance of the <see cref="MessageContent" /> class.
         /// </summary>
-        /// <value>The client identifier.</value>
-        public string ClientId { get; set; }
+        public MessageContent()
+        {
+        }
 
         /// <summary>
-        ///     Gets or sets the device identifier.
+        ///     Initializes a new instance of the <see cref="MessageContent" /> class.
         /// </summary>
-        /// <value>The device identifier.</value>
-        public string DeviceId { get; set; }
+        /// <param name="traceEntry">The trace entry.</param>
+        public MessageContent(TraceEntry traceEntry)
+        {
+            if (traceEntry != null)
+            {
+                this.ClientId = traceEntry.ClientId;
+                this.DeviceId = traceEntry.DeviceId;
+                this.RequestId = traceEntry.RequestId;
+                this.SessionId = traceEntry.SessionId;
+                this.SourceIP = traceEntry.SourceIP;
+                this.SourceUserAgent = traceEntry.SourceUserAgent;
+                this.UserId = traceEntry.UserId;
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the error code.
@@ -44,27 +70,9 @@ namespace MoeLib.Diagnostics
         public Dictionary<string, object> Payload { get; set; }
 
         /// <summary>
-        ///     Gets or sets the request identifier.
-        /// </summary>
-        /// <value>The request identifier.</value>
-        public string RequestId { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the session identifier.
-        /// </summary>
-        /// <value>The session identifier.</value>
-        public string SessionId { get; set; }
-
-        /// <summary>
         ///     Gets or sets the tag.
         /// </summary>
         /// <value>The tag.</value>
         public string Tag { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the user identifier.
-        /// </summary>
-        /// <value>The user identifier.</value>
-        public string UserId { get; set; }
     }
 }
