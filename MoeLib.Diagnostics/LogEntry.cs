@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : LogEntry.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-24  3:35 PM
+// ***********************************************************************
+// <copyright file="LogEntry.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 
 namespace MoeLib.Diagnostics
 {
@@ -53,7 +66,7 @@ namespace MoeLib.Diagnostics
         ///     Gets or sets the precise timestamp.
         /// </summary>
         /// <value>The precise timestamp.</value>
-        public DateTime PreciseTimestamp { get; set; }
+        public DateTime PreciseTimeStamp { get; set; }
 
         /// <summary>
         ///     Gets or sets the role.

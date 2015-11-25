@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : AppConfigProvider.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  12:43 PM
+// ***********************************************************************
+// <copyright file="AppConfigProvider.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Configuration;
 using Moe.Lib;
 
@@ -17,7 +30,13 @@ namespace MoeLib.Jinyinmao
         /// <returns>System.String.</returns>
         public virtual string GetAppKeysConfig()
         {
-            return ConfigurationManager.AppSettings.Get("AppKeys").HtmlDecode();
+            string config = ConfigurationManager.AppSettings.Get("AppKeys");
+            if (config.IsNullOrEmpty())
+            {
+                throw new ConfigurationErrorsException("Missing config of \"AppKeys\"");
+            }
+
+            return config.HtmlDecode();
         }
 
         /// <summary>
@@ -30,12 +49,28 @@ namespace MoeLib.Jinyinmao
         }
 
         /// <summary>
+        ///     Gets the environment.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public virtual string GetEnvironment()
+        {
+            string config = ConfigurationManager.AppSettings.Get("Env");
+            return config.IsNullOrEmpty() ? "DEV" : config;
+        }
+
+        /// <summary>
         ///     Gets the role configuration.
         /// </summary>
         /// <returns>System.String.</returns>
         public virtual string GetRoleConfig()
         {
-            return ConfigurationManager.AppSettings.Get("Role");
+            string config = ConfigurationManager.AppSettings.Get("Role");
+            if (config.IsNullOrEmpty())
+            {
+                throw new ConfigurationErrorsException("Missing config of \"Role\"");
+            }
+
+            return config;
         }
 
         /// <summary>
@@ -44,7 +79,7 @@ namespace MoeLib.Jinyinmao
         /// <returns>System.String.</returns>
         public virtual string GetRoleInstanceConfig()
         {
-            return ConfigurationManager.AppSettings.Get("Role") + "_" + HostServer.IP;
+            return this.GetRoleConfig() + "_IN_" + HostServer.IP;
         }
 
         #endregion IAppConfigProvider Members

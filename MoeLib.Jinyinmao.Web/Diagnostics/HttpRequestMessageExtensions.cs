@@ -21,6 +21,8 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
             IEnumerable<string> clientId = null;
             IEnumerable<string> deviceId = null;
             IEnumerable<string> requestId = null;
+            IEnumerable<string> sourceIP = null;
+            IEnumerable<string> sourceUserAgent = null;
             IEnumerable<string> sessionId = null;
             IEnumerable<string> userId = null;
 
@@ -29,6 +31,8 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 request.Headers.TryGetValues("X-JYM-CID", out clientId);
                 request.Headers.TryGetValues("X-JYM-DID", out deviceId);
                 request.Headers.TryGetValues("X-JYM-RID", out requestId);
+                request.Headers.TryGetValues("X-JYM-IP", out sourceIP);
+                request.Headers.TryGetValues("X-JYM-UA", out sourceUserAgent);
                 request.Headers.TryGetValues("X-JYM-SID", out sessionId);
                 request.Headers.TryGetValues("X-JYM-UID", out userId);
             }
@@ -39,8 +43,8 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 DeviceId = deviceId?.Join(","),
                 RequestId = requestId?.Join(","),
                 SessionId = sessionId?.Join(","),
-                SourceIP = request?.GetUserHostAddress(),
-                SourceUserAgent = request?.GetUserAgent(),
+                SourceIP = sourceIP != null ? sourceIP.Join(",") : request?.GetUserHostAddress(),
+                SourceUserAgent = sourceUserAgent != null ? sourceUserAgent.Join(",") : request?.GetUserAgent(),
                 UserId = userId?.Join(",")
             };
         }

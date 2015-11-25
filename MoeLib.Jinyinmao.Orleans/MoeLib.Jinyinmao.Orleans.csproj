@@ -55,9 +55,11 @@
     <Compile Include="Diagnostics\JinyinmaoSiloTraceWriter.cs" />
     <Compile Include="Diagnostics\NOrleansLogger.cs" />
     <Compile Include="Diagnostics\WADOrleansLogger.cs" />
+    <Compile Include="IJinyinmaoGrain.cs" />
+    <Compile Include="JinyinmaoGrain.cs" />
     <Compile Include="JinyinmaoGrainBase.cs" />
     <Compile Include="JinyinmaoGrainBaseExtensions.cs" />
-    <Compile Include="OrleansConfigurationExtensions.cs" />
+    <Compile Include="GrainExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

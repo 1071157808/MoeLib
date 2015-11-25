@@ -394,7 +394,7 @@ namespace MoeLib.Jinyinmao.Diagnostics
                 EventId = level.ToString(),
                 Function = string.Empty,
                 Level = level,
-                PreciseTimestamp = DateTime.UtcNow,
+                PreciseTimeStamp = DateTime.UtcNow,
                 Role = App.Host.Role,
                 RoleInstance = App.Host.RoleInstance,
                 Message = new MessageContent

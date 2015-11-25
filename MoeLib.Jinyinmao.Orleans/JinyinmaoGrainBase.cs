@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : JinyinmaoGrainBase.cs
+// Created          : 2015-11-23  3:46 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  2:11 PM
+// ***********************************************************************
+// <copyright file="JinyinmaoGrainBase.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Orleans.Diagnostics;
 using MoeLib.Orleans;
@@ -8,12 +21,14 @@ namespace MoeLib.Jinyinmao.Orleans
     /// <summary>
     ///     JinyinmaoGrainBase.
     /// </summary>
-    public abstract class JinyinmaoGrainBase : MoeGrainBase
+    public class JinyinmaoGrainBase : MoeGrainBase, IJinyinmaoGrain
     {
         /// <summary>
         ///     The logger
         /// </summary>
         private readonly Lazy<IOrleansLogger> logger = new Lazy<IOrleansLogger>(() => InitOrleansLogger());
+
+        #region IJinyinmaoGrain Members
 
         /// <summary>
         ///     Gets the logger.
@@ -23,6 +38,8 @@ namespace MoeLib.Jinyinmao.Orleans
         {
             get { return this.logger.Value; }
         }
+
+        #endregion IJinyinmaoGrain Members
 
         /// <summary>
         ///     Gets the logger.

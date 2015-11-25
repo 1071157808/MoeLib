@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Project          : MoeLib
+// File             : LogGrain.cs
+// Created          : 2015-11-20  8:47 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  2:11 PM
+// ***********************************************************************
+// <copyright file="LogGrain.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
 using System;
 using System.Threading.Tasks;
 using Moe.Lib;
@@ -9,7 +22,7 @@ namespace MoeLibOrleansLabGrains
     /// <summary>
     ///     LogGrain.
     /// </summary>
-    public class LogGrain : JinyinmaoGrainBase, ILogGrain
+    public class LogGrain : JinyinmaoGrain, ILogGrain
     {
         #region ILogGrain Members
 

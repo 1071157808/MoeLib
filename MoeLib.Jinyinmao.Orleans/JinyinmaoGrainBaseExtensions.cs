@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : JinyinmaoGrainBaseExtensions.cs
+// Created          : 2015-11-23  3:21 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  2:11 PM
+// ***********************************************************************
+// <copyright file="JinyinmaoGrainBaseExtensions.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using MoeLib.Diagnostics;
 using Orleans.Runtime;
@@ -6,14 +19,14 @@ using Orleans.Runtime;
 namespace MoeLib.Jinyinmao.Orleans
 {
     /// <summary>
-    ///     JinyinmaoGrainBaseExtensions.
+    ///     JinyinmaoGrainExtensions.
     /// </summary>
-    public static class JinyinmaoGrainBaseExtensions
+    public static class JinyinmaoGrainExtensions
     {
         /// <summary>
         ///     Logs the message at the <c>Critical</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
@@ -21,31 +34,31 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Critical(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Critical(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
                 traceEntry = RequestContext.Get("TraceEntry") as TraceEntry;
             }
 
-            jinyinmaoGrainBase.Logger.Critical(message, jinyinmaoGrainBase, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            jinyinmaoGrain.Logger.Critical(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Critical</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Critical(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
+        public static void Critical(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
-            jinyinmaoGrainBase.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
+            jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Error</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
@@ -53,31 +66,31 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Error(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Error(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
                 traceEntry = RequestContext.Get("TraceEntry") as TraceEntry;
             }
 
-            jinyinmaoGrainBase.Logger.Error(message, jinyinmaoGrainBase, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            jinyinmaoGrain.Logger.Error(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Error</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Error(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
+        public static void Error(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
-            jinyinmaoGrainBase.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
+            jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Info</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
@@ -85,31 +98,31 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Info(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Info(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
                 traceEntry = RequestContext.Get("TraceEntry") as TraceEntry;
             }
 
-            jinyinmaoGrainBase.Logger.Info(message, jinyinmaoGrainBase, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            jinyinmaoGrain.Logger.Info(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Info</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Info(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
+        public static void Info(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
-            jinyinmaoGrainBase.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
+            jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Verbose</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
@@ -117,31 +130,31 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Verbose(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Verbose(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
                 traceEntry = RequestContext.Get("TraceEntry") as TraceEntry;
             }
 
-            jinyinmaoGrainBase.Logger.Verbose(message, jinyinmaoGrainBase, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            jinyinmaoGrain.Logger.Verbose(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Verbose</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Verbose(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
+        public static void Verbose(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
-            jinyinmaoGrainBase.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
+            jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Warning</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
@@ -149,25 +162,25 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Warning(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Warning(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
                 traceEntry = RequestContext.Get("TraceEntry") as TraceEntry;
             }
 
-            jinyinmaoGrainBase.Logger.Warning(message, jinyinmaoGrainBase, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            jinyinmaoGrain.Logger.Warning(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
         ///     Logs the message at the <c>Warning</c> level.
         /// </summary>
-        /// <param name="jinyinmaoGrainBase">The jinyinmaoGrainBase.</param>
+        /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Warning(this JinyinmaoGrainBase jinyinmaoGrainBase, string message, Exception exception)
+        public static void Warning(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
-            jinyinmaoGrainBase.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
+            jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
     }
 }

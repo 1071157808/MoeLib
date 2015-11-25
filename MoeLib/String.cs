@@ -627,7 +627,7 @@ namespace Moe.Lib
         /// <param name="items">The items.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>System.String.</returns>
-        public static string Join(this IEnumerable<string> items, string separator)
+        public static string Join(this IEnumerable<string> items, string separator = "")
         {
             return string.Join(separator, items.ToArray());
         }

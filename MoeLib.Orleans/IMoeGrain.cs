@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Project          : MoeLib
-// File             : MoeGrainBase.cs
-// Created          : 2015-11-25  1:36 PM
+// File             : IMoeGrain.cs
+// Created          : 2015-11-25  1:38 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-25  1:45 PM
+// Last Modified On : 2015-11-25  2:06 PM
 // ***********************************************************************
-// <copyright file="MoeGrainBase.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+// <copyright file="IMoeGrain.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
 // </copyright>
 // ***********************************************************************
@@ -19,20 +19,15 @@ using Orleans.Runtime;
 namespace MoeLib.Orleans
 {
     /// <summary>
-    ///     MoeGrainBase.
+    ///     Interface IMoeGrain
     /// </summary>
-    public class MoeGrainBase : Grain, IMoeGrain
+    public interface IMoeGrain : IGrain
     {
-        #region IMoeGrainBase Members
-
         /// <summary>
         ///     Gets the grain factory.
         /// </summary>
         /// <value>The grain factory.</value>
-        public new IGrainFactory GrainFactory
-        {
-            get { return base.GrainFactory; }
-        }
+        IGrainFactory GrainFactory { get; }
 
         /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
@@ -45,26 +40,13 @@ namespace MoeLib.Orleans
         /// <param name="dueTime">Due time for this reminder</param>
         /// <param name="period">Frequence period for this reminder</param>
         /// <returns>Promise for Reminder handle.</returns>
-        public async Task<IGrainReminder> GetOrRegisterReminder(string reminderName, TimeSpan dueTime, TimeSpan period)
-        {
-            return await this.GetReminder(reminderName) ?? await this.RegisterOrUpdateReminder(reminderName, dueTime, period);
-        }
+        Task<IGrainReminder> GetOrRegisterReminder(string reminderName, TimeSpan dueTime, TimeSpan period);
 
         /// <summary>
         ///     Unregisters a previously registered reminder or do nothing if the reminder has not been registered.
         /// </summary>
         /// <param name="reminderName">Name of the reminder to unregister.</param>
         /// <returns>Completion promise for this operation.</returns>
-        public async Task UnregisterReminder(string reminderName)
-        {
-            IGrainReminder reminder = await this.GetReminder(reminderName);
-
-            if (reminder != null)
-            {
-                await this.UnregisterReminder(reminder);
-            }
-        }
-
-        #endregion IMoeGrainBase Members
+        Task UnregisterReminder(string reminderName);
     }
 }

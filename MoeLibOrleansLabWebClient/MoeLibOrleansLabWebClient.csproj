@@ -124,6 +124,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoeLib.Diagnostics\MoeLib.Diagnostics.csproj">
+      <Project>{898E4B30-9475-43E4-AD53-393C480654FE}</Project>
+      <Name>MoeLib.Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Orleans\MoeLib.Jinyinmao.Orleans.csproj">
+      <Project>{efd330ca-d6f3-4c8a-81dd-f47ccc4dfc6a}</Project>
+      <Name>MoeLib.Jinyinmao.Orleans</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoeLib.Jinyinmao.Web\MoeLib.Jinyinmao.Web.csproj">
       <Project>{0c319208-df3a-4bdf-9662-20985f7d2fe5}</Project>
       <Name>MoeLib.Jinyinmao.Web</Name>

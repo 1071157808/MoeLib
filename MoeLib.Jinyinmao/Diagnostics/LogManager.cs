@@ -1,4 +1,17 @@
-﻿using Microsoft.WindowsAzure.ServiceRuntime;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : LogManager.cs
+// Created          : 2015-11-23  5:22 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  10:11 AM
+// ***********************************************************************
+// <copyright file="LogManager.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Diagnostics
@@ -21,16 +34,7 @@ namespace MoeLib.Jinyinmao.Diagnostics
         /// <returns>ILogger.</returns>
         public ILogger CreateLogger()
         {
-            return this.IsInAzureCloud() ? (ILogger)new WADLogger() : new NLogger();
-        }
-
-        /// <summary>
-        ///     Determines whether [is in azure cloud].
-        /// </summary>
-        /// <returns><c>true</c> if [is in azure cloud]; otherwise, <c>false</c>.</returns>
-        public bool IsInAzureCloud()
-        {
-            return RoleEnvironment.IsAvailable;
+            return App.IsInAzureCloud ? (ILogger)new WADLogger() : new NLogger();
         }
     }
 }

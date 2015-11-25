@@ -83,6 +83,38 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoeLib.Data\MoeLib.Data.csproj">
+      <Project>{ff908604-907c-4987-a459-38f4daa77d43}</Project>
+      <Name>MoeLib.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Diagnostics\MoeLib.Diagnostics.csproj">
+      <Project>{898e4b30-9475-43e4-ad53-393c480654fe}</Project>
+      <Name>MoeLib.Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Azure\MoeLib.Jinyinmao.Azure.csproj">
+      <Project>{a0f7f1df-316c-42cc-b036-145f16022c8e}</Project>
+      <Name>MoeLib.Jinyinmao.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Orleans\MoeLib.Jinyinmao.Orleans.csproj">
+      <Project>{efd330ca-d6f3-4c8a-81dd-f47ccc4dfc6a}</Project>
+      <Name>MoeLib.Jinyinmao.Orleans</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Web\MoeLib.Jinyinmao.Web.csproj">
+      <Project>{0c319208-df3a-4bdf-9662-20985f7d2fe5}</Project>
+      <Name>MoeLib.Jinyinmao.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao\MoeLib.Jinyinmao.csproj">
+      <Project>{67cdcf1a-50df-469a-a37f-ccb059151ec3}</Project>
+      <Name>MoeLib.Jinyinmao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Orleans\MoeLib.Orleans.csproj">
+      <Project>{97f3f00e-b650-481f-a4f6-a8bb419fdefb}</Project>
+      <Name>MoeLib.Orleans</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Web\MoeLib.Web.csproj">
+      <Project>{32a3cd73-5ce1-4f10-bf56-8c472b3c882d}</Project>
+      <Name>MoeLib.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoeLib\MoeLib.csproj">
       <Project>{03528bb2-032e-486f-bcd0-ea8b69c477dc}</Project>
       <Name>MoeLib</Name>

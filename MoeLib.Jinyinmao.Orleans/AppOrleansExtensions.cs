@@ -1,4 +1,18 @@
-﻿using MoeLib.Jinyinmao.Diagnostics;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : AppOrleansExtensions.cs
+// Created          : 2015-11-23  1:40 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  10:10 AM
+// ***********************************************************************
+// <copyright file="AppOrleansExtensions.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Diagnostics;
 using MoeLib.Jinyinmao.Orleans.Diagnostics;
 
 namespace MoeLib.Jinyinmao.Orleans
@@ -15,7 +29,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <returns>IWebLogger.</returns>
         public static IOrleansLogger CreateOrleansLogger(this LogManager logManager)
         {
-            return logManager.IsInAzureCloud() ? (IOrleansLogger)new WADOrleansLogger() : new NOrleansLogger();
+            return App.IsInAzureCloud ? (IOrleansLogger)new WADOrleansLogger() : new NOrleansLogger();
         }
     }
 }

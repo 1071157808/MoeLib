@@ -11,6 +11,7 @@
     </Sites>
     <ConfigurationSettings>
       <Setting name="AppKeys" />
+      <Setting name="Env" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
     </ConfigurationSettings>
     <Endpoints>

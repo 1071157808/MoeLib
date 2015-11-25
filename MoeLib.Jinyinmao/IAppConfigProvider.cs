@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : IAppConfigProvider.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  12:36 PM
+// ***********************************************************************
+// <copyright file="IAppConfigProvider.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 
 namespace MoeLib.Jinyinmao
 {
@@ -18,6 +31,12 @@ namespace MoeLib.Jinyinmao
         /// </summary>
         /// <returns>Guid.</returns>
         Guid GetDeploymentIdConfig();
+
+        /// <summary>
+        ///     Gets the environment.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        string GetEnvironment();
 
         /// <summary>
         ///     Gets the role configuration.

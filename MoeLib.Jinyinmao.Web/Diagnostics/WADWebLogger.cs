@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : WADWebLogger.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-24  12:26 PM
+// ***********************************************************************
+// <copyright file="WADWebLogger.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -164,7 +177,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                     payload.AddIfNotExist("Referrer", request.Headers.Referrer?.ToString());
                     payload.AddIfNotExist("UserAgent", request.Headers.UserAgent?.ToString());
 
-                    request.Headers.Where(h => h.Key.StartsWith("X-JYM-", StringComparison.OrdinalIgnoreCase)).ToList()
+                    request.Headers.Where(h => h.Key.StartsWith("X-", StringComparison.OrdinalIgnoreCase)).ToList()
                         .ForEach(h => payload.Add(h.Key, h.Value.Join(",")));
                 }
 

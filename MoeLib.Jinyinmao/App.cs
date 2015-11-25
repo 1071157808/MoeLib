@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : App.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  10:11 AM
+// ***********************************************************************
+// <copyright file="App.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using MoeLib.Jinyinmao;
 using MoeLib.Jinyinmao.Diagnostics;
 
@@ -27,7 +40,7 @@ namespace Moe.Lib.Jinyinmao
         /// <summary>
         ///     Initializes a new instance of the <see cref="App" /> class.
         /// </summary>
-        protected App()
+        private App()
         {
         }
 
@@ -45,6 +58,15 @@ namespace Moe.Lib.Jinyinmao
                 }
                 return app.host;
             }
+        }
+
+        /// <summary>
+        ///     Determines whether the <see cref="App" /> [is in azure cloud].
+        /// </summary>
+        /// <returns><c>true</c> if the <see cref="App" /> [is in azure cloud]; otherwise, <c>false</c>.</returns>
+        public static bool IsInAzureCloud
+        {
+            get { return app.host.IsInAzureCloud(); }
         }
 
         /// <summary>

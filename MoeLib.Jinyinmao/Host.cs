@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : Host.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-25  12:35 PM
+// ***********************************************************************
+// <copyright file="Host.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace MoeLib.Jinyinmao
 {
@@ -27,6 +41,12 @@ namespace MoeLib.Jinyinmao
         public Guid DeploymentId { get; set; }
 
         /// <summary>
+        ///     Gets or sets the environment.
+        /// </summary>
+        /// <value>The environment.</value>
+        public string Environment { get; set; }
+
+        /// <summary>
         ///     Gets or sets the role.
         /// </summary>
         /// <value>The role.</value>
@@ -37,5 +57,14 @@ namespace MoeLib.Jinyinmao
         /// </summary>
         /// <value>The role instance.</value>
         public string RoleInstance { get; set; }
+
+        /// <summary>
+        ///     Determines whether the <see cref="Host" /> [is in azure cloud].
+        /// </summary>
+        /// <returns><c>true</c> if the <see cref="Host" /> [is in azure cloud]; otherwise, <c>false</c>.</returns>
+        public bool IsInAzureCloud()
+        {
+            return RoleEnvironment.IsAvailable;
+        }
     }
 }
