@@ -4,7 +4,7 @@
 // Created          : 2015-11-20  5:55 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-24  12:26 PM
+// Last Modified On : 2015-11-26  4:10 PM
 // ***********************************************************************
 // <copyright file="WADWebLogger.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -185,7 +185,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 {
                     Task<string> contentTask = request.Content.ReadAsStringAsync();
                     contentTask.Wait();
-                    payload.AddIfNotExist("Content", contentTask.Result);
+                    payload.AddIfNotExist("RequestContent", contentTask.Result);
                 }
             }
 

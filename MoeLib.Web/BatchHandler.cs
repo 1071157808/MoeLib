@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : BatchHandler.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-27  1:02 AM
+// ***********************************************************************
+// <copyright file="BatchHandler.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -82,7 +95,7 @@ namespace Moe.Lib.Web
                 HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod(r.Method), subRequestUri);
 
                 // copy all http headers from request, and do not copy the content headers (do not support POST | PUT)
-                HttpUtils.CopyRequestHeaders(request.Headers, httpRequestMessage.Headers);
+                httpRequestMessage.CopyHeadersFrom(request);
                 return httpRequestMessage;
             });
             return subRequests.ToList();

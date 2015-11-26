@@ -1,10 +1,23 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : HttpUtils.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-27  1:03 AM
+// ***********************************************************************
+// <copyright file="HttpUtils.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using ReflectionMagic;
@@ -22,26 +35,72 @@ namespace Moe.Lib.Web
         private const string HTTP_CONTEXT_BASE_KEY = "MS_HttpContext";
 
         /// <summary>
-        ///     Copies the request headers for batch request.
+        ///     Ases the HTTP request message.
         /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        public static void CopyRequestHeaders(IEnumerable<KeyValuePair<string, IEnumerable<string>>> source, HttpRequestHeaders destination)
+        /// <param name="request">The request.</param>
+        /// <returns>HttpRequestMessage.</returns>
+        public static HttpRequestMessage AsHttpRequestMessage(this HttpRequestBase request)
         {
-            foreach (KeyValuePair<string, IEnumerable<string>> header in source)
+            HttpRequestMessage httpRequest = new HttpRequestMessage(new HttpMethod(request.HttpMethod), request.Url);
+            httpRequest.CopyHeadersFrom(request);
+
+            if (request.InputStream != null)
             {
-                switch (header.Key)
+                httpRequest.Content = new StreamContent(request.InputStream);
+            }
+
+            return httpRequest;
+        }
+
+        /// <summary>
+        ///     Clones an <see cref="HttpWebRequest" /> in order to send it again.
+        /// </summary>
+        /// <param name="message">The message to set headers on.</param>
+        /// <param name="request">The request with headers to clone.</param>
+        public static void CopyHeadersFrom(this HttpRequestMessage message, HttpRequestBase request)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            foreach (string headerName in request.Headers)
+            {
+                string[] headerValues = request.Headers.GetValues(headerName);
+                if (!message.Headers.TryAddWithoutValidation(headerName, headerValues))
                 {
-                    case "User-Agent":
-                        destination.Add(header.Key, "nyanya/1.0");
-                        break;
+                    message.Content.Headers.TryAddWithoutValidation(headerName, headerValues);
+                }
+            }
+        }
 
-                    case "Via":
-                        break;
+        /// <summary>
+        ///     Clones an <see cref="HttpWebRequest" /> in order to send it again.
+        /// </summary>
+        /// <param name="message">The message to set headers on.</param>
+        /// <param name="request">The request with headers to clone.</param>
+        public static void CopyHeadersFrom(this HttpRequestMessage message, HttpRequestMessage request)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
 
-                    default:
-                        destination.Add(header.Key, string.Join(",", header.Value));
-                        break;
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers.AsEnumerable())
+            {
+                if (!message.Headers.TryAddWithoutValidation(header.Key, header.Value))
+                {
+                    message.Content.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
             }
         }

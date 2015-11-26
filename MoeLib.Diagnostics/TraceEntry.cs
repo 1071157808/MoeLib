@@ -1,9 +1,11 @@
-﻿namespace MoeLib.Diagnostics
+﻿using System;
+
+namespace MoeLib.Diagnostics
 {
     /// <summary>
     ///     TraceEntry.
     /// </summary>
-    public class TraceEntry
+    public class TraceEntry : IEquatable<TraceEntry>
     {
         /// <summary>
         ///     Gets or sets the client identifier.
@@ -46,5 +48,77 @@
         /// </summary>
         /// <value>The user identifier.</value>
         public string UserId { get; set; }
+
+        /// <summary>
+        /// Implements the !=.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(TraceEntry left, TraceEntry right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
+        /// Implements the ==.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(TraceEntry left, TraceEntry right)
+        {
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <returns>
+        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// </returns>
+        /// <param name="obj">The object to compare with the current object. </param>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return this.Equals((TraceEntry)obj);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(TraceEntry other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return string.Equals(this.ClientId, other.ClientId) && string.Equals(this.DeviceId, other.DeviceId) && string.Equals(this.RequestId, other.RequestId) && string.Equals(this.SessionId, other.SessionId) && string.Equals(this.SourceIP, other.SourceIP) && string.Equals(this.SourceUserAgent, other.SourceUserAgent) && string.Equals(this.UserId, other.UserId);
+        }
+
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current object.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (this.ClientId != null ? this.ClientId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.DeviceId != null ? this.DeviceId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.RequestId != null ? this.RequestId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.SessionId != null ? this.SessionId.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.SourceIP != null ? this.SourceIP.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.SourceUserAgent != null ? this.SourceUserAgent.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this.UserId != null ? this.UserId.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 }

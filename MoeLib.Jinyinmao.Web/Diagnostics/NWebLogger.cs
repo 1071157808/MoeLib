@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Project          : MoeLib
+// File             : NWebLogger.cs
+// Created          : 2015-11-20  5:55 PM
+//
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-26  4:09 PM
+// ***********************************************************************
+// <copyright file="NWebLogger.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
+//     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
+// </copyright>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -172,7 +185,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 {
                     Task<string> contentTask = request.Content.ReadAsStringAsync();
                     contentTask.Wait();
-                    payload.AddIfNotExist("Content", contentTask.Result);
+                    payload.AddIfNotExist("RequestContent", contentTask.Result);
                 }
             }
 

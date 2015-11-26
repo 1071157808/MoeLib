@@ -1,10 +1,10 @@
 // ***********************************************************************
 // Project          : MoeLib
 // File             : DateTime.cs
-// Created          : 2015-03-14  4:14 PM
+// Created          : 2015-08-13  3:30 PM
 //
-// Last Modified By : Siqi Lu
-// Last Modified On : 2015-08-12  9:03 AM
+// Last Modified By : Siqi Lu(lu.siqi@outlook.com)
+// Last Modified On : 2015-11-26  9:23 PM
 // ***********************************************************************
 // <copyright file="DateTime.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
