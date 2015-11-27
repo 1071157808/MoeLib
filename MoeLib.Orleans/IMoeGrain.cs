@@ -4,7 +4,7 @@
 // Created          : 2015-11-25  1:38 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-25  2:06 PM
+// Last Modified On : 2015-11-27  2:24 PM
 // ***********************************************************************
 // <copyright file="IMoeGrain.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -23,12 +23,6 @@ namespace MoeLib.Orleans
     /// </summary>
     public interface IMoeGrain : IGrain
     {
-        /// <summary>
-        ///     Gets the grain factory.
-        /// </summary>
-        /// <value>The grain factory.</value>
-        IGrainFactory GrainFactory { get; }
-
         /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
         ///     The MoeGrainBase must implement the <c>Orleans.IRemindable</c> interface, and reminders for this MoeGrainBase will be sent to the <c>ReceiveReminder</c> callback method.

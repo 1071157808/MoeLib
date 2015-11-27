@@ -4,7 +4,7 @@
 // Created          : 2015-11-25  1:40 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-25  2:11 PM
+// Last Modified On : 2015-11-27  2:24 PM
 // ***********************************************************************
 // <copyright file="MoeGrain.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -26,15 +26,6 @@ namespace MoeLib.Orleans
         private readonly MoeGrainBase moeGrainBase = new MoeGrainBase();
 
         #region IMoeGrain Members
-
-        /// <summary>
-        ///     Gets the grain factory.
-        /// </summary>
-        /// <value>The grain factory.</value>
-        public new IGrainFactory GrainFactory
-        {
-            get { return this.moeGrainBase.GrainFactory; }
-        }
 
         /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
@@ -74,15 +65,6 @@ namespace MoeLib.Orleans
         private readonly MoeGrainBase moeGrainBase = new MoeGrainBase();
 
         #region IMoeGrain Members
-
-        /// <summary>
-        ///     Gets the grain factory.
-        /// </summary>
-        /// <value>The grain factory.</value>
-        public new IGrainFactory GrainFactory
-        {
-            get { return this.moeGrainBase.GrainFactory; }
-        }
 
         /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
