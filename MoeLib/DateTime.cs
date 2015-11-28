@@ -4,7 +4,7 @@
 // Created          : 2015-08-13  3:30 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-26  9:23 PM
+// Last Modified On : 2015-11-28  12:15 PM
 // ***********************************************************************
 // <copyright file="DateTime.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -29,6 +29,98 @@ namespace Moe.Lib
         public static TimeSpan DurationToNow(this DateTime startDateTime)
         {
             return (DateTime.Now - startDateTime);
+        }
+
+        /// <summary>
+        ///     Determines whether the specified destination is after.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns><c>true</c> if the specified destination is after; otherwise, <c>false</c>.</returns>
+        public static bool IsAfter(this DateTime source, DateTime destination)
+        {
+            return DateTimeUtility.IsAfter(source, destination);
+        }
+
+        /// <summary>
+        ///     Determines whether the specified destination is after.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <param name="redundancy">The redundancy.</param>
+        /// <returns><c>true</c> if the specified destination is after; otherwise, <c>false</c>.</returns>
+        public static bool IsAfter(this DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return DateTimeUtility.IsAfter(source, destination, redundancy);
+        }
+
+        /// <summary>
+        ///     Determines whether [is after or equal] [the specified destination].
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns><c>true</c> if [is after or equal] [the specified destination]; otherwise, <c>false</c>.</returns>
+        public static bool IsAfterOrEqual(this DateTime source, DateTime destination)
+        {
+            return DateTimeUtility.IsAfterOrEqual(source, destination);
+        }
+
+        /// <summary>
+        ///     Determines whether [is after or equal] [the specified destination].
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <param name="redundancy">The redundancy.</param>
+        /// <returns><c>true</c> if [is after or equal] [the specified destination]; otherwise, <c>false</c>.</returns>
+        public static bool IsAfterOrEqual(this DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return DateTimeUtility.IsAfterOrEqual(source, destination, redundancy);
+        }
+
+        /// <summary>
+        ///     Determines whether the specified destination is before.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns><c>true</c> if the specified destination is before; otherwise, <c>false</c>.</returns>
+        public static bool IsBefore(this DateTime source, DateTime destination)
+        {
+            return DateTimeUtility.IsBefore(source, destination);
+        }
+
+        /// <summary>
+        ///     Determines whether the specified destination is before.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <param name="redundancy">The redundancy.</param>
+        /// <returns><c>true</c> if the specified destination is before; otherwise, <c>false</c>.</returns>
+        public static bool IsBefore(this DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return DateTimeUtility.IsBefore(source, destination, redundancy);
+        }
+
+        /// <summary>
+        ///     Determines whether [is before or equal] [the specified destination].
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns><c>true</c> if [is before or equal] [the specified destination]; otherwise, <c>false</c>.</returns>
+        public static bool IsBeforeOrEqual(this DateTime source, DateTime destination)
+        {
+            return DateTimeUtility.IsBeforeOrEqual(source, destination);
+        }
+
+        /// <summary>
+        ///     Determines whether [is before or equal] [the specified destination].
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        /// <param name="redundancy">The redundancy.</param>
+        /// <returns><c>true</c> if [is before or equal] [the specified destination]; otherwise, <c>false</c>.</returns>
+        public static bool IsBeforeOrEqual(this DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return DateTimeUtility.IsBeforeOrEqual(source, destination, redundancy);
         }
 
         /// <summary>
@@ -121,6 +213,11 @@ namespace Moe.Lib
             }
 
             return localTime > MaxValueMinusOneDay ? DateTime.MaxValue : localTime.ToUniversalTime();
+        }
+
+        public static TimeSpan Days(this int value)
+        {
+            return new TimeSpan(value);
         }
 
         /// <summary>
@@ -233,6 +330,51 @@ namespace Moe.Lib
             return GetUnixTimestamp(utc);
         }
 
+        public static TimeSpan Hours(this int value)
+        {
+            return new TimeSpan(value, 0, 0);
+        }
+
+        public static bool IsAfter(DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return source - destination > redundancy;
+        }
+
+        public static bool IsAfter(DateTime source, DateTime destination)
+        {
+            return source > destination;
+        }
+
+        public static bool IsAfterOrEqual(DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return source - destination >= redundancy;
+        }
+
+        public static bool IsAfterOrEqual(DateTime source, DateTime destination)
+        {
+            return source >= destination;
+        }
+
+        public static bool IsBefore(DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return destination - source > redundancy;
+        }
+
+        public static bool IsBefore(DateTime source, DateTime destination)
+        {
+            return destination > source;
+        }
+
+        public static bool IsBeforeOrEqual(DateTime source, DateTime destination)
+        {
+            return destination >= source;
+        }
+
+        public static bool IsBeforeOrEqual(DateTime source, DateTime destination, TimeSpan redundancy)
+        {
+            return destination - source >= redundancy;
+        }
+
         /// <summary>
         ///     Determines whether [is in the day] [the specified date].
         /// </summary>
@@ -242,6 +384,21 @@ namespace Moe.Lib
         public static bool IsInTheDay(this DateTime time, DateTime date)
         {
             return time >= date.Date && time < date.Date.AddDays(1);
+        }
+
+        public static TimeSpan Milliseconds(this int value)
+        {
+            return new TimeSpan(0, 0, 0, 0, value);
+        }
+
+        public static TimeSpan Minutes(this int value)
+        {
+            return new TimeSpan(0, 0, value, 0);
+        }
+
+        public static TimeSpan Seconds(this int value)
+        {
+            return new TimeSpan(0, 0, value);
         }
 
         /// <summary>
