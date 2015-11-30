@@ -4,7 +4,7 @@
 // Created          : 2015-11-20  5:55 PM
 //
 // Last Modified By : Siqi Lu(lu.siqi@outlook.com)
-// Last Modified On : 2015-11-27  2:21 PM
+// Last Modified On : 2015-11-28  6:55 PM
 // ***********************************************************************
 // <copyright file="Program.cs" company="Shanghai Yuyi Mdt InfoTech Ltd.">
 //     Copyright ©  2012-2015 Shanghai Yuyi Mdt InfoTech Ltd. All rights reserved.
@@ -90,9 +90,6 @@ namespace MoeLibLab
 
         private static void Main(string[] args)
         {
-            Console.WriteLine(GuidUtility.GuidShortCode());
-            //App.Initialize().Config();
-            //Logger.Info(DateTime.Now.ToString("F"), "MoeLibLabLog");
         }
     }
 }

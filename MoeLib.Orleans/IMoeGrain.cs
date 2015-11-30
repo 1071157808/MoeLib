@@ -24,6 +24,17 @@ namespace MoeLib.Orleans
     public interface IMoeGrain : IGrain
     {
         /// <summary>
+        ///     String representation of grain's SiloIdentity including type and primary key.
+        /// </summary>
+        string IdentityString { get; }
+
+        /// <summary>
+        ///     A unique identifier for the current silo.
+        ///     There is no semantic content to this string, but it may be useful for logging.
+        /// </summary>
+        string RuntimeIdentity { get; }
+
+        /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
         ///     The MoeGrainBase must implement the <c>Orleans.IRemindable</c> interface, and reminders for this MoeGrainBase will be sent to the <c>ReceiveReminder</c> callback method.
         ///     If the current MoeGrainBase is deactivated when the timer fires, a new activation of this MoeGrainBase will be created to receive this reminder.

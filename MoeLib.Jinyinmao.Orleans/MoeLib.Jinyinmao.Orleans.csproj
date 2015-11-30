@@ -58,7 +58,7 @@
     <Compile Include="IJinyinmaoGrain.cs" />
     <Compile Include="JinyinmaoGrain.cs" />
     <Compile Include="JinyinmaoGrainBase.cs" />
-    <Compile Include="JinyinmaoGrainBaseExtensions.cs" />
+    <Compile Include="JinyinmaoGrainExtensions.cs" />
     <Compile Include="GrainExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,10 +66,6 @@
     <ProjectReference Include="..\MoeLib.Diagnostics\MoeLib.Diagnostics.csproj">
       <Project>{898e4b30-9475-43e4-ad53-393c480654fe}</Project>
       <Name>MoeLib.Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MoeLib.Jinyinmao.Web\MoeLib.Jinyinmao.Web.csproj">
-      <Project>{0C319208-DF3A-4BDF-9662-20985F7D2FE5}</Project>
-      <Name>MoeLib.Jinyinmao.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\MoeLib.Jinyinmao\MoeLib.Jinyinmao.csproj">
       <Project>{67cdcf1a-50df-469a-a37f-ccb059151ec3}</Project>

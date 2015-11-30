@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using MoeLib.Diagnostics;
-using MoeLib.Orleans;
 
 namespace MoeLib.Jinyinmao.Orleans.Diagnostics
 {
@@ -14,79 +13,79 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Logs the message at the <c>Critical</c> level.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Critical(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Critical(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
 
         /// <summary>
         ///     Logs the message at the <c>Error</c> level.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Error(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Error(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
 
         /// <summary>
         ///     Logs the message at the <c>Info</c> level.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Info(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Info(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
 
         /// <summary>
         ///     Logs the message at the specified level.
         /// </summary>
         /// <param name="level">The level.</param>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Log(int level, string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Log(int level, string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
 
         /// <summary>
         ///     Logs the message at the <c>Verbose</c> level.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Verbose(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Verbose(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
 
         /// <summary>
         ///     Logs the message at the <c>Warning</c> level.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        void Warning(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
+        void Warning(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null);
     }
 }

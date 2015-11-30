@@ -32,16 +32,16 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Criticals the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Critical(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Critical(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
-            MessageContent logMessageContent = BuildLogMessageContent(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            MessageContent logMessageContent = BuildLogMessageContent(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             Trace.TraceError(logMessageContent.ToJson());
         }
 
@@ -49,16 +49,16 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Error(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Error(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
-            MessageContent logMessageContent = BuildLogMessageContent(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            MessageContent logMessageContent = BuildLogMessageContent(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             Trace.TraceError(logMessageContent.ToJson());
         }
 
@@ -66,16 +66,16 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Informations the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Info(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Info(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
-            MessageContent logMessageContent = BuildLogMessageContent(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            MessageContent logMessageContent = BuildLogMessageContent(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             Trace.TraceInformation(logMessageContent.ToJson());
         }
 
@@ -84,39 +84,39 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         /// </summary>
         /// <param name="level">The level.</param>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Log(int level, string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Log(int level, string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             switch (level)
             {
                 case 1:
-                    this.Critical(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Critical(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
 
                 case 2:
-                    this.Error(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Error(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
 
                 case 3:
-                    this.Warning(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Warning(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
 
                 case 4:
-                    this.Info(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Info(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
 
                 case 5:
-                    this.Verbose(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Verbose(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
 
                 default:
-                    this.Verbose(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+                    this.Verbose(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
                     break;
             }
         }
@@ -125,14 +125,14 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Verboses the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Verbose(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Verbose(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
         }
 
@@ -140,16 +140,16 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
         ///     Warnings the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="moeGrain">The MoeGrain.</param>
+        /// <param name="jinyinmaoGrain"></param>
         /// <param name="tag">The tag.</param>
         /// <param name="errorCode">The error code.</param>
         /// <param name="errorCodeMessage">The error code message.</param>
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public void Warning(string message, MoeGrain moeGrain, string tag = "None", ulong errorCode = 0, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public void Warning(string message, IJinyinmaoGrain jinyinmaoGrain, string tag = "None", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
-            MessageContent logMessageContent = BuildLogMessageContent(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            MessageContent logMessageContent = BuildLogMessageContent(message, jinyinmaoGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
             Trace.TraceWarning(logMessageContent.ToJson());
         }
 
@@ -181,7 +181,7 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
                 UserId = userId
             };
 
-            this.Critical(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            this.Critical(message, (IJinyinmaoGrain)moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
                 UserId = userId
             };
 
-            this.Error(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            this.Error(message, (IJinyinmaoGrain)moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
                 UserId = userId
             };
 
-            this.Info(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            this.Info(message, (IJinyinmaoGrain)moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
@@ -314,7 +314,7 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
                 UserId = userId
             };
 
-            this.Verbose(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            this.Verbose(message, (IJinyinmaoGrain)moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
         /// <summary>
@@ -343,10 +343,10 @@ namespace MoeLib.Jinyinmao.Orleans.Diagnostics
                 UserId = userId
             };
 
-            this.Warning(message, moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
+            this.Warning(message, (IJinyinmaoGrain)moeGrain, tag, errorCode, errorCodeMessage, traceEntry, exception, payload);
         }
 
-        private static MessageContent BuildLogMessageContent(string message, MoeGrain moeGrain, string tag, ulong errorCode, string errorCodeMessage, TraceEntry traceEntry, Exception exception, Dictionary<string, object> payload)
+        private static MessageContent BuildLogMessageContent(string message, IMoeGrain moeGrain, string tag, ulong errorCode, string errorCodeMessage, TraceEntry traceEntry, Exception exception, Dictionary<string, object> payload)
         {
             if (moeGrain != null)
             {

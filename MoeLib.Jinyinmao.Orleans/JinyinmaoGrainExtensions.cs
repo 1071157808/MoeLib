@@ -34,7 +34,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Critical(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Critical(this IJinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
@@ -50,7 +50,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Critical(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
+        public static void Critical(this IJinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
             jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
@@ -66,7 +66,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Error(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Error(this IJinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
@@ -82,7 +82,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Error(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
+        public static void Error(this IJinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
             jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
@@ -98,7 +98,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Info(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Info(this IJinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
@@ -114,7 +114,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Info(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
+        public static void Info(this IJinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
             jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
@@ -130,7 +130,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Verbose(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Verbose(this IJinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
@@ -146,7 +146,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Verbose(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
+        public static void Verbose(this IJinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
             jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }
@@ -162,7 +162,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="traceEntry">The trace entry.</param>
         /// <param name="exception">The exception.</param>
         /// <param name="payload">The payload.</param>
-        public static void Warning(this JinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
+        public static void Warning(this IJinyinmaoGrain jinyinmaoGrain, string message, string tag = "Orleans Grain Log", ulong errorCode = 0UL, string errorCodeMessage = "", TraceEntry traceEntry = null, Exception exception = null, Dictionary<string, object> payload = null)
         {
             if (traceEntry == null)
             {
@@ -178,7 +178,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <param name="jinyinmaoGrain">The jinyinmaoGrain.</param>
         /// <param name="message">The message.</param>
         /// <param name="exception">The exception.</param>
-        public static void Warning(this JinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
+        public static void Warning(this IJinyinmaoGrain jinyinmaoGrain, string message, Exception exception)
         {
             jinyinmaoGrain.Critical(message, "Orleans Grain Log", 0UL, "", null, exception);
         }

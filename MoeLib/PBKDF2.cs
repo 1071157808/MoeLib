@@ -12,6 +12,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
@@ -175,7 +176,7 @@ namespace Moe.Lib
         /// <param name="buf">The buf.</param>
         /// <param name="offset">The offset.</param>
         /// <exception cref="System.OverflowException"></exception>
-        private static void IncrementBigEndianIndex(byte[] buf, int offset)
+        private static void IncrementBigEndianIndex(IList<byte> buf, int offset)
         {
             // treat the four bytes starting at buf[offset]
             // as a big endian integer, and increment it
@@ -197,7 +198,7 @@ namespace Moe.Lib
         /// <param name="cb">The cb.</param>
         /// <param name="dest">The dest.</param>
         /// <param name="destOffset">The dest offset.</param>
-        private static void XorByteArray(byte[] src, int srcOffset, int cb, byte[] dest, int destOffset)
+        private static void XorByteArray(IReadOnlyList<byte> src, int srcOffset, int cb, IList<byte> dest, int destOffset)
         {
             int end = checked(srcOffset + cb);
             while (srcOffset != end)
