@@ -12,7 +12,7 @@
 // ***********************************************************************
 
 using System.Web.Mvc;
-using MoeLib.Jinyinmao.Web.Diagnostics;
+using MoeLib.Jinyinmao.Mvc.Diagnostics;
 
 namespace MoeLibMvcWebLab
 {

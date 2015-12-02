@@ -193,6 +193,10 @@
       <Project>{a0f7f1df-316c-42cc-b036-145f16022c8e}</Project>
       <Name>MoeLib.Jinyinmao.Azure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Mvc\MoeLib.Jinyinmao.Mvc.csproj">
+      <Project>{cd0d8839-9bd6-4778-b7a9-4f4e471a1cc3}</Project>
+      <Name>MoeLib.Jinyinmao.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoeLib.Jinyinmao.Web\MoeLib.Jinyinmao.Web.csproj">
       <Project>{0c319208-df3a-4bdf-9662-20985f7d2fe5}</Project>
       <Name>MoeLib.Jinyinmao.Web</Name>
@@ -213,6 +217,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using Microsoft.Owin.Security.DataProtection;
-using Moe.Lib.Jinyinmao;
 
 namespace Jinyinmao.AuthManager.Api.Auth
 {
@@ -17,10 +16,11 @@ namespace Jinyinmao.AuthManager.Api.Auth
         /// <summary>
         ///     Initializes a new instance of the <see cref="JYMDataProtector" /> class.
         /// </summary>
-        public JYMDataProtector()
+        /// <param name="key">The cryptographic key.</param>
+        public JYMDataProtector(string key)
         {
             this.rsaCryptoServiceProvider = new RSACryptoServiceProvider();
-            this.rsaCryptoServiceProvider.FromXmlString(App.Host.AppKeys);
+            this.rsaCryptoServiceProvider.FromXmlString(key);
         }
 
         #region IDataProtector Members

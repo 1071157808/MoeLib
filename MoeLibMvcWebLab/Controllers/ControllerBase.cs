@@ -11,7 +11,7 @@
 // </copyright>
 // ***********************************************************************
 
-using MoeLib.Jinyinmao.Web;
+using MoeLib.Jinyinmao.Mvc;
 
 namespace MoeLibMvcWebLab.Controllers
 {
