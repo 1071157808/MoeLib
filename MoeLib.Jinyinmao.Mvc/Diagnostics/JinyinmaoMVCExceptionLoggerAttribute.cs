@@ -17,8 +17,10 @@ using System.Web.Mvc;
 using Moe.Lib.Jinyinmao;
 using Moe.Lib.Web;
 using MoeLib.Diagnostics;
+using MoeLib.Jinyinmao.Web;
+using MoeLib.Jinyinmao.Web.Diagnostics;
 
-namespace MoeLib.Jinyinmao.Web.Diagnostics
+namespace MoeLib.Jinyinmao.Mvc.Diagnostics
 {
     /// <summary>
     ///     JinyinmaoMVCExceptionLoggerAttribute.

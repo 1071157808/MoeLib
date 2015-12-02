@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,19 +9,24 @@ using System.Web.Http.Filters;
 namespace MoeLib.Jinyinmao.Web.Filters
 {
     /// <summary>
-    ///     Class HeaderFileterAttribute.
+    ///     Class AuthorizationHeaderRequiredAttribute.
     /// </summary>
-    public class HeaderFileterAttribute : ActionFilterAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class AuthorizationHeaderRequiredAttribute : ActionFilterAttribute
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Web.Http.Filters.ActionFilterAttribute" /> class.
         /// </summary>
-        public HeaderFileterAttribute(string schemeName)
+        public AuthorizationHeaderRequiredAttribute(string schemeName)
         {
             this.SchemeName = schemeName;
         }
 
-        public string SchemeName { get; set; }
+        /// <summary>
+        ///     Gets or sets the name of the scheme.
+        /// </summary>
+        /// <value>The name of the scheme.</value>
+        public string SchemeName { get; }
 
         /// <summary>
         ///     Occurs before the action method is invoked.
@@ -28,18 +34,16 @@ namespace MoeLib.Jinyinmao.Web.Filters
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (actionContext.Request.Headers.Authorization.Scheme != this.SchemeName
-                && this.CheckParameter(actionContext.Request.Headers.Authorization.Parameter))
+            if (!string.Equals(actionContext.Request.Headers.Authorization.Scheme, this.SchemeName, StringComparison.OrdinalIgnoreCase))
             {
-                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Forbidden, " ");
-                actionContext.Response.Headers.Add("WWW-Authenticate", "Basic relam=jinyinmao.com.cn");
-                return;
+                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
+                actionContext.Response.Headers.Add("WWW-Authenticate", $"{this.SchemeName} relam=jinyinmao.com.cn");
             }
             base.OnActionExecuting(actionContext);
         }
 
         /// <summary>
-        /// Checks the parameter.
+        ///     Checks the parameter.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLib", "MoeLib\MoeLib.csproj", "{03528BB2-032E-486F-BCD0-EA8B69C477DC}"
 EndProject
@@ -46,6 +46,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLib.Jinyinmao.Orleans", "MoeLib.Jinyinmao.Orleans\MoeLib.Jinyinmao.Orleans.csproj", "{EFD330CA-D6F3-4C8A-81DD-F47CCC4DFC6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLibMvcWebLab", "MoeLibMvcWebLab\MoeLibMvcWebLab.csproj", "{FF9533C3-9376-444F-A61B-C4A0D78C093D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLib.Jinyinmao.Mvc", "MoeLib.Jinyinmao.Mvc\MoeLib.Jinyinmao.Mvc.csproj", "{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +123,10 @@ Global
 		{FF9533C3-9376-444F-A61B-C4A0D78C093D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF9533C3-9376-444F-A61B-C4A0D78C093D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF9533C3-9376-444F-A61B-C4A0D78C093D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +149,7 @@ Global
 		{97F3F00E-B650-481F-A4F6-A8BB419FDEFB} = {2C1B7D13-4233-43B2-8045-BF95FE584171}
 		{EFD330CA-D6F3-4C8A-81DD-F47CCC4DFC6A} = {7FBF66ED-63A7-4F6E-9EEB-0A4D0D699BBC}
 		{FF9533C3-9376-444F-A61B-C4A0D78C093D} = {2FC7C249-BF06-4100-9A53-A13F34ED891A}
+		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3} = {7FBF66ED-63A7-4F6E-9EEB-0A4D0D699BBC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
