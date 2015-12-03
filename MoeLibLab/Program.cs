@@ -90,6 +90,18 @@ namespace MoeLibLab
 
         private static void Main(string[] args)
         {
+            string s = "Hello ==";
+            byte[] a = s.GetBytesOfUTF8();
+            Console.WriteLine(a.Utf8());
+            string a1 = a.ToBase64String();
+            Console.WriteLine(a1);
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+            byte[] b = rsa.SignData(a, CryptoConfig.MapNameToOID("MD5"));
+            Console.WriteLine(b.ToBase64String());
+            List<byte> c = new List<byte>(a);
+            c.AddRange(":".ToBase64Bytes());
+            c.AddRange(b);
+            Console.WriteLine(c.ToArray().ToBase64String());
         }
     }
 }

@@ -12,7 +12,6 @@
 // ***********************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Moe.Lib
@@ -27,10 +26,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static string Ascii(this byte value)
+        public static string ASCII(this byte value)
         {
-            return ByteUtility.Ascii(value);
+            return ByteUtility.ASCII(value);
         }
 
         /// <summary>
@@ -38,10 +36,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static string Ascii(this byte[] value)
+        public static string ASCII(this byte[] value)
         {
-            return ByteUtility.Ascii(value);
+            return ByteUtility.ASCII(value);
         }
 
         /// <summary>
@@ -49,10 +46,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static byte[] GetBytesOfAscii(this string value)
+        public static byte[] GetBytesOfASCII(this string value)
         {
-            return ByteUtility.GetBytesOfAscii(value);
+            return ByteUtility.GetBytesOfASCII(value);
         }
 
         /// <summary>
@@ -70,9 +66,9 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        public static byte[] GetBytesOfUtf8(this string value)
+        public static byte[] GetBytesOfUTF8(this string value)
         {
-            return ByteUtility.GetBytesOfUtf8(value);
+            return ByteUtility.GetBytesOfUTF8(value);
         }
 
         /// <summary>
@@ -126,8 +122,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static string Ascii(byte value)
+        public static string ASCII(byte value)
         {
             return Encoding.ASCII.GetString(new[] { value });
         }
@@ -137,8 +132,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static string Ascii(byte[] value)
+        public static string ASCII(byte[] value)
         {
             if (value == null)
                 return null;
@@ -151,8 +145,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ascii")]
-        public static byte[] GetBytesOfAscii(string value)
+        public static byte[] GetBytesOfASCII(string value)
         {
             return Encoding.ASCII.GetBytes(value);
         }
@@ -172,7 +165,7 @@ namespace Moe.Lib
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.Byte[].</returns>
-        public static byte[] GetBytesOfUtf8(string value)
+        public static byte[] GetBytesOfUTF8(string value)
         {
             return Encoding.UTF8.GetBytes(value);
         }

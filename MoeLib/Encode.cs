@@ -1,4 +1,4 @@
-// ***********************************************************************
+﻿// ***********************************************************************
 // Project          : MoeLib
 // File             : Encode.cs
 // Created          : 2015-08-13  3:30 PM
@@ -77,31 +77,6 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Decode the Base64 encoded string into a string using Utf8.
-        /// </summary>
-        /// <param name="value">The string to decode.</param>
-        /// <returns>System.String.</returns>
-        public static string Base64Decode(string value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            return Convert.FromBase64String(value).Utf8();
-        }
-
-        /// <summary>
-        ///     Encode the given string into a Base64 string using Utf8.
-        /// </summary>
-        /// <param name="value">The string to encode.</param>
-        /// <returns>System.String.</returns>
-        public static string Base64Encode(string value)
-        {
-            return Convert.ToBase64String(value.GetBytesOfUtf8());
-        }
-
-        /// <summary>
         ///     Decode the HTML encoded string into a string.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -134,6 +109,35 @@ namespace Moe.Lib
         }
 
         /// <summary>
+        ///     Converts the specified string, which encodes binary data as base-64 digits, to an equivalent 8-bit unsigned integer array.
+        /// </summary>
+        /// <returns>
+        ///     An array of 8-bit unsigned integers that is equivalent to <paramref name="value" />.
+        /// </returns>
+        /// <param name="value">The string to convert. </param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null. </exception>
+        /// <exception cref="T:System.FormatException">The length of <paramref name="value" />, ignoring white-space characters, is not zero or a multiple of 4. -or-The format of <paramref name="value" /> is invalid. <paramref name="value" /> contains a non-base-64 character, more than two padding characters, or a non-white space-character among the padding characters.</exception>
+        /// <filterpriority>1</filterpriority>
+        public static byte[] ToBase64Bytes(this string value)
+        {
+            return Convert.FromBase64String(value);
+        }
+
+        /// <summary>
+        ///     Converts an array of 8-bit unsigned integers to its equivalent string representation that is encoded with base-64 digits.
+        /// </summary>
+        /// <returns>
+        ///     The string representation, in base 64, of the contents of <paramref name="value" />.
+        /// </returns>
+        /// <param name="value">An array of 8-bit unsigned integers. </param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="value" /> is null. </exception>
+        /// <filterpriority>1</filterpriority>
+        public static string ToBase64String(this byte[] value)
+        {
+            return Convert.ToBase64String(value);
+        }
+
+        /// <summary>
         ///     Return the URL decoded from the string value.
         /// </summary>
         /// <param name="value">The string value.</param>
@@ -162,7 +166,7 @@ namespace Moe.Lib
                 throw new ArgumentException(@"String to encode can not be null or empty.", nameof(value));
             }
 
-            byte[] bytes = value.GetBytesOfUtf8();
+            byte[] bytes = value.GetBytesOfUTF8();
             byte[] encodedBytes = HttpEncoder.UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */);
             return new Uri(encodedBytes.Utf8());
         }

@@ -277,7 +277,7 @@ namespace Moe.Lib
         }
 
         /// <summary>
-        ///     Gets the UTC from the js date string.
+        ///     Froms the unix timestamp.
         /// </summary>
         /// <param name="timestamp">The time stamp.</param>
         /// <returns>DateTime.</returns>

@@ -33,7 +33,7 @@ namespace Moe.Lib
         {
             string stringToHash = payload + salt;
             SHA256 sha256 = SHA256.Create();
-            byte[] hashBytes = sha256.ComputeHash(stringToHash.GetBytesOfUtf8());
+            byte[] hashBytes = sha256.ComputeHash(stringToHash.GetBytesOfUTF8());
             StringBuilder hashString = new StringBuilder();
             foreach (byte b in hashBytes)
                 hashString.Append(b.ToString("x2"));

@@ -173,7 +173,6 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
 
                 if (request.Headers != null)
                 {
-                    payload.AddIfNotExist("Authorization", request.Headers.Authorization?.ToString());
                     payload.AddIfNotExist("Referrer", request.Headers.Referrer?.ToString());
                     payload.AddIfNotExist("UserAgent", request.Headers.UserAgent?.ToString());
 
@@ -185,7 +184,10 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 {
                     Task<string> contentTask = request.Content.ReadAsStringAsync();
                     contentTask.Wait();
-                    payload.AddIfNotExist("RequestContent", contentTask.Result);
+                    if (!contentTask.Result.Contains("password", StringComparison.OrdinalIgnoreCase))
+                    {
+                        payload.AddIfNotExist("RequestContent", contentTask.Result);
+                    }
                 }
             }
 
