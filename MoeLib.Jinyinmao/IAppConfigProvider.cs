@@ -33,10 +33,10 @@ namespace MoeLib.Jinyinmao
         Guid GetDeploymentIdConfig();
 
         /// <summary>
-        ///     Gets the environment.
+        ///     Gets the environment configuration.
         /// </summary>
         /// <returns>System.String.</returns>
-        string GetEnvironment();
+        string GetEnvironmentConfig();
 
         /// <summary>
         ///     Gets the role configuration.

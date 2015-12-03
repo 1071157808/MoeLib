@@ -52,7 +52,7 @@ namespace MoeLib.Jinyinmao.Azure
         ///     Gets the environment.
         /// </summary>
         /// <returns>System.String.</returns>
-        public override string GetEnvironment()
+        public override string GetEnvironmentConfig()
         {
             string config = CloudConfigurationManager.GetSetting("Env");
             return config.IsNullOrEmpty() ? "DEV" : config;

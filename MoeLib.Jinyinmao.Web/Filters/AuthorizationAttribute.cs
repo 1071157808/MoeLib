@@ -32,7 +32,7 @@ namespace MoeLib.Jinyinmao.Web.Filters
         /// <param name="actionContext">The action context.</param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (!string.Equals(actionContext.Request.Headers.Authorization.Scheme, this.SchemeName, StringComparison.OrdinalIgnoreCase))
+            if (actionContext.Request.Headers.Authorization?.Scheme != null && !string.Equals(actionContext.Request.Headers.Authorization.Scheme, this.SchemeName, StringComparison.OrdinalIgnoreCase))
             {
                 actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "");
                 actionContext.Response.Headers.Add("WWW-Authenticate", $"{this.SchemeName} relam=jinyinmao.com.cn");

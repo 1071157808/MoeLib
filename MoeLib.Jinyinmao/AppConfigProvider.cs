@@ -52,7 +52,7 @@ namespace MoeLib.Jinyinmao
         ///     Gets the environment.
         /// </summary>
         /// <returns>System.String.</returns>
-        public virtual string GetEnvironment()
+        public virtual string GetEnvironmentConfig()
         {
             string config = ConfigurationManager.AppSettings.Get("Env");
             return config.IsNullOrEmpty() ? "DEV" : config;

@@ -29,6 +29,12 @@ namespace MoeLib.Jinyinmao
         }
 
         /// <summary>
+        ///     Gets or sets the application identifier.
+        /// </summary>
+        /// <value>The application identifier.</value>
+        public string AppId { get; set; }
+
+        /// <summary>
         ///     Gets or sets the application keys.
         /// </summary>
         /// <value>The application keys.</value>

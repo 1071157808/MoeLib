@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using Moe.Lib;
 using MoeLib.Jinyinmao.Web.Auth;
 
 namespace MoeLib.Jinyinmao.Web.Handlers
@@ -43,7 +42,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request.Headers.Authorization.Scheme.IsNotNullOrEmpty() &&
+            if (request.Headers.Authorization?.Scheme != null &&
                 string.Equals(request.Headers.Authorization.Scheme, JYMAuthScheme.Bearer, StringComparison.OrdinalIgnoreCase))
             {
                 this.Identity = this.accessTokenProtector.Unprotect(request.Headers.Authorization.Parameter);
@@ -51,7 +50,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            if (request.Headers.Authorization.Scheme.IsNotNullOrEmpty() &&
+            if (request.Headers.Authorization?.Scheme != null &&
                 !string.Equals(request.Headers.Authorization.Scheme, JYMAuthScheme.Bearer, StringComparison.OrdinalIgnoreCase)
                 && this.Identity != null && this.Identity.IsAuthenticated)
             {
