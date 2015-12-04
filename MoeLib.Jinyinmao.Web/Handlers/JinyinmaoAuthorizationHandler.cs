@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MoeLib.Jinyinmao.Web.Auth;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using MoeLib.Jinyinmao.Web.Auth;
 
 namespace MoeLib.Jinyinmao.Web.Handlers
 {
@@ -54,7 +54,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
                 !string.Equals(request.Headers.Authorization.Scheme, JYMAuthScheme.Bearer, StringComparison.OrdinalIgnoreCase)
                 && this.Identity != null && this.Identity.IsAuthenticated)
             {
-                response = request.CreateResponse(HttpStatusCode.OK, new { access_token = this.accessTokenProtector.Protect(this.Identity) });
+                response.Content = request.CreateResponse(HttpStatusCode.OK, new { access_token = this.accessTokenProtector.Protect(this.Identity) }).Content;
             }
 
             return response;
