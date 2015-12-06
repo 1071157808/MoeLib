@@ -24,7 +24,7 @@ namespace MoeLibMvcWebLab
     {
         protected void Application_Start()
         {
-            App.Initialize().ConfigWithAzure();
+            App.Initialize().ConfigForAzure();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

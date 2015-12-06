@@ -80,7 +80,7 @@ Where:
             {
                 #region 日志配置
 
-                App.Initialize().ConfigWithAzure();
+                App.Initialize().ConfigForAzure();
 
                 TraceLogger.LogConsumers.Add(new JinyinmaoSiloTraceWriter());
 

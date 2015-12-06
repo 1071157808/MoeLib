@@ -9,7 +9,7 @@ namespace MoeLibWebLab
     {
         protected void Application_Start()
         {
-            App.Initialize().ConfigWithAzure();
+            App.Initialize().ConfigForAzure();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

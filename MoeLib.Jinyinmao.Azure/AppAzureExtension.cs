@@ -8,11 +8,11 @@ namespace MoeLib.Jinyinmao.Azure
     public static class AppAzureExtension
     {
         /// <summary>
-        ///     Configurations the with azure.
+        ///     Configurations for azure.
         /// </summary>
         /// <param name="app">The application.</param>
         /// <returns>App.</returns>
-        public static App ConfigWithAzure(this App app)
+        public static App ConfigForAzure(this App app)
         {
             return app.Config(new AzureAppConfigProvider());
         }
