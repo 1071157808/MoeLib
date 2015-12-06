@@ -58,6 +58,10 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AppConfigProvider.cs" />
+    <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="Config\FileConfigProvider.cs" />
+    <Compile Include="Config\GovernmentServerConfigProvider.cs" />
+    <Compile Include="Config\IConfigProvider.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IAppConfigProvider.cs" />
     <Compile Include="Diagnostics\NLogger.cs" />

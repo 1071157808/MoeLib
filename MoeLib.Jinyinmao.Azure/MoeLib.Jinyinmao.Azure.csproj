@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AppAzureExtension.cs" />
     <Compile Include="AzureAppConfigProvider.cs" />
+    <Compile Include="AzureConfigProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
