@@ -52,7 +52,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 { "ResponseStatusCode", response.StatusCode }
             };
 
-            if (response.Content != null)
+            if (response.Content != null && response.Content.Headers.ContentType.MediaType.StartsWith("application", StringComparison.OrdinalIgnoreCase))
             {
                 payload.Add("ResponseContent", (await response.Content.ReadAsStringAsync()).GetFirst(30000));
             }
