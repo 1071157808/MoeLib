@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Configuration;
-using Moe.Lib;
 
-namespace MoeLib.Jinyinmao.Config
+namespace MoeLib.Jinyinmao.Configs
 {
     /// <summary>
-    ///     FileConfigProvider.
+    ///     GovernmentServerConfigProvider.
     /// </summary>
-    /// <typeparam name="TConfig">The type of the configuration.</typeparam>
-    public class FileConfigProvider<TConfig> : IConfigProvider<TConfig> where TConfig : class, new()
+    /// <typeparam name="TConfig">The type of the t configuration.</typeparam>
+    public class GovernmentServerConfigProvider<TConfig> : IConfigProvider<TConfig> where TConfig : class, new()
     {
         #region IConfigProvider<TConfig> Members
 
@@ -16,33 +14,30 @@ namespace MoeLib.Jinyinmao.Config
         ///     Gets the configuration.
         /// </summary>
         /// <returns>TConfig.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public TConfig GetConfig()
         {
-            return this.GetConfigJsonString().FromJson<TConfig>();
+            throw new NotImplementedException();
         }
 
         /// <summary>
         ///     Gets the configuration json string.
         /// </summary>
         /// <returns>System.String.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public string GetConfigJsonString()
         {
-            string config = ConfigurationManager.AppSettings.Get("Configs");
-            if (config.IsNullOrEmpty())
-            {
-                throw new ConfigurationErrorsException("Missing config of \"Configs\"");
-            }
-
-            return config;
+            throw new NotImplementedException();
         }
 
         /// <summary>
         ///     Gets the type of the configuration.
         /// </summary>
         /// <returns>Type.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public Type GetConfigType()
         {
-            return typeof(TConfig);
+            throw new NotImplementedException();
         }
 
         #endregion IConfigProvider<TConfig> Members

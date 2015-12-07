@@ -14,8 +14,9 @@
 using System;
 using System.Configuration;
 using MoeLib.Jinyinmao;
-using MoeLib.Jinyinmao.Config;
+using MoeLib.Jinyinmao.Configs;
 using MoeLib.Jinyinmao.Diagnostics;
+using MoeLib.Jinyinmao.Resources;
 
 namespace Moe.Lib.Jinyinmao
 {
@@ -43,6 +44,11 @@ namespace Moe.Lib.Jinyinmao
         ///     The log manager
         /// </summary>
         private LogManager logManager;
+
+        /// <summary>
+        ///     The resource manager
+        /// </summary>
+        private ResourcesManager resourceManager;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="App" /> class.
@@ -115,6 +121,29 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
+        ///     Gets the resource manager.
+        /// </summary>
+        /// <value>The resource manager.</value>
+        /// <exception cref="System.InvalidOperationException">The app has not configurated the ResourceManager.</exception>
+        public static ResourcesManager ResourceManager
+        {
+            get
+            {
+                if (!app.Initialized || !app.Configurated)
+                {
+                    ThrowInvalidOperationException();
+                }
+
+                if (app.resourceManager == null)
+                {
+                    throw new InvalidOperationException("The app has not configurated the ResourceManager.");
+                }
+
+                return app.resourceManager;
+            }
+        }
+
+        /// <summary>
         ///     Gets a value indicating whether this <see cref="App" /> is configurated.
         /// </summary>
         /// <value><c>true</c> if configurated; otherwise, <c>false</c>.</value>
@@ -149,8 +178,11 @@ namespace Moe.Lib.Jinyinmao
         public static App Initialize()
         {
             app.host = new Host();
-            app.configManager = null;
             app.logManager = new LogManager();
+
+            app.configManager = null;
+            app.resourceManager = null;
+
             app.Initialized = true;
             return app;
         }

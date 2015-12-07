@@ -58,16 +58,18 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AppConfigProvider.cs" />
-    <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Config\FileConfigProvider.cs" />
-    <Compile Include="Config\GovernmentServerConfigProvider.cs" />
-    <Compile Include="Config\IConfigProvider.cs" />
+    <Compile Include="Configs\ConfigManager.cs" />
+    <Compile Include="Configs\FileConfigProvider.cs" />
+    <Compile Include="Configs\GovernmentServerConfigProvider.cs" />
+    <Compile Include="Configs\IConfigProvider.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IAppConfigProvider.cs" />
     <Compile Include="Diagnostics\NLogger.cs" />
     <Compile Include="Diagnostics\LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Diagnostics\WADLogger.cs" />
+    <Compile Include="Resources\IResourcesProvider.cs" />
+    <Compile Include="Resources\ResourcesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

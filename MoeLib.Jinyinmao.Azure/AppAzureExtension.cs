@@ -1,5 +1,5 @@
 ﻿using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Config;
+using MoeLib.Jinyinmao.Configs;
 
 namespace MoeLib.Jinyinmao.Azure
 {

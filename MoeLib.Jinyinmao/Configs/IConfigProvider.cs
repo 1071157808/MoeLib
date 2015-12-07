@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoeLib.Jinyinmao.Config
+namespace MoeLib.Jinyinmao.Configs
 {
     /// <summary>
     ///     Interface IConfigProvider

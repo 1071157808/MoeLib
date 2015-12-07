@@ -1440,7 +1440,7 @@ namespace Moe.Lib
         /// <returns>System.String.</returns>
         public static string MD5Hash(string stringToHash)
         {
-            return Lib.MD5Hash.ComputeMD5Hash(stringToHash);
+            return Lib.MD5Hash.ComputeMD5HashString(stringToHash);
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 using System.Configuration;
 using Microsoft.Azure;
 using Moe.Lib;
-using MoeLib.Jinyinmao.Config;
+using MoeLib.Jinyinmao.Configs;
 
 namespace MoeLib.Jinyinmao.Azure
 {

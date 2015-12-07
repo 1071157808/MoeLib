@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Moe.Lib;
 
-namespace MoeLib.Jinyinmao.Config
+namespace MoeLib.Jinyinmao.Configs
 {
     /// <summary>
     ///     ConfigManager.
@@ -34,7 +34,7 @@ namespace MoeLib.Jinyinmao.Config
         /// <returns>TConfig.</returns>
         public TConfig GetConfig()
         {
-            if (this.Config == null || this.IsConfigExpired())
+            if (this.Config == null)
             {
                 this.RefreshConfig();
             }
@@ -101,7 +101,7 @@ namespace MoeLib.Jinyinmao.Config
         /// </summary>
         protected ConfigManager()
         {
-            this.RefreshInterval = 20.Minutes();
+            this.RefreshInterval = 5.Minutes();
         }
 
         /// <summary>
@@ -111,7 +111,6 @@ namespace MoeLib.Jinyinmao.Config
         protected ConfigManager(TimeSpan refreshInterval)
         {
             this.RefreshInterval = refreshInterval;
-            this.ConfigValidityPeriod = new TimeSpan(refreshInterval.Ticks * 3);
         }
 
         /// <summary>
@@ -122,25 +121,10 @@ namespace MoeLib.Jinyinmao.Config
         public DateTime ConfigRefreshTime { get; protected set; }
 
         /// <summary>
-        ///     Gets the configuration validity period.
-        /// </summary>
-        /// <value>The configuration validity period.</value>
-        public TimeSpan ConfigValidityPeriod { get; }
-
-        /// <summary>
         ///     Gets or sets the refresh interval.
         /// </summary>
         /// <value>The refresh interval.</value>
         public TimeSpan RefreshInterval { get; }
-
-        /// <summary>
-        ///     Determines whether [is configuration expired].
-        /// </summary>
-        /// <returns><c>true</c> if [is configuration expired]; otherwise, <c>false</c>.</returns>
-        protected bool IsConfigExpired()
-        {
-            return this.ConfigRefreshTime.Add(this.ConfigValidityPeriod) < DateTime.UtcNow;
-        }
 
         /// <summary>
         ///     Determines whether [is configuration need refresh].
