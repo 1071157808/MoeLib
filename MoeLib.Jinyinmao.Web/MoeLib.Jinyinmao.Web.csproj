@@ -81,6 +81,7 @@
     <Compile Include="Handlers\JinyinmaoAuthorizationHandler.cs" />
     <Compile Include="Handlers\JinyinmaoExceptionHandler.cs" />
     <Compile Include="Diagnostics\JinyinmaoLogHandler.cs" />
+    <Compile Include="Handlers\JinyinmaoServicePermissionHandler.cs" />
     <Compile Include="Handlers\JinyinmaoTraceEntryHandler.cs" />
     <Compile Include="Handlers\JinyinmaoRequestIdHandler.cs" />
     <Compile Include="HttpClient.cs" />
