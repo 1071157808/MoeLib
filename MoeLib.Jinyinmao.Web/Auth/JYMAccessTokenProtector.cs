@@ -68,6 +68,7 @@ namespace MoeLib.Jinyinmao.Web.Auth
                 else
                 {
                     claims.Add(new Claim(ClaimTypes.Name, identityDatas[0] ?? Anonymous));
+                    claims.Add(new Claim(ClaimTypes.Role, "User"));
                     return new ClaimsIdentity(claims, identityDatas[2] ?? Unspecified);
                 }
             }

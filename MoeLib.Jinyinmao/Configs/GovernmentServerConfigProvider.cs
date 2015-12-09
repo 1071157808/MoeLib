@@ -26,16 +26,6 @@ namespace MoeLib.Jinyinmao.Configs
         #region IConfigProvider Members
 
         /// <summary>
-        ///     Gets the configuration.
-        /// </summary>
-        /// <returns>TConfig.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public IConfig GetConfig()
-        {
-            return this.GetConfigurationsString().FromJson<TConfig>();
-        }
-
-        /// <summary>
         ///     Gets the type of the configuration.
         /// </summary>
         /// <returns>Type.</returns>
@@ -80,6 +70,16 @@ namespace MoeLib.Jinyinmao.Configs
 
         #endregion IConfigProvider Members
 
+        /// <summary>
+        ///     Gets the configuration.
+        /// </summary>
+        /// <returns>TConfig.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public IConfig GetConfig()
+        {
+            return this.GetConfigurationsString().FromJson<TConfig>();
+        }
+
         private static Uri GetGovernmentBaseUri()
         {
             try
@@ -103,7 +103,7 @@ namespace MoeLib.Jinyinmao.Configs
         {
             HttpClient client = HttpClientFactory.Create(new ApplicationIdentityMessageHandler());
             client.BaseAddress = GetGovernmentBaseUri();
-            client.Timeout = 5.Minutes();
+            client.Timeout = 1.Minutes();
             return client;
         }
     }

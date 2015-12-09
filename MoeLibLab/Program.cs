@@ -13,6 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Web;
 
 namespace MoeLibLab
 {
@@ -28,10 +31,11 @@ namespace MoeLibLab
     {
         private static void Main(string[] args)
         {
-            Uri u = new Uri("https://jym-dev-government.jinyinmao.com.cn/");
-            Uri u1 = new Uri("https://jym-dev-government.jinyinmao.com.cn");
-            Console.WriteLine(u);
-            Console.WriteLine(u1);
+            App.Initialize().Config();
+            HttpClient client = JYMInternalHttpClientFactory.Create("s", new HttpRequestMessage());
+            client.GetAsync("http://www.baidu.com.cn/").Wait();
+
+            client.Dispose();
         }
     }
 }

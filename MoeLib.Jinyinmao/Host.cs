@@ -59,15 +59,6 @@ namespace MoeLib.Jinyinmao
         public string RoleInstance { get; set; }
 
         /// <summary>
-        ///     Determines whether [is azure mode].
-        /// </summary>
-        /// <returns><c>true</c> if [is azure mode]; otherwise, <c>false</c>.</returns>
-        public bool IsAzureMode()
-        {
-            return RoleEnvironment.IsAvailable || RoleEnvironment.IsEmulated;
-        }
-
-        /// <summary>
         ///     Determines whether [is in azure cloud].
         /// </summary>
         /// <returns><c>true</c> if [is in azure cloud]; otherwise, <c>false</c>.</returns>

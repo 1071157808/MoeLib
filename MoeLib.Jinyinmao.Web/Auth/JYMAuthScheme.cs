@@ -16,6 +16,11 @@
         public static readonly string Bearer = "Bearer";
 
         /// <summary>
+        /// The jym internal authentication
+        /// </summary>
+        public static readonly string JYMInternalAuth = "JIAUTH";
+
+        /// <summary>
         ///     JYMQuick
         /// </summary>
         public static readonly string JYMQuick = "JYMQuick";

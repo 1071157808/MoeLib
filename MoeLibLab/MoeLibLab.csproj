@@ -86,6 +86,22 @@
     <Content Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoeLib.Diagnostics\MoeLib.Diagnostics.csproj">
+      <Project>{898e4b30-9475-43e4-ad53-393c480654fe}</Project>
+      <Name>MoeLib.Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Azure\MoeLib.Jinyinmao.Azure.csproj">
+      <Project>{a0f7f1df-316c-42cc-b036-145f16022c8e}</Project>
+      <Name>MoeLib.Jinyinmao.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao.Web\MoeLib.Jinyinmao.Web.csproj">
+      <Project>{0c319208-df3a-4bdf-9662-20985f7d2fe5}</Project>
+      <Name>MoeLib.Jinyinmao.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoeLib.Jinyinmao\MoeLib.Jinyinmao.csproj">
+      <Project>{67cdcf1a-50df-469a-a37f-ccb059151ec3}</Project>
+      <Name>MoeLib.Jinyinmao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoeLib\MoeLib.csproj">
       <Project>{03528bb2-032e-486f-bcd0-ea8b69c477dc}</Project>
       <Name>MoeLib</Name>

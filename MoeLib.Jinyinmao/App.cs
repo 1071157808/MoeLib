@@ -91,15 +91,6 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is azure mode.
-        /// </summary>
-        /// <value><c>true</c> if this instance is azure mode; otherwise, <c>false</c>.</value>
-        public static bool IsAzureMode
-        {
-            get { return app.host.IsAzureMode(); }
-        }
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is in azure cloud.
         /// </summary>
         /// <value><c>true</c> if this instance is in azure cloud; otherwise, <c>false</c>.</value>

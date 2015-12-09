@@ -29,7 +29,7 @@ namespace MoeLib.Jinyinmao.Orleans
         /// <returns>IWebLogger.</returns>
         public static IOrleansLogger CreateOrleansLogger(this LogManager logManager)
         {
-            return App.IsAzureMode ? (IOrleansLogger)new WADOrleansLogger() : new NOrleansLogger();
+            return App.IsInAzureCloud ? (IOrleansLogger)new WADOrleansLogger() : new NOrleansLogger();
         }
     }
 }

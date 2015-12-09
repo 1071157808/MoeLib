@@ -43,10 +43,28 @@ namespace MoeLib.Jinyinmao.Configs
         public DateTime ConfigRefreshTime { get; protected set; }
 
         /// <summary>
+        /// Gets the permissions.
+        /// </summary>
+        /// <value>The permissions.</value>
+        public Dictionary<string, KeyValuePair<string, string>> Permissions
+        {
+            get { return this.GetPermissions(); }
+        }
+
+        /// <summary>
         ///     Gets or sets the refresh interval.
         /// </summary>
         /// <value>The refresh interval.</value>
         public TimeSpan RefreshInterval { get; }
+
+        /// <summary>
+        /// Gets the resources.
+        /// </summary>
+        /// <value>The resources.</value>
+        public Dictionary<string, string> Resources
+        {
+            get { return this.GetResources(); }
+        }
 
         private IConfig Config { get; set; }
 
@@ -102,6 +120,21 @@ namespace MoeLib.Jinyinmao.Configs
         }
 
         /// <summary>
+        /// Gets the permission.
+        /// </summary>
+        /// <param name="serviceName">Name of the service.</param>
+        /// <returns>System.Nullable&lt;KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
+        public KeyValuePair<string, string>? GetPermission(string serviceName)
+        {
+            if (this.Permissions.ContainsKey(serviceName))
+            {
+                return this.Permissions[serviceName];
+            }
+
+            return null;
+        }
+
+        /// <summary>
         ///     Gets the permissions.
         /// </summary>
         /// <returns>Dictionary&lt;System.String, KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
@@ -117,6 +150,18 @@ namespace MoeLib.Jinyinmao.Configs
         public Dictionary<string, string> GetResources()
         {
             return this.GetConfig<IConfig>().Resources;
+        }
+
+        /// <summary>
+        /// Gets the resource string.
+        /// </summary>
+        /// <param name="resourceName">Name of the resource.</param>
+        /// <returns>System.String.</returns>
+        public string GetResourceString(string resourceName)
+        {
+            string resourceString;
+            this.Resources.TryGetValue(resourceName, out resourceString);
+            return resourceString;
         }
 
         /// <summary>
