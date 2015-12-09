@@ -28,6 +28,7 @@ namespace MoeLib.Jinyinmao.Web.Filters
             if (!this.IpIsAuthorized(actionContext))
             {
                 this.HandleUnauthorizedRequest(actionContext);
+                return;
             }
 
             base.OnAuthorization(actionContext);

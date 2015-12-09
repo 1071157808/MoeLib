@@ -74,7 +74,7 @@
     <Compile Include="Diagnostics\IWebLogger.cs" />
     <Compile Include="Diagnostics\NWebLogger.cs" />
     <Compile Include="Diagnostics\WADWebLogger.cs" />
-    <Compile Include="Filters\AuthorizationAttribute.cs" />
+    <Compile Include="Filters\AuthorizationRequiredAttribute.cs" />
     <Compile Include="Filters\IPAuthorizeAttribute.cs" />
     <Compile Include="Auth\JYMAuthScheme.cs" />
     <Compile Include="Handlers\JinyinmaoAuthorizationHandler.cs" />
