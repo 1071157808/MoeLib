@@ -16,7 +16,6 @@ using System.Configuration;
 using MoeLib.Jinyinmao;
 using MoeLib.Jinyinmao.Configs;
 using MoeLib.Jinyinmao.Diagnostics;
-using MoeLib.Jinyinmao.Resources;
 
 namespace Moe.Lib.Jinyinmao
 {
@@ -31,9 +30,9 @@ namespace Moe.Lib.Jinyinmao
         private static readonly App app = new App();
 
         /// <summary>
-        ///     The configuration manager
+        ///     The configurations
         /// </summary>
-        private ConfigManager configManager;
+        private ConfigManager configurations;
 
         /// <summary>
         ///     The host
@@ -46,11 +45,6 @@ namespace Moe.Lib.Jinyinmao
         private LogManager logManager;
 
         /// <summary>
-        ///     The resource manager
-        /// </summary>
-        private ResourcesManager resourceManager;
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="App" /> class.
         /// </summary>
         private App()
@@ -58,10 +52,11 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
-        ///     Gets the configuration manager.
+        ///     Gets the condigurations.
         /// </summary>
-        /// <value>The configuration manager.</value>
-        public static ConfigManager ConfigManager
+        /// <value>The condigurations.</value>
+        /// <exception cref="System.InvalidOperationException">The app has not configurated the ConfigManager.</exception>
+        public static ConfigManager Condigurations
         {
             get
             {
@@ -70,12 +65,12 @@ namespace Moe.Lib.Jinyinmao
                     ThrowInvalidOperationException();
                 }
 
-                if (app.configManager == null)
+                if (app.configurations == null)
                 {
                     throw new InvalidOperationException("The app has not configurated the ConfigManager.");
                 }
 
-                return app.configManager;
+                return app.configurations;
             }
         }
 
@@ -96,9 +91,18 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
-        ///     Determines whether the <see cref="App" /> [is in azure cloud].
+        ///     Gets a value indicating whether this instance is azure mode.
         /// </summary>
-        /// <returns><c>true</c> if the <see cref="App" /> [is in azure cloud]; otherwise, <c>false</c>.</returns>
+        /// <value><c>true</c> if this instance is azure mode; otherwise, <c>false</c>.</value>
+        public static bool IsAzureMode
+        {
+            get { return app.host.IsAzureMode(); }
+        }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is in azure cloud.
+        /// </summary>
+        /// <value><c>true</c> if this instance is in azure cloud; otherwise, <c>false</c>.</value>
         public static bool IsInAzureCloud
         {
             get { return app.host.IsInAzureCloud(); }
@@ -121,29 +125,6 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
-        ///     Gets the resource manager.
-        /// </summary>
-        /// <value>The resource manager.</value>
-        /// <exception cref="System.InvalidOperationException">The app has not configurated the ResourceManager.</exception>
-        public static ResourcesManager ResourceManager
-        {
-            get
-            {
-                if (!app.Initialized || !app.Configurated)
-                {
-                    ThrowInvalidOperationException();
-                }
-
-                if (app.resourceManager == null)
-                {
-                    throw new InvalidOperationException("The app has not configurated the ResourceManager.");
-                }
-
-                return app.resourceManager;
-            }
-        }
-
-        /// <summary>
         ///     Gets a value indicating whether this <see cref="App" /> is configurated.
         /// </summary>
         /// <value><c>true</c> if configurated; otherwise, <c>false</c>.</value>
@@ -156,22 +137,6 @@ namespace Moe.Lib.Jinyinmao
         public bool Initialized { get; private set; }
 
         /// <summary>
-        ///     Gets the configuration.
-        /// </summary>
-        /// <typeparam name="TConfig">The type of the t configuration.</typeparam>
-        /// <returns>TConfig.</returns>
-        public static TConfig GetConfig<TConfig>() where TConfig : class, new()
-        {
-            ConfigManager<TConfig> manager = ConfigManager as ConfigManager<TConfig>;
-            if (manager == null)
-            {
-                throw new InvalidOperationException($"The config type {typeof(TConfig)} is incorrect.");
-            }
-
-            return manager.GetConfig();
-        }
-
-        /// <summary>
         ///     Initializes this instance.
         /// </summary>
         /// <returns>App.</returns>
@@ -180,8 +145,7 @@ namespace Moe.Lib.Jinyinmao
             app.host = new Host();
             app.logManager = new LogManager();
 
-            app.configManager = null;
-            app.resourceManager = null;
+            app.configurations = null;
 
             app.Initialized = true;
             return app;
@@ -216,18 +180,17 @@ namespace Moe.Lib.Jinyinmao
         /// <summary>
         ///     Uses the configuration manager.
         /// </summary>
-        /// <typeparam name="TConfig">The type of the configuration.</typeparam>
         /// <param name="configProvider">The configuration provider.</param>
         /// <param name="configProviderForDev">The configuration provider for dev.</param>
         /// <returns>App.</returns>
-        public App UseConfigManager<TConfig>(IConfigProvider<TConfig> configProvider, IConfigProvider<TConfig> configProviderForDev = null) where TConfig : class, new()
+        public App UseConfigManager(IConfigProvider configProvider, IConfigProvider configProviderForDev = null)
         {
-            if (ConfigurationManager.AppSettings.Get("UseDevConfigProvider").AsBoolean(false) && configProviderForDev != null)
+            if (ConfigurationManager.AppSettings.Get("UseConfigProviderForDev").AsBoolean(false) && configProviderForDev != null)
             {
-                app.configManager = new ConfigManager<TConfig>(configProviderForDev);
+                app.configurations = new ConfigManager(configProviderForDev);
             }
 
-            app.configManager = new ConfigManager<TConfig>(configProvider);
+            app.configurations = new ConfigManager(configProvider);
 
             return app;
         }
@@ -238,7 +201,7 @@ namespace Moe.Lib.Jinyinmao
         /// <typeparam name="TConfig">The type of the configuration.</typeparam>
         /// <param name="configProviderForDev">The configuration provider for dev.</param>
         /// <returns>App.</returns>
-        public App UseFileConfigManager<TConfig>(IConfigProvider<TConfig> configProviderForDev = null) where TConfig : class, new()
+        public App UseFileConfigManager<TConfig>(IConfigProvider configProviderForDev = null) where TConfig : class, IConfig
         {
             return this.UseConfigManager(new FileConfigProvider<TConfig>(), configProviderForDev);
         }
@@ -249,7 +212,7 @@ namespace Moe.Lib.Jinyinmao
         /// <typeparam name="TConfig">The type of the configuration.</typeparam>
         /// <param name="configProviderForDev">The configuration provider for dev.</param>
         /// <returns>App.</returns>
-        public App UseGovernmentServerConfigManager<TConfig>(IConfigProvider<TConfig> configProviderForDev = null) where TConfig : class, new()
+        public App UseGovernmentServerConfigManager<TConfig>(IConfigProvider configProviderForDev = null) where TConfig : class, IConfig
         {
             return this.UseConfigManager(new GovernmentServerConfigProvider<TConfig>(), configProviderForDev);
         }

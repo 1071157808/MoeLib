@@ -34,7 +34,7 @@ namespace MoeLib.Jinyinmao.Diagnostics
         /// <returns>ILogger.</returns>
         public ILogger CreateLogger()
         {
-            return App.IsInAzureCloud ? (ILogger)new WADLogger() : new NLogger();
+            return App.IsAzureMode ? (ILogger)new WADLogger() : new NLogger();
         }
     }
 }

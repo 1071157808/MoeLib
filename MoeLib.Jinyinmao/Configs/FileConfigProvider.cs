@@ -8,33 +8,9 @@ namespace MoeLib.Jinyinmao.Configs
     ///     FileConfigProvider.
     /// </summary>
     /// <typeparam name="TConfig">The type of the configuration.</typeparam>
-    public class FileConfigProvider<TConfig> : IConfigProvider<TConfig> where TConfig : class, new()
+    public class FileConfigProvider<TConfig> : IConfigProvider where TConfig : class, IConfig
     {
-        #region IConfigProvider<TConfig> Members
-
-        /// <summary>
-        ///     Gets the configuration.
-        /// </summary>
-        /// <returns>TConfig.</returns>
-        public TConfig GetConfig()
-        {
-            return this.GetConfigJsonString().FromJson<TConfig>();
-        }
-
-        /// <summary>
-        ///     Gets the configuration json string.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        public string GetConfigJsonString()
-        {
-            string config = ConfigurationManager.AppSettings.Get("Configs");
-            if (config.IsNullOrEmpty())
-            {
-                throw new ConfigurationErrorsException("Missing config of \"Configs\"");
-            }
-
-            return config;
-        }
+        #region IConfigProvider Members
 
         /// <summary>
         ///     Gets the type of the configuration.
@@ -45,6 +21,21 @@ namespace MoeLib.Jinyinmao.Configs
             return typeof(TConfig);
         }
 
-        #endregion IConfigProvider<TConfig> Members
+        /// <summary>
+        ///     Gets the configurations string.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string GetConfigurationsString()
+        {
+            string config = ConfigurationManager.AppSettings.Get("Configurations");
+            if (config.IsNullOrEmpty())
+            {
+                throw new ConfigurationErrorsException("Missing config of \"Configurations\"");
+            }
+
+            return config;
+        }
+
+        #endregion IConfigProvider Members
     }
 }

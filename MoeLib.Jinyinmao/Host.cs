@@ -29,12 +29,6 @@ namespace MoeLib.Jinyinmao
         }
 
         /// <summary>
-        ///     Gets or sets the application identifier.
-        /// </summary>
-        /// <value>The application identifier.</value>
-        public string AppId { get; set; }
-
-        /// <summary>
         ///     Gets or sets the application keys.
         /// </summary>
         /// <value>The application keys.</value>
@@ -65,9 +59,18 @@ namespace MoeLib.Jinyinmao
         public string RoleInstance { get; set; }
 
         /// <summary>
-        ///     Determines whether the <see cref="Host" /> [is in azure cloud].
+        ///     Determines whether [is azure mode].
         /// </summary>
-        /// <returns><c>true</c> if the <see cref="Host" /> [is in azure cloud]; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if [is azure mode]; otherwise, <c>false</c>.</returns>
+        public bool IsAzureMode()
+        {
+            return RoleEnvironment.IsAvailable || RoleEnvironment.IsEmulated;
+        }
+
+        /// <summary>
+        ///     Determines whether [is in azure cloud].
+        /// </summary>
+        /// <returns><c>true</c> if [is in azure cloud]; otherwise, <c>false</c>.</returns>
         public bool IsInAzureCloud()
         {
             return RoleEnvironment.IsAvailable;

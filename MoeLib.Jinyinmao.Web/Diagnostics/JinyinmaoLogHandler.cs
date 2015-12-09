@@ -20,6 +20,24 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         private static readonly Lazy<IWebLogger> logger = new Lazy<IWebLogger>(() => InitApplicationLogger());
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="JinyinmaoLogHandler" /> class.
+        /// </summary>
+        public JinyinmaoLogHandler(string requestTag, string responseTag)
+        {
+            this.RequestTag = requestTag;
+            this.ResponseTag = responseTag;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="JinyinmaoLogHandler" /> class.
+        /// </summary>
+        public JinyinmaoLogHandler()
+        {
+            this.RequestTag = "ASP.NET HTTP Request";
+            this.ResponseTag = "ASP.NET HTTP Response";
+        }
+
+        /// <summary>
         ///     Gets the logger.
         /// </summary>
         /// <value>The logger.</value>
@@ -27,6 +45,10 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         {
             get { return logger.Value; }
         }
+
+        private string RequestTag { get; set; }
+
+        private string ResponseTag { get; set; }
 
         /// <summary>
         ///     Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.
@@ -43,7 +65,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
 
             string requestIdString = traceEntry?.RequestId ?? Guid.NewGuid().ToGuidString();
 
-            this.Logger.Info($"Request Begin: {requestIdString}", request, "ASP.NET HTTP Request", 0UL, string.Empty, traceEntry);
+            this.Logger.Info($"Request Begin: {requestIdString}", request, this.RequestTag, 0UL, string.Empty, traceEntry);
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
@@ -57,7 +79,7 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 payload.Add("ResponseContent", (await response.Content.ReadAsStringAsync()).GetFirst(30000));
             }
 
-            this.Logger.Info($"Request End: {requestIdString}", request, "ASP.NET HTTP Response", 0UL, string.Empty, traceEntry, null, payload);
+            this.Logger.Info($"Request End: {requestIdString}", request, this.ResponseTag, 0UL, string.Empty, traceEntry, null, payload);
 
             return response;
         }

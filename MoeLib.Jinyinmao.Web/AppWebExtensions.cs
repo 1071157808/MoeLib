@@ -29,7 +29,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <returns>IWebLogger.</returns>
         public static IWebLogger CreateWebLogger(this LogManager logManager)
         {
-            return App.IsInAzureCloud ? (IWebLogger)new WADWebLogger() : new NWebLogger();
+            return App.IsAzureMode ? (IWebLogger)new WADWebLogger() : new NWebLogger();
         }
     }
 }

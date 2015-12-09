@@ -1,4 +1,12 @@
 ﻿using System;
+using System.Configuration;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
+using Microsoft.Azure;
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
 
 namespace MoeLib.Jinyinmao.Configs
 {
@@ -6,40 +14,97 @@ namespace MoeLib.Jinyinmao.Configs
     ///     GovernmentServerConfigProvider.
     /// </summary>
     /// <typeparam name="TConfig">The type of the t configuration.</typeparam>
-    public class GovernmentServerConfigProvider<TConfig> : IConfigProvider<TConfig> where TConfig : class, new()
+    public class GovernmentServerConfigProvider<TConfig> : IConfigProvider where TConfig : class, IConfig
     {
-        #region IConfigProvider<TConfig> Members
+        private static readonly Lazy<HttpClient> httpClient = new Lazy<HttpClient>(() => InitHttpClient());
+
+        private HttpClient HttpClient
+        {
+            get { return httpClient.Value; }
+        }
+
+        #region IConfigProvider Members
 
         /// <summary>
         ///     Gets the configuration.
         /// </summary>
         /// <returns>TConfig.</returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public TConfig GetConfig()
+        public IConfig GetConfig()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Gets the configuration json string.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public string GetConfigJsonString()
-        {
-            throw new NotImplementedException();
+            return this.GetConfigurationsString().FromJson<TConfig>();
         }
 
         /// <summary>
         ///     Gets the type of the configuration.
         /// </summary>
         /// <returns>Type.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public Type GetConfigType()
         {
-            throw new NotImplementedException();
+            return typeof(TConfig);
         }
 
-        #endregion IConfigProvider<TConfig> Members
+        /// <summary>
+        ///     Gets the configurations string.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string GetConfigurationsString()
+        {
+            try
+            {
+                ApplicationConfigurationsFetchRequest request = new ApplicationConfigurationsFetchRequest
+                {
+                    Role = App.Host.Role,
+                    RoleInstance = App.Host.RoleInstance,
+                    SourceVersion = App.Condigurations.GetConfigurationVersion()
+                };
+
+                Task<HttpResponseMessage> responseTask = this.HttpClient.PostAsync("api/Configurations", request, new JsonMediaTypeFormatter());
+                responseTask.Wait();
+                HttpResponseMessage response = responseTask.Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Task<string> contentTask = response.Content.ReadAsStringAsync();
+                    contentTask.Wait();
+                    return contentTask.Result;
+                }
+
+                throw new HttpRequestException($"Can not get \"Configurations\" from government server {this.HttpClient.BaseAddress}, {response.StatusCode} {response.ReasonPhrase}");
+            }
+            catch (Exception e)
+            {
+                throw new ConfigurationErrorsException("Missing config of \"Configurations\"", e);
+            }
+        }
+
+        #endregion IConfigProvider Members
+
+        private static Uri GetGovernmentBaseUri()
+        {
+            try
+            {
+                string specifiedGovernmentBaseUri = CloudConfigurationManager.GetSetting("GovernmentBaseUri");
+                if (specifiedGovernmentBaseUri.IsNotNullOrEmpty() && RegexUtility.UrlRegex.IsMatch(specifiedGovernmentBaseUri))
+                {
+                    Uri governmentBaseUri = new Uri(specifiedGovernmentBaseUri);
+                    return governmentBaseUri;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return new Uri($"https://jym-{App.Host.Environment}-government.jinyinmao.com.cn/");
+        }
+
+        private static HttpClient InitHttpClient()
+        {
+            HttpClient client = HttpClientFactory.Create(new ApplicationIdentityMessageHandler());
+            client.BaseAddress = GetGovernmentBaseUri();
+            client.Timeout = 5.Minutes();
+            return client;
+        }
     }
 }

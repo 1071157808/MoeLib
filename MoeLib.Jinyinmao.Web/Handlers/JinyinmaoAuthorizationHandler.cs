@@ -61,9 +61,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            if (request.Headers.Authorization?.Scheme != null &&
-                !string.Equals(request.Headers.Authorization.Scheme, JYMAuthScheme.Bearer, StringComparison.OrdinalIgnoreCase)
-                && this.Identity != null && this.Identity.IsAuthenticated)
+            if (request.Headers.Authorization?.Parameter == null && this.Identity != null && this.Identity.IsAuthenticated)
             {
                 Claim claim = this.Identity.FindFirst(ClaimTypes.Expiration);
                 long timestamp = claim?.Value?.AsLong() ?? DateTime.UtcNow.UnixTimestamp();

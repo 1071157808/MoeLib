@@ -21,9 +21,9 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
             IEnumerable<string> clientId = null;
             IEnumerable<string> deviceId = null;
             IEnumerable<string> requestId = null;
+            IEnumerable<string> sessionId = null;
             IEnumerable<string> sourceIP = null;
             IEnumerable<string> sourceUserAgent = null;
-            IEnumerable<string> sessionId = null;
             IEnumerable<string> userId = null;
 
             if (request?.Headers != null)
@@ -31,9 +31,9 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
                 request.Headers.TryGetValues("X-JYM-CID", out clientId);
                 request.Headers.TryGetValues("X-JYM-DID", out deviceId);
                 request.Headers.TryGetValues("X-JYM-RID", out requestId);
+                request.Headers.TryGetValues("X-JYM-SID", out sessionId);
                 request.Headers.TryGetValues("X-JYM-IP", out sourceIP);
                 request.Headers.TryGetValues("X-JYM-UA", out sourceUserAgent);
-                request.Headers.TryGetValues("X-JYM-SID", out sessionId);
                 request.Headers.TryGetValues("X-JYM-UID", out userId);
             }
 
