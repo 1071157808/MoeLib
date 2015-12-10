@@ -7,7 +7,7 @@ using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
 using MoeLib.Jinyinmao.Web.Diagnostics;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Client
 {
     /// <summary>
     ///     JinyinmaoTraceEntryHandler.

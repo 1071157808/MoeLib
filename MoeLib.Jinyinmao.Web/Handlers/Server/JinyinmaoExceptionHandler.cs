@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Server
 {
     /// <summary>
     ///     JinyinmaoExceptionHandler.

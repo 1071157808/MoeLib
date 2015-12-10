@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Client
 {
     /// <summary>
     ///     JinyinmaoHttpStatusHandler.

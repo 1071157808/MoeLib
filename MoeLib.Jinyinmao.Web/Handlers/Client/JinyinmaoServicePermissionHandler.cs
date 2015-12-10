@@ -10,7 +10,7 @@ using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Web.Auth;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Client
 {
     /// <summary>
     ///     JinyinmaoServicePermissionHandler.

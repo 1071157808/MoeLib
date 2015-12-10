@@ -28,6 +28,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Debug(string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Debug, message);
         }
 
@@ -47,6 +48,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Debug(Exception exception, string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Debug, exception, message);
         }
 
@@ -56,6 +58,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Error(string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Error, message);
         }
 
@@ -75,6 +78,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Error(Exception exception, string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Error, exception, message);
         }
 
@@ -84,6 +88,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Fatal(string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Fatal, message);
         }
 
@@ -103,6 +108,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Fatal(Exception exception, string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Fatal, exception, message);
         }
 
@@ -112,6 +118,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Info(string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Info, message);
         }
 
@@ -131,6 +138,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Info(Exception exception, string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Info, exception, message);
         }
 
@@ -140,6 +148,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Warn(string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Warn, message);
         }
 
@@ -159,6 +168,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <param name="message">The log message.</param>
         protected void Warn(Exception exception, string message)
         {
+            message = message.Replace("{", "{{").Replace("}", "}}");
             this.Logger.Trace(this.Request, "Application", TraceLevel.Warn, exception, message);
         }
     }

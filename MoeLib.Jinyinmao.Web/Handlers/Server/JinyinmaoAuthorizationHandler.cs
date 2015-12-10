@@ -8,36 +8,38 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Azure;
 using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Web.Auth;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Server
 {
     /// <summary>
     ///     JinyinmaoAuthorizationHandler.
     /// </summary>
     public class JinyinmaoAuthorizationHandler : DelegatingHandler
     {
+        private static readonly bool useSwaggerAsApplicationForDev = CloudConfigurationManager.GetSetting("UseSwaggerAsApplicationForDev").AsBoolean(false);
         private readonly JYMAccessTokenProtector accessTokenProtector;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="JinyinmaoAuthorizationHandler" /> class.
         /// </summary>
-        /// <param name="bearerKeys">The bearerKeys.</param>
-        public JinyinmaoAuthorizationHandler(string bearerKeys)
+        /// <param name="bearerAuthKeys">The bearerAuthKeys.</param>
+        public JinyinmaoAuthorizationHandler(string bearerAuthKeys)
         {
-            this.accessTokenProtector = new JYMAccessTokenProtector(bearerKeys);
+            this.accessTokenProtector = new JYMAccessTokenProtector(bearerAuthKeys);
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="JinyinmaoAuthorizationHandler" /> class.
         /// </summary>
-        /// <param name="bearerKeys">The bearerKeys.</param>
+        /// <param name="bearerAuthKeys">The bearerAuthKeys.</param>
         /// <param name="governmentServerPublicKey">The government server public key.</param>
-        public JinyinmaoAuthorizationHandler(string bearerKeys, string governmentServerPublicKey)
+        public JinyinmaoAuthorizationHandler(string bearerAuthKeys, string governmentServerPublicKey)
         {
-            this.accessTokenProtector = new JYMAccessTokenProtector(bearerKeys);
+            this.accessTokenProtector = new JYMAccessTokenProtector(bearerAuthKeys);
             this.GovernmentServerPublicKey = governmentServerPublicKey;
         }
 
@@ -46,6 +48,15 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         /// </summary>
         /// <value>The government server public key.</value>
         public string GovernmentServerPublicKey { get; set; }
+
+        /// <summary>
+        ///     Gets a value indicating whether [use swagger as application for dev].
+        /// </summary>
+        /// <value><c>true</c> if [use swagger as application for dev]; otherwise, <c>false</c>.</value>
+        public bool UseSwaggerAsApplicationForDev
+        {
+            get { return useSwaggerAsApplicationForDev; }
+        }
 
         private RSACryptoServiceProvider CryptoServiceProvider
         {
@@ -82,6 +93,10 @@ namespace MoeLib.Jinyinmao.Web.Handlers
             {
                 this.AuthorizeUserViaBearerToken(request);
             }
+            else if (this.UseSwaggerAsApplicationForDev && this.IsFromSwagger(request))
+            {
+                this.AuthorizeApplicationIfFromSwagger();
+            }
             else if (this.GovernmentServerPublicKey != null && HasAuthorizationHeader(request, JYMAuthScheme.JYMInternalAuth))
             {
                 this.AuthorizeApplicationViaAuthToken(request);
@@ -102,6 +117,15 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         {
             return request.Headers.Authorization?.Scheme != null &&
                    string.Equals(request.Headers.Authorization.Scheme, scheme, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void AuthorizeApplicationIfFromSwagger()
+        {
+            this.Identity = new ClaimsIdentity(new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "Swagger"),
+                new Claim(ClaimTypes.Role, "Application")
+            }, JYMAuthScheme.JYMInternalAuth);
         }
 
         private void AuthorizeApplicationViaAuthToken(HttpRequestMessage request)
@@ -153,6 +177,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers
                     expiration = timestamp
                 }).Content;
             }
+        }
+
+        private bool IsFromSwagger(HttpRequestMessage request)
+        {
+            return request.Headers.Referrer.AbsoluteUri.Contains("swagger", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

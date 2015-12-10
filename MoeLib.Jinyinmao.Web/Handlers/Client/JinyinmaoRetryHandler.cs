@@ -1,15 +1,19 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 using Moe.Lib;
+using Moe.Lib.TransientFaultHandling;
 
-namespace MoeLib.Jinyinmao.Web.Handlers
+namespace MoeLib.Jinyinmao.Web.Handlers.Client
 {
     /// <summary>
-    ///     JinyinmaoRequestIdHandler.
+    ///     JinyinmaoRetryHandler.
     /// </summary>
-    public class JinyinmaoRequestIdHandler : DelegatingHandler
+    public class JinyinmaoRetryHandler : DelegatingHandler
     {
+        private static readonly RetryPolicy retryPolicy = new RetryPolicy(new HttpRequestTransientErrorDetectionStrategy(), 5, 3.Seconds());
+
         /// <summary>
         ///     Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.
         /// </summary>
@@ -21,15 +25,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request?.Headers != null)
-            {
-                if (!request.Headers.Contains("X-JYM-RID"))
-                {
-                    request.Headers.TryAddWithoutValidation("X-JYM-RID", GuidUtility.NewSequentialGuid().ToGuidString());
-                }
-            }
-
-            return base.SendAsync(request, cancellationToken);
+            return retryPolicy.ExecuteAction(() => base.SendAsync(request, cancellationToken));
         }
     }
 }

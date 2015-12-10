@@ -3,8 +3,8 @@ using System.Linq;
 using System.Net.Http;
 using Moe.Lib;
 using MoeLib.Diagnostics;
-using MoeLib.Jinyinmao.Web.Diagnostics;
 using MoeLib.Jinyinmao.Web.Handlers;
+using MoeLib.Jinyinmao.Web.Handlers.Client;
 
 namespace MoeLib.Jinyinmao.Web
 {

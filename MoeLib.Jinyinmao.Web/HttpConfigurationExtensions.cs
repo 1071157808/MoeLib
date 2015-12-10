@@ -3,6 +3,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Tracing;
 using MoeLib.Jinyinmao.Web.Diagnostics;
 using MoeLib.Jinyinmao.Web.Handlers;
+using MoeLib.Jinyinmao.Web.Handlers.Server;
 
 namespace Moe.Lib.Web
 {
@@ -12,20 +13,15 @@ namespace Moe.Lib.Web
     public static class HttpConfigurationExtensions
     {
         /// <summary>
-        ///     Uses the jinyinmao configuration.
+        ///     Uses the jinyinmao authorization handler.
         /// </summary>
         /// <param name="config">The configuration.</param>
+        /// <param name="bearerAuthKeys">The bearer keys.</param>
+        /// <param name="governmentServerPublicKey">The government server public key.</param>
         /// <returns>HttpConfiguration.</returns>
-        public static HttpConfiguration UseJinyinmaoConfig(this HttpConfiguration config)
+        public static HttpConfiguration UseJinyinmaoAuthorizationHandler(this HttpConfiguration config, string bearerAuthKeys, string governmentServerPublicKey)
         {
-            config.MessageHandlers.Add(new JinyinmaoRequestIdHandler());
-            config.MessageHandlers.Add(new JinyinmaoLogHandler());
-
-            config.Services.Replace(typeof(ITraceWriter), new JinyinmaoTraceWriter());
-            config.Services.Add(typeof(IExceptionLogger), new JinyinmaoExceptionLogger());
-
-            config.Services.Replace(typeof(IExceptionHandler), new JinyinmaoExceptionHandler());
-
+            config.MessageHandlers.Add(new JinyinmaoAuthorizationHandler(bearerAuthKeys, governmentServerPublicKey));
             return config;
         }
 
@@ -75,13 +71,26 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        ///     Uses the jinyinmao request identifier handler.
+        ///     Uses the jinyinmao log handler.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        /// <param name="requestTag">The request tag.</param>
+        /// <param name="responseTag">The response tag.</param>
+        /// <returns>HttpConfiguration.</returns>
+        public static HttpConfiguration UseJinyinmaoLogHandler(this HttpConfiguration config, string requestTag, string responseTag)
+        {
+            config.MessageHandlers.Add(new JinyinmaoLogHandler(requestTag, responseTag));
+            return config;
+        }
+
+        /// <summary>
+        ///     Uses the jinyinmao trace entry handler.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <returns>HttpConfiguration.</returns>
-        public static HttpConfiguration UseJinyinmaoRequestIdHandler(this HttpConfiguration config)
+        public static HttpConfiguration UseJinyinmaoTraceEntryHandler(this HttpConfiguration config)
         {
-            config.MessageHandlers.Add(new JinyinmaoRequestIdHandler());
+            config.MessageHandlers.Add(new JinyinmaoTraceEntryHandler());
             return config;
         }
 

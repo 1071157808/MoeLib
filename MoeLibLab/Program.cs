@@ -13,9 +13,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Web;
 
 namespace MoeLibLab
 {
@@ -31,11 +28,6 @@ namespace MoeLibLab
     {
         private static void Main(string[] args)
         {
-            App.Initialize().Config();
-            HttpClient client = JYMInternalHttpClientFactory.Create("s", new HttpRequestMessage());
-            client.GetAsync("http://www.baidu.com.cn/").Wait();
-
-            client.Dispose();
         }
     }
 }
