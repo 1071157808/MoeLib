@@ -96,7 +96,7 @@
     <Compile Include="Handlers\Client\JinyinmaoServicePermissionHandler.cs" />
     <Compile Include="Handlers\Client\JinyinmaoTraceEntryHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoTraceEntryHandler.cs" />
-    <Compile Include="HttpClient.cs" />
+    <Compile Include="JYMInternalHttpClientFactory.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
     <Compile Include="Diagnostics\JinyinmaoExceptionLogger.cs" />
     <Compile Include="Diagnostics\JinyinmaoTraceWriter.cs" />

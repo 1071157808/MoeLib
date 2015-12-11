@@ -72,7 +72,6 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
         /// </returns>
         /// <param name="request">The HTTP request message to send to the server.</param>
         /// <param name="cancellationToken">A cancellation token to cancel operation.</param>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             if (this.TraceEntry == null)

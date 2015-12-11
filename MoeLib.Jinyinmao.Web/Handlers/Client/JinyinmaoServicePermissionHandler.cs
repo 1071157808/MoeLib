@@ -51,7 +51,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
                 else
                 {
                     request.RequestUri = new Uri(new Uri(permission.Value.Key), request.RequestUri.PathAndQuery);
-                    request.Headers.Authorization = new AuthenticationHeaderValue(JYMAuthScheme.Bearer, permission.Value.Value);
+                    request.Headers.Authorization = new AuthenticationHeaderValue(JYMAuthScheme.JYMInternalAuth, permission.Value.Value);
                 }
             }
 
