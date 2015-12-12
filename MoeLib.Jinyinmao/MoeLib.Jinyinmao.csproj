@@ -73,7 +73,7 @@
     <Compile Include="Configs\ConfigManager.cs" />
     <Compile Include="Configs\FileConfigProvider.cs" />
     <Compile Include="Configs\GovernmentHttpClient\ApplicationConfigurationsFetchResponse.cs" />
-    <Compile Include="Configs\GovernmentHttpClient\ApplicationIdentityMessageHandler.cs" />
+    <Compile Include="Configs\GovernmentHttpClient\GovernmentHttpClientMessageHandler.cs" />
     <Compile Include="Configs\GovernmentHttpClient\ApplicationConfigurationsFetchRequest.cs" />
     <Compile Include="Configs\GovernmentServerConfigProvider.cs" />
     <Compile Include="Configs\IConfig.cs" />

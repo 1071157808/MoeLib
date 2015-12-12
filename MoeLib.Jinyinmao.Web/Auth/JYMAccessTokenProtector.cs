@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Moe.Lib;
@@ -9,10 +10,10 @@ namespace MoeLib.Jinyinmao.Web.Auth
     /// <summary>
     ///     JYMAccessTokenProtector.
     /// </summary>
-    internal class JYMAccessTokenProtector
+    internal sealed class JYMAccessTokenProtector
     {
         private const string Anonymous = "Anonymous";
-
+        private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JYMAccessTokenProtector RSACryptoServiceProvider can not initialize. The key may be in bad format. Key: {0}";
         private const string Unspecified = "Unspecified";
 
         /// <summary>
@@ -26,8 +27,15 @@ namespace MoeLib.Jinyinmao.Web.Auth
         /// <param name="key">The cryptographic key.</param>
         internal JYMAccessTokenProtector(string key)
         {
-            this.rsaCryptoServiceProvider = new RSACryptoServiceProvider();
-            this.rsaCryptoServiceProvider.FromXmlString(key);
+            try
+            {
+                this.rsaCryptoServiceProvider = new RSACryptoServiceProvider();
+                this.rsaCryptoServiceProvider.FromXmlString(key);
+            }
+            catch (Exception e)
+            {
+                throw new ConfigurationErrorsException(CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE.FormatWith(key), e);
+            }
         }
 
         internal string Protect(ClaimsIdentity identity)

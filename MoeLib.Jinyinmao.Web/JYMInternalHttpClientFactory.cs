@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using Moe.Lib;
 using MoeLib.Diagnostics;
+using MoeLib.Jinyinmao.Web.Diagnostics;
 using MoeLib.Jinyinmao.Web.Handlers;
 using MoeLib.Jinyinmao.Web.Handlers.Client;
 
@@ -29,7 +31,19 @@ namespace MoeLib.Jinyinmao.Web
             delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
             delegatingHandlers.Add(new JinyinmaoRetryHandler());
 
-            HttpClient client = HttpClientFactory.Create(new HttpClientHandler(), handlers);
+            HttpClient client = HttpClientFactory.Create(new HttpClientHandler
+            {
+                AllowAutoRedirect = true,
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            }, handlers);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 0.7));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.2));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.1));
+            client.DefaultRequestHeaders.AcceptEncoding.Clear();
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 0.7));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.2));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
             client.Timeout = 1.Minutes();
             return client;
         }
@@ -44,16 +58,12 @@ namespace MoeLib.Jinyinmao.Web
         /// <returns>A new instance of the <see cref="T:System.Net.Http.HttpClient" />.</returns>
         public static HttpClient Create(string serviceName, TraceEntry traceEntry, string userId, params DelegatingHandler[] handlers)
         {
-            IList<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>();
-            delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
-            delegatingHandlers.Add(new JinyinmaoTraceEntryHandler(traceEntry, userId));
-            delegatingHandlers.Add(new JinyinmaoHttpStatusHandler());
-            delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
-            delegatingHandlers.Add(new JinyinmaoRetryHandler());
+            if (userId.IsNotNullOrEmpty())
+            {
+                traceEntry.UserId = userId;
+            }
 
-            HttpClient client = HttpClientFactory.Create(new HttpClientHandler(), handlers);
-            client.Timeout = 1.Minutes();
-            return client;
+            return Create(serviceName, traceEntry, handlers);
         }
 
         /// <summary>
@@ -65,16 +75,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <returns>A new instance of the <see cref="T:System.Net.Http.HttpClient" />.</returns>
         public static HttpClient Create(string serviceName, HttpRequestMessage request, params DelegatingHandler[] handlers)
         {
-            IList<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>();
-            delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
-            delegatingHandlers.Add(new JinyinmaoTraceEntryHandler(request));
-            delegatingHandlers.Add(new JinyinmaoHttpStatusHandler());
-            delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
-            delegatingHandlers.Add(new JinyinmaoRetryHandler());
-
-            HttpClient client = HttpClientFactory.Create(new HttpClientHandler(), delegatingHandlers.ToArray());
-            client.Timeout = 1.Minutes();
-            return client;
+            return Create(serviceName, request, "", handlers);
         }
 
         /// <summary>
@@ -87,16 +88,7 @@ namespace MoeLib.Jinyinmao.Web
         /// <returns>A new instance of the <see cref="T:System.Net.Http.HttpClient" />.</returns>
         public static HttpClient Create(string serviceName, HttpRequestMessage request, string userId, params DelegatingHandler[] handlers)
         {
-            IList<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>();
-            delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
-            delegatingHandlers.Add(new JinyinmaoTraceEntryHandler(request, userId));
-            delegatingHandlers.Add(new JinyinmaoHttpStatusHandler());
-            delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
-            delegatingHandlers.Add(new JinyinmaoRetryHandler());
-
-            HttpClient client = HttpClientFactory.Create(new HttpClientHandler(), handlers);
-            client.Timeout = 1.Minutes();
-            return client;
+            return Create(serviceName, request.GetTraceEntry(), userId, handlers);
         }
     }
 }

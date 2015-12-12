@@ -40,7 +40,10 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
         public JinyinmaoTraceEntryHandler(TraceEntry traceEntry, string userId)
         {
             this.TraceEntry = traceEntry;
-            this.TraceEntry.UserId = userId;
+            if (userId.IsNotNullOrEmpty())
+            {
+                this.TraceEntry.UserId = userId;
+            }
         }
 
         /// <summary>
@@ -51,7 +54,10 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
         public JinyinmaoTraceEntryHandler(HttpRequestMessage request, string userId)
         {
             this.TraceEntry = request.GetTraceEntry();
-            this.TraceEntry.UserId = userId;
+            if (userId.IsNotNullOrEmpty())
+            {
+                this.TraceEntry.UserId = userId;
+            }
         }
 
         /// <summary>

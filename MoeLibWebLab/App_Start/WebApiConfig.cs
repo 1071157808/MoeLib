@@ -25,6 +25,8 @@ namespace MoeLibWebLab
             string mockGovernmentServerPublicKey = mockBearerAuthKeys;
 
             // Web API configuration and services
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
             config.UseJinyinmaoExceptionHandler();
 
             config.UseJinyinmaoTraceEntryHandler();

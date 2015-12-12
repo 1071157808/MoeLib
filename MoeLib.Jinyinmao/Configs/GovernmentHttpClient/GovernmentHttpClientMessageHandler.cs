@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
@@ -10,18 +11,26 @@ using Moe.Lib.Jinyinmao;
 namespace MoeLib.Jinyinmao.Configs.GovernmentHttpClient
 {
     /// <summary>
-    ///     ApplicationIdentityMessageHandler.
+    ///     GovernmentHttpClientMessageHandler.
     /// </summary>
-    public class ApplicationIdentityMessageHandler : DelegatingHandler
+    public class GovernmentHttpClientMessageHandler : DelegatingHandler
     {
+        private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "GovernmentHttpClientMessageHandler RSACryptoServiceProvider can not initialize. The AppKeys may be in bad format. AppKeys: {0}";
         private static readonly RSACryptoServiceProvider cryptoServiceProvider = new RSACryptoServiceProvider(2048);
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ApplicationIdentityMessageHandler" /> class.
+        ///     Initializes a new instance of the <see cref="GovernmentHttpClientMessageHandler" /> class.
         /// </summary>
-        public ApplicationIdentityMessageHandler()
+        public GovernmentHttpClientMessageHandler()
         {
-            cryptoServiceProvider.FromXmlString(App.Host.AppKeys);
+            try
+            {
+                cryptoServiceProvider.FromXmlString(App.Host.AppKeys);
+            }
+            catch (Exception e)
+            {
+                throw new ConfigurationErrorsException(CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE.FormatWith(App.Host.AppKeys), e);
+            }
         }
 
         /// <summary>
@@ -35,7 +44,7 @@ namespace MoeLib.Jinyinmao.Configs.GovernmentHttpClient
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            string sign = cryptoServiceProvider.SignData(App.Host.Role.ToBase64Bytes(), new SHA1CryptoServiceProvider()).ToBase64String();
+            string sign = cryptoServiceProvider.SignData(App.Host.Role.GetBytesOfASCII(), new SHA1CryptoServiceProvider()).ToBase64String();
             string ticket = $"{App.Host.Role},{sign}";
             request.Headers.Authorization = new AuthenticationHeaderValue("JIAUTH", ticket);
             request.Headers.TryAddWithoutValidation("X-JYM-CID", App.Host.RoleInstance);
@@ -43,6 +52,9 @@ namespace MoeLib.Jinyinmao.Configs.GovernmentHttpClient
             request.Headers.TryAddWithoutValidation("X-JYM-SID", Guid.NewGuid().ToGuidString());
             request.Headers.Accept.Clear();
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+            request.Headers.AcceptEncoding.Clear();
+            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 0.8));
+            request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.2));
             return base.SendAsync(request, cancellationToken);
         }
     }

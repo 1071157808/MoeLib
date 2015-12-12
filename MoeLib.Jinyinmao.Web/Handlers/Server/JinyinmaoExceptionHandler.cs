@@ -41,19 +41,19 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         /// <summary>
         ///     ErrorResult. This class cannot be inherited.
         /// </summary>
-        private sealed class ErrorResult : IHttpActionResult
+        public sealed class ErrorResult : IHttpActionResult
         {
             /// <summary>
             ///     Gets or sets the exception.
             /// </summary>
             /// <value>The exception.</value>
-            internal Exception Exception { private get; set; }
+            public Exception Exception { get; set; }
 
             /// <summary>
             ///     Gets or sets the request.
             /// </summary>
             /// <value>The request.</value>
-            internal HttpRequestMessage Request { private get; set; }
+            public HttpRequestMessage Request { get; set; }
 
             #region IHttpActionResult Members
 

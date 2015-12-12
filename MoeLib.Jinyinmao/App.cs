@@ -149,8 +149,9 @@ namespace Moe.Lib.Jinyinmao
         /// <returns>App.</returns>
         public App Config(IAppConfigProvider appConfigProvider)
         {
-            this.host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
             this.host.AppKeys = appConfigProvider.GetAppKeysConfig();
+            this.host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
+            this.host.Environment = appConfigProvider.GetEnvironmentConfig();
             this.host.Role = appConfigProvider.GetRoleConfig();
             this.host.RoleInstance = appConfigProvider.GetRoleInstanceConfig();
 

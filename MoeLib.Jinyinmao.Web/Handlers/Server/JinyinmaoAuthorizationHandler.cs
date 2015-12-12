@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,7 +21,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
     /// </summary>
     public class JinyinmaoAuthorizationHandler : DelegatingHandler
     {
-        private static readonly bool useSwaggerAsApplicationForDev = CloudConfigurationManager.GetSetting("UseSwaggerAsApplicationForDev").AsBoolean(false);
+        private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JinyinmaoAuthorizationHandler CryptoServiceProvider can not initialize. The GovernmentServerPublicKey may be in bad format. GovernmentServerPublicKey: {0}";
         private readonly JYMAccessTokenProtector accessTokenProtector;
 
         /// <summary>
@@ -44,19 +45,16 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         }
 
         /// <summary>
+        ///     Gets a value indicating whether [use swagger as application for dev].
+        /// </summary>
+        /// <value><c>true</c> if [use swagger as application for dev]; otherwise, <c>false</c>.</value>
+        public static bool UseSwaggerAsApplicationForDev { get; } = CloudConfigurationManager.GetSetting("UseSwaggerAsApplicationForDev").AsBoolean(false);
+
+        /// <summary>
         ///     Gets or sets the government server public key.
         /// </summary>
         /// <value>The government server public key.</value>
         public string GovernmentServerPublicKey { get; set; }
-
-        /// <summary>
-        ///     Gets a value indicating whether [use swagger as application for dev].
-        /// </summary>
-        /// <value><c>true</c> if [use swagger as application for dev]; otherwise, <c>false</c>.</value>
-        public bool UseSwaggerAsApplicationForDev
-        {
-            get { return useSwaggerAsApplicationForDev; }
-        }
 
         private RSACryptoServiceProvider CryptoServiceProvider
         {
@@ -66,9 +64,16 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 {
                     return null;
                 }
-                RSACryptoServiceProvider provider = new RSACryptoServiceProvider(2048);
-                provider.FromXmlString(this.GovernmentServerPublicKey);
-                return provider;
+                try
+                {
+                    RSACryptoServiceProvider provider = new RSACryptoServiceProvider(2048);
+                    provider.FromXmlString(this.GovernmentServerPublicKey);
+                    return provider;
+                }
+                catch (Exception e)
+                {
+                    throw new ConfigurationErrorsException(CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE.FormatWith(this.GovernmentServerPublicKey), e);
+                }
             }
         }
 
@@ -97,7 +102,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             {
                 this.AuthorizeApplicationViaAuthToken(request);
             }
-            else if (this.UseSwaggerAsApplicationForDev && this.IsFromSwagger(request))
+            else if (UseSwaggerAsApplicationForDev && this.IsFromSwagger(request))
             {
                 this.AuthorizeApplicationIfFromSwagger();
             }

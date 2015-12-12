@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
@@ -101,7 +102,11 @@ namespace MoeLib.Jinyinmao.Configs
 
         private static HttpClient InitHttpClient()
         {
-            HttpClient client = HttpClientFactory.Create(new ApplicationIdentityMessageHandler());
+            HttpClient client = HttpClientFactory.Create(new HttpClientHandler
+            {
+                AllowAutoRedirect = true,
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            }, new GovernmentHttpClientMessageHandler());
             client.BaseAddress = GetGovernmentBaseUri();
             client.Timeout = 1.Minutes();
             return client;
