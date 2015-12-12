@@ -103,7 +103,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             }
             else if (this.IsFromLocalhost(request))
             {
-                this.AuthorizeApplicationIfFromSwagger();
+                this.AuthorizeApplicationIfFromLocalhost();
             }
             else
             {
