@@ -41,6 +41,8 @@ namespace MoeLib.Jinyinmao.Configs.GovernmentHttpClient
             request.Headers.TryAddWithoutValidation("X-JYM-CID", App.Host.RoleInstance);
             request.Headers.TryAddWithoutValidation("X-JYM-RID", Guid.NewGuid().ToGuidString());
             request.Headers.TryAddWithoutValidation("X-JYM-SID", Guid.NewGuid().ToGuidString());
+            request.Headers.Accept.Clear();
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
             return base.SendAsync(request, cancellationToken);
         }
     }
