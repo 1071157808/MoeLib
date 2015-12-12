@@ -93,13 +93,17 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             {
                 this.AuthorizeUserViaBearerToken(request);
             }
+            else if (this.GovernmentServerPublicKey != null && HasAuthorizationHeader(request, JYMAuthScheme.JYMInternalAuth))
+            {
+                this.AuthorizeApplicationViaAuthToken(request);
+            }
             else if (this.UseSwaggerAsApplicationForDev && this.IsFromSwagger(request))
             {
                 this.AuthorizeApplicationIfFromSwagger();
             }
-            else if (this.GovernmentServerPublicKey != null && HasAuthorizationHeader(request, JYMAuthScheme.JYMInternalAuth))
+            else if (this.IsFromLocalhost(request))
             {
-                this.AuthorizeApplicationViaAuthToken(request);
+                this.AuthorizeApplicationIfFromSwagger();
             }
             else
             {
@@ -117,6 +121,15 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         {
             return request.Headers.Authorization?.Scheme != null &&
                    string.Equals(request.Headers.Authorization.Scheme, scheme, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void AuthorizeApplicationIfFromLocalhost()
+        {
+            this.Identity = new ClaimsIdentity(new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "Localhost"),
+                new Claim(ClaimTypes.Role, "Application")
+            }, JYMAuthScheme.JYMInternalAuth);
         }
 
         private void AuthorizeApplicationIfFromSwagger()
@@ -177,6 +190,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                     expiration = timestamp
                 }).Content;
             }
+        }
+
+        private bool IsFromLocalhost(HttpRequestMessage request)
+        {
+            return request.IsLocal();
         }
 
         private bool IsFromSwagger(HttpRequestMessage request)
