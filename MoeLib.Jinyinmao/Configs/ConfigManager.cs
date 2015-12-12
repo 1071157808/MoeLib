@@ -43,7 +43,7 @@ namespace MoeLib.Jinyinmao.Configs
         public DateTime ConfigRefreshTime { get; protected set; }
 
         /// <summary>
-        /// Gets the permissions.
+        ///     Gets the permissions.
         /// </summary>
         /// <value>The permissions.</value>
         public Dictionary<string, KeyValuePair<string, string>> Permissions
@@ -58,7 +58,7 @@ namespace MoeLib.Jinyinmao.Configs
         public TimeSpan RefreshInterval { get; }
 
         /// <summary>
-        /// Gets the resources.
+        ///     Gets the resources.
         /// </summary>
         /// <value>The resources.</value>
         public Dictionary<string, string> Resources
@@ -74,7 +74,7 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>TConfig.</returns>
         public TConfig GetConfig<TConfig>() where TConfig : class, IConfig
         {
-            if (!this.GetConfigType().IsSubclassOf(typeof(TConfig)))
+            if (!this.GetConfigType().IsEquivalentTo(typeof(TConfig)))
             {
                 throw new InvalidOperationException($"The config type {typeof(TConfig)} is incorrect.");
             }
@@ -120,7 +120,7 @@ namespace MoeLib.Jinyinmao.Configs
         }
 
         /// <summary>
-        /// Gets the permission.
+        ///     Gets the permission.
         /// </summary>
         /// <param name="serviceName">Name of the service.</param>
         /// <returns>System.Nullable&lt;KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
@@ -153,7 +153,7 @@ namespace MoeLib.Jinyinmao.Configs
         }
 
         /// <summary>
-        /// Gets the resource string.
+        ///     Gets the resource string.
         /// </summary>
         /// <param name="resourceName">Name of the resource.</param>
         /// <returns>System.String.</returns>
