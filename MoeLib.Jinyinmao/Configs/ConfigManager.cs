@@ -74,7 +74,7 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>TConfig.</returns>
         public TConfig GetConfig<TConfig>() where TConfig : class, IConfig
         {
-            if (!this.GetConfigType().IsEquivalentTo(typeof(TConfig)))
+            if (!this.GetConfigType().IsEquivalentTo(typeof(TConfig)) && !this.GetConfigType().IsSubclassOf(typeof(TConfig)))
             {
                 throw new InvalidOperationException($"The config type {typeof(TConfig)} is incorrect.");
             }
