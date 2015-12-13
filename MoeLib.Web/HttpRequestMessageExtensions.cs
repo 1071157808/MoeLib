@@ -19,7 +19,7 @@ namespace MoeLib.Web
         /// <exception cref="System.ArgumentNullException">If the cookieName is null, throw the ArgumentNullException.</exception>
         public static string GetCookie(this HttpRequestMessage request, string cookieName)
         {
-            return HttpUtils.GetHeader(request, cookieName);
+            return HttpUtils.GetCookie(request, cookieName);
         }
 
         /// <summary>
