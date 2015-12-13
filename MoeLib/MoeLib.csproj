@@ -82,6 +82,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="Int.cs" />
+    <Compile Include="Object.cs" />
     <Compile Include="PaginatedList.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

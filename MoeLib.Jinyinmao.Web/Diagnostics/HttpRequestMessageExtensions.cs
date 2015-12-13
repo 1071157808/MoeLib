@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using Moe.Lib;
 using MoeLib.Diagnostics;
 using MoeLib.Web;
@@ -18,35 +17,16 @@ namespace MoeLib.Jinyinmao.Web.Diagnostics
         /// <returns>MoeLib.Diagnostics.TraceEntry.</returns>
         public static TraceEntry GetTraceEntry(this HttpRequestMessage request)
         {
-            IEnumerable<string> clientId = null;
-            IEnumerable<string> deviceId = null;
-            IEnumerable<string> requestId = null;
-            IEnumerable<string> sessionId = null;
-            IEnumerable<string> sourceIP = null;
-            IEnumerable<string> sourceUserAgent = null;
-            IEnumerable<string> userId = null;
-
-            if (request?.Headers != null)
+            return request.To(r => new TraceEntry
             {
-                request.Headers.TryGetValues("X-JYM-CID", out clientId);
-                request.Headers.TryGetValues("X-JYM-DID", out deviceId);
-                request.Headers.TryGetValues("X-JYM-RID", out requestId);
-                request.Headers.TryGetValues("X-JYM-SID", out sessionId);
-                request.Headers.TryGetValues("X-JYM-IP", out sourceIP);
-                request.Headers.TryGetValues("X-JYM-UA", out sourceUserAgent);
-                request.Headers.TryGetValues("X-JYM-UID", out userId);
-            }
-
-            return new TraceEntry
-            {
-                ClientId = clientId?.Join(","),
-                DeviceId = deviceId?.Join(","),
-                RequestId = requestId?.Join(","),
-                SessionId = sessionId?.Join(","),
-                SourceIP = sourceIP != null ? sourceIP.Join(",") : request?.GetUserHostAddress(),
-                SourceUserAgent = sourceUserAgent != null ? sourceUserAgent.Join(",") : request?.GetUserAgent(),
-                UserId = userId?.Join(",")
-            };
+                ClientId = request?.GetHeader("X-JYM-CID"),
+                DeviceId = request?.GetHeader("X-JYM-DID"),
+                RequestId = request?.GetHeader("X-JYM-RID"),
+                SessionId = request?.GetHeader("X-JYM-SID"),
+                SourceIP = request?.GetHeader("X-JYM-IP") ?? request?.GetUserHostAddress(),
+                SourceUserAgent = request?.GetHeader("X-JYM-UA") ?? request?.GetUserAgent(),
+                UserId = request?.GetHeader("X-JYM-UID")
+            });
         }
     }
 }

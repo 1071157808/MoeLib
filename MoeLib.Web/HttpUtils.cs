@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using ReflectionMagic;
@@ -205,6 +206,53 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
+        /// Returns an individual cookie from the cookies collection.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="cookieName">The name of the cookie.</param>
+        /// <returns>The cookie value. Return null if the cookie does not exist.</returns>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
+        /// <exception cref="System.ArgumentNullException">If the cookieName is null, throw the ArgumentNullException.</exception>
+        public static string GetCookie(HttpRequestMessage request, string cookieName)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            if (cookieName == null)
+            {
+                throw new ArgumentNullException(nameof(cookieName));
+            }
+            CookieHeaderValue cookie = request.Headers.GetCookies(cookieName).FirstOrDefault();
+            return cookie?[cookieName].Value;
+        }
+
+        /// <summary>
+        /// Returns an individual HTTP Header value that joins all the header value with ' '.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="key">The key of the header.</param>
+        /// <returns>The HTTP Header value that joins all the header value with ' '. Return null if the header does not exist.</returns>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
+        /// <exception cref="System.ArgumentNullException">If the key is null, throw the ArgumentNullException.</exception>
+        public static string GetHeader(HttpRequestMessage request, string key)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            IEnumerable<string> keys;
+            if (!request.Headers.TryGetValues(key, out keys))
+                return null;
+
+            return keys.Join(" ");
+        }
+
+        /// <summary>
         ///     Gets the HTTP httpContext.
         /// </summary>
         /// <param name="request">The request.</param>
@@ -227,40 +275,93 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        ///     Gets the user agent.
+        /// Returns an individual querystring value.
         /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>The querystring value. Return null if the querystring does not exist.</returns>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
+        /// <exception cref="System.ArgumentNullException">If the key is null, throw the ArgumentNullException.</exception>
+        public static string GetQueryString(this HttpRequestMessage request, string key)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            // IEnumerable<KeyValuePair<string,string>> - right!
+            IEnumerable<KeyValuePair<string, string>> queryStrings = request.GetQueryNameValuePairs();
+            if (queryStrings == null)
+                return null;
+
+            KeyValuePair<string, string> match = queryStrings.FirstOrDefault(kv => string.Compare(kv.Key, key, StringComparison.OrdinalIgnoreCase) == 0);
+            return string.IsNullOrEmpty(match.Value) ? null : match.Value;
+        }
+
+        /// <summary>
+        /// Returns a dictionary of QueryStrings that's easier to work with
+        /// than GetQueryNameValuePairs KevValuePairs collection.
+        /// If you need to pull a few single values use GetQueryString instead.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <returns>The QueryStrings dictionary.</returns>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
+        public static Dictionary<string, string> GetQueryStrings(HttpRequestMessage request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            return request.GetQueryNameValuePairs()
+                          .ToDictionary(kv => kv.Key, kv => kv.Value, StringComparer.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
+        ///     Returns the user agent string value.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <returns>The user agent string value.</returns>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
         public static string GetUserAgent(HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
             return GetUserAgent(request.ToHttpContext());
         }
 
         /// <summary>
-        ///     Gets the user agent.
+        ///     Returns the user agent string value.
         /// </summary>
-        /// <param name="httpContext">The HTTP httpContext.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="httpContext">The instance of <see cref="HttpContext"/>.</param>
+        /// <returns>The user agent string value.</returns>
         public static string GetUserAgent(HttpContext httpContext)
         {
             return httpContext == null ? "" : httpContext.Request.UserAgent;
         }
 
         /// <summary>
-        ///     Gets the user host address.
+        ///     Returns the user host(ip) string value.
         /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
         public static string GetUserHostAddress(HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
             return GetUserHostAddress(request.ToHttpContext());
         }
 
         /// <summary>
-        ///     Gets the user host address.
+        ///     Returns the user host(ip) string value.
         /// </summary>
-        /// <param name="httpContext">The HTTP httpContext.</param>
-        /// <returns>System.String.</returns>
+        /// <param name="httpContext">The instance of <see cref="HttpContext"/>.</param>
         public static string GetUserHostAddress(HttpContext httpContext)
         {
             return httpContext == null ? "" : httpContext.Request.UserHostAddress;
