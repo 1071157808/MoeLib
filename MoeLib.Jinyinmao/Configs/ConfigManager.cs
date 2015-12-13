@@ -74,12 +74,12 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>TConfig.</returns>
         public TConfig GetConfig<TConfig>() where TConfig : class, IConfig
         {
-            if (!this.GetConfigType().IsEquivalentTo(typeof(TConfig)) && !this.GetConfigType().IsSubclassOf(typeof(TConfig)))
+            if (!this.GetConfigType().IsEquivalentTo(typeof(TConfig)))
             {
                 throw new InvalidOperationException($"The config type {typeof(TConfig)} is incorrect.");
             }
 
-            if (this.Config == null)
+            if (!(this.Config is TConfig))
             {
                 this.RefreshConfig<TConfig>();
             }
@@ -140,7 +140,12 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>Dictionary&lt;System.String, KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
         public Dictionary<string, KeyValuePair<string, string>> GetPermissions()
         {
-            return this.GetConfig<IConfig>().Permissions;
+            if (this.Config == null)
+            {
+                this.RefreshConfig<IConfig>();
+            }
+
+            return this.Config.Permissions;
         }
 
         /// <summary>
@@ -149,7 +154,12 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>Dictionary&lt;System.String, System.String&gt;.</returns>
         public Dictionary<string, string> GetResources()
         {
-            return this.GetConfig<IConfig>().Resources;
+            if (this.Config == null)
+            {
+                this.RefreshConfig<IConfig>();
+            }
+
+            return this.Config.Resources;
         }
 
         /// <summary>
