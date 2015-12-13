@@ -45,7 +45,7 @@ namespace MoeLib.Jinyinmao.Configs.GovernmentHttpClient
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             string sign = cryptoServiceProvider.SignData(App.Host.Role.GetBytesOfASCII(), new SHA1CryptoServiceProvider()).ToBase64String();
-            string ticket = $"{App.Host.Role},{sign}";
+            string ticket = $"{App.Host.Role},{sign}".GetBytesOfASCII().ToBase64String();
             request.Headers.Authorization = new AuthenticationHeaderValue("JIAUTH", ticket);
             request.Headers.TryAddWithoutValidation("X-JYM-CID", App.Host.RoleInstance);
             request.Headers.TryAddWithoutValidation("X-JYM-RID", Guid.NewGuid().ToGuidString());

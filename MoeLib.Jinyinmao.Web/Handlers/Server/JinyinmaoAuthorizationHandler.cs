@@ -148,7 +148,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private void AuthorizeApplicationViaAuthToken(HttpRequestMessage request)
         {
-            string token = request.Headers.Authorization?.Parameter;
+            string token = request.Headers.Authorization?.Parameter.ToBase64Bytes().ASCII();
             string[] tokenPiece = token?.Split(',');
             if (tokenPiece?.Length == 5)
             {

@@ -50,7 +50,7 @@ namespace MoeLib.Jinyinmao.Configs
                     SourceVersion = App.Condigurations.GetConfigurationVersion()
                 };
 
-                Task<HttpResponseMessage> responseTask = this.HttpClient.PostAsync("api/Configurations", request, new JsonMediaTypeFormatter());
+                Task<HttpResponseMessage> responseTask = this.HttpClient.PostAsync("/api/Configurations", request, new JsonMediaTypeFormatter());
                 responseTask.Wait();
                 HttpResponseMessage response = responseTask.Result;
 
