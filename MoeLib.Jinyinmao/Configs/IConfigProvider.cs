@@ -17,6 +17,6 @@ namespace MoeLib.Jinyinmao.Configs
         ///     Gets the configurations string.
         /// </summary>
         /// <returns>System.String.</returns>
-        string GetConfigurationsString();
+        SourceConfig GetSourceConfig();
     }
 }

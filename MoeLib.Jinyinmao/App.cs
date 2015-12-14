@@ -188,17 +188,6 @@ namespace Moe.Lib.Jinyinmao
         }
 
         /// <summary>
-        ///     Uses the file configuration manager.
-        /// </summary>
-        /// <typeparam name="TConfig">The type of the configuration.</typeparam>
-        /// <param name="configProviderForDev">The configuration provider for dev.</param>
-        /// <returns>App.</returns>
-        public App UseFileConfigManager<TConfig>(IConfigProvider configProviderForDev = null) where TConfig : class, IConfig
-        {
-            return this.UseConfigManager(new FileConfigProvider<TConfig>(), configProviderForDev);
-        }
-
-        /// <summary>
         ///     Uses the government server configuration manager.
         /// </summary>
         /// <typeparam name="TConfig">The type of the configuration.</typeparam>

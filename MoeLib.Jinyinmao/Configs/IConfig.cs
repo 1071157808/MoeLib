@@ -8,24 +8,6 @@ namespace MoeLib.Jinyinmao.Configs
     public interface IConfig
     {
         /// <summary>
-        ///     Gets the configurations.
-        /// </summary>
-        /// <value>The configurations.</value>
-        string Configurations { get; }
-
-        /// <summary>
-        ///     Gets the configuration version.
-        /// </summary>
-        /// <value>The configuration version.</value>
-        string ConfigurationVersion { get; }
-
-        /// <summary>
-        ///     Gets the permissions.
-        /// </summary>
-        /// <value>The permissions.</value>
-        Dictionary<string, KeyValuePair<string, string>> Permissions { get; }
-
-        /// <summary>
         ///     Gets the resources.
         /// </summary>
         /// <value>The resources.</value>

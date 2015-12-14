@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moe.Lib;
 using Moe.Lib.Jinyinmao;
+using Newtonsoft.Json;
 
 namespace MoeLib.Jinyinmao.Configs
 {
@@ -66,6 +67,12 @@ namespace MoeLib.Jinyinmao.Configs
             get { return this.GetResources(); }
         }
 
+        /// <summary>
+        ///     Gets or sets the source configuration.
+        /// </summary>
+        /// <value>The source configuration.</value>
+        public SourceConfig SourceConfig { get; set; }
+
         private IConfig Config { get; set; }
 
         /// <summary>
@@ -79,14 +86,9 @@ namespace MoeLib.Jinyinmao.Configs
                 throw new InvalidOperationException($"The config type {typeof(TConfig)} is incorrect.");
             }
 
-            if (!(this.Config is TConfig))
+            if (this.Config == null)
             {
-                this.RefreshConfig<TConfig>();
-            }
-
-            if (this.IsConfigNeedRefresh())
-            {
-                Task.Run(() => this.RefreshConfig<TConfig>());
+                return this.GetSourceConfig().Configurations.FromJson<TConfig>();
             }
 
             return (TConfig)this.Config;
@@ -107,7 +109,7 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>System.String.</returns>
         public string GetConfigurationsString()
         {
-            return this.configProvider.GetConfigurationsString();
+            return this.GetSourceConfig().Configurations;
         }
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>System.String.</returns>
         public string GetConfigurationVersion()
         {
-            return this.Config == null ? "init" : this.Config.ConfigurationVersion;
+            return this.SourceConfig == null ? "init" : this.SourceConfig.ConfigurationVersion;
         }
 
         /// <summary>
@@ -140,12 +142,7 @@ namespace MoeLib.Jinyinmao.Configs
         /// <returns>Dictionary&lt;System.String, KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
         public Dictionary<string, KeyValuePair<string, string>> GetPermissions()
         {
-            if (this.Config == null)
-            {
-                this.RefreshConfig<IConfig>();
-            }
-
-            return this.Config.Permissions;
+            return this.GetSourceConfig().Permissions;
         }
 
         /// <summary>
@@ -156,7 +153,7 @@ namespace MoeLib.Jinyinmao.Configs
         {
             if (this.Config == null)
             {
-                this.RefreshConfig<IConfig>();
+                return this.GetSourceConfig().Configurations.FromJson<IConfig>().Resources;
             }
 
             return this.Config.Resources;
@@ -183,7 +180,24 @@ namespace MoeLib.Jinyinmao.Configs
             return this.ConfigRefreshTime.Add(this.RefreshInterval) < DateTime.UtcNow;
         }
 
-        private void RefreshConfig<TConfig>() where TConfig : class, IConfig
+        private SourceConfig GetSourceConfig()
+        {
+            if (this.SourceConfig == null)
+            {
+                this.RefreshConfig();
+            }
+            else
+            {
+                if (this.IsConfigNeedRefresh())
+                {
+                    Task.Run(() => this.RefreshConfig());
+                }
+            }
+
+            return this.SourceConfig;
+        }
+
+        private void RefreshConfig()
         {
             if (!this.isConfigRefreshing)
             {
@@ -194,7 +208,8 @@ namespace MoeLib.Jinyinmao.Configs
                         if (!this.isConfigRefreshing)
                         {
                             this.isConfigRefreshing = true;
-                            this.Config = this.configProvider.GetConfigurationsString().FromJson<TConfig>();
+                            this.SourceConfig = this.configProvider.GetSourceConfig();
+                            this.Config = (IConfig)JsonConvert.DeserializeObject(this.SourceConfig.Configurations, this.GetConfigType());
                             this.ConfigRefreshTime = DateTime.UtcNow;
                         }
                     }

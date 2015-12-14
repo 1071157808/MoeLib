@@ -39,7 +39,7 @@ namespace MoeLib.Jinyinmao.Configs
         ///     Gets the configurations string.
         /// </summary>
         /// <returns>System.String.</returns>
-        public string GetConfigurationsString()
+        public SourceConfig GetSourceConfig()
         {
             try
             {
@@ -58,7 +58,7 @@ namespace MoeLib.Jinyinmao.Configs
                 {
                     Task<string> contentTask = response.Content.ReadAsStringAsync();
                     contentTask.Wait();
-                    return contentTask.Result;
+                    return contentTask.Result.FromJson<SourceConfig>();
                 }
 
                 throw new HttpRequestException($"Can not get \"Configurations\" from government server {this.HttpClient.BaseAddress}, {response.StatusCode} {response.ReasonPhrase}");
@@ -70,16 +70,6 @@ namespace MoeLib.Jinyinmao.Configs
         }
 
         #endregion IConfigProvider Members
-
-        /// <summary>
-        ///     Gets the configuration.
-        /// </summary>
-        /// <returns>TConfig.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public IConfig GetConfig()
-        {
-            return this.GetConfigurationsString().FromJson<TConfig>();
-        }
 
         private static Uri GetGovernmentBaseUri()
         {
