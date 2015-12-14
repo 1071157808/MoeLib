@@ -22,8 +22,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             request.Headers.Accept.Clear();
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 0.8));
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.2));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.5));
             return await base.SendAsync(request, cancellationToken);
         }
     }

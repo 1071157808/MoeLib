@@ -27,25 +27,28 @@ namespace MoeLib.Jinyinmao.Web
         /// <returns>A new instance of the <see cref="T:System.Net.Http.HttpClient" />.</returns>
         public static HttpClient Create(string serviceName, TraceEntry traceEntry, params DelegatingHandler[] handlers)
         {
-            IList<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>();
-            //delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
-            delegatingHandlers.Add(new JinyinmaoTraceEntryHandler(traceEntry));
-            delegatingHandlers.Add(new JinyinmaoHttpStatusHandler());
-            delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
-            delegatingHandlers.Add(new JinyinmaoRetryHandler());
+            List<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>
+            {
+                // new JinyinmaoServicePermissionHandler(serviceName),
+                new JinyinmaoTraceEntryHandler(traceEntry),
+                new JinyinmaoHttpStatusHandler(),
+                new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"),
+                new JinyinmaoRetryHandler()
+            };
+            delegatingHandlers.AddRange(handlers);
 
             HttpClient client = HttpClientFactory.Create(new HttpClientHandler
             {
                 AllowAutoRedirect = true,
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            }, handlers);
+            }, delegatingHandlers.ToArray());
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 0.7));
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.2));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json", 1.0));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.5));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*", 0.1));
             client.DefaultRequestHeaders.AcceptEncoding.Clear();
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 0.7));
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.2));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 1.0));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.5));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
             client.Timeout = 1.Minutes();
 

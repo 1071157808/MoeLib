@@ -89,7 +89,6 @@
     <Compile Include="Filters\IPAuthorizeAttribute.cs" />
     <Compile Include="Auth\JYMAuthScheme.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
-    <Compile Include="Handlers\Client\JinyinmaoAcceptHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoAuthorizationHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoExceptionHandler.cs" />
     <Compile Include="Handlers\JinyinmaoLogHandler.cs" />
