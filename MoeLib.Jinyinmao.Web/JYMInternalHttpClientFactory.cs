@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -45,6 +46,7 @@ namespace MoeLib.Jinyinmao.Web
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.2));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
             client.Timeout = 1.Minutes();
+            client.BaseAddress = new Uri("http://mock.jinyinmao.com.cn/");
             return client;
         }
 
