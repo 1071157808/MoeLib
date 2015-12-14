@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers
         ///     The logger
         /// </summary>
         private static readonly Lazy<IWebLogger> logger = new Lazy<IWebLogger>(() => InitApplicationLogger());
+
+        private static readonly string[] mediaTypes = { "application/json", "application/xml", "application/jsonp" };
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="JinyinmaoLogHandler" /> class.
@@ -75,7 +78,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers
                 { "ResponseStatusCode", response.StatusCode }
             };
 
-            if (response.Content != null && response.Content.Headers.ContentType.MediaType.StartsWith("application", StringComparison.OrdinalIgnoreCase))
+            if (response.Content != null && mediaTypes.Any(t => string.Equals(t, response.Content.Headers.ContentType.MediaType, StringComparison.OrdinalIgnoreCase)))
             {
                 payload.Add("ResponseContent", (await response.Content.ReadAsStringAsync()).GetFirst(30000));
             }

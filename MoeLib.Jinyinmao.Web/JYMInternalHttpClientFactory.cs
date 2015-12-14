@@ -4,7 +4,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Moe.Lib;
+using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
+using MoeLib.Jinyinmao.Web.Auth;
 using MoeLib.Jinyinmao.Web.Diagnostics;
 using MoeLib.Jinyinmao.Web.Handlers;
 using MoeLib.Jinyinmao.Web.Handlers.Client;
@@ -26,7 +28,7 @@ namespace MoeLib.Jinyinmao.Web
         public static HttpClient Create(string serviceName, TraceEntry traceEntry, params DelegatingHandler[] handlers)
         {
             IList<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>();
-            delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
+            //delegatingHandlers.Add(new JinyinmaoServicePermissionHandler(serviceName));
             delegatingHandlers.Add(new JinyinmaoTraceEntryHandler(traceEntry));
             delegatingHandlers.Add(new JinyinmaoHttpStatusHandler());
             delegatingHandlers.Add(new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"));
@@ -46,7 +48,18 @@ namespace MoeLib.Jinyinmao.Web
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.2));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
             client.Timeout = 1.Minutes();
-            client.BaseAddress = new Uri("http://mock.jinyinmao.com.cn/");
+
+            KeyValuePair<string, string>? permission = App.Condigurations.GetPermission(serviceName);
+            if (permission.HasValue)
+            {
+                client.BaseAddress = new Uri(permission.Value.Key);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JYMAuthScheme.JYMInternalAuth, permission.Value.Value);
+            }
+            else
+            {
+                client.BaseAddress = new Uri("http://service.jinyinmao.com.cn/");
+            }
+
             return client;
         }
 

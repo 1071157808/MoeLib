@@ -11,13 +11,22 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
+using System.Net.Http;
+using MoeLib.Diagnostics;
+using MoeLib.Jinyinmao.Web;
+
 namespace MoeLibLab
 {
     internal class Program
     {
         private static void Main(string[] args)
         {
-            HttpClientTest.TestAsync().Wait();
+            using (HttpClient client = JYMInternalHttpClientFactory.Create("Jinyinmao.MessageManager.Api", (TraceEntry)null))
+            {
+                client.GetAsync("/api/a").Wait();
+                Console.WriteLine("1");
+            }
         }
     }
 }
