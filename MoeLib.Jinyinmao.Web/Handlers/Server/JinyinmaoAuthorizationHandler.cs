@@ -204,7 +204,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private bool IsFromSwagger(HttpRequestMessage request)
         {
-            return request.Headers.Referrer.AbsoluteUri.Contains("swagger", StringComparison.OrdinalIgnoreCase);
+            if (request.Headers.Referrer != null)
+            {
+                return request.Headers.Referrer.AbsoluteUri.Contains("swagger", StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
         }
     }
 }
