@@ -156,7 +156,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 string sign = tokenPiece[4];
                 if (this.CryptoServiceProvider.VerifyData(ticket.GetBytesOfASCII(), new SHA1CryptoServiceProvider(), sign.ToBase64Bytes()))
                 {
-                    if (tokenPiece[3].AsLong(0) > DateTime.UtcNow.UnixTimestamp() && tokenPiece[2] == App.Host.Role)
+                    if (tokenPiece[3].AsLong(0) > DateTime.UtcNow.UnixTimestamp() && tokenPiece[1] == App.Host.Role)
                     {
                         this.Identity = new ClaimsIdentity(new List<Claim>
                         {

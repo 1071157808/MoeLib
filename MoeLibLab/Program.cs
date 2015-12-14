@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
 using MoeLib.Jinyinmao.Configs;
@@ -21,6 +22,28 @@ using MoeLib.Jinyinmao.Web;
 
 namespace MoeLibLab
 {
+    public class DispatcherRequest
+    {
+        public string BizCode { get; set; }
+
+        public string ChannelCode { get; set; }
+
+        public List<int> Gateway { get; set; }
+
+        public int MessageType
+        {
+            get { return 10; }
+        }
+
+        public string Priority { get; set; }
+
+        public string SendRule { get; set; }
+
+        public Dictionary<string, string> TemplateParams { get; set; }
+
+        public List<UserInfo> UserInfoList { get; set; }
+    }
+
     public class TestConfig : IConfig
     {
         #region IConfig Members
@@ -34,16 +57,35 @@ namespace MoeLibLab
         #endregion IConfig Members
     }
 
+    public class UserInfo
+    {
+        public string Email { get; set; }
+
+        public string PhoneNum { get; set; }
+
+        public string UAppId { get; set; }
+
+        public string UId { get; set; }
+
+        public string WeChatNum { get; set; }
+    }
+
     internal class Program
     {
         private static void Main(string[] args)
+        {
+            Test().Wait();
+        }
+
+        private static async Task Test()
         {
             App.Initialize().Config().UseGovernmentServerConfigManager<TestConfig>();
 
             using (HttpClient client = JYMInternalHttpClientFactory.Create("Jinyinmao.MessageManager.Api", (TraceEntry)null))
             {
-                client.GetAsync("/api/a").Wait();
-                Console.WriteLine("1");
+                HttpResponseMessage response = await client.PostAsJsonAsync("/api/MessageManager/SendWithTemplate", new DispatcherRequest());
+                string content = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(content);
             }
         }
     }
