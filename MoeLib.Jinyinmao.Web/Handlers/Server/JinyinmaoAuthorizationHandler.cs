@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Azure;
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Web.Auth;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,10 +13,8 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.Azure;
-using Moe.Lib;
-using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Web.Auth;
+
+// ReSharper disable All
 
 namespace MoeLib.Jinyinmao.Web.Handlers.Server
 {

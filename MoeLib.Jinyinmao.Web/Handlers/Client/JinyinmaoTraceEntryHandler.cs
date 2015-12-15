@@ -1,11 +1,13 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Moe.Lib;
+﻿using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
 using MoeLib.Jinyinmao.Web.Diagnostics;
+using System;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+
+// ReSharper disable All
 
 namespace MoeLib.Jinyinmao.Web.Handlers.Client
 {

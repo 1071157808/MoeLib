@@ -11,6 +11,7 @@
 // </copyright>
 // ***********************************************************************
 
+using ReflectionMagic;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -21,7 +22,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using ReflectionMagic;
+
+// ReSharper disable All
 
 namespace Moe.Lib.Web
 {
@@ -206,9 +208,9 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        /// Returns an individual cookie from the cookies collection.
+        ///     Returns an individual cookie from the cookies collection.
         /// </summary>
-        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <param name="cookieName">The name of the cookie.</param>
         /// <returns>The cookie value. Return null if the cookie does not exist.</returns>
         /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
@@ -228,9 +230,9 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        /// Returns an individual HTTP Header value that joins all the header value with ' '.
+        ///     Returns an individual HTTP Header value that joins all the header value with ' '.
         /// </summary>
-        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <param name="key">The key of the header.</param>
         /// <returns>The HTTP Header value that joins all the header value with ' '. Return null if the header does not exist.</returns>
         /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
@@ -275,7 +277,7 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        /// Returns an individual querystring value.
+        ///     Returns an individual querystring value.
         /// </summary>
         /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <param name="key">The key.</param>
@@ -302,11 +304,11 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
-        /// Returns a dictionary of QueryStrings that's easier to work with
-        /// than GetQueryNameValuePairs KevValuePairs collection.
-        /// If you need to pull a few single values use GetQueryString instead.
+        ///     Returns a dictionary of QueryStrings that's easier to work with
+        ///     than GetQueryNameValuePairs KevValuePairs collection.
+        ///     If you need to pull a few single values use GetQueryString instead.
         /// </summary>
-        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <returns>The QueryStrings dictionary.</returns>
         /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
         public static Dictionary<string, string> GetQueryStrings(HttpRequestMessage request)
@@ -316,13 +318,13 @@ namespace Moe.Lib.Web
                 throw new ArgumentNullException(nameof(request));
             }
             return request.GetQueryNameValuePairs()
-                          .ToDictionary(kv => kv.Key, kv => kv.Value, StringComparer.OrdinalIgnoreCase);
+                .ToDictionary(kv => kv.Key, kv => kv.Value, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
         ///     Returns the user agent string value.
         /// </summary>
-        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <returns>The user agent string value.</returns>
         /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
         public static string GetUserAgent(HttpRequestMessage request)
@@ -337,7 +339,7 @@ namespace Moe.Lib.Web
         /// <summary>
         ///     Returns the user agent string value.
         /// </summary>
-        /// <param name="httpContext">The instance of <see cref="HttpContext"/>.</param>
+        /// <param name="httpContext">The instance of <see cref="HttpContext" />.</param>
         /// <returns>The user agent string value.</returns>
         public static string GetUserAgent(HttpContext httpContext)
         {
@@ -347,7 +349,7 @@ namespace Moe.Lib.Web
         /// <summary>
         ///     Returns the user host(ip) string value.
         /// </summary>
-        /// <param name="request">The instance of <see cref="HttpRequestMessage"/>.</param>
+        /// <param name="request">The instance of <see cref="HttpRequestMessage" />.</param>
         /// <exception cref="System.ArgumentNullException">If the request is null, throw the ArgumentNullException.</exception>
         public static string GetUserHostAddress(HttpRequestMessage request)
         {
@@ -361,7 +363,7 @@ namespace Moe.Lib.Web
         /// <summary>
         ///     Returns the user host(ip) string value.
         /// </summary>
-        /// <param name="httpContext">The instance of <see cref="HttpContext"/>.</param>
+        /// <param name="httpContext">The instance of <see cref="HttpContext" />.</param>
         public static string GetUserHostAddress(HttpContext httpContext)
         {
             return httpContext == null ? "" : httpContext.Request.UserHostAddress;

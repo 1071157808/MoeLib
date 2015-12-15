@@ -21,14 +21,16 @@ OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHE
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Net;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Azure;
 using MoeLib.Jinyinmao.Web.Diagnostics;
 using Orleans.Runtime;
 using Orleans.Runtime.Host;
+using System;
+using System.Collections.Generic;
+using System.Net;
+
+// ReSharper disable All
 
 namespace MoeLibOrleansLabSiloHost
 {

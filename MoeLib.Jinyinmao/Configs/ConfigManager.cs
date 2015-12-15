@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Moe.Lib;
+﻿using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+// ReSharper disable All
 
 namespace MoeLib.Jinyinmao.Configs
 {

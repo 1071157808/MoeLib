@@ -13,6 +13,8 @@
 
 using System;
 
+// ReSharper disable All
+
 namespace MoeLib.Diagnostics
 {
     /// <summary>

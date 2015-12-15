@@ -14,6 +14,8 @@
 using System;
 using System.Collections.Generic;
 
+// ReSharper disable All
+
 namespace MoeLib.Diagnostics
 {
     /// <summary>
@@ -76,8 +78,26 @@ namespace MoeLib.Diagnostics
         /// <value>The tag.</value>
         public string Tag { get; set; }
 
+        #region IEquatable<MessageContent> Members
+
         /// <summary>
-        /// Implements the !=.
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(MessageContent other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.ErrorCode == other.ErrorCode && string.Equals(this.ErrorCodeMsg, other.ErrorCodeMsg) && string.Equals(this.Message, other.Message) && Equals(this.Payload, other.Payload) && string.Equals(this.Tag, other.Tag);
+        }
+
+        #endregion IEquatable<MessageContent> Members
+
+        /// <summary>
+        ///     Implements the !=.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -88,7 +108,7 @@ namespace MoeLib.Diagnostics
         }
 
         /// <summary>
-        /// Implements the ==.
+        ///     Implements the ==.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -99,10 +119,10 @@ namespace MoeLib.Diagnostics
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to the current object.
+        ///     Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <returns>
-        /// true if the specified object  is equal to the current object; otherwise, false.
+        ///     true if the specified object  is equal to the current object; otherwise, false.
         /// </returns>
         /// <param name="obj">The object to compare with the current object. </param>
         public override bool Equals(object obj)
@@ -114,24 +134,10 @@ namespace MoeLib.Diagnostics
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        ///     Serves as the default hash function.
         /// </summary>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
-        /// </returns>
-        /// <param name="other">An object to compare with this object.</param>
-        public bool Equals(MessageContent other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return this.ErrorCode == other.ErrorCode && string.Equals(this.ErrorCodeMsg, other.ErrorCodeMsg) && string.Equals(this.Message, other.Message) && Equals(this.Payload, other.Payload) && string.Equals(this.Tag, other.Tag);
-        }
-
-        /// <summary>
-        /// Serves as the default hash function.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
+        ///     A hash code for the current object.
         /// </returns>
         public override int GetHashCode()
         {

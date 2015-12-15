@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.Azure;
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
+using System;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
-using Microsoft.Azure;
-using Moe.Lib;
-using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
+
+// ReSharper disable All
 
 namespace MoeLib.Jinyinmao.Configs
 {
@@ -49,19 +51,18 @@ namespace MoeLib.Jinyinmao.Configs
                     RoleInstance = App.Host.RoleInstance,
                     SourceVersion = App.Condigurations.GetConfigurationVersion()
                 };
-
-                Task<HttpResponseMessage> responseTask = this.HttpClient.PostAsync("/api/Configurations", request, new JsonMediaTypeFormatter());
-                responseTask.Wait();
-                HttpResponseMessage response = responseTask.Result;
-
-                if (response.IsSuccessStatusCode)
+                return Task.Run(async () =>
                 {
-                    Task<string> contentTask = response.Content.ReadAsStringAsync();
-                    contentTask.Wait();
-                    return contentTask.Result.FromJson<SourceConfig>();
-                }
+                    HttpResponseMessage response = await this.HttpClient.PostAsync("/api/Configurations", request, new JsonMediaTypeFormatter());
 
-                throw new HttpRequestException($"Can not get \"Configurations\" from government server {this.HttpClient.BaseAddress}, {response.StatusCode} {response.ReasonPhrase}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Task<string> contentTask = response.Content.ReadAsStringAsync();
+                        contentTask.Wait();
+                        return contentTask.Result.FromJson<SourceConfig>();
+                    }
+                    throw new HttpRequestException($"Can not get \"Configurations\" from government server {this.HttpClient.BaseAddress}, {response.StatusCode} {response.ReasonPhrase}");
+                }).Result;
             }
             catch (Exception e)
             {
