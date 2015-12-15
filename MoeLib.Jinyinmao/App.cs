@@ -56,7 +56,7 @@ namespace Moe.Lib.Jinyinmao
         /// </summary>
         /// <value>The condigurations.</value>
         /// <exception cref="System.InvalidOperationException">The app has not configurated the ConfigManager.</exception>
-        public static ConfigManager Condigurations
+        public static ConfigManager Configurations
         {
             get
             {

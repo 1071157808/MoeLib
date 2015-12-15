@@ -1,13 +1,12 @@
-﻿using Microsoft.Azure;
-using Moe.Lib;
-using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Threading.Tasks;
+using Microsoft.Azure;
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
 
 // ReSharper disable All
 
@@ -49,17 +48,16 @@ namespace MoeLib.Jinyinmao.Configs
                 {
                     Role = App.Host.Role,
                     RoleInstance = App.Host.RoleInstance,
-                    SourceVersion = App.Condigurations.GetConfigurationVersion()
+                    SourceVersion = App.Configurations.GetConfigurationVersion()
                 };
                 return Task.Run(async () =>
                 {
-                    HttpResponseMessage response = await this.HttpClient.PostAsync("/api/Configurations", request, new JsonMediaTypeFormatter());
+                    HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync("/api/Configurations", request);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        Task<string> contentTask = response.Content.ReadAsStringAsync();
-                        contentTask.Wait();
-                        return contentTask.Result.FromJson<SourceConfig>();
+                        string content = await response.Content.ReadAsStringAsync();
+                        return content.FromJson<SourceConfig>();
                     }
                     throw new HttpRequestException($"Can not get \"Configurations\" from government server {this.HttpClient.BaseAddress}, {response.StatusCode} {response.ReasonPhrase}");
                 }).Result;

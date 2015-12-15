@@ -72,9 +72,19 @@ namespace MoeLibLab
 
     internal class Program
     {
+        public static string TestTask()
+        {
+            return Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(60));
+                return "aaa";
+            }).Result;
+        }
+
         private static void Main(string[] args)
         {
-            Test().Wait();
+            string value = TestTask();
+            Console.WriteLine(value);
         }
 
         private static async Task Test()

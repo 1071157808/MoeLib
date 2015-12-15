@@ -52,7 +52,7 @@ namespace MoeLib.Jinyinmao.Web
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
             client.Timeout = 1.Minutes();
 
-            KeyValuePair<string, string>? permission = App.Condigurations.GetPermission(serviceName);
+            KeyValuePair<string, string>? permission = App.Configurations.GetPermission(serviceName);
             if (permission.HasValue)
             {
                 client.BaseAddress = new Uri(permission.Value.Key);
