@@ -234,7 +234,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private bool IsFromWhitelists(HttpRequestMessage request)
         {
-            return IPWhitelists.Contains(request.GetUserHostAddress());
+            return IPWhitelists != null && IPWhitelists.Contains(request.GetUserHostAddress());
         }
     }
 }

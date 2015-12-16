@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Diagnostics;
 using MoeLib.Jinyinmao.Configs;
@@ -76,6 +77,25 @@ namespace MoeLibLab
         public string WeChatNum { get; set; }
     }
 
+    internal class JinyinmaoConfig : IConfig
+    {
+        #region IConfig Members
+
+        /// <summary>
+        ///     Gets the ip whitelists.
+        /// </summary>
+        /// <value>The ip whitelists.</value>
+        public List<string> IPWhitelists { get; set; }
+
+        /// <summary>
+        ///     Gets the resources.
+        /// </summary>
+        /// <value>The resources.</value>
+        public Dictionary<string, string> Resources { get; set; }
+
+        #endregion IConfig Members
+    }
+
     internal class Program
     {
         public static string TestTask()
@@ -89,8 +109,8 @@ namespace MoeLibLab
 
         private static void Main(string[] args)
         {
-            string value = TestTask();
-            Console.WriteLine(value);
+            List<string> list = "{}".FromJson<JinyinmaoConfig>().IPWhitelists;
+            Console.WriteLine(list?.Count);
         }
 
         private static async Task Test()

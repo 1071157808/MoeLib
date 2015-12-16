@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AppConfigProvider.cs" />
+    <Compile Include="Configs\JinyinmaoConfig.cs" />
     <Compile Include="Configs\ConfigManager.cs" />
     <Compile Include="Configs\GovernmentHttpClient\ApplicationConfigurationsFetchResponse.cs" />
     <Compile Include="Configs\GovernmentHttpClient\GovernmentHttpClientMessageHandler.cs" />

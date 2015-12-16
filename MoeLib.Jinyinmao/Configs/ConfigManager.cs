@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
 using Moe.Lib;
 using Moe.Lib.Jinyinmao;
@@ -44,7 +45,7 @@ namespace MoeLib.Jinyinmao.Configs
         public DateTime ConfigRefreshTime { get; protected set; }
 
         /// <summary>
-        /// Gets the ip whitelists.
+        ///     Gets the ip whitelists.
         /// </summary>
         /// <value>The ip whitelists.</value>
         public List<string> IPWhitelists
@@ -138,7 +139,7 @@ namespace MoeLib.Jinyinmao.Configs
         {
             if (this.Config == null)
             {
-                return this.GetSourceConfig().Configurations.FromJson<IConfig>().IPWhitelists;
+                return this.GetSourceConfig().Configurations.FromJson<JinyinmaoConfig>().IPWhitelists;
             }
 
             return this.Config.IPWhitelists;
@@ -176,7 +177,7 @@ namespace MoeLib.Jinyinmao.Configs
         {
             if (this.Config == null)
             {
-                return this.GetSourceConfig().Configurations.FromJson<IConfig>().Resources;
+                return this.GetSourceConfig().Configurations.FromJson<JinyinmaoConfig>().Resources;
             }
 
             return this.Config.Resources;
@@ -244,6 +245,11 @@ namespace MoeLib.Jinyinmao.Configs
                         {
                             { "SourceVersion", this.GetConfigurationVersion() }
                         });
+
+                    if (this.SourceConfig == null)
+                    {
+                        throw new ConfigurationErrorsException("Can not init configurations!", e);
+                    }
                 }
                 finally
                 {
