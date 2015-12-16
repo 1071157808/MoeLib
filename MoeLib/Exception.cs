@@ -16,8 +16,6 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
 
-// ReSharper disable All
-
 namespace Moe.Lib
 {
     /// <summary>

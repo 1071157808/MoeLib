@@ -8,8 +8,6 @@ using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Configs.GovernmentHttpClient;
 
-// ReSharper disable All
-
 namespace MoeLib.Jinyinmao.Configs
 {
     /// <summary>

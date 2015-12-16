@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -7,8 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-
-// ReSharper disable All
+using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
 
 namespace Moe.Lib.Data
 {

@@ -11,7 +11,6 @@
 // </copyright>
 // ***********************************************************************
 
-using ReflectionMagic;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -22,8 +21,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-
-// ReSharper disable All
+using ReflectionMagic;
 
 namespace Moe.Lib.Web
 {

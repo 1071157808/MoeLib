@@ -1,8 +1,4 @@
-﻿using Microsoft.Azure;
-using Moe.Lib;
-using Moe.Lib.Jinyinmao;
-using MoeLib.Jinyinmao.Web.Auth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -13,8 +9,11 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-
-// ReSharper disable All
+using Microsoft.Azure;
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using MoeLib.Jinyinmao.Web.Auth;
+using MoeLib.Web;
 
 namespace MoeLib.Jinyinmao.Web.Handlers.Server
 {
@@ -24,6 +23,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
     public class JinyinmaoAuthorizationHandler : DelegatingHandler
     {
         private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JinyinmaoAuthorizationHandler CryptoServiceProvider can not initialize. The GovernmentServerPublicKey may be in bad format. GovernmentServerPublicKey: {0}";
+        private static readonly Lazy<List<string>> ipWhitelists = new Lazy<List<string>>(() => App.Configurations.GetIPWhitelists());
         private readonly JYMAccessTokenProtector accessTokenProtector;
 
         /// <summary>
@@ -57,6 +57,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         /// </summary>
         /// <value>The government server public key.</value>
         public string GovernmentServerPublicKey { get; set; }
+
+        private static List<string> IPWhitelists
+        {
+            get { return ipWhitelists.Value; }
+        }
 
         private RSACryptoServiceProvider CryptoServiceProvider
         {
@@ -108,6 +113,10 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             {
                 this.AuthorizeApplicationIfFromSwagger();
             }
+            else if (this.IsFromWhitelists(request))
+            {
+                this.AuthorizeApplicationIfFromWhitelistst(request);
+            }
             else if (this.IsFromLocalhost(request))
             {
                 this.AuthorizeApplicationIfFromLocalhost();
@@ -144,6 +153,16 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             this.Identity = new ClaimsIdentity(new List<Claim>
             {
                 new Claim(ClaimTypes.Name, "Swagger"),
+                new Claim(ClaimTypes.Role, "Application")
+            }, JYMAuthScheme.JYMInternalAuth);
+        }
+
+        private void AuthorizeApplicationIfFromWhitelistst(HttpRequestMessage request)
+        {
+            string ip = request.GetUserHostAddress();
+            this.Identity = new ClaimsIdentity(new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, $"IP: {ip}"),
                 new Claim(ClaimTypes.Role, "Application")
             }, JYMAuthScheme.JYMInternalAuth);
         }
@@ -211,6 +230,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 return request.Headers.Referrer.AbsoluteUri.Contains("swagger", StringComparison.OrdinalIgnoreCase);
             }
             return false;
+        }
+
+        private bool IsFromWhitelists(HttpRequestMessage request)
+        {
+            return IPWhitelists.Contains(request.GetUserHostAddress());
         }
     }
 }

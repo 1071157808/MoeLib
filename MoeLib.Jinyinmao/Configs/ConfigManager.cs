@@ -1,11 +1,9 @@
-﻿using Moe.Lib;
-using Moe.Lib.Jinyinmao;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-// ReSharper disable All
+using Moe.Lib;
+using Moe.Lib.Jinyinmao;
+using Newtonsoft.Json;
 
 namespace MoeLib.Jinyinmao.Configs
 {
@@ -44,6 +42,15 @@ namespace MoeLib.Jinyinmao.Configs
         /// </summary>
         /// <value>The configuration refresh time.</value>
         public DateTime ConfigRefreshTime { get; protected set; }
+
+        /// <summary>
+        /// Gets the ip whitelists.
+        /// </summary>
+        /// <value>The ip whitelists.</value>
+        public List<string> IPWhitelists
+        {
+            get { return this.GetIPWhitelists(); }
+        }
 
         /// <summary>
         ///     Gets the permissions.
@@ -121,6 +128,20 @@ namespace MoeLib.Jinyinmao.Configs
         public string GetConfigurationVersion()
         {
             return this.SourceConfig == null ? "init" : this.SourceConfig.ConfigurationVersion;
+        }
+
+        /// <summary>
+        ///     Gets the ip whitelists.
+        /// </summary>
+        /// <returns>List&lt;System.String&gt;.</returns>
+        public List<string> GetIPWhitelists()
+        {
+            if (this.Config == null)
+            {
+                return this.GetSourceConfig().Configurations.FromJson<IConfig>().IPWhitelists;
+            }
+
+            return this.Config.IPWhitelists;
         }
 
         /// <summary>

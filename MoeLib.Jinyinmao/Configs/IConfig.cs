@@ -8,6 +8,12 @@ namespace MoeLib.Jinyinmao.Configs
     public interface IConfig
     {
         /// <summary>
+        /// Gets the ip whitelists.
+        /// </summary>
+        /// <value>The ip whitelists.</value>
+        List<string> IPWhitelists { get; }
+
+        /// <summary>
         ///     Gets the resources.
         /// </summary>
         /// <value>The resources.</value>

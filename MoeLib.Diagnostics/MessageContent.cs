@@ -14,8 +14,6 @@
 using System;
 using System.Collections.Generic;
 
-// ReSharper disable All
-
 namespace MoeLib.Diagnostics
 {
     /// <summary>
