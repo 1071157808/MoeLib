@@ -10,7 +10,7 @@ namespace MoeLib.Jinyinmao.Web.Auth
     /// <summary>
     ///     JYMAccessTokenProtector.
     /// </summary>
-    internal sealed class JYMAccessTokenProtector
+    public sealed class JYMAccessTokenProtector
     {
         private const string Anonymous = "Anonymous";
         private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JYMAccessTokenProtector RSACryptoServiceProvider can not initialize. The key may be in bad format. Key: {0}";
@@ -25,7 +25,7 @@ namespace MoeLib.Jinyinmao.Web.Auth
         ///     Initializes a new instance of the <see cref="JYMAccessTokenProtector" /> class.
         /// </summary>
         /// <param name="key">The cryptographic key.</param>
-        internal JYMAccessTokenProtector(string key)
+        public JYMAccessTokenProtector(string key)
         {
             try
             {
@@ -38,7 +38,12 @@ namespace MoeLib.Jinyinmao.Web.Auth
             }
         }
 
-        internal string Protect(ClaimsIdentity identity)
+        /// <summary>
+        ///     Protects the specified identity.
+        /// </summary>
+        /// <param name="identity">The identity.</param>
+        /// <returns>System.String.</returns>
+        public string Protect(ClaimsIdentity identity)
         {
             if (identity == null)
             {
@@ -54,7 +59,12 @@ namespace MoeLib.Jinyinmao.Web.Auth
             return this.rsaCryptoServiceProvider.Encrypt(payload.GetBytesOfASCII(), false).ToBase64String();
         }
 
-        internal ClaimsIdentity Unprotect(string protectedData)
+        /// <summary>
+        ///     Unprotects the specified protected data.
+        /// </summary>
+        /// <param name="protectedData">The protected data.</param>
+        /// <returns>System.Security.Claims.ClaimsIdentity.</returns>
+        public ClaimsIdentity Unprotect(string protectedData)
         {
             if (protectedData == null)
             {
