@@ -86,7 +86,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private ClaimsIdentity Identity
         {
-            get { return HttpContext.Current.User.Identity as ClaimsIdentity; }
+            get { return HttpContext.Current.User?.Identity as ClaimsIdentity; }
             set { HttpContext.Current.User = new ClaimsPrincipal(value); }
         }
 
@@ -128,7 +128,10 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            this.GenerateAndSetAccessToken(request, response);
+            if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null && this.Identity != null && this.Identity.IsAuthenticated)
+            {
+                this.GenerateAndSetAccessToken(request, response);
+            }
 
             return response;
         }
@@ -205,17 +208,14 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private void GenerateAndSetAccessToken(HttpRequestMessage request, HttpResponseMessage response)
         {
-            if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null && this.Identity != null && this.Identity.IsAuthenticated)
-            {
-                Claim claim = this.Identity.FindFirst(ClaimTypes.Expiration);
-                long timestamp = claim?.Value?.AsLong() ?? DateTime.UtcNow.UnixTimestamp();
+            Claim claim = this.Identity.FindFirst(ClaimTypes.Expiration);
+            long timestamp = claim?.Value?.AsLong() ?? DateTime.UtcNow.UnixTimestamp();
 
-                response.Content = request.CreateResponse(HttpStatusCode.OK, new
-                {
-                    access_token = this.accessTokenProtector.Protect(this.Identity),
-                    expiration = timestamp
-                }).Content;
-            }
+            response.Content = request.CreateResponse(HttpStatusCode.OK, new
+            {
+                access_token = this.accessTokenProtector.Protect(this.Identity),
+                expiration = timestamp
+            }).Content;
         }
 
         private bool IsFromLocalhost(HttpRequestMessage request)
