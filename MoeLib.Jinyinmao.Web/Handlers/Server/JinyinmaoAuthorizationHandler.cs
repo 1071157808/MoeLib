@@ -23,7 +23,6 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
     public class JinyinmaoAuthorizationHandler : DelegatingHandler
     {
         private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JinyinmaoAuthorizationHandler CryptoServiceProvider can not initialize. The GovernmentServerPublicKey may be in bad format. GovernmentServerPublicKey: {0}";
-        private static readonly Lazy<List<string>> ipWhitelists = new Lazy<List<string>>(() => App.Configurations.GetIPWhitelists());
         private readonly JYMAccessTokenProtector accessTokenProtector;
 
         /// <summary>
@@ -58,11 +57,6 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         /// <value>The government server public key.</value>
         public string GovernmentServerPublicKey { get; set; }
 
-        private static List<string> IPWhitelists
-        {
-            get { return ipWhitelists.Value; }
-        }
-
         private RSACryptoServiceProvider CryptoServiceProvider
         {
             get
@@ -88,6 +82,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         {
             get { return HttpContext.Current.User?.Identity as ClaimsIdentity; }
             set { HttpContext.Current.User = new ClaimsPrincipal(value); }
+        }
+
+        private List<string> IPWhitelists
+        {
+            get { return App.Configurations.GetIPWhitelists(); }
         }
 
         /// <summary>
@@ -234,7 +233,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private bool IsFromWhitelists(HttpRequestMessage request)
         {
-            return IPWhitelists != null && IPWhitelists.Contains(request.GetUserHostAddress());
+            return this.IPWhitelists != null && this.IPWhitelists.Contains(request.GetUserHostAddress());
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Moe.Lib;
+using Moe.Lib.Jinyinmao;
 using MoeLib.Web;
 
 namespace MoeLib.Jinyinmao.Web.Handlers.Server
@@ -12,6 +14,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
     /// </summary>
     public class JinyinmaoTraceEntryHandler : DelegatingHandler
     {
+        private List<string> IPWhitelists
+        {
+            get { return App.Configurations.GetIPWhitelists(); }
+        }
+
         /// <summary>
         ///     Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.
         /// </summary>
@@ -25,7 +32,21 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         {
             if (!request.Headers.Contains("X-JYM-CID"))
             {
-                request.Headers.TryAddWithoutValidation("X-JYM-CID", "0");
+                string clientId = request.GetUserHostAddress();
+                if (this.IsFromSwagger(request))
+                {
+                    clientId = "Swagger_" + clientId;
+                }
+                else if (this.IsFromWhitelists(request))
+                {
+                    clientId = "Whitelist_" + clientId;
+                }
+                else if (this.IsFromLocalhost(request))
+                {
+                    clientId = "Localhost_" + clientId;
+                }
+
+                request.Headers.TryAddWithoutValidation("X-JYM-CID", clientId);
             }
 
             if (!request.Headers.Contains("X-JYM-DID"))
@@ -59,6 +80,25 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             }
 
             return base.SendAsync(request, cancellationToken);
+        }
+
+        private bool IsFromLocalhost(HttpRequestMessage request)
+        {
+            return request.IsLocal();
+        }
+
+        private bool IsFromSwagger(HttpRequestMessage request)
+        {
+            if (request.Headers.Referrer != null)
+            {
+                return request.Headers.Referrer.AbsoluteUri.Contains("swagger", StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        private bool IsFromWhitelists(HttpRequestMessage request)
+        {
+            return this.IPWhitelists != null && this.IPWhitelists.Contains(request.GetUserHostAddress());
         }
     }
 }
