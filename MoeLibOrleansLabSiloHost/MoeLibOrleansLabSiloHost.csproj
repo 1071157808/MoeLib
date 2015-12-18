@@ -114,6 +114,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="OrleansConfiguration.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="keys.cer" />

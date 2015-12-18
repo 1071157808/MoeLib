@@ -49,8 +49,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLibMvcWebLab", "MoeLibMv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLib.Jinyinmao.Mvc", "MoeLib.Jinyinmao.Mvc\MoeLib.Jinyinmao.Mvc.csproj", "{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeLibNuGetLab", "MoeLibNuGetLab\MoeLibNuGetLab.csproj", "{C3E44734-BF97-4178-9A96-FA839939285C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,10 +127,6 @@ Global
 		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3E44734-BF97-4178-9A96-FA839939285C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3E44734-BF97-4178-9A96-FA839939285C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3E44734-BF97-4178-9A96-FA839939285C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3E44734-BF97-4178-9A96-FA839939285C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,7 +150,6 @@ Global
 		{EFD330CA-D6F3-4C8A-81DD-F47CCC4DFC6A} = {7FBF66ED-63A7-4F6E-9EEB-0A4D0D699BBC}
 		{FF9533C3-9376-444F-A61B-C4A0D78C093D} = {2FC7C249-BF06-4100-9A53-A13F34ED891A}
 		{CD0D8839-9BD6-4778-B7A9-4F4E471A1CC3} = {7FBF66ED-63A7-4F6E-9EEB-0A4D0D699BBC}
-		{C3E44734-BF97-4178-9A96-FA839939285C} = {7BE62472-ABBA-4DAF-A4A7-8F918E2616E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45

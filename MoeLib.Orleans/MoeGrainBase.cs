@@ -23,8 +23,6 @@ namespace MoeLib.Orleans
     /// </summary>
     public class MoeGrainBase : Grain, IMoeGrain
     {
-        #region IMoeGrainBase Members
-
         /// <summary>
         ///     Gets the grain factory.
         /// </summary>
@@ -33,6 +31,8 @@ namespace MoeLib.Orleans
         {
             get { return base.GrainFactory; }
         }
+
+        #region IMoeGrain Members
 
         /// <summary>
         ///     Get a previously registered reminder or registers a new persistent, reliable reminder to send regular notifications (reminders) to the MoeGrainBase.
@@ -57,14 +57,23 @@ namespace MoeLib.Orleans
         /// <returns>Completion promise for this operation.</returns>
         public async Task UnregisterReminder(string reminderName)
         {
-            IGrainReminder reminder = await this.GetReminder(reminderName);
-
-            if (reminder != null)
+            try
             {
-                await this.UnregisterReminder(reminder);
+                IGrainReminder reminder = await this.GetReminder(reminderName);
+
+                if (reminder != null)
+                {
+                    await this.UnregisterReminder(reminder);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                //ignore
+                // GetReminder throws exception when reminder don't exists
+                // https://github.com/dotnet/orleans/issues/1167
             }
         }
 
-        #endregion IMoeGrainBase Members
+        #endregion IMoeGrain Members
     }
 }
