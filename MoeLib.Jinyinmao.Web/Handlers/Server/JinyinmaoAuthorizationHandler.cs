@@ -120,10 +120,6 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             {
                 this.AuthorizeApplicationIfFromLocalhost();
             }
-            else
-            {
-                this.AuthorizeUserViaCustomHeader(request);
-            }
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
@@ -195,15 +191,6 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         private void AuthorizeUserViaBearerToken(HttpRequestMessage request)
         {
             this.Identity = this.accessTokenProtector.Unprotect(request.Headers.Authorization.Parameter);
-        }
-
-        private void AuthorizeUserViaCustomHeader(HttpRequestMessage request)
-        {
-            IEnumerable<string> authHeader;
-            if (request.Headers.TryGetValues("X-JYM-AUTH", out authHeader))
-            {
-                this.Identity = this.accessTokenProtector.Unprotect(authHeader.FirstOrDefault());
-            }
         }
 
         private void GenerateAndSetAccessToken(HttpRequestMessage request, HttpResponseMessage response)
