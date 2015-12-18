@@ -84,7 +84,7 @@ namespace MoeLib.Jinyinmao.Configs
                 // ignored
             }
 
-            return new Uri($"https://jym-{App.Host.Environment.ToLowerInvariant()}-government.jinyinmao.com.cn/");
+            return new Uri($"http://jym-{App.Host.Environment.ToLowerInvariant()}-government.jinyinmao.com.cn/");
         }
 
         private static HttpClient InitHttpClient()
