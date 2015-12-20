@@ -21,6 +21,16 @@ namespace MoeLib.Jinyinmao
     /// </summary>
     public class Host
     {
+        internal Lazy<string> appKeys;
+
+        internal Lazy<Guid> deploymentId;
+
+        internal Lazy<string> environment;
+
+        internal Lazy<string> role;
+
+        internal Lazy<string> roleInstance;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Host" /> class.
         /// </summary>
@@ -29,34 +39,49 @@ namespace MoeLib.Jinyinmao
         }
 
         /// <summary>
-        ///     Gets or sets the application keys.
+        /// Gets the application keys.
         /// </summary>
         /// <value>The application keys.</value>
-        public string AppKeys { get; set; }
+        public string AppKeys
+        {
+            get { return this.appKeys.Value; }
+        }
 
         /// <summary>
         ///     Gets or sets the deployment identifier.
         /// </summary>
         /// <value>The deployment identifier.</value>
-        public Guid DeploymentId { get; set; }
+        public Guid DeploymentId
+        {
+            get { return this.deploymentId.Value; }
+        }
 
         /// <summary>
         ///     Gets or sets the environment.
         /// </summary>
         /// <value>The environment.</value>
-        public string Environment { get; set; }
+        public string Environment
+        {
+            get { return this.environment.Value; }
+        }
 
         /// <summary>
         ///     Gets or sets the role.
         /// </summary>
         /// <value>The role.</value>
-        public string Role { get; set; }
+        public string Role
+        {
+            get { return this.role.Value; }
+        }
 
         /// <summary>
         ///     Gets or sets the role instance.
         /// </summary>
         /// <value>The role instance.</value>
-        public string RoleInstance { get; set; }
+        public string RoleInstance
+        {
+            get { return this.roleInstance.Value; }
+        }
 
         /// <summary>
         ///     Determines whether [is in azure cloud].

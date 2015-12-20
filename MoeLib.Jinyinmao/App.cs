@@ -149,11 +149,11 @@ namespace Moe.Lib.Jinyinmao
         /// <returns>App.</returns>
         public App Config(IAppConfigProvider appConfigProvider)
         {
-            this.host.AppKeys = appConfigProvider.GetAppKeysConfig();
-            this.host.DeploymentId = appConfigProvider.GetDeploymentIdConfig();
-            this.host.Environment = appConfigProvider.GetEnvironmentConfig();
-            this.host.Role = appConfigProvider.GetRoleConfig();
-            this.host.RoleInstance = appConfigProvider.GetRoleInstanceConfig();
+            this.host.appKeys = new Lazy<string>(() => appConfigProvider.GetAppKeysConfig());
+            this.host.deploymentId = new Lazy<Guid>(() => appConfigProvider.GetDeploymentIdConfig());
+            this.host.environment = new Lazy<string>(() => appConfigProvider.GetEnvironmentConfig());
+            this.host.role = new Lazy<string>(() => appConfigProvider.GetRoleConfig());
+            this.host.roleInstance = new Lazy<string>(() => appConfigProvider.GetRoleInstanceConfig());
 
             this.Configurated = true;
 
