@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading;
@@ -24,6 +25,11 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
     {
         private const string CRYPTO_SERVICE_PROVIDER_ERROR_MESSAGE = "JinyinmaoAuthorizationHandler CryptoServiceProvider can not initialize. The GovernmentServerPublicKey may be in bad format. GovernmentServerPublicKey: {0}";
         private readonly JYMAccessTokenProtector accessTokenProtector;
+
+        static JinyinmaoAuthorizationHandler()
+        {
+            UseSwaggerAsApplicationForDev = CloudConfigurationManager.GetSetting("UseSwaggerAsApplicationForDev").AsBoolean(false);
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="JinyinmaoAuthorizationHandler" /> class.
@@ -49,7 +55,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         ///     Gets a value indicating whether [use swagger as application for dev].
         /// </summary>
         /// <value><c>true</c> if [use swagger as application for dev]; otherwise, <c>false</c>.</value>
-        public static bool UseSwaggerAsApplicationForDev { get; } = CloudConfigurationManager.GetSetting("UseSwaggerAsApplicationForDev").AsBoolean(false);
+        public static bool UseSwaggerAsApplicationForDev { get; }
 
         /// <summary>
         ///     Gets or sets the government server public key.
@@ -100,6 +106,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         /// <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            FillAuthorizationWithCustomeHeader(request);
+
             if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter != null)
             {
                 this.AuthorizeUserViaBearerToken(request);
@@ -124,7 +132,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
             if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null
-                && this.Identity != null && this.Identity.IsAuthenticated && response.IsSuccessStatusCode)
+                && this.Identity != null && this.Identity.IsAuthenticated && response.StatusCode == HttpStatusCode.OK)
             {
                 this.GenerateAndSetAccessToken(request, response);
             }
@@ -132,10 +140,27 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             return response;
         }
 
+        private static void FillAuthorizationWithCustomeHeader(HttpRequestMessage request)
+        {
+            if (!HasAuthorizationHeader(request) && request.Headers.Contains("X-JYM-Authorization"))
+            {
+                string headerValue = request.GetHeader("X-JYM-Authorization");
+                if (headerValue.IsNotNullOrEmpty())
+                {
+                    request.Headers.Authorization = AuthenticationHeaderValue.Parse(headerValue);
+                }
+            }
+        }
+
         private static bool HasAuthorizationHeader(HttpRequestMessage request, string scheme)
         {
             return request.Headers.Authorization?.Scheme != null &&
                    string.Equals(request.Headers.Authorization.Scheme, scheme, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool HasAuthorizationHeader(HttpRequestMessage request)
+        {
+            return request.Headers.Authorization?.Scheme != null;
         }
 
         private void AuthorizeApplicationIfFromLocalhost()

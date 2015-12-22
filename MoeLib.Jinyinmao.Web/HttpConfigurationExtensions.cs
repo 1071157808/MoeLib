@@ -48,6 +48,17 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
+        ///     Uses the jinyinmao json response wapper handler.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        /// <returns>HttpConfiguration.</returns>
+        public static HttpConfiguration UseJinyinmaoJsonResponseWapperHandler(this HttpConfiguration config)
+        {
+            config.MessageHandlers.Add(new JinyinmaoJsonResponseWarpperHandler());
+            return config;
+        }
+
+        /// <summary>
         ///     Uses the jinyinmao logger.
         /// </summary>
         /// <param name="config">The configuration.</param>
