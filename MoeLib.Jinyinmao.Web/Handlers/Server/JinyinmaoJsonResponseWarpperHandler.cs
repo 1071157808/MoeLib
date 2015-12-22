@@ -49,6 +49,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             }
 
             JObject jObject = JObject.Parse(content);
+            jObject.Remove("retCode");
+            jObject.Remove("retMsg");
             jObject.Add("retCode", response.IsSuccessStatusCode ? "00000" : "10000");
             jObject.Add("retMsg", response.IsSuccessStatusCode ? "ok" : (jObject.GetValue("message", StringComparison.OrdinalIgnoreCase)?.Value<string>() ?? ""));
 

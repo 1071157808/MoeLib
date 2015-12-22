@@ -133,7 +133,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
             if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null
-                && this.Identity != null && this.Identity.IsAuthenticated && response.StatusCode == HttpStatusCode.OK)
+                && this.Identity != null && this.Identity.IsAuthenticated && this.Identity.AuthenticationType == JYMAuthScheme.Bearer && response.StatusCode == HttpStatusCode.OK)
             {
                 await this.GenerateAndSetAccessToken(request, response);
             }
@@ -237,6 +237,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 }
 
                 JObject jObject = JObject.Parse(content);
+                jObject.Remove("access_token");
+                jObject.Remove("expiration");
                 jObject.Add("access_token", this.accessTokenProtector.Protect(this.Identity));
                 jObject.Add("expiration", timestamp);
 
