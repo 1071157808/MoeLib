@@ -15,6 +15,7 @@ using Moe.Lib;
 using Moe.Lib.Jinyinmao;
 using MoeLib.Jinyinmao.Web.Auth;
 using MoeLib.Web;
+using Newtonsoft.Json.Linq;
 
 namespace MoeLib.Jinyinmao.Web.Handlers.Server
 {
@@ -134,7 +135,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null
                 && this.Identity != null && this.Identity.IsAuthenticated && response.StatusCode == HttpStatusCode.OK)
             {
-                this.GenerateAndSetAccessToken(request, response);
+                await this.GenerateAndSetAccessToken(request, response);
             }
 
             return response;
@@ -218,16 +219,37 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
             this.Identity = this.accessTokenProtector.Unprotect(request.Headers.Authorization.Parameter);
         }
 
-        private void GenerateAndSetAccessToken(HttpRequestMessage request, HttpResponseMessage response)
+        private async Task GenerateAndSetAccessToken(HttpRequestMessage request, HttpResponseMessage response)
         {
             Claim claim = this.Identity.FindFirst(ClaimTypes.Expiration);
             long timestamp = claim?.Value?.AsLong() ?? DateTime.UtcNow.UnixTimestamp();
 
-            response.Content = request.CreateResponse(HttpStatusCode.OK, new
+            if (response.Content?.Headers.ContentType.MediaType == "application/json")
             {
-                access_token = this.accessTokenProtector.Protect(this.Identity),
-                expiration = timestamp
-            }).Content;
+                string content = null;
+                if (response.Content != null)
+                {
+                    content = await response.Content.ReadAsStringAsync();
+                }
+                if (content.IsNullOrEmpty())
+                {
+                    content = "{}";
+                }
+
+                JObject jObject = JObject.Parse(content);
+                jObject.Add("access_token", this.accessTokenProtector.Protect(this.Identity));
+                jObject.Add("expiration", timestamp);
+
+                response.Content = request.CreateResponse(response.StatusCode, jObject).Content;
+            }
+            else
+            {
+                response.Content = request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    access_token = this.accessTokenProtector.Protect(this.Identity),
+                    expiration = timestamp
+                }).Content;
+            }
         }
 
         private bool IsFromLocalhost(HttpRequestMessage request)
