@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Moe.Lib.Web
 {
@@ -17,6 +16,12 @@ namespace Moe.Lib.Web
         }
 
         /// <summary>
+        ///     Gets or sets the body.
+        /// </summary>
+        /// <value>The body.</value>
+        public string Body { get; set; }
+
+        /// <summary>
         ///     Gets or sets the code.
         /// </summary>
         /// <value>The code.</value>
@@ -26,7 +31,6 @@ namespace Moe.Lib.Web
         ///     Gets or sets the headers.
         /// </summary>
         /// <value>The headers.</value>
-        [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
-        public Dictionary<string, string> Headers { get; private set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 }

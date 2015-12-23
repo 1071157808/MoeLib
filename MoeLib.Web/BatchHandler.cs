@@ -66,7 +66,7 @@ namespace Moe.Lib.Web
                 }
                 if (subResponse.Content != null)
                 {
-                    await subResponse.Content.ReadAsStringAsync();
+                    jsonResponse.Body = await subResponse.Content.ReadAsStringAsync();
                     foreach (KeyValuePair<string, IEnumerable<string>> header in subResponse.Content.Headers)
                     {
                         jsonResponse.Headers.Add(header.Key, string.Join(",", header.Value));
