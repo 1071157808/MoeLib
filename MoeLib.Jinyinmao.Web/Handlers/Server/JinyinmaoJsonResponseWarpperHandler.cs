@@ -28,7 +28,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
         {
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            if (request.GetQueryString("jsonWarpp").IsNotNullOrEmpty() && request.Headers.Accept.Any(a => a.MediaType == "application/json" || a.MediaType == "*/*") &&
+            if (request.GetQueryString("jw").IsNotNullOrEmpty() && request.Headers.Accept.Any(a => a.MediaType == "application/json" || a.MediaType == "*/*") &&
                 (response.Content == null || response.Content.Headers.ContentType.MediaType == "application/json"))
             {
                 await WappUpContent(request, response);
