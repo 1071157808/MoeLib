@@ -132,7 +132,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
-            if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == null
+            if (HasAuthorizationHeader(request, JYMAuthScheme.Bearer) && request.Headers.Authorization?.Parameter == "=="
                 && this.Identity != null && this.Identity.IsAuthenticated && this.Identity.AuthenticationType == JYMAuthScheme.Bearer && response.StatusCode == HttpStatusCode.OK)
             {
                 await this.GenerateAndSetAccessToken(request, response);
