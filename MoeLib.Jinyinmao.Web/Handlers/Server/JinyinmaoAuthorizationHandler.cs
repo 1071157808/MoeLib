@@ -143,13 +143,20 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
 
         private static void FillAuthorizationWithCustomeHeader(HttpRequestMessage request)
         {
-            if (!HasAuthorizationHeader(request) && request.Headers.Contains("X-JYM-Authorization"))
+            try
             {
-                string headerValue = request.GetHeader("X-JYM-Authorization");
-                if (headerValue.IsNotNullOrEmpty())
+                if (!HasAuthorizationHeader(request) && request.Headers.Contains("X-JYM-Authorization"))
                 {
-                    request.Headers.Authorization = AuthenticationHeaderValue.Parse(headerValue);
+                    string headerValue = request.GetHeader("X-JYM-Authorization");
+                    if (headerValue.IsNotNullOrEmpty())
+                    {
+                        request.Headers.Authorization = AuthenticationHeaderValue.Parse(headerValue);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                //ignore
             }
         }
 
