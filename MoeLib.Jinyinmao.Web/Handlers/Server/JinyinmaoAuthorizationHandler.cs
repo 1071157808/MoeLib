@@ -238,27 +238,30 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 {
                     content = await response.Content.ReadAsStringAsync();
                 }
+
                 if (content.IsNullOrEmpty())
                 {
                     content = "{}";
                 }
 
-                JObject jObject = JObject.Parse(content);
-                jObject.Remove("access_token");
-                jObject.Remove("expiration");
-                jObject.Add("access_token", this.accessTokenProtector.Protect(this.Identity));
-                jObject.Add("expiration", timestamp);
-
-                response.Content = request.CreateResponse(response.StatusCode, jObject).Content;
-            }
-            else
-            {
-                response.Content = request.CreateResponse(HttpStatusCode.OK, new
+                if (content != null && content.StartsWith("{", StringComparison.Ordinal))
                 {
-                    access_token = this.accessTokenProtector.Protect(this.Identity),
-                    expiration = timestamp
-                }).Content;
+                    JObject jObject = JObject.Parse(content);
+                    jObject.Remove("access_token");
+                    jObject.Remove("expiration");
+                    jObject.Add("access_token", this.accessTokenProtector.Protect(this.Identity));
+                    jObject.Add("expiration", timestamp);
+
+                    response.Content = request.CreateResponse(response.StatusCode, jObject).Content;
+                    return;
+                }
             }
+
+            response.Content = request.CreateResponse(HttpStatusCode.OK, new
+            {
+                access_token = this.accessTokenProtector.Protect(this.Identity),
+                expiration = timestamp
+            }).Content;
         }
 
         private bool IsFromLocalhost(HttpRequestMessage request)

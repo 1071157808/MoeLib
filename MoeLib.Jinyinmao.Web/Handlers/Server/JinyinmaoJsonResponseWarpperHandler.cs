@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -49,11 +48,13 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Server
                 content = "{}";
             }
 
-            JObject jObject = JObject.Parse(content);
-            jObject.Remove("retCode");
-            jObject.Remove("retMsg");
-            jObject.Add("retCode", (response.IsSuccessStatusCode ? "00" : "10") + (int)response.StatusCode);
-            jObject.Add("retMsg", response.IsSuccessStatusCode ? "ok" : (jObject.GetValue("message", StringComparison.OrdinalIgnoreCase)?.Value<string>() ?? ""));
+            JToken jToken = JToken.Parse(content);
+            JObject jObject = new JObject
+            {
+                { "retCode", (response.IsSuccessStatusCode ? "00" : "10") + (int)response.StatusCode },
+                { "retMsg", response.IsSuccessStatusCode ? "ok" : jToken.SelectToken("message", false)?.Value<string>() ?? "" },
+                { "data", jToken }
+            };
 
             response.Content = request.CreateResponse(HttpStatusCode.OK, jObject).Content;
         }

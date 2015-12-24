@@ -108,7 +108,7 @@ namespace Moe.Lib.Web
         /// <returns>Task&lt;JsonRequestMessage[]&gt;.</returns>
         private static async Task<JsonRequestMessage[]> GetJsonRequestMessages(HttpRequestMessage request)
         {
-            return await request.Content.ReadAsAsync<JsonRequestMessage[]>();
+            return await request.Content.ReadAsAsync<JsonRequestMessage[]>() ?? new JsonRequestMessage[0];
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Moe.Lib.Web
         private static async Task<JsonRequestMessage[]> GetUrlencodeRequestMessages(HttpRequestMessage request)
         {
             string requestContent = (await request.Content.ReadAsFormDataAsync()).Get("batch");
-            return JObject.Parse(requestContent).GetValue("requests").ToObject<JsonRequestMessage[]>();
+            return JObject.Parse(requestContent).GetValue("requests").ToObject<JsonRequestMessage[]>() ?? new JsonRequestMessage[0];
         }
 
         /// <summary>
