@@ -29,7 +29,7 @@ namespace MoeLib.Jinyinmao.Web
         {
             List<DelegatingHandler> delegatingHandlers = new List<DelegatingHandler>
             {
-                // new JinyinmaoServicePermissionHandler(serviceName),
+                new JinyinmaoServicePermissionHandler(serviceName),
                 new JinyinmaoTraceEntryHandler(traceEntry),
                 new JinyinmaoHttpStatusHandler(),
                 new JinyinmaoLogHandler("HTTP Client Request", "HTTP Client Response"),
@@ -50,7 +50,7 @@ namespace MoeLib.Jinyinmao.Web
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 1.0));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.5));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
-            client.Timeout = 1.Minutes();
+            client.Timeout = 3.Minutes();
 
             KeyValuePair<string, string>? permission = App.Configurations.GetPermission(serviceName);
             if (permission.HasValue)

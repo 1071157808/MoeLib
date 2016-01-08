@@ -31,7 +31,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
                         throw new HttpRequestException($"404: Can not find the service. {request.RequestUri.AbsoluteUri}");
                     case HttpStatusCode.Unauthorized:
                     case HttpStatusCode.Forbidden:
-                        throw new HttpRequestException($"{(int)response.StatusCode}: Can not access the service. {request.RequestUri.AbsoluteUri}");
+                        throw new HttpRequestException($"{(int)response.StatusCode}: Does not have permission to access the service. {request.RequestUri.AbsoluteUri}");
                 }
 
                 if ((int)response.StatusCode < 500)

@@ -43,7 +43,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
         {
             if (!ignorePermission)
             {
-                KeyValuePair<string, string>? permission = App.Condigurations.GetPermission(this.ServiceName);
+                KeyValuePair<string, string>? permission = App.Configurations.GetPermission(this.ServiceName);
                 if (!permission.HasValue)
                 {
                     this.HandleUnauthorizedRequest();
@@ -69,7 +69,7 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
 
         private void HandleUnauthorizedRequest()
         {
-            throw new HttpRequestException($"Do not have permission to access the service {this.ServiceName}");
+            throw new HttpRequestException($"Does not have permission to access the service {this.ServiceName}");
         }
     }
 }

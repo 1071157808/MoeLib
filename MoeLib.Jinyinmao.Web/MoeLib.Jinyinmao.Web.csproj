@@ -49,8 +49,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -89,6 +89,7 @@
     <Compile Include="Filters\IPAuthorizeAttribute.cs" />
     <Compile Include="Auth\JYMAuthScheme.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
+    <Compile Include="Handlers\Client\JinyinmaoServicePermissionHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoJsonResponseWarpperHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoAuthorizationHandler.cs" />
     <Compile Include="Handlers\Server\JinyinmaoExceptionHandler.cs" />
