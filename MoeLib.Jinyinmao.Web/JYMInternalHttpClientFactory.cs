@@ -50,6 +50,7 @@ namespace MoeLib.Jinyinmao.Web
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip", 1.0));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.5));
             client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("*", 0.1));
+            client.DefaultRequestHeaders.Connection.Add("keep-alive");
             client.Timeout = 3.Minutes();
 
             KeyValuePair<string, string>? permission = App.Configurations.GetPermission(serviceName);
