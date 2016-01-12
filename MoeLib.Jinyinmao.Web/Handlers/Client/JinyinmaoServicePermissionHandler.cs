@@ -50,10 +50,8 @@ namespace MoeLib.Jinyinmao.Web.Handlers.Client
                 }
                 else
                 {
-                    if (request.RequestUri.Host == "mock.jinyinmao.com.cn")
-                    {
-                        request.RequestUri = new Uri(new Uri(permission.Value.Key), request.RequestUri.PathAndQuery);
-                    }
+                    request.RequestUri = new Uri(new Uri(permission.Value.Key), request.RequestUri.PathAndQuery);
+                    request.Headers.Host = request.RequestUri.Host;
                     request.Headers.Authorization = new AuthenticationHeaderValue(JYMAuthScheme.JYMInternalAuth, permission.Value.Value);
                 }
             }

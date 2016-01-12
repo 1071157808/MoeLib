@@ -16,18 +16,8 @@
         public static readonly string Bearer = "Bearer";
 
         /// <summary>
-        /// The jym internal authentication
+        ///     The jym internal authentication
         /// </summary>
         public static readonly string JYMInternalAuth = "JIAUTH";
-
-        /// <summary>
-        ///     JYMQuick
-        /// </summary>
-        public static readonly string JYMQuick = "JYMQuick";
-
-        /// <summary>
-        ///     JYMWeChat
-        /// </summary>
-        public static readonly string JYMWeChat = "JYMWeChat";
     }
 }
